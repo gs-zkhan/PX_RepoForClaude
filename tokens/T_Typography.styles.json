@@ -1,0 +1,715 @@
+{
+  "font": {
+    "heading": {
+      "XXXLarge": {
+        "semibold": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "Noto Sans",
+            "fontStyle": "SemiBold",
+            "fontWeight": 600,
+            "fontSize": "42px",
+            "lineHeight": "64px",
+            "letterSpacing": "0px",
+            "paragraphSpacing": "0px",
+            "textCase": "none",
+            "textDecoration": "none"
+          },
+          "$extensions": { "figmaStyleName": "font.heading.XXXLarge.semibold" }
+        },
+        "regular": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "Noto Sans",
+            "fontStyle": "Regular",
+            "fontWeight": 400,
+            "fontSize": "42px",
+            "lineHeight": "64px",
+            "letterSpacing": "0px",
+            "paragraphSpacing": "0px",
+            "textCase": "none",
+            "textDecoration": "none"
+          },
+          "$extensions": { "figmaStyleName": "font.heading.XXXLarge.regular" }
+        },
+        "light": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "Noto Sans",
+            "fontStyle": "Light",
+            "fontWeight": 300,
+            "fontSize": "42px",
+            "lineHeight": "64px",
+            "letterSpacing": "0px",
+            "paragraphSpacing": "0px",
+            "textCase": "none",
+            "textDecoration": "none"
+          },
+          "$extensions": { "figmaStyleName": "font.heading.XXXLarge.light" }
+        }
+      },
+      "XXLarge": {
+        "semibold": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "Noto Sans",
+            "fontStyle": "SemiBold",
+            "fontWeight": 600,
+            "fontSize": "28px",
+            "lineHeight": "40px",
+            "letterSpacing": "0px",
+            "paragraphSpacing": "0px",
+            "textCase": "none",
+            "textDecoration": "none"
+          },
+          "$extensions": { "figmaStyleName": "font.heading.XXLarge.semibold" }
+        }
+      },
+      "XLarge": {
+        "semibold": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "Noto Sans",
+            "fontStyle": "SemiBold",
+            "fontWeight": 600,
+            "fontSize": "26px",
+            "lineHeight": "40px",
+            "letterSpacing": "0px",
+            "paragraphSpacing": "0px",
+            "textCase": "none",
+            "textDecoration": "none"
+          },
+          "$extensions": { "figmaStyleName": "font.heading.XLarge.semibold" }
+        }
+      },
+      "large": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Noto Sans",
+          "fontStyle": "SemiBold",
+          "fontWeight": 600,
+          "fontSize": "21px",
+          "lineHeight": "32px",
+          "letterSpacing": "0px",
+          "paragraphSpacing": "0px",
+          "textCase": "none",
+          "textDecoration": "none"
+        },
+        "$extensions": { "figmaStyleName": "font.heading.large" }
+      },
+      "medium": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Noto Sans",
+          "fontStyle": "SemiBold",
+          "fontWeight": 600,
+          "fontSize": "18px",
+          "lineHeight": "24px",
+          "letterSpacing": "0px",
+          "paragraphSpacing": "0px",
+          "textCase": "none",
+          "textDecoration": "none"
+        },
+        "$extensions": { "figmaStyleName": "font.heading.medium" }
+      },
+      "small": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Noto Sans",
+          "fontStyle": "SemiBold",
+          "fontWeight": 600,
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "letterSpacing": "0px",
+          "paragraphSpacing": "0px",
+          "textCase": "none",
+          "textDecoration": "none"
+        },
+        "$extensions": { "figmaStyleName": "font.heading.small" }
+      },
+      "xsmall": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Noto Sans",
+          "fontStyle": "SemiBold",
+          "fontWeight": 600,
+          "fontSize": "14px",
+          "lineHeight": "24px",
+          "letterSpacing": "0px",
+          "paragraphSpacing": "0px",
+          "textCase": "none",
+          "textDecoration": "none"
+        },
+        "$extensions": { "figmaStyleName": "font.heading.xsmall" }
+      },
+      "xxsmall": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Noto Sans",
+          "fontStyle": "SemiBold",
+          "fontWeight": 600,
+          "fontSize": "12px",
+          "lineHeight": "16px",
+          "letterSpacing": "0px",
+          "paragraphSpacing": "0px",
+          "textCase": "none",
+          "textDecoration": "none"
+        },
+        "$extensions": { "figmaStyleName": "font.heading.xxsmall" }
+      },
+      "xxxsmall": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Noto Sans",
+          "fontStyle": "SemiBold",
+          "fontWeight": 600,
+          "fontSize": "11px",
+          "lineHeight": "16px",
+          "letterSpacing": "0.5px",
+          "paragraphSpacing": "0px",
+          "textCase": "none",
+          "textDecoration": "none"
+        },
+        "$extensions": { "figmaStyleName": "font.heading.xxxsmall" }
+      }
+    },
+    "body": {
+      "large": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Noto Sans",
+          "fontStyle": "Regular",
+          "fontWeight": 400,
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "letterSpacing": "0px",
+          "paragraphSpacing": "0px",
+          "textCase": "none",
+          "textDecoration": "none"
+        },
+        "$extensions": { "figmaStyleName": "font.body.large" }
+      },
+      "medium": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Noto Sans",
+          "fontStyle": "Regular",
+          "fontWeight": 400,
+          "fontSize": "14px",
+          "lineHeight": "24px",
+          "letterSpacing": "0px",
+          "paragraphSpacing": "0px",
+          "textCase": "none",
+          "textDecoration": "none"
+        },
+        "$extensions": { "figmaStyleName": "font.body.medium" }
+      }
+    },
+    "label": {
+      "small": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Noto Sans",
+          "fontStyle": "Regular",
+          "fontWeight": 400,
+          "fontSize": "12px",
+          "lineHeight": "16px",
+          "letterSpacing": "0px",
+          "paragraphSpacing": "0px",
+          "textCase": "none",
+          "textDecoration": "none"
+        },
+        "$extensions": { "figmaStyleName": "font.label.small" }
+      },
+      "xsmall": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Noto Sans",
+          "fontStyle": "Regular",
+          "fontWeight": 400,
+          "fontSize": "11px",
+          "lineHeight": "16px",
+          "letterSpacing": "0px",
+          "paragraphSpacing": "0px",
+          "textCase": "none",
+          "textDecoration": "none"
+        },
+        "$extensions": { "figmaStyleName": "font.label.xsmall" }
+      }
+    }
+  },
+  "button": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "SemiBold",
+        "fontWeight": 600,
+        "fontSize": "14px",
+        "lineHeight": "24px",
+        "letterSpacing": "0%",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "button.font" },
+      "small": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Noto Sans",
+          "fontStyle": "SemiBold",
+          "fontWeight": 600,
+          "fontSize": "12px",
+          "lineHeight": "16px",
+          "letterSpacing": "0%",
+          "paragraphSpacing": "0px",
+          "textCase": "none",
+          "textDecoration": "none"
+        },
+        "$extensions": { "figmaStyleName": "button.font.small" }
+      }
+    }
+  },
+  "dropdown": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "Regular",
+        "fontWeight": 400,
+        "fontSize": "14px",
+        "lineHeight": "24px",
+        "letterSpacing": "0%",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "dropdown.font" }
+    }
+  },
+  "search": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "Regular",
+        "fontWeight": 400,
+        "fontSize": "14px",
+        "lineHeight": "24px",
+        "letterSpacing": "0%",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "search.font" }
+    }
+  },
+  "tab": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "SemiBold",
+        "fontWeight": 600,
+        "fontSize": "14px",
+        "lineHeight": "24px",
+        "letterSpacing": "0%",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "tab.font" }
+    }
+  },
+  "tooltip": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "Regular",
+        "fontWeight": 400,
+        "fontSize": "12px",
+        "lineHeight": "16px",
+        "letterSpacing": "0%",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "tooltip.font" }
+    }
+  },
+  "toast": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "Regular",
+        "fontWeight": 400,
+        "fontSize": "14px",
+        "lineHeight": "24px",
+        "letterSpacing": "0%",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "toast.font" }
+    }
+  },
+  "banner": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "Regular",
+        "fontWeight": 400,
+        "fontSize": "14px",
+        "lineHeight": "24px",
+        "letterSpacing": "0%",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "banner.font" }
+    }
+  },
+  "modal": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "SemiBold",
+        "fontWeight": 600,
+        "fontSize": "18px",
+        "lineHeight": "24px",
+        "letterSpacing": "0%",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "modal.font" }
+    }
+  },
+  "breadcrumb": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "Regular",
+        "fontWeight": 400,
+        "fontSize": "11px",
+        "lineHeight": "16px",
+        "letterSpacing": "0%",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "breadcrumb.font" }
+    }
+  },
+  "pagination": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "SemiBold",
+        "fontWeight": 600,
+        "fontSize": "12px",
+        "lineHeight": "16px",
+        "letterSpacing": "0%",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "pagination.font" }
+    }
+  },
+  "table": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "Regular",
+        "fontWeight": 400,
+        "fontSize": "12px",
+        "lineHeight": "16px",
+        "letterSpacing": "0%",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "table.font" }
+    }
+  },
+  "accordion": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "SemiBold",
+        "fontWeight": 600,
+        "fontSize": "14px",
+        "lineHeight": "24px",
+        "letterSpacing": "0%",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "accordion.font" }
+    }
+  },
+  "inputnumber": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "Regular",
+        "fontWeight": 400,
+        "fontSize": "14px",
+        "lineHeight": "24px",
+        "letterSpacing": "0%",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "inputnumber.font" }
+    }
+  },
+  "chip": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "Regular",
+        "fontWeight": 400,
+        "fontSize": "12px",
+        "lineHeight": "16px",
+        "letterSpacing": "0%",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "chip.font" }
+    }
+  },
+  "statuslabel": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "Regular",
+        "fontWeight": 400,
+        "fontSize": "12px",
+        "lineHeight": "16px",
+        "letterSpacing": "0%",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "statuslabel.font" }
+    }
+  },
+  "checkbox": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "Regular",
+        "fontWeight": 400,
+        "fontSize": "14px",
+        "lineHeight": "24px",
+        "letterSpacing": "0%",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "checkbox.font" }
+    }
+  },
+  "radio": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "SemiBold",
+        "fontWeight": 600,
+        "fontSize": "12px",
+        "lineHeight": "16px",
+        "letterSpacing": "0%",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "radio.font" }
+    }
+  },
+  "textfield": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "Regular",
+        "fontWeight": 400,
+        "fontSize": "14px",
+        "lineHeight": "24px",
+        "letterSpacing": "0%",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "textfield.font" }
+    }
+  },
+  "formfield": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "Regular",
+        "fontWeight": 400,
+        "fontSize": "12px",
+        "lineHeight": "16px",
+        "letterSpacing": "0%",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "formfield.font" }
+    }
+  },
+  "datepicker": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "SemiBold",
+        "fontWeight": 600,
+        "fontSize": "14px",
+        "lineHeight": "24px",
+        "letterSpacing": "0%",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "datepicker.font" }
+    }
+  },
+  "tree": {
+    "font": {
+      "default": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Noto Sans",
+          "fontStyle": "Regular",
+          "fontWeight": 400,
+          "fontSize": "14px",
+          "lineHeight": "24px",
+          "letterSpacing": "0%",
+          "paragraphSpacing": "0px",
+          "textCase": "none",
+          "textDecoration": "none"
+        },
+        "$extensions": { "figmaStyleName": "tree.font.default" }
+      },
+      "selected": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Noto Sans",
+          "fontStyle": "SemiBold",
+          "fontWeight": 600,
+          "fontSize": "14px",
+          "lineHeight": "24px",
+          "letterSpacing": "0%",
+          "paragraphSpacing": "0px",
+          "textCase": "none",
+          "textDecoration": "none"
+        },
+        "$extensions": { "figmaStyleName": "tree.font.selected" }
+      }
+    }
+  },
+  "metricXXLarge": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "SemiBold",
+        "fontWeight": 600,
+        "fontSize": "28px",
+        "lineHeight": "40px",
+        "letterSpacing": "0px",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "metricXXLarge.font" }
+    }
+  },
+  "metricXLarge": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "SemiBold",
+        "fontWeight": 600,
+        "fontSize": "26px",
+        "lineHeight": "40px",
+        "letterSpacing": "0px",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "metricXLarge.font" }
+    }
+  },
+  "metricLarge": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "SemiBold",
+        "fontWeight": 600,
+        "fontSize": "21px",
+        "lineHeight": "32px",
+        "letterSpacing": "0px",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "metricLarge.font" }
+    }
+  },
+  "metricDefault": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "SemiBold",
+        "fontWeight": 600,
+        "fontSize": "14px",
+        "lineHeight": "24px",
+        "letterSpacing": "0px",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "metricDefault.font" }
+    }
+  },
+  "metricLabel": {
+    "font": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Noto Sans",
+        "fontStyle": "SemiBold",
+        "fontWeight": 600,
+        "fontSize": "12px",
+        "lineHeight": "16px",
+        "letterSpacing": "0.5px",
+        "paragraphSpacing": "0px",
+        "textCase": "none",
+        "textDecoration": "none"
+      },
+      "$extensions": { "figmaStyleName": "metricLabel.font" }
+    }
+  }
+}

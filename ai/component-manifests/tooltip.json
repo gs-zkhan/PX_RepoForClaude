@@ -1,0 +1,143 @@
+{
+  "component": "Tooltip",
+  "figma_node_id": null,
+  "figma_component_name": "Tooltip",
+  "implementation_foundation": "Radix/ShadCN Tooltip (TooltipProvider, Tooltip, TooltipTrigger, TooltipContent). Includes built-in Radix arrow pointing at trigger.",
+  "blocking_issues": [
+    "BLOCKING: @radix-ui/react-tooltip is not installed in package.json. Run: npm install @radix-ui/react-tooltip. Component is stubbed until this package is available."
+  ],
+  "anatomy": [
+    "trigger (any element wrapped as trigger)",
+    "content-bubble (dark floating label)",
+    "arrow (pointer/caret toward trigger)",
+    "text (single line or multi-line label)"
+  ],
+  "variants": {
+    "Position": ["top", "bottom", "left", "right"],
+    "Arrow": ["true", "false"]
+  },
+  "sizes": ["default"],
+  "states": ["hidden", "visible"],
+  "dimensions": {
+    "default": {
+      "height": "hug",
+      "min_width": null,
+      "padding": "4px 8px",
+      "gap": null,
+      "radius": "6px",
+      "border_width": null,
+      "shadow": "none — NO shadow on tooltip (confirmed)"
+    }
+  },
+  "typography": {
+    "text": {
+      "figma_style": "tooltip.font",
+      "font_size": "12px",
+      "font_weight": "400",
+      "line_height": "16px",
+      "letter_spacing": "0%"
+    }
+  },
+  "token_bindings": {
+    "font/size": {
+      "figma_variable": "Component/tooltip/font/size → Primitives/font/size/h7",
+      "resolved_value": "12px",
+      "existing_css_var": "--c-tooltip-font-size",
+      "proposed_css_var": null
+    },
+    "font/weight": {
+      "figma_variable": "Component/tooltip/font/weight → Primitives/font/weight/regular",
+      "resolved_value": "400",
+      "existing_css_var": "--c-tooltip-font-weight",
+      "proposed_css_var": null
+    },
+    "font/line-height": {
+      "figma_variable": "Component/tooltip/font/lineHeight → Primitives/font/lineHeight/h7",
+      "resolved_value": "16px",
+      "existing_css_var": "--c-tooltip-font-line-height",
+      "proposed_css_var": null
+    },
+    "radius": {
+      "figma_variable": "Component/tooltip/radius → Primitives/radius/075",
+      "resolved_value": "6px",
+      "existing_css_var": "--c-tooltip-radius",
+      "proposed_css_var": null
+    },
+    "background": {
+      "figma_variable": "Semantic/color/surface/inverse",
+      "resolved_value": "#181F26",
+      "existing_css_var": "--s-color-surface-inverse",
+      "proposed_css_var": null,
+      "note": "Confirmed: use --s-color-surface-inverse directly. No new --c-tooltip-background token needed."
+    },
+    "text/color": {
+      "figma_variable": "Semantic/color/text/inverse",
+      "resolved_value": "#FFFFFF",
+      "existing_css_var": "--s-color-text-inverse",
+      "proposed_css_var": null,
+      "note": "Confirmed: use --s-color-text-inverse directly. No new --c-tooltip-content token needed."
+    },
+    "padding/horizontal": {
+      "figma_variable": "Primitives/space/100",
+      "resolved_value": "8px",
+      "existing_css_var": null,
+      "proposed_css_var": null,
+      "note": "RESOLVED: Implemented as Tailwind utility class px-2 (8px). Standard utility values are acceptable per tooltip implementation spec."
+    },
+    "padding/vertical": {
+      "figma_variable": "Primitives/space/050",
+      "resolved_value": "4px",
+      "existing_css_var": null,
+      "proposed_css_var": null,
+      "note": "RESOLVED: Implemented as Tailwind utility class py-1 (4px). Standard utility values are acceptable per tooltip implementation spec."
+    },
+    "arrow/color": {
+      "figma_variable": "Semantic/color/surface/inverse",
+      "resolved_value": "#181F26",
+      "existing_css_var": "--s-color-surface-inverse",
+      "proposed_css_var": null,
+      "note": "Arrow fill matches background — fill-[var(--s-color-surface-inverse)]"
+    },
+    "shadow": {
+      "figma_variable": null,
+      "resolved_value": "none",
+      "existing_css_var": null,
+      "proposed_css_var": null,
+      "note": "CONFIRMED: NO shadow on tooltip. Removed from implementation."
+    }
+  },
+  "icon_dependencies": [],
+  "accessibility": {
+    "role": "tooltip",
+    "required_attributes": ["role=\"tooltip\" on content", "aria-describedby (on trigger pointing to tooltip id)", "id (on tooltip content)"],
+    "keyboard": [
+      "Tooltip appears on focus (keyboard) and hover (mouse)",
+      "Escape: dismiss tooltip",
+      "Tab: moves focus away, tooltip hides"
+    ]
+  },
+  "usage_rules": [
+    "Use for supplementary information only — labels for icon-only buttons, field hints, truncated text explanations.",
+    "Do NOT put critical information in a tooltip — it is not accessible on touch devices.",
+    "Do not use to show errors — use a form validation message instead.",
+    "Do not use for rich content with links or interactive elements — use a Popover instead.",
+    "Always associate with a trigger that is itself focusable.",
+    "Tooltip text should be concise — typically a single short phrase or sentence."
+  ],
+  "anti_patterns": [
+    "Do not put interactive elements inside tooltip content.",
+    "Do not use tooltip to repeat information already visible in the UI.",
+    "Do not style tooltip with a light/white background — it must use --s-color-surface-inverse (dark).",
+    "Do not add any shadow to tooltip."
+  ],
+  "extraction_notes": [
+    "RESOLVED: 4 component tokens confirmed (--c-tooltip-font-size, --c-tooltip-font-weight, --c-tooltip-font-line-height, --c-tooltip-radius).",
+    "RESOLVED: Background uses --s-color-surface-inverse: #181F26 directly. No new --c-tooltip-background token needed.",
+    "RESOLVED: Text uses --s-color-text-inverse: #FFFFFF directly. No new --c-tooltip-content token needed.",
+    "RESOLVED: NO shadow on tooltip (confirmed). Removed shadow binding entirely.",
+    "RESOLVED: Padding implemented as Tailwind utility classes (px-2 py-1) — not token-bound.",
+    "RESOLVED: Arrow fill uses fill-[var(--s-color-surface-inverse)] to match bubble background.",
+    "BLOCKING: @radix-ui/react-tooltip not in package.json. Stub component created. Install before full implementation.",
+    "Figma node ID remains UNRESOLVED."
+  ]
+}

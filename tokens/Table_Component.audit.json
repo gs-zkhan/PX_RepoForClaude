@@ -1,0 +1,442 @@
+{
+  "_meta": {
+    "figma_file_key": "U3D8WMBVFl9LvAZyLHhm24",
+    "figma_page_node": "20:34",
+    "figma_page_name": "Table 🟢",
+    "audit_date": "2026-07-27",
+    "inspector": "Claude Sonnet 4.6 via Figma MCP",
+    "primary_nodes_inspected": [
+      "1842:38  — _Table/Header Cell (all Sort × State variants)",
+      "1844:24  — _Table/Body Cell (all Type × State variants)",
+      "1856:301 — _Table/Body Row (all Column × State variants)",
+      "1857:367 — Table/Row (all Column × Density × State variants)",
+      "1857:96  — Table/Header (all Column counts)",
+      "1896:6   — Table/Toolbar",
+      "2298:60763 — Pagination",
+      "2021:2760 — Full Demo Table (light mode)",
+      "3757:36515 — Comfortable 6-col row",
+      "3757:36529 — Compact 6-col row"
+    ],
+    "source_types_used": [
+      "variable   — Figma Variable resolved via get_variable_defs",
+      "auto-layout — Figma Auto Layout gap / padding via get_design_context code",
+      "fixed-size — layer width/height via metadata or code",
+      "component-prop — Figma component variant property value",
+      "text-style — Figma text style",
+      "ai-doc     — text extracted from the AI Instructions annotation layer in Figma"
+    ],
+    "confidence_legend": {
+      "high":   "value confirmed by variable_defs + design_context code agreement",
+      "medium": "value read from design_context code but not confirmed by variable_defs",
+      "low":    "value inferred from AI-doc text or not directly readable"
+    }
+  },
+
+  "table_container": {
+    "_note": "The table container is the root wrapper that holds the Toolbar, Header, Body rows, and Pagination. In the Full Demo Table the fixed width is 1356 px, but that is a demo constraint — the component is fill-width in production.",
+    "width_behaviour":   { "value": "fill container (flex stretch)", "source": "auto-layout", "confidence": "medium" },
+    "height_behaviour":  { "value": "hug content (sum of toolbar + header + body rows + pagination)", "source": "auto-layout", "confidence": "medium" },
+    "border":            { "value": "none on container; row dividers applied per-row", "source": "auto-layout", "confidence": "high" },
+    "corner_radius":     { "value": "not found — no radius on table container", "source": "not found", "confidence": "high" },
+    "background":        { "value": "transparent — individual rows carry their own background", "source": "auto-layout", "confidence": "high" },
+    "overflow":          { "value": "scroll-x inside the content area; Toolbar and Pagination stay outside scroll zone", "source": "ai-doc", "confidence": "medium" },
+    "clip_content":      { "value": "not found on container; cells use overflow:hidden individually", "source": "not found", "confidence": "high" },
+    "shadow":            { "value": "not found — shadow belongs to the page-level card wrapper, not the Table component", "source": "not found", "confidence": "high" },
+    "auto_layout_direction": { "value": "column (vertical stack: toolbar → header → body rows → pagination)", "source": "auto-layout", "confidence": "high" },
+    "auto_layout_gap":   { "value": "0 — rows abut; dividers are bottom-borders on each row", "source": "auto-layout", "confidence": "high" },
+    "padding":           { "value": "0 — padding lives on toolbar and individual cells, not on the container", "source": "auto-layout", "confidence": "high" }
+  },
+
+  "density_variants": {
+    "_note": "Density only changes body-row height and cell vertical alignment. Header row height, cell horizontal padding, cell typography, and all token values are identical across all three densities.",
+    "compact": {
+      "figma_node":           "3757:36529",
+      "component_prop":       "Density=Compact",
+      "body_row_height":      { "value": "32px", "token": "space/400", "resolved": 32, "source": "variable", "confidence": "high" },
+      "header_row_height":    { "value": "32px (unchanged)", "token": "space/400", "resolved": 32, "source": "fixed-size", "confidence": "high" },
+      "cell_vertical_align":  { "value": "items-center (flexbox)", "source": "auto-layout", "confidence": "high" },
+      "cell_padding_top":     { "value": "12px", "token": "space/150", "resolved": 12, "source": "variable", "confidence": "high" },
+      "cell_padding_bottom":  { "value": "12px", "token": "space/150", "resolved": 12, "source": "variable", "confidence": "high" },
+      "cell_padding_left":    { "value": "24px", "token": "space/300", "resolved": 24, "source": "variable", "confidence": "high" },
+      "cell_padding_right":   { "value": "8px",  "token": "space/100", "resolved": 8,  "source": "variable", "confidence": "high" },
+      "typography_difference":  "none — same 14px/24px body, same 12px/16px header",
+      "icon_size_difference":   "none",
+      "badge_size_difference":  "none",
+      "usage_guidance": "Dense analytical tables and embedded table-in-card contexts only"
+    },
+    "default": {
+      "figma_node":           "1857:97  (1-col, Default density, Default state)",
+      "component_prop":       "Density=Default",
+      "body_row_height":      { "value": "48px", "token": "space/600", "resolved": 48, "source": "variable", "confidence": "high" },
+      "header_row_height":    { "value": "32px", "token": "space/400", "resolved": 32, "source": "fixed-size", "confidence": "high" },
+      "cell_vertical_align":  { "value": "items-start (flexbox)", "source": "auto-layout", "confidence": "high" },
+      "cell_padding_top":     { "value": "12px", "token": "space/150", "resolved": 12, "source": "variable", "confidence": "high" },
+      "cell_padding_bottom":  { "value": "12px", "token": "space/150", "resolved": 12, "source": "variable", "confidence": "high" },
+      "cell_padding_left":    { "value": "24px", "token": "space/300", "resolved": 24, "source": "variable", "confidence": "high" },
+      "cell_padding_right":   { "value": "8px",  "token": "space/100", "resolved": 8,  "source": "variable", "confidence": "high" },
+      "typography_difference":  "none",
+      "icon_size_difference":   "none",
+      "badge_size_difference":  "none",
+      "usage_guidance": "All standard list pages and data views"
+    },
+    "comfortable": {
+      "figma_node":           "3757:36515",
+      "component_prop":       "Density=Comfortable",
+      "body_row_height":      { "value": "56px", "token": "space/700", "resolved": 56, "source": "variable", "confidence": "high" },
+      "header_row_height":    { "value": "32px (unchanged)", "token": "space/400", "resolved": 32, "source": "fixed-size", "confidence": "high" },
+      "cell_vertical_align":  { "value": "items-center (flexbox)", "source": "auto-layout", "confidence": "high" },
+      "cell_padding_top":     { "value": "12px", "token": "space/150", "resolved": 12, "source": "variable", "confidence": "high" },
+      "cell_padding_bottom":  { "value": "12px", "token": "space/150", "resolved": 12, "source": "variable", "confidence": "high" },
+      "cell_padding_left":    { "value": "24px", "token": "space/300", "resolved": 24, "source": "variable", "confidence": "high" },
+      "cell_padding_right":   { "value": "8px",  "token": "space/100", "resolved": 8,  "source": "variable", "confidence": "high" },
+      "typography_difference":  "none",
+      "icon_size_difference":   "none",
+      "badge_size_difference":  "none",
+      "usage_guidance": "Rows containing multi-line metadata or avatars with subtitles"
+    },
+    "density_delta_summary": {
+      "what_changes":    ["body_row_height", "cell_vertical_alignment"],
+      "what_stays_same": ["header_row_height", "all_cell_padding", "all_typography", "all_icon_sizes", "all_token_colors", "badge_dimensions"]
+    }
+  },
+
+  "header_row": {
+    "figma_frame": "1857:96 — Table/Header",
+    "_note": "Height is fixed at 32px across all density variants. Density does not affect the header.",
+    "height_compact":     { "value": "32px", "token": "space/400", "resolved": 32, "source": "fixed-size", "confidence": "high" },
+    "height_default":     { "value": "32px", "token": "space/400", "resolved": 32, "source": "fixed-size", "confidence": "high" },
+    "height_comfortable": { "value": "32px", "token": "space/400", "resolved": 32, "source": "fixed-size", "confidence": "high" },
+    "min_height":         { "value": "32px", "source": "fixed-size", "confidence": "high" },
+    "background_default": { "value": "#FFFFFF", "token": "table/header/background/default → color/surface/default", "source": "variable", "confidence": "high" },
+    "background_hover":   { "value": "#F5F7F9", "token": "table/header/background/hover → color/surface/muted", "source": "variable", "confidence": "high" },
+    "bottom_border":      { "value": "1px solid #D5D9DE", "token": "table/header/border/bottom → color/line/default", "source": "variable", "confidence": "high" },
+    "sticky_behaviour":   { "value": "sticky — header stays visible during vertical scroll (per AI instructions)", "source": "ai-doc", "confidence": "medium" },
+    "clip_content":       { "value": "not found on row; cells use overflow:hidden", "source": "not found", "confidence": "medium" }
+  },
+
+  "header_cell": {
+    "figma_component": "1842:38 — _Table/Header Cell",
+    "component_props": "Sort=[None|Asc|Desc], State=[Default|Hover]",
+    "height":           { "value": "32px", "token": "space/400", "resolved": 32, "source": "fixed-size", "confidence": "high" },
+    "width_default":    { "value": "200px (atomic component default)", "source": "fixed-size", "confidence": "high" },
+    "min_width":        { "value": "not found — no minWidth constraint on atom; flexible when composed in Table/Header", "source": "not found", "confidence": "medium" },
+    "max_width":        { "value": "not found", "source": "not found", "confidence": "medium" },
+    "padding_left":     { "value": "24px", "token": "space/300", "resolved": 24, "source": "variable", "confidence": "high" },
+    "padding_right":    { "value": "8px",  "token": "space/100", "resolved": 8,  "source": "variable", "confidence": "high" },
+    "padding_top":      { "value": "8px",  "token": "space/100", "resolved": 8,  "source": "variable", "confidence": "high" },
+    "padding_bottom":   { "value": "8px",  "token": "space/100", "resolved": 8,  "source": "variable", "confidence": "high" },
+    "gap_icon":         { "value": "4px (between label text and sort icon)", "source": "auto-layout", "confidence": "high" },
+    "alignment":        { "value": "items-center (flex row)", "source": "auto-layout", "confidence": "high" },
+    "typography_style_name": { "value": "table.font — Noto Sans Regular 12/16", "source": "text-style", "confidence": "high" },
+    "font_size":        { "value": "12px", "token": "table/header/font/size (→ font/size/h7)", "resolved": 12, "source": "variable", "confidence": "high" },
+    "font_line_height": { "value": "16px", "token": "table/header/font/lineHeight (→ font/lineHeight/h7)", "resolved": 16, "source": "variable", "confidence": "high" },
+    "font_weight":      { "value": "400", "token": "table/header/font/weight (→ font/weight/regular)", "resolved": 400, "source": "variable", "confidence": "high" },
+    "text_colour":      { "value": "#5F6C7A", "token": "table/header/text → color/text/subtlest", "source": "variable", "confidence": "high" },
+    "text_truncation":  { "value": "overflow-hidden + text-ellipsis + whitespace-nowrap", "source": "auto-layout", "confidence": "high" },
+    "background_default": { "value": "#FFFFFF", "token": "table/header/background/default", "source": "variable", "confidence": "high" },
+    "background_hover":   { "value": "#F5F7F9", "token": "table/header/background/hover", "source": "variable", "confidence": "high" },
+    "sort_icon_size":   { "value": "16px", "token": "icon/size/016", "resolved": 16, "source": "auto-layout", "confidence": "high" },
+    "sort_icon_colour_inactive": { "value": "#3C4A57", "token": "table/header/icon → icon/color/default", "source": "variable", "confidence": "high" },
+    "sort_icon_colour_active":   { "value": "#0369E9", "token": "table/header/icon/sort/active → color/action/primary/default", "source": "variable", "confidence": "high" },
+    "sort_variants": {
+      "sort_none_default": "no icon shown",
+      "sort_none_hover":   "arrow-down (ghost) + pin-line icon revealed (16px each)",
+      "sort_asc_default":  "arrow-up icon (16px) shown, icon colour = table/header/icon/sort/active #0369E9",
+      "sort_asc_hover":    "arrow-up icon + bg = table/header/background/hover",
+      "sort_desc_default": "arrow-down icon (16px) shown, same active colour",
+      "sort_desc_hover":   "arrow-down icon + bg = table/header/background/hover"
+    },
+    "resize_handle": { "value": "pin-line icon (16px) appears on hover alongside ghost sort icon; no explicit resize handle layer found", "source": "auto-layout", "confidence": "medium" }
+  },
+
+  "body_row": {
+    "figma_component": "1856:301 — _Table/Body Row / 1857:367 — Table/Row",
+    "component_props": "Columns=[1–6], State=[Default|Hover|Selected], Density=[Default|Comfortable|Compact]",
+    "height_compact":     { "value": "32px", "token": "space/400", "resolved": 32, "source": "variable", "confidence": "high" },
+    "height_default":     { "value": "48px", "token": "space/600", "resolved": 48, "source": "variable", "confidence": "high" },
+    "height_comfortable": { "value": "56px", "token": "space/700", "resolved": 56, "source": "variable", "confidence": "high" },
+    "min_height":         { "value": "not found — height is fixed per density", "source": "not found", "confidence": "high" },
+    "background_default":  { "value": "#FFFFFF", "token": "table/cell/background/default → color/surface/default", "source": "variable", "confidence": "high" },
+    "background_hover":    { "value": "#F5F7F9", "token": "table/cell/background/hover → color/surface/muted", "source": "variable", "confidence": "high" },
+    "background_selected": { "value": "#E9F8FA", "token": "table/cell/background/selected → color/surface/selected", "source": "variable", "confidence": "high" },
+    "background_disabled": { "value": "not found as explicit row state — cell-level only", "source": "not found", "confidence": "medium" },
+    "bottom_border":       { "value": "1px solid #D5D9DE", "token": "table/cell/border/row → color/line/default", "source": "variable", "confidence": "high" },
+    "interaction_states":  ["Default", "Hover", "Selected"],
+    "hover_reveals":       "More (ellipsis) icon button in the actions column",
+    "selection_behaviour": "checkbox checked + background spans all cells in the row",
+    "hover_target":        "full row width",
+    "clip_content":        { "value": "h-full on cells; cell content clips via overflow-hidden", "source": "auto-layout", "confidence": "high" },
+    "cell_vertical_align_by_density": {
+      "compact":    "items-center",
+      "default":    "items-start",
+      "comfortable":"items-center"
+    }
+  },
+
+  "body_cell": {
+    "figma_component": "1844:24 — _Table/Body Cell",
+    "component_props": "Type=[Text|Link|Number|Avatar|Checkbox|Date|Badge|More], State=[Default|Hover|Selected]",
+    "height":           { "value": "48px in atom; overridden by row density in Table/Row context (h-full)", "token": "space/600", "resolved": 48, "source": "variable", "confidence": "high" },
+    "width_default_atom": { "value": "200px (atomic default)", "source": "fixed-size", "confidence": "high" },
+    "padding_left":     { "value": "24px", "token": "space/300", "resolved": 24, "source": "variable", "confidence": "high" },
+    "padding_right":    { "value": "8px",  "token": "space/100", "resolved": 8,  "source": "variable", "confidence": "high" },
+    "padding_top":      { "value": "12px", "token": "space/150", "resolved": 12, "source": "variable", "confidence": "high" },
+    "padding_bottom":   { "value": "12px", "token": "space/150", "resolved": 12, "source": "variable", "confidence": "high" },
+    "alignment_by_type": {
+      "Text":     "items-center (flex row)",
+      "Link":     "items-center (flex row)",
+      "Number":   "items-center + justify-end (right-aligned)",
+      "Avatar":   "items-start (flex row) + gap-8px between avatar and name",
+      "Date":     "items-start (flex row)",
+      "Badge":    "items-start (flex row)",
+      "Checkbox": "items-center + justify-center",
+      "More":     "items-center + justify-center"
+    },
+    "typography_style_name": "font.body.medium — Noto Sans Regular 14/24",
+    "font_size":        { "value": "14px", "token": "table/cell/font/size (→ font/size/h6)", "resolved": 14, "source": "variable", "confidence": "high" },
+    "font_line_height": { "value": "24px", "token": "table/cell/font/lineHeight (→ font/lineHeight/h6)", "resolved": 24, "source": "variable", "confidence": "high" },
+    "font_weight":      { "value": "400", "token": "table/cell/font/weight (→ font/weight/regular)", "resolved": 400, "source": "variable", "confidence": "high" },
+    "text_truncation":  "overflow:hidden + text-ellipsis + whitespace-nowrap on all text types",
+    "wrap_behaviour":   "no wrap — single line always; enforced by whitespace-nowrap",
+    "primary_text_colour":   { "value": "#181F26", "token": "table/cell/text/default → color/text/default", "source": "variable", "confidence": "high" },
+    "secondary_text_colour": { "value": "#3C4A57", "token": "table/cell/text/subtle → color/text/subtle", "source": "variable", "confidence": "high" },
+    "tertiary_text_colour":  { "value": "#5F6C7A", "token": "table/cell/text/subtlest → color/text/subtlest", "source": "variable", "confidence": "high" },
+    "link_colour":           { "value": "#0369E9", "token": "table/cell/text/link → color/link/default", "source": "variable", "confidence": "high" },
+    "disabled_text_colour":  { "value": "#ACB4BD", "token": "table/cell/text/disabled → color/text/disabled", "source": "variable", "confidence": "high" },
+    "column_divider_behaviour": { "value": "table/cell/border/column token exists (#D5D9DE) but column dividers are not visible in the default table variant — only row dividers (bottom-border) are rendered by default", "source": "variable", "confidence": "medium" }
+  },
+
+  "checkbox_column": {
+    "figma_type": "Type=Checkbox in _Table/Body Cell + header checkbox in Table/Header",
+    "column_width":         { "value": "48px (fixed)", "source": "fixed-size", "confidence": "high" },
+    "min_width":            { "value": "48px", "source": "fixed-size", "confidence": "high" },
+    "max_width":            { "value": "48px", "source": "fixed-size", "confidence": "high" },
+    "cell_padding":         { "value": "12px all sides", "token": "space/150", "resolved": 12, "source": "variable", "confidence": "high" },
+    "checkbox_size":        { "value": "16px", "source": "auto-layout", "confidence": "high" },
+    "checkbox_alignment":   "items-center + justify-center",
+    "hit_target_size":      { "value": "24px (checkbox wrapped in p-4px container = 16+4+4=24px)", "token": "space/050", "resolved": 4, "source": "auto-layout", "confidence": "medium" },
+    "header_checkbox_behaviour": { "value": "indeterminate when some rows selected; checked when all rows selected", "source": "ai-doc", "confidence": "medium" },
+    "selected_state":       "checkbox checked + row background = table/cell/background/selected",
+    "indeterminate_state":  { "value": "supported per Checkbox component props (not directly visible in table frame variants shown)", "source": "component-prop", "confidence": "medium" }
+  },
+
+  "avatar_cell": {
+    "figma_type": "Type=Avatar in _Table/Body Cell",
+    "avatar_size":          { "value": "24px", "source": "fixed-size", "confidence": "high" },
+    "avatar_to_text_gap":   { "value": "8px", "token": "space/100", "resolved": 8, "source": "variable", "confidence": "high" },
+    "name_typography":      "Noto Sans Regular 14/24 — same as body cell text",
+    "name_colour":          { "value": "#0369E9 (link style)", "token": "table/cell/text/link → color/link/default", "source": "auto-layout", "confidence": "high" },
+    "secondary_text":       { "value": "not found in atom — secondary text beneath name not present in the _Table/Body Cell component", "source": "not found", "confidence": "high" },
+    "internal_alignment":   "items-start in Default density; items-center in Compact/Comfortable",
+    "truncation":           "name text: overflow hidden, flex-[1_0_0] takes remaining width"
+  },
+
+  "badge_cell": {
+    "figma_component": "767:222 — Status Label (composed into _Table/Body Cell Type=Badge)",
+    "badge_height":          { "value": "24px", "source": "fixed-size", "confidence": "high" },
+    "badge_padding_horizontal": { "value": "8px", "source": "auto-layout", "confidence": "high" },
+    "badge_padding_vertical":   { "value": "2px", "source": "auto-layout", "confidence": "high" },
+    "badge_radius":          { "value": "8px", "source": "auto-layout", "confidence": "high" },
+    "badge_font_size":       { "value": "12px", "token": "table/badge/font/size → font/size/small", "resolved": 12, "source": "variable", "confidence": "high" },
+    "badge_line_height":     { "value": "16px", "token": "table/badge/font/lineHeight → font/lineHeight/small", "resolved": 16, "source": "variable", "confidence": "high" },
+    "badge_font_weight":     { "value": "400 regular", "token": "table/badge/font/weight → font/weight/regular", "resolved": 400, "source": "variable", "confidence": "high" },
+    "badge_background":      { "value": "#F5F7F9 (neutral/Open)", "token": "color/status/neutral/subtlest", "source": "auto-layout", "confidence": "high" },
+    "badge_text_colour":     { "value": "#3C4A57 (neutral)", "token": "color/status/neutral/default", "source": "auto-layout", "confidence": "high" },
+    "cell_alignment":        "items-start — badge sits at top of cell in Default density; items-center in Compact/Comfortable",
+    "behaviour_compact":     "badge rendered same size (24px); cell is items-center at 32px row height",
+    "behaviour_default":     "badge rendered at top of 48px row (items-start)",
+    "behaviour_comfortable": "badge centered in 56px row (items-center)"
+  },
+
+  "actions_column": {
+    "figma_type": "Type=More in _Table/Body Cell",
+    "column_width":        { "value": "48px (fixed)", "source": "fixed-size", "confidence": "high" },
+    "min_width":           { "value": "48px", "source": "fixed-size", "confidence": "high" },
+    "icon_size":           { "value": "24px", "token": "icon/size/024", "resolved": 24, "source": "variable", "confidence": "high" },
+    "icon_colour":         { "value": "#3C4A57", "token": "table/cell/icon/default → icon/color/default", "source": "variable", "confidence": "high" },
+    "icon_colour_hover":   { "value": "#25313B", "token": "table/cell/icon/action/hover → icon/color/hover", "source": "variable", "confidence": "high" },
+    "cell_padding":        { "value": "12px all sides", "token": "space/150", "resolved": 12, "source": "variable", "confidence": "high" },
+    "alignment":           "items-center + justify-center",
+    "visibility_behaviour": "icon hidden by default; revealed on row hover",
+    "sticky_behaviour":    { "value": "not found at component level — sticky action column is a page-level layout concern", "source": "not found", "confidence": "medium" }
+  },
+
+  "column_widths": {
+    "_source": "ai-doc (AI Instructions annotation layer in Figma page)",
+    "_confidence": "medium — these are design guidance ranges, not variable-bound values",
+    "Avatar":   { "value": "200px", "type": "fixed" },
+    "Text":     { "value": "130–200px", "type": "flexible range" },
+    "Number":   { "value": "100–120px", "type": "flexible range" },
+    "Date":     { "value": "130–140px", "type": "flexible range" },
+    "Badge":    { "value": "110–120px", "type": "flexible range" },
+    "Checkbox": { "value": "48px", "type": "fixed" },
+    "More":     { "value": "48px", "type": "fixed" }
+  },
+
+  "toolbar": {
+    "figma_node":     "1896:6 — Table/Toolbar",
+    "height":         { "value": "48px", "token": "space/600", "resolved": 48, "source": "variable", "confidence": "high" },
+    "padding_left":   { "value": "16px", "token": "space/200", "resolved": 16, "source": "variable", "confidence": "high" },
+    "padding_right":  { "value": "8px",  "token": "space/100", "resolved": 8,  "source": "variable", "confidence": "high" },
+    "padding_top":    { "value": "8px",  "token": "space/100", "resolved": 8,  "source": "variable", "confidence": "high" },
+    "padding_bottom": { "value": "8px",  "token": "space/100", "resolved": 8,  "source": "variable", "confidence": "high" },
+    "background":     { "value": "#FFFFFF", "token": "table/header/background/default → color/surface/default", "source": "variable", "confidence": "high" },
+    "bottom_border":  { "value": "not found on toolbar — toolbar and header row share the same background; the header row carries the bottom border", "source": "not found", "confidence": "medium" },
+    "title_typography": {
+      "style_name":   "font.heading.small — Noto Sans SemiBold 16/24",
+      "font_size":    { "value": "16px", "token": "font/size/h5", "resolved": 16, "source": "variable", "confidence": "high" },
+      "font_weight":  { "value": "600 SemiBold", "token": "font/weight/semibold", "resolved": 600, "source": "text-style", "confidence": "high" },
+      "line_height":  { "value": "24px", "token": "font/lineHeight/h5", "resolved": 24, "source": "variable", "confidence": "high" },
+      "colour":       { "value": "#181F26", "token": "color/text/default", "source": "variable", "confidence": "high" }
+    },
+    "actions_gap":      { "value": "4px", "token": "space/050", "resolved": 4, "source": "variable", "confidence": "high" },
+    "icon_button_size": { "value": "32px", "source": "fixed-size", "confidence": "high" },
+    "icon_button_radius": { "value": "6px", "token": "radius/075", "resolved": 6, "source": "variable", "confidence": "high" },
+    "icon_size":        { "value": "24px", "token": "icon/size/024", "resolved": 24, "source": "variable", "confidence": "high" },
+    "toolbar_icons_shown": ["search", "filter", "add-column (column selector)", "more-vertical (overflow)"],
+    "alignment":        "flex row — title flex-[1_0_0], actions shrink-0 right side",
+    "sticky_behaviour": { "value": "sticky — sits outside the scroll zone per AI instructions", "source": "ai-doc", "confidence": "medium" }
+  },
+
+  "pagination": {
+    "figma_node":     "1063:189 — Pagination (instance 2298:60763 on Table page)",
+    "height":         { "value": "40px (fixed)", "source": "fixed-size", "confidence": "high" },
+    "min_height":     { "value": "40px", "source": "fixed-size", "confidence": "high" },
+    "padding_horizontal": { "value": "16px", "token": "space/200", "resolved": 16, "source": "variable", "confidence": "high" },
+    "gap":            { "value": "12px", "token": "space/150", "resolved": 12, "source": "variable", "confidence": "high" },
+    "top_border":     { "value": "not found — pagination sits below table rows whose bottom borders act as the visual separator", "source": "not found", "confidence": "medium" },
+    "background":     { "value": "#FFFFFF", "token": "color/surface/default", "source": "variable", "confidence": "high" },
+    "results_count_typography": {
+      "style":        "Noto Sans SemiBold 12/16",
+      "font_size":    { "value": "12px", "token": "font/size/small", "resolved": 12, "source": "variable", "confidence": "high" },
+      "font_weight":  { "value": "600 SemiBold", "source": "text-style", "confidence": "high" },
+      "colour":       { "value": "#5F6C7A", "token": "color/text/subtlest", "source": "variable", "confidence": "high" }
+    },
+    "per_page_text_colour": { "value": "#181F26", "token": "color/text/default", "source": "variable", "confidence": "high" },
+    "divider_width":  { "value": "1px", "source": "fixed-size", "confidence": "high" },
+    "divider_height": { "value": "20px", "source": "fixed-size", "confidence": "high" },
+    "divider_colour": { "value": "#D5D9DE", "token": "color/line/default", "source": "variable", "confidence": "high" },
+    "nav_button_size":     { "value": "24px", "source": "fixed-size", "confidence": "high" },
+    "page_pill_width":     { "value": "32px", "source": "fixed-size", "confidence": "high" },
+    "page_pill_height":    { "value": "24px", "source": "fixed-size", "confidence": "high" },
+    "page_pill_radius":    { "value": "4px", "token": "radius/050", "resolved": 4, "source": "variable", "confidence": "high" },
+    "page_number_typography": {
+      "font_size":    { "value": "12px", "token": "font/size/small", "resolved": 12, "source": "variable", "confidence": "high" },
+      "font_weight":  600,
+      "colour":       { "value": "#181F26", "token": "color/text/default", "source": "variable", "confidence": "high" }
+    },
+    "alignment":       "flex row — results count + divider + per-page left; spacer fills; nav right",
+    "sticky_behaviour": { "value": "sticky — sits outside the scroll zone per AI instructions", "source": "ai-doc", "confidence": "medium" }
+  },
+
+  "state_variants": {
+    "default_row":          { "background": "#FFFFFF", "token": "table/cell/background/default", "confidence": "high" },
+    "hover_row":            { "background": "#F5F7F9", "token": "table/cell/background/hover", "more_icon_visible": true, "confidence": "high" },
+    "selected_row":         { "background": "#E9F8FA", "token": "table/cell/background/selected", "checkbox": "checked", "confidence": "high" },
+    "disabled_row":         { "value": "not found as an explicit table row variant — disabled state exists at cell icon/text level only", "confidence": "high" },
+    "loading_row":          { "value": "not found in inspected variants", "confidence": "medium" },
+    "skeleton_row":         { "value": "not found in inspected variants", "confidence": "medium" },
+    "empty_table":          { "value": "separate page-level pattern (View=Table, State=Empty in List Page frame 3302:210)", "confidence": "high" },
+    "error_table":          { "value": "not found in inspected variants on Table component page", "confidence": "medium" },
+    "sort_active":          { "icon": "arrow-up or arrow-down", "icon_colour": "#0369E9", "token": "table/header/icon/sort/active", "confidence": "high" },
+    "sort_inactive":        { "icon": "none shown by default", "hover_shows": "ghost arrow-down + pin icon", "confidence": "high" },
+    "sort_none_hover":      { "icons": ["arrow-down (ghost)", "pin-line"], "header_bg": "#F5F7F9", "confidence": "high" },
+    "checkbox_selected":    { "visual": "checked checkbox (image asset)", "row_bg": "#E9F8FA", "confidence": "high" },
+    "checkbox_indeterminate": { "value": "supported in Checkbox component but not visible as a table row variant; header checkbox uses this for partial selection", "confidence": "medium" },
+    "action_hover":         { "icon": "icons/24/more-vertical", "colour_hover": "#25313B", "token": "table/cell/icon/action/hover", "confidence": "high" },
+    "link_hover":           { "value": "not found as explicit state variant; browser default underline expected", "confidence": "low" }
+  },
+
+  "variable_token_mapping": {
+    "_note": "All table/* tokens below are confirmed present in C_Default.tokens.json. Space/* tokens are primitives used directly in Auto Layout. Tokens marked NEW are not in C_Default.tokens.json.",
+    "colour_tokens_in_file": [
+      { "token": "table/header/text",               "resolved": "#5F6C7A", "alias": "color/text/subtlest",         "source": "variable", "confidence": "high" },
+      { "token": "table/header/background/default",  "resolved": "#FFFFFF", "alias": "color/surface/default",       "source": "variable", "confidence": "high" },
+      { "token": "table/header/background/hover",    "resolved": "#F5F7F9", "alias": "color/surface/muted",         "source": "variable", "confidence": "high" },
+      { "token": "table/header/border/bottom",       "resolved": "#D5D9DE", "alias": "color/line/default",          "source": "variable", "confidence": "high" },
+      { "token": "table/header/icon",                "resolved": "#3C4A57", "alias": "icon/color/default",          "source": "variable", "confidence": "high" },
+      { "token": "table/header/icon/sort/active",    "resolved": "#0369E9", "alias": "color/action/primary/default","source": "variable", "confidence": "high" },
+      { "token": "table/cell/background/default",    "resolved": "#FFFFFF", "alias": "color/surface/default",       "source": "variable", "confidence": "high" },
+      { "token": "table/cell/background/hover",      "resolved": "#F5F7F9", "alias": "color/surface/muted",         "source": "variable", "confidence": "high" },
+      { "token": "table/cell/background/selected",   "resolved": "#E9F8FA", "alias": "color/surface/selected",      "source": "variable", "confidence": "high" },
+      { "token": "table/cell/border/row",            "resolved": "#D5D9DE", "alias": "color/line/default",          "source": "variable", "confidence": "high" },
+      { "token": "table/cell/border/column",         "resolved": "#D5D9DE", "alias": "color/line/default",          "source": "variable", "confidence": "high" },
+      { "token": "table/cell/text/default",          "resolved": "#181F26", "alias": "color/text/default",          "source": "variable", "confidence": "high" },
+      { "token": "table/cell/text/subtle",           "resolved": "#3C4A57", "alias": "color/text/subtle",           "source": "variable", "confidence": "high" },
+      { "token": "table/cell/text/subtlest",         "resolved": "#5F6C7A", "alias": "color/text/subtlest",         "source": "variable", "confidence": "high" },
+      { "token": "table/cell/text/link",             "resolved": "#0369E9", "alias": "color/link/default",          "source": "variable", "confidence": "high" },
+      { "token": "table/cell/text/disabled",         "resolved": "#ACB4BD", "alias": "color/text/disabled",         "source": "variable", "confidence": "high" },
+      { "token": "table/cell/icon/default",          "resolved": "#3C4A57", "alias": "icon/color/default",          "source": "variable", "confidence": "high" },
+      { "token": "table/cell/icon/subtle",           "resolved": "#ACB4BD", "alias": "icon/color/subtle",           "source": "variable", "confidence": "high" },
+      { "token": "table/cell/icon/action/hover",     "resolved": "#25313B", "alias": "icon/color/hover",            "source": "variable", "confidence": "high" }
+    ],
+    "number_tokens_in_file": [
+      { "token": "table/header/font/size",       "resolved": 12,  "alias": "font/size/h7",         "source": "variable", "confidence": "high" },
+      { "token": "table/header/font/lineHeight", "resolved": 16,  "alias": "font/lineHeight/h7",   "source": "variable", "confidence": "high" },
+      { "token": "table/header/font/weight",     "resolved": 400, "alias": "font/weight/regular",  "source": "variable", "confidence": "high" },
+      { "token": "table/cell/font/size",         "resolved": 14,  "alias": "font/size/h6",         "source": "variable", "confidence": "high" },
+      { "token": "table/cell/font/lineHeight",   "resolved": 24,  "alias": "font/lineHeight/h6",   "source": "variable", "confidence": "high" },
+      { "token": "table/cell/font/weight",       "resolved": 400, "alias": "font/weight/regular",  "source": "variable", "confidence": "high" },
+      { "token": "table/badge/font/size",        "resolved": 12,  "alias": "font/size/small",      "source": "variable", "confidence": "high" },
+      { "token": "table/badge/font/lineHeight",  "resolved": 16,  "alias": "font/lineHeight/small","source": "variable", "confidence": "high" },
+      { "token": "table/badge/font/weight",      "resolved": 400, "alias": "font/weight/regular",  "source": "variable", "confidence": "high" }
+    ],
+    "spacing_used_as_primitives_not_component_tokens": [
+      { "primitive": "space/050",  "resolved": 4,  "used_for": ["toolbar action gap", "checkbox hit-target padding"] },
+      { "primitive": "space/075",  "resolved": 6,  "used_for": ["pagination icon padding"] },
+      { "primitive": "space/100",  "resolved": 8,  "used_for": ["header padding top/right/bottom", "cell padding right", "avatar-to-name gap", "toolbar padding right/top/bottom"] },
+      { "primitive": "space/150",  "resolved": 12, "used_for": ["body cell padding top/bottom", "checkbox/More cell padding all sides", "pagination gap"] },
+      { "primitive": "space/200",  "resolved": 16, "used_for": ["toolbar padding left", "pagination padding horizontal"] },
+      { "primitive": "space/300",  "resolved": 24, "used_for": ["header cell padding left", "body cell padding left"] },
+      { "primitive": "space/400",  "resolved": 32, "used_for": ["header row height", "Compact body row height"] },
+      { "primitive": "space/600",  "resolved": 48, "used_for": ["Default body row height", "toolbar height", "checkbox/More column width"] },
+      { "primitive": "space/700",  "resolved": 56, "used_for": ["Comfortable body row height"] },
+      { "primitive": "radius/050", "resolved": 4,  "used_for": ["pagination page pill radius"] },
+      { "primitive": "radius/075", "resolved": 6,  "used_for": ["toolbar icon button radius"] },
+      { "primitive": "icon/size/016", "resolved": 16, "used_for": ["sort icon size"] },
+      { "primitive": "icon/size/024", "resolved": 24, "used_for": ["toolbar icon size", "More icon size", "nav button size"] }
+    ],
+    "missing_from_token_file": [
+      { "value": "density=compact body-row height 32px",   "recommendation": "should_become_token: table/row/height/compact", "source": "variable (space/400)" },
+      { "value": "density=default body-row height 48px",   "recommendation": "should_become_token: table/row/height/default", "source": "variable (space/600)" },
+      { "value": "density=comfortable body-row height 56px","recommendation": "should_become_token: table/row/height/comfortable", "source": "variable (space/700)" },
+      { "value": "header row height 32px",                 "recommendation": "should_become_token: table/header/height", "source": "fixed-size" },
+      { "value": "body cell padding-left 24px",            "recommendation": "layout-guidance — primitives (space/300) sufficient", "source": "variable" },
+      { "value": "body cell padding-right 8px",            "recommendation": "layout-guidance — primitives (space/100) sufficient", "source": "variable" },
+      { "value": "body cell padding-top/bottom 12px",      "recommendation": "layout-guidance — primitives (space/150) sufficient", "source": "variable" },
+      { "value": "checkbox/More column width 48px",        "recommendation": "should_become_token: table/column/width/action", "source": "fixed-size" },
+      { "value": "toolbar height 48px",                    "recommendation": "layout-guidance — same as space/600", "source": "variable" },
+      { "value": "pagination height 40px",                 "recommendation": "should_become_token: table/pagination/height", "source": "fixed-size" },
+      { "value": "badge cell radius 8px",                  "recommendation": "layout-guidance — resolved from Status Label component, not a table token", "source": "auto-layout" },
+      { "value": "avatar size 24px in cell",               "recommendation": "layout-guidance — resolved from Avatar component", "source": "auto-layout" },
+      { "value": "sort icon gap 4px",                      "recommendation": "layout-guidance — primitives (space/050) sufficient", "source": "auto-layout" },
+      { "value": "table/cell/background/disabled",         "recommendation": "should_become_token if disabled row state is designed", "source": "not found" },
+      { "value": "table/header/background/active-sort",    "recommendation": "should_become_token — active-sort header bg (currently same as hover)", "source": "not found" }
+    ]
+  },
+
+  "accessibility": {
+    "source": "ai-doc",
+    "confidence": "medium",
+    "values": [
+      "role=grid on table container",
+      "aria-rowcount + aria-colcount on table container",
+      "role=columnheader + aria-sort (ascending|descending|none) on header cells",
+      "aria-selected=true on selected rows",
+      "aria-label=Select [row name] on checkbox cells",
+      "focus ring: shadow/focus (2px)",
+      "keyboard: Tab between interactive cells; arrow keys navigate the grid"
+    ]
+  },
+
+  "values_not_readable": [
+    "Sticky header / sticky action column exact CSS (overflow, position:sticky, z-index) — ai-doc confirms behaviour but no layer properties found",
+    "Loading/skeleton row state — variant not present in inspected frames",
+    "Error state — variant not present on Table component page",
+    "Disabled row state (full row) — only cell-level disabled text/icon tokens exist",
+    "Column resize handle exact dimensions — only the pin-line icon (16px) is visible on hover",
+    "Table container clip-content property — not found",
+    "Hover cursor (pointer/default) — not readable via MCP",
+    "Shadow on table container — none found; shadow lives at page card level"
+  ]
+}

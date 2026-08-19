@@ -1,0 +1,3718 @@
+{
+  "color": {
+    "action": {
+      "primary": {
+        "default": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.1882352977991104,
+              0.5176470875740051,
+              0.929411768913269
+            ],
+            "alpha": 1,
+            "hex": "#3084ED"
+          },
+          "$description": "Primary action default — button fill, link colour, active nav indicator. Light: royalBlue/700. Dark: royalBlue/600.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:185:3",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:2c946c2be1a911121c87987944f882c84da7ef25/-1:-1",
+              "targetVariableName": "color/royalBlue/600",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.1882352977991104,
+              0.5176470875740051,
+              0.929411768913269
+            ],
+            "alpha": 1,
+            "hex": "#3084ED"
+          },
+          "$description": "Primary action hover — darken on pointer-over. Light: royalBlue/600. Dark: royalBlue/600.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:185:4",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:2c946c2be1a911121c87987944f882c84da7ef25/-1:-1",
+              "targetVariableName": "color/royalBlue/600",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "click": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0117647061124444,
+              0.35686275362968445,
+              0.7764706015586853
+            ],
+            "alpha": 1,
+            "hex": "#035BC6"
+          },
+          "$description": "Primary action pressed — deepest shade on mouse-down. Light: royalBlue/800. Dark: royalBlue/800.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:185:5",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:39f2b9231f2aad6a8860b42ad3e6b3e758e1da42/-1:-1",
+              "targetVariableName": "color/royalBlue/800",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.6352941393852234,
+              0.7803921699523926,
+              0.9686274528503418
+            ],
+            "alpha": 1,
+            "hex": "#A2C7F7"
+          },
+          "$description": "Primary action subtle — soft accent for selected rows and active states. Light: royalBlue/500. Dark: royalBlue/400.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:185:6",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:9225b92752a4b55c6416495f045120cdce7d869f/-1:-1",
+              "targetVariableName": "color/royalBlue/400",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtlest": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0117647061124444,
+              0.29019609093666077,
+              0.6392157077789307
+            ],
+            "alpha": 1,
+            "hex": "#034AA3"
+          },
+          "$description": "Primary action subtlest — lightest tint for hover backgrounds and focus areas. Light: royalBlue/100. Dark: royalBlue/900.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:185:7",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:d82f3042829794987c15a537901ece9a84f810e1/-1:-1",
+              "targetVariableName": "color/royalBlue/900",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "visited": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8235294222831726,
+              0.8941176533699036,
+              0.9843137264251709
+            ],
+            "alpha": 1,
+            "hex": "#D2E4FB"
+          },
+          "$description": "Visited link colour. Light: royalBlue/800. Dark: royalBlue/300.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:827:106",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:acaf5ecfdaa895531d5ab21d2a59c0c4ea62ae8d/-1:-1",
+              "targetVariableName": "color/royalBlue/300",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        }
+      },
+      "secondary": {
+        "default": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.14509804546833038,
+              0.1921568661928177,
+              0.23137255012989044
+            ],
+            "alpha": 1,
+            "hex": "#25313B"
+          },
+          "$description": "Secondary action default — ghost button border and text. Light: royalBlue/700.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:185:8",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:c0a060971fdd3c095feed87e39153dc60e43c544/-1:-1",
+              "targetVariableName": "color/neutral/800",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0117647061124444,
+              0.35686275362968445,
+              0.7764706015586853
+            ],
+            "alpha": 1,
+            "hex": "#035BC6"
+          },
+          "$description": "Secondary action hover background. Light: royalBlue/100.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:185:9",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:39f2b9231f2aad6a8860b42ad3e6b3e758e1da42/-1:-1",
+              "targetVariableName": "color/royalBlue/800",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "click": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0117647061124444,
+              0.29019609093666077,
+              0.6392157077789307
+            ],
+            "alpha": 1,
+            "hex": "#034AA3"
+          },
+          "$description": "Secondary action pressed background. Light: royalBlue/200.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:185:10",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:d82f3042829794987c15a537901ece9a84f810e1/-1:-1",
+              "targetVariableName": "color/royalBlue/900",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        }
+      },
+      "destructive": {
+        "default": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9764705896377563,
+              0.5882353186607361,
+              0.5529412031173706
+            ],
+            "alpha": 1,
+            "hex": "#F9968D"
+          },
+          "$description": "Destructive action — delete, irreversible operations",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:185:11",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:67ac3d943c5ffe240dea69569f360428eeb281a9/-1:-1",
+              "targetVariableName": "color/tartRed/500",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9882352948188782,
+              0.7450980544090271,
+              0.7254902124404907
+            ],
+            "alpha": 1,
+            "hex": "#FCBEB9"
+          },
+          "$description": "Destructive action hover — darker red for delete/danger button hover state.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:185:12",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:7562dc750e3a525c9a666e519db623c1196e04b1/-1:-1",
+              "targetVariableName": "color/tartRed/400",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "click": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9921568632125854,
+              0.8745098114013672,
+              0.8627451062202454
+            ],
+            "alpha": 1,
+            "hex": "#FDDFDC"
+          },
+          "$description": "Destructive action pressed — deepest red for delete/danger button mouse-down.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:185:13",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:57365a691be09de63d0ff4c59e5ffac42446c396/-1:-1",
+              "targetVariableName": "color/tartRed/300",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        }
+      },
+      "neutral": {
+        "default": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0941176488995552,
+              0.12156862765550613,
+              0.14901961386203766
+            ],
+            "alpha": 1,
+            "hex": "#181F26"
+          },
+          "$description": "Neutral action default — tertiary button resting state. Transparent surface.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:704:137",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:5502683fa03ac5f9b88b7cffdff847900d0f31a8/-1:-1",
+              "targetVariableName": "color/neutral/900",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.14509804546833038,
+              0.1921568661928177,
+              0.23137255012989044
+            ],
+            "alpha": 1,
+            "hex": "#25313B"
+          },
+          "$description": "Neutral action hover — subtle grey fill on pointer-over.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:704:138",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:c0a060971fdd3c095feed87e39153dc60e43c544/-1:-1",
+              "targetVariableName": "color/neutral/800",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "active": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.23529411852359772,
+              0.29019609093666077,
+              0.34117648005485535
+            ],
+            "alpha": 1,
+            "hex": "#3C4A57"
+          },
+          "$description": "Neutral action active/pressed — slightly deeper grey on mouse-down.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:704:139",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:f8059a30a0af86896199b924b93612cb4edf85b4/-1:-1",
+              "targetVariableName": "color/neutral/700",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        }
+      },
+      "accent": {
+        "default": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.6509804129600525,
+              0.886274516582489,
+              0.9215686321258545
+            ],
+            "alpha": 1,
+            "hex": "#A6E2EB"
+          },
+          "$description": "Accent action color for secondary interactive elements — distinct from primary action.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:3660:13746",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:2a0f5453bdc99e7ed347324800db3b896d95e7f2/-1:-1",
+              "targetVariableName": "color/pacificBlue/500",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9137254953384399,
+              0.9725490212440491,
+              0.9803921580314636
+            ],
+            "alpha": 1,
+            "hex": "#E9F8FA"
+          },
+          "$description": "Accent action color on hover state.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:3660:13747",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:9ac35900f6f9e6d0490af8e7de58b6f53b4d6cce/-1:-1",
+              "targetVariableName": "color/pacificBlue/200",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        }
+      }
+    },
+    "text": {
+      "default": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9921568632125854,
+            0.9921568632125854,
+            0.9960784316062927
+          ],
+          "alpha": 1,
+          "hex": "#FDFDFE"
+        },
+        "$description": "Primary text — body copy, headings. Light: neutral/900. Dark: neutral/100.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:185:14",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:182f0041a6d0dd58d92d3ce8e6ef270657bc0bbb/-1:-1",
+            "targetVariableName": "color/neutral/100",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8352941274642944,
+            0.8509804010391235,
+            0.8705882430076599
+          ],
+          "alpha": 1,
+          "hex": "#D5D9DE"
+        },
+        "$description": "Secondary text — metadata, supporting labels. Light: neutral/700. Dark: neutral/400.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:185:15",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:437c4818651498931ca1b366012718bb772c6a71/-1:-1",
+            "targetVariableName": "color/neutral/400",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "subtlest": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6745098233222961,
+            0.7058823704719543,
+            0.7411764860153198
+          ],
+          "alpha": 1,
+          "hex": "#ACB4BD"
+        },
+        "$description": "Tertiary text — placeholders, disabled labels. Light: neutral/600. Dark: neutral/500.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:185:16",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:c00d8e7ba397bbdb1231bbe9b474b0c6fdba0d63/-1:-1",
+            "targetVariableName": "color/neutral/500",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.37254902720451355,
+            0.42352941632270813,
+            0.47843137383461
+          ],
+          "alpha": 1,
+          "hex": "#5F6C7A"
+        },
+        "$description": "Disabled text — non-interactive labels. Light: neutral/500. Dark: neutral/600.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:185:17",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:8a7e365bbfda7c93313e1c3a3093d45a163a2930/-1:-1",
+            "targetVariableName": "color/neutral/600",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "purple": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8784313797950745,
+            0.800000011920929,
+            0.9607843160629272
+          ],
+          "alpha": 1,
+          "hex": "#E0CCF5"
+        },
+        "$description": "Purple accent text — for beta and accent labels. Pending Brand collection migration.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:785:6",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:511b29988b9b60d352d9e6b69fbb001a205c41fc/-1:-1",
+            "targetVariableName": "color/purple/300",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "success": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5960784554481506,
+            0.9058823585510254,
+            0.6941176652908325
+          ],
+          "alpha": 1,
+          "hex": "#98E7B1"
+        },
+        "$description": "Success text — for status labels and success messages on light backgrounds. Light: freshGreen/800. Dark: freshGreen/400.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:2425:2",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:d0357b5cc2e9ea9c34576e2e2378c8a3d5004743/-1:-1",
+            "targetVariableName": "color/freshGreen/400",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "warning": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            0.8823529481887817,
+            0.5607843399047852
+          ],
+          "alpha": 1,
+          "hex": "#FFE18F"
+        },
+        "$description": "Warning text — for warning labels on light backgrounds. Light: honeyAmber/800. Dark: honeyAmber/400.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:2425:3",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:b6da7ba477e700e341a77bf873316c66b3a4e263/-1:-1",
+            "targetVariableName": "color/honeyAmber/400",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "information": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6352941393852234,
+            0.7803921699523926,
+            0.9686274528503418
+          ],
+          "alpha": 1,
+          "hex": "#A2C7F7"
+        },
+        "$description": "Information/brand text — for info labels and branded accent text. Light: royalBlue/800. Dark: royalBlue/400.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:2425:4",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:9225b92752a4b55c6416495f045120cdce7d869f/-1:-1",
+            "targetVariableName": "color/royalBlue/400",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "selected": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8235294222831726,
+            0.8941176533699036,
+            0.9843137264251709
+          ],
+          "alpha": 1,
+          "hex": "#D2E4FB"
+        },
+        "$description": "Text color for selected items — e.g. selected table rows, active nav items.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:2814:33786",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:acaf5ecfdaa895531d5ab21d2a59c0c4ea62ae8d/-1:-1",
+            "targetVariableName": "color/royalBlue/300",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "inverse": {
+        "subtle": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8352941274642944,
+              0.8509804010391235,
+              0.8705882430076599
+            ],
+            "alpha": 1,
+            "hex": "#D5D9DE"
+          },
+          "$description": "Inverse subtle text — secondary text on dark surfaces (toast actions). Light: neutral/800. Dark: neutral/300.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:2370:2",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:437c4818651498931ca1b366012718bb772c6a71/-1:-1",
+              "targetVariableName": "color/neutral/400",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtlest": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.6745098233222961,
+              0.7058823704719543,
+              0.7411764860153198
+            ],
+            "alpha": 1,
+            "hex": "#ACB4BD"
+          },
+          "$description": "Inverse subtlest text — tertiary text on dark surfaces (toast hover actions). Light: neutral/700. Dark: neutral/400.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:2370:3",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:c00d8e7ba397bbdb1231bbe9b474b0c6fdba0d63/-1:-1",
+              "targetVariableName": "color/neutral/500",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "$root": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0941176488995552,
+              0.12156862765550613,
+              0.14901961386203766
+            ],
+            "alpha": 1,
+            "hex": "#181F26"
+          },
+          "$description": "Inverse text — white text on dark surfaces (toasts, dark nav). Light: neutral/0. Dark: neutral/900.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:185:18",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:5502683fa03ac5f9b88b7cffdff847900d0f31a8/-1:-1",
+              "targetVariableName": "color/neutral/900",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        }
+      }
+    },
+    "surface": {
+      "page": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0941176488995552,
+            0.12156862765550613,
+            0.14901961386203766
+          ],
+          "alpha": 1,
+          "hex": "#181F26"
+        },
+        "$description": "App / page canvas background",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:185:26",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:5502683fa03ac5f9b88b7cffdff847900d0f31a8/-1:-1",
+            "targetVariableName": "color/neutral/900",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "default": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.14509804546833038,
+            0.1921568661928177,
+            0.23137255012989044
+          ],
+          "alpha": 1,
+          "hex": "#25313B"
+        },
+        "$description": "Default page/canvas background. Light: neutral/0. Dark: neutral/900.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:185:27",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:c0a060971fdd3c095feed87e39153dc60e43c544/-1:-1",
+            "targetVariableName": "color/neutral/800",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "muted": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.23529411852359772,
+            0.29019609093666077,
+            0.34117648005485535
+          ],
+          "alpha": 1,
+          "hex": "#3C4A57"
+        },
+        "$description": "Muted surface — disabled backgrounds and skeleton loaders. Light: neutral/200. Dark: neutral/700.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:185:28",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:f8059a30a0af86896199b924b93612cb4edf85b4/-1:-1",
+            "targetVariableName": "color/neutral/700",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "sunken": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0941176488995552,
+            0.12156862765550613,
+            0.14901961386203766
+          ],
+          "alpha": 1,
+          "hex": "#181F26"
+        },
+        "$description": "Recessed surface — below default elevation (wells, code blocks). Light: neutral/300. Dark: neutral/800.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:185:29",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:5502683fa03ac5f9b88b7cffdff847900d0f31a8/-1:-1",
+            "targetVariableName": "color/neutral/900",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.23529411852359772,
+            0.29019609093666077,
+            0.34117648005485535
+          ],
+          "alpha": 1,
+          "hex": "#3C4A57"
+        },
+        "$description": "Disabled surface background — for non-interactive panels and containers.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:185:30",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:f8059a30a0af86896199b924b93612cb4edf85b4/-1:-1",
+            "targetVariableName": "color/neutral/700",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ],
+          "alpha": 1,
+          "hex": "#FFFFFF"
+        },
+        "$description": "Inverse surface — dark surface on light mode (toasts, dark tooltips). Light: neutral/900. Dark: neutral/0.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:185:31",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:e7c021298b574fe07043d9b5a1aa9809d26b66bd/-1:-1",
+            "targetVariableName": "color/neutral/0",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "overlay": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.14509804546833038,
+            0.1921568661928177,
+            0.23137255012989044
+          ],
+          "alpha": 1,
+          "hex": "#25313B"
+        },
+        "$description": "Overlay surface — modal and dialog backgrounds. Light: neutral/0. Dark: neutral/800.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:185:32",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:c0a060971fdd3c095feed87e39153dc60e43c544/-1:-1",
+            "targetVariableName": "color/neutral/800",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "selected": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.10196078568696976,
+            0.45098039507865906,
+            0.5058823823928833
+          ],
+          "alpha": 1,
+          "hex": "#1A7381"
+        },
+        "$description": "Selected row/item background. Light: royalBlue/100.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:1790:6",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:d3a244ee35276979c3f17d8ef1c12039d247cd53/-1:-1",
+            "targetVariableName": "color/pacificBlue/900",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "empty": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ],
+          "alpha": 0,
+          "hex": "#FFFFFF"
+        },
+        "$description": "Background surface for empty state containers.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:2814:33772",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "purple": {
+        "subtle": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.3529411852359772,
+              0.14901961386203766,
+              0.5647059082984924
+            ],
+            "alpha": 1,
+            "hex": "#5A2690"
+          },
+          "$description": "Purple subtle surface — light purple background. Pending Brand collection migration.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:785:8",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:b870285758fbdeeb5921b06a0b0d5c343cffc5ba/-1:-1",
+              "targetVariableName": "color/purple/800",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "bold": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8784313797950745,
+              0.800000011920929,
+              0.9607843160629272
+            ],
+            "alpha": 1,
+            "hex": "#E0CCF5"
+          },
+          "$description": "Purple bold surface — dark purple background. Pending Brand collection migration.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:785:9",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:511b29988b9b60d352d9e6b69fbb001a205c41fc/-1:-1",
+              "targetVariableName": "color/purple/300",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        }
+      }
+    },
+    "line": {
+      "default": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.37254902720451355,
+            0.42352941632270813,
+            0.47843137383461
+          ],
+          "alpha": 1,
+          "hex": "#5F6C7A"
+        },
+        "$description": "Default border/divider — input borders, separators, card outlines. Light: neutral/300. Dark: neutral/600.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:185:33",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:8a7e365bbfda7c93313e1c3a3093d45a163a2930/-1:-1",
+            "targetVariableName": "color/neutral/600",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0117647061124444,
+            0.35686275362968445,
+            0.7764706015586853
+          ],
+          "alpha": 1,
+          "hex": "#035BC6"
+        },
+        "$description": "Subtle border — lighter dividers, inner separators. Light: neutral/200. Dark: neutral/700.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:185:34",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:39f2b9231f2aad6a8860b42ad3e6b3e758e1da42/-1:-1",
+            "targetVariableName": "color/royalBlue/800",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "bold": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9019607901573181,
+            0.9137254953384399,
+            0.9254902005195618
+          ],
+          "alpha": 1,
+          "hex": "#E6E9EC"
+        },
+        "$description": "Bold border — strong emphasis borders. Heavier than line/default.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:185:35",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:7575b4f953b44d9db17c19bfcedffa67d72cd2e5/-1:-1",
+            "targetVariableName": "color/neutral/300",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "brand": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6352941393852234,
+            0.7803921699523926,
+            0.9686274528503418
+          ],
+          "alpha": 1,
+          "hex": "#A2C7F7"
+        },
+        "$description": "Active / focused border — brand blue",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:185:36",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:9225b92752a4b55c6416495f045120cdce7d869f/-1:-1",
+            "targetVariableName": "color/royalBlue/400",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.23529411852359772,
+            0.29019609093666077,
+            0.34117648005485535
+          ],
+          "alpha": 1,
+          "hex": "#3C4A57"
+        },
+        "$description": "Disabled border — for non-interactive field outlines.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:185:37",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:f8059a30a0af86896199b924b93612cb4edf85b4/-1:-1",
+            "targetVariableName": "color/neutral/700",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      }
+    },
+    "status": {
+      "success": {
+        "default": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.5960784554481506,
+              0.9058823585510254,
+              0.6941176652908325
+            ],
+            "alpha": 1,
+            "hex": "#98E7B1"
+          },
+          "$description": "Success fill — green badge background, status dot. Light: freshGreen/600.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:185:38",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:d0357b5cc2e9ea9c34576e2e2378c8a3d5004743/-1:-1",
+              "targetVariableName": "color/freshGreen/400",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtlest": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.05882352963089943,
+              0.4901960790157318,
+              0.30588236451148987
+            ],
+            "alpha": 1,
+            "hex": "#0F7D4E"
+          },
+          "$description": "Success subtle — light green chip and alert background. Light: freshGreen/300.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:185:39",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:1265fa786b77df0c7911faafbd7dce268b01ecc1/-1:-1",
+              "targetVariableName": "color/freshGreen/900",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.07450980693101883,
+              0.7803921699523926,
+              0.49803921580314636
+            ],
+            "alpha": 1,
+            "hex": "#13C77F"
+          },
+          "$description": "Success status — background hover state on success badges and chips. Aliases color/freshGreen/600.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:7395:10251",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:7f3a040e692a1bf40fbf3c6531f45901366bd9bd/-1:-1",
+              "targetVariableName": "color/freshGreen/600",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "selected": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9647058844566345,
+              0.9921568632125854,
+              0.9803921580314636
+            ],
+            "alpha": 1,
+            "hex": "#F6FDFA"
+          },
+          "$description": "Success status — selected/pressed text and icon fill. Aliases color/freshGreen/100.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:7395:18093",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:2afe4b1d26d65188c48dd57e78739d44b1e035ea/-1:-1",
+              "targetVariableName": "color/freshGreen/100",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.07058823853731155,
+              0.6000000238418579,
+              0.35686275362968445
+            ],
+            "alpha": 1,
+            "hex": "#12995B"
+          },
+          "$extensions": {
+            "com.figma.variableId": "VariableID:9141:172",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:181b7032c4706acef0a5018c21bd69efe117eb21/-1:-1",
+              "targetVariableName": "color/freshGreen/800",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        }
+      },
+      "warning": {
+        "default": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              0.8823529481887817,
+              0.5607843399047852
+            ],
+            "alpha": 1,
+            "hex": "#FFE18F"
+          },
+          "$description": "Warning fill — amber badge background, status dot. Light: honeyAmber/600.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:185:40",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:b6da7ba477e700e341a77bf873316c66b3a4e263/-1:-1",
+              "targetVariableName": "color/honeyAmber/400",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtlest": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.7647058963775635,
+              0.4117647111415863,
+              0
+            ],
+            "alpha": 1,
+            "hex": "#C36900"
+          },
+          "$description": "Warning subtle — light amber chip and alert background. Light: honeyAmber/300.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:185:41",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:2b2bc4b828c032333c4d3c3b6ea9d3166a911369/-1:-1",
+              "targetVariableName": "color/honeyAmber/900",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              0.7333333492279053,
+              0
+            ],
+            "alpha": 1,
+            "hex": "#FFBB00"
+          },
+          "$description": "Warning status — background hover state. Aliases color/honeyAmber/600.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:7395:10252",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:032f1dac6b407a5c29a45dc4595f23df4450f55d/-1:-1",
+              "targetVariableName": "color/honeyAmber/600",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "selected": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              0.9803921580314636,
+              0.9215686321258545
+            ],
+            "alpha": 1,
+            "hex": "#FFFAEB"
+          },
+          "$description": "Warning status — selected/pressed fill. Aliases color/honeyAmber/100.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:7395:18094",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:9a8f112f16f0bfaee53eb45adb4daea5234537f0/-1:-1",
+              "targetVariableName": "color/honeyAmber/100",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8745098114013672,
+              0.5176470875740051,
+              0.01568627543747425
+            ],
+            "alpha": 1,
+            "hex": "#DF8404"
+          },
+          "$extensions": {
+            "com.figma.variableId": "VariableID:9141:173",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:ea7063a4edf4da169cdf77f8763bb2d78fbb3913/-1:-1",
+              "targetVariableName": "color/honeyAmber/800",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        }
+      },
+      "neutral": {
+        "default": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8352941274642944,
+              0.8509804010391235,
+              0.8705882430076599
+            ],
+            "alpha": 1,
+            "hex": "#D5D9DE"
+          },
+          "$description": "Neutral status color — used for inactive or default status labels.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:3684:10047",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:437c4818651498931ca1b366012718bb772c6a71/-1:-1",
+              "targetVariableName": "color/neutral/400",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtlest": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.37254902720451355,
+              0.42352941632270813,
+              0.47843137383461
+            ],
+            "alpha": 1,
+            "hex": "#5F6C7A"
+          },
+          "$description": "Neutral status subtlest background — used for inactive or default status chips and alerts. Aliases color/neutral/600.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:3179:2745",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:8a7e365bbfda7c93313e1c3a3093d45a163a2930/-1:-1",
+              "targetVariableName": "color/neutral/600",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.37254902720451355,
+              0.42352941632270813,
+              0.47843137383461
+            ],
+            "alpha": 1,
+            "hex": "#5F6C7A"
+          },
+          "$description": "Neutral status — background hover state. Aliases color/neutral/600.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:7395:10253",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:8a7e365bbfda7c93313e1c3a3093d45a163a2930/-1:-1",
+              "targetVariableName": "color/neutral/600",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "selected": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9921568632125854,
+              0.9921568632125854,
+              0.9960784316062927
+            ],
+            "alpha": 1,
+            "hex": "#FDFDFE"
+          },
+          "$description": "Neutral status — selected/pressed fill. Aliases color/neutral/100.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:7395:18095",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:182f0041a6d0dd58d92d3ce8e6ef270657bc0bbb/-1:-1",
+              "targetVariableName": "color/neutral/100",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.6745098233222961,
+              0.7058823704719543,
+              0.7411764860153198
+            ],
+            "alpha": 1,
+            "hex": "#ACB4BD"
+          },
+          "$extensions": {
+            "com.figma.variableId": "VariableID:9141:176",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:c00d8e7ba397bbdb1231bbe9b474b0c6fdba0d63/-1:-1",
+              "targetVariableName": "color/neutral/500",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        }
+      },
+      "new": {
+        "default": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9019607901573181,
+              0.9411764740943909,
+              0.9921568632125854
+            ],
+            "alpha": 1,
+            "hex": "#E6F0FD"
+          },
+          "$description": "New readonly chip — icon and text fill. Aliases color/royalBlue/200.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:7395:18101",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:189de2a67814f1d0bf06bd76b91fb87dcf26a38b/-1:-1",
+              "targetVariableName": "color/royalBlue/200",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtlest": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0117647061124444,
+              0.4117647111415863,
+              0.9137254953384399
+            ],
+            "alpha": 1,
+            "hex": "#0369E9"
+          },
+          "$description": "New readonly chip — background fill. Aliases color/royalBlue/700.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:7395:18102",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:40e739b8b2fd713faaed9424d685c306da9cdef7/-1:-1",
+              "targetVariableName": "color/royalBlue/700",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.1882352977991104,
+              0.5176470875740051,
+              0.929411768913269
+            ],
+            "alpha": 1,
+            "hex": "#3084ED"
+          },
+          "$extensions": {
+            "com.figma.variableId": "VariableID:9141:178",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:2c946c2be1a911121c87987944f882c84da7ef25/-1:-1",
+              "targetVariableName": "color/royalBlue/600",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        }
+      },
+      "tutorial": {
+        "default": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9607843160629272,
+              0.9686274528503418,
+              0.9764705896377563
+            ],
+            "alpha": 1,
+            "hex": "#F5F7F9"
+          },
+          "$description": "Tutorial readonly chip — icon and text fill. Aliases color/neutral/200.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:7395:18103",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:fa2f0949b9027edc4381da26cc630063678be603/-1:-1",
+              "targetVariableName": "color/neutral/200",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtlest": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.23529411852359772,
+              0.29019609093666077,
+              0.34117648005485535
+            ],
+            "alpha": 1,
+            "hex": "#3C4A57"
+          },
+          "$description": "Tutorial readonly chip — background fill. Aliases color/neutral/700.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:7395:18104",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:f8059a30a0af86896199b924b93612cb4edf85b4/-1:-1",
+              "targetVariableName": "color/neutral/700",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.37254902720451355,
+              0.42352941632270813,
+              0.47843137383461
+            ],
+            "alpha": 1,
+            "hex": "#5F6C7A"
+          },
+          "$extensions": {
+            "com.figma.variableId": "VariableID:9141:177",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:8a7e365bbfda7c93313e1c3a3093d45a163a2930/-1:-1",
+              "targetVariableName": "color/neutral/600",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        }
+      },
+      "beta": {
+        "default": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9411764740943909,
+              0.8980392217636108,
+              0.9803921580314636
+            ],
+            "alpha": 1,
+            "hex": "#F0E5FA"
+          },
+          "$description": "Beta readonly chip — icon and text fill. Aliases color/purple/200.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:7395:18098",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:7e11692fbe851b2206462a60376b1805c1113aab/-1:-1",
+              "targetVariableName": "color/purple/200",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtlest": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.4313725531101227,
+              0.19607843458652496,
+              0.6823529601097107
+            ],
+            "alpha": 1,
+            "hex": "#6E32AE"
+          },
+          "$description": "Beta readonly chip — background fill. Aliases color/purple/700.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:7395:18099",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:b3dce24c2ee28a174c6e8bf7273de49f3bd2eb92/-1:-1",
+              "targetVariableName": "color/purple/700",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.5607843399047852,
+              0.3294117748737335,
+              0.8313725590705872
+            ],
+            "alpha": 1,
+            "hex": "#8F54D4"
+          },
+          "$extensions": {
+            "com.figma.variableId": "VariableID:9141:179",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:29ca2b7cd77ba93e887b0bdb79df2e4494ce9048/-1:-1",
+              "targetVariableName": "color/purple/600",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        }
+      },
+      "danger": {
+        "default": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9882352948188782,
+              0.7450980544090271,
+              0.7254902124404907
+            ],
+            "alpha": 1,
+            "hex": "#FCBEB9"
+          },
+          "$description": "Danger fill — red badge background, error border. Light: tartRed/600.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:185:42",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:7562dc750e3a525c9a666e519db623c1196e04b1/-1:-1",
+              "targetVariableName": "color/tartRed/400",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtlest": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.6039215922355652,
+              0.10980392247438431,
+              0.04313725605607033
+            ],
+            "alpha": 1,
+            "hex": "#9A1C0B"
+          },
+          "$description": "Danger subtle — light red chip and alert background. Light: tartRed/300.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:185:43",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:c1d8cca6e6be1e3165cbed2de7cddc092525b560/-1:-1",
+              "targetVariableName": "color/tartRed/900",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9686274528503418,
+              0.364705890417099,
+              0.30980393290519714
+            ],
+            "alpha": 1,
+            "hex": "#F75D4F"
+          },
+          "$description": "Danger status — background hover state. Aliases color/tartRed/600.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:7395:18091",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:314b0331fdcf571586185c85f576e569fd29f3de/-1:-1",
+              "targetVariableName": "color/tartRed/600",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "selected": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              0.9764705896377563,
+              0.9764705896377563
+            ],
+            "alpha": 1,
+            "hex": "#FFF9F9"
+          },
+          "$description": "Danger status — selected/pressed fill. Aliases color/tartRed/100.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:7395:18096",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:1bea18d5f4b126e792d739fcbc147196e8a81594/-1:-1",
+              "targetVariableName": "color/tartRed/100",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.7490196228027344,
+              0.12941177189350128,
+              0.05098039284348488
+            ],
+            "alpha": 1,
+            "hex": "#BF210D"
+          },
+          "$extensions": {
+            "com.figma.variableId": "VariableID:9141:174",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:b22195c0aba2a739803b9c99461c1cc8bbc1d611/-1:-1",
+              "targetVariableName": "color/tartRed/800",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        }
+      },
+      "information": {
+        "default": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.6352941393852234,
+              0.7803921699523926,
+              0.9686274528503418
+            ],
+            "alpha": 1,
+            "hex": "#A2C7F7"
+          },
+          "$description": "Information fill — blue badge background. Light: royalBlue/600.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:185:44",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:9225b92752a4b55c6416495f045120cdce7d869f/-1:-1",
+              "targetVariableName": "color/royalBlue/400",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtlest": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0117647061124444,
+              0.29019609093666077,
+              0.6392157077789307
+            ],
+            "alpha": 1,
+            "hex": "#034AA3"
+          },
+          "$description": "Information subtle — light blue chip and alert background. Light: royalBlue/200.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:185:45",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:d82f3042829794987c15a537901ece9a84f810e1/-1:-1",
+              "targetVariableName": "color/royalBlue/900",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.1882352977991104,
+              0.5176470875740051,
+              0.929411768913269
+            ],
+            "alpha": 1,
+            "hex": "#3084ED"
+          },
+          "$description": "Information status — background hover state. Aliases color/royalBlue/600.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:7395:18092",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:2c946c2be1a911121c87987944f882c84da7ef25/-1:-1",
+              "targetVariableName": "color/royalBlue/600",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "selected": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9607843160629272,
+              0.9764705896377563,
+              0.9960784316062927
+            ],
+            "alpha": 1,
+            "hex": "#F5F9FE"
+          },
+          "$description": "Information status — selected/pressed fill. Aliases color/royalBlue/100.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:7395:18097",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:ffde468832524e0117a37f41d8289c7b6f8e330d/-1:-1",
+              "targetVariableName": "color/royalBlue/100",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0117647061124444,
+              0.35686275362968445,
+              0.7764706015586853
+            ],
+            "alpha": 1,
+            "hex": "#035BC6"
+          },
+          "$extensions": {
+            "com.figma.variableId": "VariableID:9141:175",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:39f2b9231f2aad6a8860b42ad3e6b3e758e1da42/-1:-1",
+              "targetVariableName": "color/royalBlue/800",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        }
+      }
+    },
+    "overlay": {
+      "backdrop": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ],
+          "alpha": 0.47999998927116394,
+          "hex": "#FFFFFF"
+        },
+        "$description": "Modal backdrop — semi-transparent dark overlay",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:185:46",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:27d87a5564d9a4ebc531a97fca1d92739bfb71eb/-1:-1",
+            "targetVariableName": "color/neutral/B500",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      }
+    },
+    "link": {
+      "default": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6352941393852234,
+            0.7803921699523926,
+            0.9686274528503418
+          ],
+          "alpha": 1,
+          "hex": "#A2C7F7"
+        },
+        "$description": "Link default colour. Aliases color/royalBlue/400.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:185:50",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:9225b92752a4b55c6416495f045120cdce7d869f/-1:-1",
+            "targetVariableName": "color/royalBlue/400",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "hover": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8235294222831726,
+            0.8941176533699036,
+            0.9843137264251709
+          ],
+          "alpha": 1,
+          "hex": "#D2E4FB"
+        },
+        "$description": "Link hover colour. Aliases color/royalBlue/300.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:185:51",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:acaf5ecfdaa895531d5ab21d2a59c0c4ea62ae8d/-1:-1",
+            "targetVariableName": "color/royalBlue/300",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "visited": {
+        "$type": "color",
+        "$value": "{color.action.primary.visited}",
+        "$description": "Color for visited hyperlinks.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:3844:6",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      }
+    },
+    "control": {
+      "selection": {
+        "default": {
+          "$type": "color",
+          "$value": "{color.action.primary.default}",
+          "$description": "Selection highlight — text selection background. Light: royalBlue/200.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:704:140",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ]
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{color.action.primary.hover}",
+          "$description": "Selection hover — background tint when hovering over a selectable item.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:704:141",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ]
+          }
+        },
+        "active": {
+          "$type": "color",
+          "$value": "{color.action.primary.click}",
+          "$description": "Selection active — background for currently active/focused selectable item.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:704:142",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ]
+          }
+        },
+        "disabled": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.14509804546833038,
+              0.1921568661928177,
+              0.23137255012989044
+            ],
+            "alpha": 1,
+            "hex": "#25313B"
+          },
+          "$description": "Disabled selection. Light: surface/muted.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:704:143",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:c0a060971fdd3c095feed87e39153dc60e43c544/-1:-1",
+              "targetVariableName": "color/neutral/800",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "mark": {
+          "$type": "color",
+          "$value": "{color.text.inverse.$root}",
+          "$description": "Selection mark colour — checkmark or tick inside a selected control.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:704:144",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ]
+          }
+        }
+      },
+      "border": {
+        "default": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.37254902720451355,
+              0.42352941632270813,
+              0.47843137383461
+            ],
+            "alpha": 1,
+            "hex": "#5F6C7A"
+          },
+          "$description": "Control default border. Light: neutral/400.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:704:145",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:8a7e365bbfda7c93313e1c3a3093d45a163a2930/-1:-1",
+              "targetVariableName": "color/neutral/600",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{color.action.primary.hover}",
+          "$description": "Control hover border. Light: royalBlue/700.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:704:146",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ]
+          }
+        },
+        "focus": {
+          "$type": "color",
+          "$value": "{color.action.primary.default}",
+          "$description": "Control focus border — border colour when checkbox/radio has keyboard focus.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:704:147",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ]
+          }
+        },
+        "invalid": {
+          "$type": "color",
+          "$value": "{color.status.danger.default}",
+          "$description": "Control invalid border — border colour when checkbox/radio has a validation error.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:704:148",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ]
+          }
+        },
+        "disabled": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.23529411852359772,
+              0.29019609093666077,
+              0.34117648005485535
+            ],
+            "alpha": 1,
+            "hex": "#3C4A57"
+          },
+          "$description": "Control disabled border. Light: neutral/300.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:704:149",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:f8059a30a0af86896199b924b93612cb4edf85b4/-1:-1",
+              "targetVariableName": "color/neutral/700",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        }
+      },
+      "surface": {
+        "default": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0941176488995552,
+              0.12156862765550613,
+              0.14901961386203766
+            ],
+            "alpha": 1,
+            "hex": "#181F26"
+          },
+          "$description": "Control (checkbox, radio) default background. Light: neutral/0.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:704:150",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:5502683fa03ac5f9b88b7cffdff847900d0f31a8/-1:-1",
+              "targetVariableName": "color/neutral/900",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.14509804546833038,
+              0.1921568661928177,
+              0.23137255012989044
+            ],
+            "alpha": 1,
+            "hex": "#25313B"
+          },
+          "$description": "Control hover background. Light: royalBlue/100.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:704:151",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:c0a060971fdd3c095feed87e39153dc60e43c544/-1:-1",
+              "targetVariableName": "color/neutral/800",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "disabled": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.14509804546833038,
+              0.1921568661928177,
+              0.23137255012989044
+            ],
+            "alpha": 1,
+            "hex": "#25313B"
+          },
+          "$description": "Control disabled background. Light: neutral/200.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:704:152",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:c0a060971fdd3c095feed87e39153dc60e43c544/-1:-1",
+              "targetVariableName": "color/neutral/800",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        }
+      }
+    },
+    "uploader": {
+      "hover": {
+        "bg": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.10196078568696976,
+              0.1764705926179886,
+              0.2705882489681244
+            ],
+            "alpha": 1,
+            "hex": "#1A2D45"
+          },
+          "$description": "Background color for file uploader drop zone on hover.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:2674:2",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:fde8bba03e46126048734cc11bb064a754efbaf7/-1:-1",
+              "targetVariableName": "color/royalBlue/950",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "border": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0117647061124444,
+              0.35686275362968445,
+              0.7764706015586853
+            ],
+            "alpha": 1,
+            "hex": "#035BC6"
+          },
+          "$description": "Border color for file uploader drop zone on hover.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:2674:3",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:39f2b9231f2aad6a8860b42ad3e6b3e758e1da42/-1:-1",
+              "targetVariableName": "color/royalBlue/800",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        }
+      }
+    }
+  },
+  "shadow": {
+    "focus": {
+      "$type": "string",
+      "$value": "0 0 0 3px rgba(98,161,241,0.35)",
+      "$description": "Focus ring shadow — blue glow on interactive elements. 0 0 0 3px rgba(3,105,233,0.25).",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:190:2",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.type": "string"
+      }
+    },
+    "selected": {
+      "$type": "string",
+      "$value": "0 0 0 2px rgba(98,161,241,0.30)",
+      "$description": "Selected state shadow — softer blue glow. 0 0 0 2px rgba(3,105,233,0.20).",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:190:3",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.type": "string"
+      }
+    },
+    "color": {
+      "default": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9019607901573181,
+            0.9137254953384399,
+            0.9254902005195618
+          ],
+          "alpha": 1,
+          "hex": "#E6E9EC"
+        },
+        "$description": "Semantic shadow colour alias — points to shadow/base primitive. Use in component drop shadows.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:1119:7",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:7575b4f953b44d9db17c19bfcedffa67d72cd2e5/-1:-1",
+            "targetVariableName": "color/neutral/300",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      }
+    }
+  },
+  "icon": {
+    "size": {
+      "inline": {
+        "$type": "number",
+        "$value": 16,
+        "$description": "Inside text, labels, helpers",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:451:13",
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:8e85452e27cc069517a1376f111788efba47a385/-1:-1",
+            "targetVariableName": "icon/size/016",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "compact": {
+        "$type": "number",
+        "$value": 20,
+        "$description": "Dense tables, sidebars, chips",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:451:14",
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:bbbc823666bf3fd4d0e552cc527a3299f85aa14f/-1:-1",
+            "targetVariableName": "icon/size/020",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "default": {
+        "$type": "number",
+        "$value": 24,
+        "$description": "Standard UI — buttons, nav, toolbars",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:451:15",
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:868b8422168a0ec5fa124b199c332aaa8ea3bd47/-1:-1",
+            "targetVariableName": "icon/size/024",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "medium": {
+        "$type": "number",
+        "$value": 32,
+        "$description": "Cards, section headers",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:451:16",
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:a1c38734caaef69fa0cf0579908f4340c03af31d/-1:-1",
+            "targetVariableName": "icon/size/032",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "large": {
+        "$type": "number",
+        "$value": 40,
+        "$description": "Feature callouts, onboarding",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:451:17",
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:7b1be5671f58787c961c8859734b8378d7b4aa08/-1:-1",
+            "targetVariableName": "icon/size/040",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "hero": {
+        "$type": "number",
+        "$value": 48,
+        "$description": "Empty states, hero sections",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:451:18",
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:2634e8f8f701dafcb32de49ee72d73a6d9149687/-1:-1",
+            "targetVariableName": "icon/size/048",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "xlarge": {
+        "$type": "number",
+        "$value": 64,
+        "$description": "Extra large icons — colour status, upload, empty state",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:495:63",
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:d75393315b4329fe085824c1e3bcd66fb7c44dc9/-1:-1",
+            "targetVariableName": "icon/size/064",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      }
+    },
+    "color": {
+      "default": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9607843160629272,
+            0.9686274528503418,
+            0.9764705896377563
+          ],
+          "alpha": 1,
+          "hex": "#F5F7F9"
+        },
+        "$description": "Default icon colour. Aliases color/neutral/200.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:451:19",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:fa2f0949b9027edc4381da26cc630063678be603/-1:-1",
+            "targetVariableName": "color/neutral/200",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8352941274642944,
+            0.8509804010391235,
+            0.8705882430076599
+          ],
+          "alpha": 1,
+          "hex": "#D5D9DE"
+        },
+        "$description": "Subtle icon colour — secondary/supporting icons. Light: neutral/600. Dark: neutral/400.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:451:20",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:437c4818651498931ca1b366012718bb772c6a71/-1:-1",
+            "targetVariableName": "color/neutral/400",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "selected": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6352941393852234,
+            0.7803921699523926,
+            0.9686274528503418
+          ],
+          "alpha": 1,
+          "hex": "#A2C7F7"
+        },
+        "$description": "Icon colour — selected/active state. Aliases color/royalBlue/400.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:451:21",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:9225b92752a4b55c6416495f045120cdce7d869f/-1:-1",
+            "targetVariableName": "color/royalBlue/400",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0941176488995552,
+            0.12156862765550613,
+            0.14901961386203766
+          ],
+          "alpha": 1,
+          "hex": "#181F26"
+        },
+        "$description": "Inverse icon colour — icons on dark surfaces. Light: neutral/0.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:451:22",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:5502683fa03ac5f9b88b7cffdff847900d0f31a8/-1:-1",
+            "targetVariableName": "color/neutral/900",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "success": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5960784554481506,
+            0.9058823585510254,
+            0.6941176652908325
+          ],
+          "alpha": 1,
+          "hex": "#98E7B1"
+        },
+        "$description": "Success icon colour. Light: freshGreen/600.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:451:23",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:d0357b5cc2e9ea9c34576e2e2378c8a3d5004743/-1:-1",
+            "targetVariableName": "color/freshGreen/400",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "warning": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            0.8823529481887817,
+            0.5607843399047852
+          ],
+          "alpha": 1,
+          "hex": "#FFE18F"
+        },
+        "$description": "Warning icon colour. Light: honeyAmber/600.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:451:24",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:b6da7ba477e700e341a77bf873316c66b3a4e263/-1:-1",
+            "targetVariableName": "color/honeyAmber/400",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "danger": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9882352948188782,
+            0.7450980544090271,
+            0.7254902124404907
+          ],
+          "alpha": 1,
+          "hex": "#FCBEB9"
+        },
+        "$description": "Danger icon colour. Light: tartRed/600.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:451:25",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:7562dc750e3a525c9a666e519db623c1196e04b1/-1:-1",
+            "targetVariableName": "color/tartRed/400",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6745098233222961,
+            0.7058823704719543,
+            0.7411764860153198
+          ],
+          "alpha": 1,
+          "hex": "#ACB4BD"
+        },
+        "$description": "Disabled icon colour. Light: neutral/400. Dark: neutral/600.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:451:26",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:c00d8e7ba397bbdb1231bbe9b474b0c6fdba0d63/-1:-1",
+            "targetVariableName": "color/neutral/500",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "hover": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9019607901573181,
+            0.9137254953384399,
+            0.9254902005195618
+          ],
+          "alpha": 1,
+          "hex": "#E6E9EC"
+        },
+        "$description": "Icon colour — hover state. Aliases color/neutral/300.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:1617:22455",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:7575b4f953b44d9db17c19bfcedffa67d72cd2e5/-1:-1",
+            "targetVariableName": "color/neutral/300",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      },
+      "bgHover": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ],
+          "alpha": 0.07999999821186066,
+          "hex": "#FFFFFF"
+        },
+        "$description": "Icon background tint on hover — subtle fill behind icon on pointer-over.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:1617:22456",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:914ea5ecb424539d3aacfad82741308b1e736336/-1:-1",
+            "targetVariableName": "color/neutral/B200",
+            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+          }
+        }
+      }
+    }
+  },
+  "chart": {
+    "status": {
+      "healthy": {
+        "light": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.07058823853731155,
+              0.6000000238418579,
+              0.35686275362968445
+            ],
+            "alpha": 1,
+            "hex": "#12995B"
+          },
+          "$description": "Chart — Healthy segment light fill; area chart fills and bar backgrounds. Aliases color/freshGreen/800.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:4952:45",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:181b7032c4706acef0a5018c21bd69efe117eb21/-1:-1",
+              "targetVariableName": "color/freshGreen/800",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "$root": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.07450980693101883,
+              0.7803921699523926,
+              0.49803921580314636
+            ],
+            "alpha": 1,
+            "hex": "#13C77F"
+          },
+          "$description": "Chart — Healthy status segment fill (donut, gauge, health score). Aliases color/freshGreen/600. Data viz only — not for UI feedback.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:4952:42",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:7f3a040e692a1bf40fbf3c6531f45901366bd9bd/-1:-1",
+              "targetVariableName": "color/freshGreen/600",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        }
+      },
+      "warning": {
+        "light": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.95686274766922,
+              0.6549019813537598,
+              0.007843137718737125
+            ],
+            "alpha": 1,
+            "hex": "#F4A702"
+          },
+          "$description": "Chart — Warning segment light fill. Aliases color/honeyAmber/700.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:4952:46",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:5db242541490888a26331b936423dea7b3efb2a4/-1:-1",
+              "targetVariableName": "color/honeyAmber/700",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "$root": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              0.8313725590705872,
+              0.3607843220233917
+            ],
+            "alpha": 1,
+            "hex": "#FFD45C"
+          },
+          "$description": "Chart — Warning status segment fill. Aliases color/honeyAmber/500. Data viz only.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:4952:43",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:ad7989df7a99bba847db2273f97ae17b6f57e39f/-1:-1",
+              "targetVariableName": "color/honeyAmber/500",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        }
+      },
+      "atrisk": {
+        "light": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8627451062202454,
+              0.21176470816135406,
+              0.14901961386203766
+            ],
+            "alpha": 1,
+            "hex": "#DC3626"
+          },
+          "$description": "Chart — At Risk segment light fill. Aliases color/tartRed/700.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:4952:47",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:459f443f701bd8e540a8e264930fe2ab4753ceaf/-1:-1",
+              "targetVariableName": "color/tartRed/700",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "$root": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9764705896377563,
+              0.5882353186607361,
+              0.5529412031173706
+            ],
+            "alpha": 1,
+            "hex": "#F9968D"
+          },
+          "$description": "Chart — At Risk status segment fill. Aliases color/tartRed/500. Data viz only.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:4952:44",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:67ac3d943c5ffe240dea69569f360428eeb281a9/-1:-1",
+              "targetVariableName": "color/tartRed/500",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        }
+      }
+    },
+    "series": {
+      "1": {
+        "regular": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.3450980484485626,
+              0.772549033164978,
+              0.8352941274642944
+            ],
+            "alpha": 1,
+            "hex": "#58C5D5"
+          },
+          "$description": "First data series — always start here. Aliases color/pacificBlue/600.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:4952:48",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:3193f6ed210322c01070ad1b0628727b7f4861ae/-1:-1",
+              "targetVariableName": "color/pacificBlue/600",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtlest": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9137254953384399,
+              0.9725490212440491,
+              0.9803921580314636
+            ],
+            "alpha": 1,
+            "hex": "#E9F8FA"
+          },
+          "$description": "Series 1 light fill — area charts and bar backgrounds. Aliases color/pacificBlue/200.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:4952:54",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:9ac35900f6f9e6d0490af8e7de58b6f53b4d6cce/-1:-1",
+              "targetVariableName": "color/pacificBlue/200",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              1,
+              1
+            ],
+            "alpha": 1,
+            "hex": "#FFFFFF"
+          },
+          "$extensions": {
+            "com.figma.variableId": "VariableID:9026:50515",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ]
+          }
+        },
+        "dark": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              1,
+              1
+            ],
+            "alpha": 1,
+            "hex": "#FFFFFF"
+          },
+          "$extensions": {
+            "com.figma.variableId": "VariableID:9030:223",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ]
+          }
+        }
+      },
+      "2": {
+        "regular": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.47058823704719543,
+              0.501960813999176,
+              0.8117647171020508
+            ],
+            "alpha": 1,
+            "hex": "#7880CF"
+          },
+          "$description": "Second data series. Aliases color/bellBlue/600.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:4952:49",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:c18178d810a0af9349dbe8cffc58495c613b5c9d/-1:-1",
+              "targetVariableName": "color/bellBlue/600",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtlest": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.7843137383460999,
+              0.800000011920929,
+              0.9333333373069763
+            ],
+            "alpha": 1,
+            "hex": "#C8CCEE"
+          },
+          "$description": "Series 2 light fill. Aliases color/bellBlue/200.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:4952:55",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:f8af35c8e32dcc8ebb018b3bcd1329991bf84203/-1:-1",
+              "targetVariableName": "color/bellBlue/200",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              1,
+              1
+            ],
+            "alpha": 1,
+            "hex": "#FFFFFF"
+          },
+          "$extensions": {
+            "com.figma.variableId": "VariableID:9026:50518",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ]
+          }
+        },
+        "dark": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              1,
+              1
+            ],
+            "alpha": 1,
+            "hex": "#FFFFFF"
+          },
+          "$extensions": {
+            "com.figma.variableId": "VariableID:9030:224",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ]
+          }
+        }
+      },
+      "3": {
+        "regular": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8588235378265381,
+              0.5176470875740051,
+              0.6039215922355652
+            ],
+            "alpha": 1,
+            "hex": "#DB849A"
+          },
+          "$description": "Third data series. Aliases color/dustyRose/600.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:4952:50",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:45ff85c5c9a6f4e2bcb8eaeb193266293b0647e8/-1:-1",
+              "targetVariableName": "color/dustyRose/600",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtlest": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9490196108818054,
+              0.7882353067398071,
+              0.8274509906768799
+            ],
+            "alpha": 1,
+            "hex": "#F2C9D3"
+          },
+          "$description": "Series 3 light fill. Aliases color/dustyRose/200.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:4952:56",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:8cf4fed0219d5bbaba19a84cc40ae38733991b27/-1:-1",
+              "targetVariableName": "color/dustyRose/200",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              1,
+              1
+            ],
+            "alpha": 1,
+            "hex": "#FFFFFF"
+          },
+          "$extensions": {
+            "com.figma.variableId": "VariableID:9026:50520",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ]
+          }
+        },
+        "dark": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              1,
+              1
+            ],
+            "alpha": 1,
+            "hex": "#FFFFFF"
+          },
+          "$extensions": {
+            "com.figma.variableId": "VariableID:9030:225",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ]
+          }
+        }
+      },
+      "4": {
+        "regular": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0784313753247261,
+              0.7882353067398071,
+              0.729411780834198
+            ],
+            "alpha": 1,
+            "hex": "#14C9BA"
+          },
+          "$description": "Fourth data series. Aliases color/teal/600.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:4952:51",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:99c87183efc1c2e350cda268b32422581c18d3fc/-1:-1",
+              "targetVariableName": "color/teal/600",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtlest": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.7019608020782471,
+              0.9333333373069763,
+              0.9176470637321472
+            ],
+            "alpha": 1,
+            "hex": "#B3EEEA"
+          },
+          "$description": "Series 4 light fill. Aliases color/teal/200.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:4952:57",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:cc2bcd7558a78c002751f68c506efcdaeef8be4e/-1:-1",
+              "targetVariableName": "color/teal/200",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "dark": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              1,
+              1
+            ],
+            "alpha": 1,
+            "hex": "#FFFFFF"
+          },
+          "$extensions": {
+            "com.figma.variableId": "VariableID:9030:226",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ]
+          }
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              1,
+              1
+            ],
+            "alpha": 1,
+            "hex": "#FFFFFF"
+          },
+          "$extensions": {
+            "com.figma.variableId": "VariableID:9030:229",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ]
+          }
+        }
+      },
+      "5": {
+        "regular": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.5607843399047852,
+              0.3294117748737335,
+              0.8313725590705872
+            ],
+            "alpha": 1,
+            "hex": "#8F54D4"
+          },
+          "$description": "Fifth data series. Aliases color/purple/600.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:4952:52",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:29ca2b7cd77ba93e887b0bdb79df2e4494ce9048/-1:-1",
+              "targetVariableName": "color/purple/600",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtlest": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9411764740943909,
+              0.8980392217636108,
+              0.9803921580314636
+            ],
+            "alpha": 1,
+            "hex": "#F0E5FA"
+          },
+          "$description": "Series 5 light fill. Aliases color/purple/200.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:4952:58",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:7e11692fbe851b2206462a60376b1805c1113aab/-1:-1",
+              "targetVariableName": "color/purple/200",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "dark": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              1,
+              1
+            ],
+            "alpha": 1,
+            "hex": "#FFFFFF"
+          },
+          "$extensions": {
+            "com.figma.variableId": "VariableID:9030:227",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ]
+          }
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              1,
+              1
+            ],
+            "alpha": 1,
+            "hex": "#FFFFFF"
+          },
+          "$extensions": {
+            "com.figma.variableId": "VariableID:9030:230",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ]
+          }
+        }
+      },
+      "6": {
+        "regular": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.6745098233222961,
+              0.7058823704719543,
+              0.7411764860153198
+            ],
+            "alpha": 1,
+            "hex": "#ACB4BD"
+          },
+          "$description": "Sixth data series — neutral gray. Aliases color/neutral/500.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:4952:53",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:c00d8e7ba397bbdb1231bbe9b474b0c6fdba0d63/-1:-1",
+              "targetVariableName": "color/neutral/500",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtlest": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9019607901573181,
+              0.9137254953384399,
+              0.9254902005195618
+            ],
+            "alpha": 1,
+            "hex": "#E6E9EC"
+          },
+          "$description": "Series 6 light fill. Aliases color/neutral/300.",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:4952:59",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:7575b4f953b44d9db17c19bfcedffa67d72cd2e5/-1:-1",
+              "targetVariableName": "color/neutral/300",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "dark": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              1,
+              1
+            ],
+            "alpha": 1,
+            "hex": "#FFFFFF"
+          },
+          "$extensions": {
+            "com.figma.variableId": "VariableID:9030:228",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ]
+          }
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              1,
+              1,
+              1
+            ],
+            "alpha": 1,
+            "hex": "#FFFFFF"
+          },
+          "$extensions": {
+            "com.figma.variableId": "VariableID:9030:231",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ]
+          }
+        }
+      }
+    },
+    "heatmap": {
+      "cell-empty": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ],
+          "alpha": 1,
+          "hex": "#FFFFFF"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:9027:223",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "header": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ],
+          "alpha": 1,
+          "hex": "#FFFFFF"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:9027:224",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      }
+    },
+    "metric": {
+      "track": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ],
+          "alpha": 1,
+          "hex": "#FFFFFF"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:9027:225",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      }
+    },
+    "map": {
+      "inactive": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ],
+          "alpha": 1,
+          "hex": "#FFFFFF"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:9027:226",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      }
+    }
+  },
+  "$extensions": {
+    "com.figma.modeName": "Dark"
+  }
+}

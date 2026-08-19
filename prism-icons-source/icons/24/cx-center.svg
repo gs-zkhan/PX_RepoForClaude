@@ -1,0 +1,16 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="24" height="24" fill="white"/>
+<path d="M12 9L12.8817 10.7865L14.8532 11.0729L13.4266 12.4635L13.7634 14.4271L12 13.5L10.2366 14.4271L10.5734 12.4635L9.14683 11.0729L11.1183 10.7865L12 9Z" stroke="#3C4A57"/>
+<circle cx="12" cy="19.5" r="1.5" stroke="#3C4A57" stroke-width="1.4"/>
+<circle cx="12" cy="4.5" r="1.5" stroke="#3C4A57" stroke-width="1.4"/>
+<circle cx="18.5" cy="8.5" r="1.5" stroke="#3C4A57" stroke-width="1.4"/>
+<circle cx="18.5" cy="15.5" r="1.5" stroke="#3C4A57" stroke-width="1.4"/>
+<circle cx="5.5" cy="8.5" r="1.5" stroke="#3C4A57" stroke-width="1.4"/>
+<circle cx="5.5" cy="15.5" r="1.5" stroke="#3C4A57" stroke-width="1.4"/>
+<path d="M13 19L17.5 16.5" stroke="#3C4A57" stroke-width="1.4"/>
+<path d="M10.9981 19.0735L6.58301 16.4264" stroke="#3C4A57" stroke-width="1.4"/>
+<path d="M18.5 14V10" stroke="#3C4A57" stroke-width="1.4"/>
+<path d="M5.5 14V10" stroke="#3C4A57" stroke-width="1.4"/>
+<path d="M13.5 5L17.5 7.5" stroke="#3C4A57" stroke-width="1.4"/>
+<path d="M10.8076 5.14819L6.64255 7.36229" stroke="#3C4A57" stroke-width="1.4"/>
+</svg>

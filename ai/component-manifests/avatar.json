@@ -1,0 +1,146 @@
+{
+  "component": "Avatar",
+  "figma_node_id": null,
+  "figma_component_name": "Avatar",
+  "implementation_foundation": "Radix/ShadCN Avatar (Avatar, AvatarImage, AvatarFallback primitives). Size is passed via React context from the Avatar root to AvatarFallback for correct font sizing.",
+  "blocking_issues": [
+    "BLOCKING: @radix-ui/react-avatar is not installed in package.json. Run: npm install @radix-ui/react-avatar. Component is stubbed until this package is available."
+  ],
+  "anatomy": [
+    "container (circular frame)",
+    "image (photo, clipped to circle)",
+    "fallback-initials (shown when no image — 1 or 2 letters)"
+  ],
+  "variants": {
+    "Type": ["Image", "Initials"],
+    "Size": ["small", "medium", "large"]
+  },
+  "sizes": ["small", "medium", "large"],
+  "states": ["default"],
+  "dimensions": {
+    "small": {
+      "height": "16px",
+      "min_width": "16px",
+      "padding": "0",
+      "gap": null,
+      "radius": "9999px",
+      "border_width": null
+    },
+    "medium": {
+      "height": "24px",
+      "min_width": "24px",
+      "padding": "0",
+      "gap": null,
+      "radius": "9999px",
+      "border_width": null
+    },
+    "large": {
+      "height": "32px",
+      "min_width": "32px",
+      "padding": "0",
+      "gap": null,
+      "radius": "9999px",
+      "border_width": null
+    }
+  },
+  "typography": {
+    "fallback-initials": {
+      "figma_style": "font.label.badge",
+      "font_size": "12px",
+      "font_weight": "400",
+      "line_height": "16px",
+      "letter_spacing": "0%",
+      "note": "font.label.badge description explicitly mentions avatar initials ('USE THIS for badges, tags, pills, avatar initials and tooltip text. 12px/16px Regular.')"
+    }
+  },
+  "token_bindings": {
+    "size/small": {
+      "figma_variable": "Component/avatar/size/small → Primitives/space/200",
+      "resolved_value": "16px",
+      "existing_css_var": "--c-avatar-size-small",
+      "proposed_css_var": null
+    },
+    "size/medium": {
+      "figma_variable": "Component/avatar/size/medium → Primitives/space/300",
+      "resolved_value": "24px",
+      "existing_css_var": "--c-avatar-size-medium",
+      "proposed_css_var": null
+    },
+    "size/large": {
+      "figma_variable": "Component/avatar/size/large → Primitives/space/400",
+      "resolved_value": "32px",
+      "existing_css_var": "--c-avatar-size-large",
+      "proposed_css_var": null
+    },
+    "radius": {
+      "figma_variable": "Primitives/radius/full",
+      "resolved_value": "9999px",
+      "existing_css_var": "--p-radius-full",
+      "proposed_css_var": null,
+      "note": "Confirmed: --p-radius-full: 9999px exists in CSS"
+    },
+    "fallback/background/default": {
+      "figma_variable": "Semantic/color/surface/sunken → Primitives/neutral/300",
+      "resolved_value": "#E6E9EC",
+      "existing_css_var": "--s-color-surface-sunken",
+      "proposed_css_var": null,
+      "note": "Confirmed: --s-color-surface-sunken: #E6E9EC exists in CSS"
+    },
+    "fallback/text": {
+      "figma_variable": "Semantic/color/text/subtle",
+      "resolved_value": "#3C4A57",
+      "existing_css_var": "--s-color-text-subtle",
+      "proposed_css_var": null,
+      "note": "Confirmed: --s-color-text-subtle: #3C4A57 exists in CSS"
+    },
+    "font/size": {
+      "figma_variable": "Primitives/font/size/h7",
+      "resolved_value": "12px",
+      "existing_css_var": "--p-font-size-h7",
+      "proposed_css_var": null,
+      "note": "Confirmed: --p-font-size-h7: 12px exists in CSS. Reuses same value as --c-tooltip-font-size."
+    },
+    "font/weight": {
+      "figma_variable": "Primitives/font/weight/regular",
+      "resolved_value": "400",
+      "existing_css_var": "--p-font-weight-regular",
+      "proposed_css_var": null,
+      "note": "Confirmed: --p-font-weight-regular: 400 exists in CSS"
+    },
+    "font/line-height": {
+      "figma_variable": "Primitives/font/lineHeight/h7",
+      "resolved_value": "16px",
+      "existing_css_var": "--p-font-line-height-h7",
+      "proposed_css_var": null,
+      "note": "Confirmed: --p-font-line-height-h7: 16px exists in CSS"
+    }
+  },
+  "icon_dependencies": [],
+  "accessibility": {
+    "role": "img",
+    "required_attributes": ["alt (on image — full name, or empty if decorative)", "aria-label (on container if image has empty alt)"],
+    "keyboard": []
+  },
+  "usage_rules": [
+    "Use small (16px) for dense contexts: table cells, inline references.",
+    "Use medium (24px) for standard UI contexts: lists, cards, assignment fields.",
+    "Use large (32px) for prominent contexts: profile headers, comment threads.",
+    "Always show Initials fallback when no image URL is available — never show a broken image.",
+    "Initials should be the first letter of first and last name (max 2 characters)."
+  ],
+  "anti_patterns": [
+    "Do not use a square or rounded-rect container — always full radius (circle).",
+    "Do not scale the avatar with CSS width/height overrides outside the approved size set — use the size prop.",
+    "Do not show avatar without a fallback state."
+  ],
+  "extraction_notes": [
+    "RESOLVED: All 3 size tokens confirmed (--c-avatar-size-small/medium/large in CSS).",
+    "RESOLVED: Fallback background confirmed as --s-color-surface-sunken: #E6E9EC.",
+    "RESOLVED: Fallback text confirmed as --s-color-text-subtle: #3C4A57.",
+    "RESOLVED: Typography confirmed — uses --p-font-size-h7 (12px), --p-font-weight-regular (400), --p-font-line-height-h7 (16px). Same values as tooltip font tokens.",
+    "RESOLVED: Radius confirmed as --p-radius-full: 9999px.",
+    "NOTE: The AvatarFallback font sizing is consistent for all sizes (12px) since the container clips to the correct size. No per-size font scaling implemented.",
+    "BLOCKING: @radix-ui/react-avatar not in package.json. Stub component created. Install before full implementation.",
+    "Figma node ID remains UNRESOLVED."
+  ]
+}

@@ -1,0 +1,49 @@
+import * as React from "react"
+
+import { Button } from "@/components/ui/button"
+import { FilterConfigModal } from "@/components/ui/filter-config-modal"
+import type { FilterCriterion } from "@/components/ui/filter-config-modal"
+
+const FIELD_OPTIONS = [
+  { value: "status", label: "Status" },
+  { value: "mrr", label: "MRR" },
+  { value: "owner", label: "Owner" },
+]
+const OPERATOR_OPTIONS = [
+  { value: "is", label: "Is" },
+  { value: "is-not", label: "Is not" },
+]
+const VALUE_OPTIONS = [
+  { value: "active", label: "Active" },
+  { value: "at-risk", label: "At risk" },
+]
+
+// Each row is labelled A, B, C... by position so it can be referenced in the
+// "Advanced logic" expression below the rows, e.g. "(A and B) or C".
+export default function FilterConfigModalMultipleCriteria() {
+  const [open, setOpen] = React.useState(false)
+  const [criteria, setCriteria] = React.useState<FilterCriterion[]>([
+    { id: "1", field: "status", operator: "is", value: "active" },
+    { id: "2", field: "mrr", operator: "is", value: "at-risk" },
+    { id: "3", field: "owner", operator: "is-not", value: "active" },
+  ])
+  const [advancedLogic, setAdvancedLogic] = React.useState("(A and B) or C")
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Modify filter</Button>
+      <FilterConfigModal
+        open={open}
+        onOpenChange={setOpen}
+        criteria={criteria}
+        onCriteriaChange={setCriteria}
+        advancedLogic={advancedLogic}
+        onAdvancedLogicChange={setAdvancedLogic}
+        fieldOptions={FIELD_OPTIONS}
+        operatorOptions={OPERATOR_OPTIONS}
+        valueOptions={VALUE_OPTIONS}
+        onSave={() => setOpen(false)}
+      />
+    </>
+  )
+}

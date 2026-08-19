@@ -1,0 +1,66 @@
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --background: var(--s-color-surface-page);
+  --foreground: var(--s-color-text-default);
+
+  --card: var(--s-color-surface-default);
+  --card-foreground: var(--s-color-text-default);
+
+  --popover: var(--s-color-surface-overlay);
+  --popover-foreground: var(--s-color-text-default);
+
+  --primary: var(--c-button-primary-background-default);
+  --primary-foreground: var(--c-button-primary-content-default);
+
+  --secondary: var(--c-button-secondary-background-default);
+  --secondary-foreground: var(--c-button-secondary-content-default);
+
+  --muted: var(--s-color-surface-muted);
+  --muted-foreground: var(--s-color-text-subtle);
+
+  --accent: var(--s-color-action-neutral-hover);
+  --accent-foreground: var(--s-color-text-default);
+
+  --destructive: var(--c-button-destructive-background-default);
+  --destructive-foreground: var(--c-button-destructive-content-default);
+
+  --border: var(--s-color-line-default);
+  --input: var(--c-textfield-border-default);
+  --ring: var(--c-textfield-focus-ring-color);
+
+  --radius: var(--p-radius-100);
+}

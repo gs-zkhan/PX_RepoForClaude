@@ -1,0 +1,236 @@
+{
+  "component": "Dropdown Menu",
+  "figma_node_id": null,
+  "figma_component_name": "Dropdown List",
+  "implementation_foundation": "Radix/ShadCN DropdownMenu (action menu triggered by a button). The Prism 'Dropdown' component (--c-dropdown-*) is a form select input and must NOT be confused with this component. This component maps to the Prism 'Dropdown List' floating panel (--c-dropdown-menu-*).",
+  "blocking_issues": [
+    "BLOCKING: @radix-ui/react-dropdown-menu is not installed in package.json. Run: npm install @radix-ui/react-dropdown-menu. Component is stubbed until this package is available."
+  ],
+  "anatomy": [
+    "trigger (external — any Button or IconButton)",
+    "content-panel (floating overlay)",
+    "section-label (optional group header)",
+    "item (standard action row)",
+    "item-icon (optional leading icon in item)",
+    "item-label (primary text)",
+    "item-shortcut (optional trailing keyboard hint)",
+    "separator (divider between groups)"
+  ],
+  "variants": {
+    "Item/State": ["default", "hover", "selected", "disabled", "destructive"]
+  },
+  "sizes": ["default"],
+  "states": ["closed", "open", "item-default", "item-hover", "item-selected", "item-disabled"],
+  "dimensions": {
+    "default": {
+      "height": "hug",
+      "min_width": "160px",
+      "padding": "8px 0",
+      "gap": "0",
+      "radius": "12px",
+      "border_width": "1px"
+    },
+    "item": {
+      "height": "32px",
+      "min_width": null,
+      "padding": "4px 16px",
+      "gap": "8px",
+      "radius": "0",
+      "border_width": null
+    }
+  },
+  "typography": {
+    "item-label": {
+      "figma_style": "dropdown.font",
+      "font_size": "14px",
+      "font_weight": "400",
+      "line_height": "24px",
+      "letter_spacing": null
+    },
+    "section-label": {
+      "figma_style": null,
+      "font_size": "14px",
+      "font_weight": "500",
+      "line_height": "24px",
+      "letter_spacing": null
+    }
+  },
+  "token_bindings": {
+    "panel/background": {
+      "figma_variable": "Component/dropdown-menu/background → Semantic/color/surface/default",
+      "resolved_value": "#FFFFFF",
+      "existing_css_var": "--c-dropdown-menu-background",
+      "proposed_css_var": null
+    },
+    "panel/border": {
+      "figma_variable": "Semantic/color/line/default",
+      "resolved_value": "#D5D9DE",
+      "existing_css_var": "--s-color-line-default",
+      "proposed_css_var": null,
+      "note": "Uses --s-color-line-default, NOT --c-dropdown-border-default (which belongs to the form select trigger input)"
+    },
+    "panel/radius": {
+      "figma_variable": "Primitives/radius/150",
+      "resolved_value": "12px",
+      "existing_css_var": "--c-dropdown-menu-radius",
+      "proposed_css_var": null
+    },
+    "panel/shadow": {
+      "figma_variable": "Effects/shadow/500",
+      "resolved_value": "0px 12px 32px 0px rgba(60,74,87,0.08), 0px 0px 1px 0px rgba(60,74,87,0.2)",
+      "existing_css_var": "--e-shadow-500",
+      "proposed_css_var": null,
+      "note": "RESOLVED: Use --e-shadow-500, NOT --p-shadow-200 or --p-shadow-500. The --e-shadow-500 token confirmed in CSS with correct two-layer composite value."
+    },
+    "panel/padding-vertical": {
+      "figma_variable": "Primitives/space/100",
+      "resolved_value": "8px",
+      "existing_css_var": "--c-dropdown-menu-padding-vertical",
+      "proposed_css_var": null
+    },
+    "panel/padding-vertical-large": {
+      "figma_variable": "Primitives/space/150",
+      "resolved_value": "12px",
+      "existing_css_var": "--c-dropdown-menu-padding-vertical-large",
+      "proposed_css_var": null
+    },
+    "item/background/default": {
+      "figma_variable": "Semantic/color/surface/default",
+      "resolved_value": "#FFFFFF",
+      "existing_css_var": "--c-dropdown-menu-item-background-default",
+      "proposed_css_var": null
+    },
+    "item/background/hover": {
+      "figma_variable": "Semantic/color/surface/muted",
+      "resolved_value": "#F5F7F9",
+      "existing_css_var": "--c-dropdown-menu-item-background-hover",
+      "proposed_css_var": null
+    },
+    "item/background/selected": {
+      "figma_variable": "Semantic/color/surface/selected",
+      "resolved_value": "#E9F8FA",
+      "existing_css_var": "--c-dropdown-menu-item-background-selected",
+      "proposed_css_var": null
+    },
+    "item/content": {
+      "figma_variable": "Semantic/color/text/default",
+      "resolved_value": "#181F26",
+      "existing_css_var": "--c-dropdown-menu-item-content",
+      "proposed_css_var": null
+    },
+    "item/content/destructive": {
+      "figma_variable": "Semantic/color/status/danger/default",
+      "resolved_value": "#DC3626",
+      "existing_css_var": "--s-color-status-danger-default",
+      "proposed_css_var": null,
+      "note": "RESOLVED: No new destructive content token needed. Use --s-color-status-danger-default directly. Applied via destructive prop on DropdownMenuItem."
+    },
+    "item/gap": {
+      "figma_variable": "Primitives/space/100",
+      "resolved_value": "8px",
+      "existing_css_var": "--c-dropdown-menu-item-gap",
+      "proposed_css_var": null
+    },
+    "item/padding-horizontal": {
+      "figma_variable": "Primitives/space/200",
+      "resolved_value": "16px",
+      "existing_css_var": "--c-dropdown-menu-item-padding-horizontal",
+      "proposed_css_var": null
+    },
+    "item/padding-vertical": {
+      "figma_variable": "Primitives/space/050",
+      "resolved_value": "4px",
+      "existing_css_var": "--c-dropdown-menu-item-padding-vertical",
+      "proposed_css_var": null
+    },
+    "panel/gap": {
+      "figma_variable": "Primitives/space/100",
+      "resolved_value": "8px",
+      "existing_css_var": "--c-dropdown-menu-gap",
+      "proposed_css_var": null
+    },
+    "divider": {
+      "figma_variable": "Semantic/color/line/default",
+      "resolved_value": "#D5D9DE",
+      "existing_css_var": "--c-dropdown-menu-divider",
+      "proposed_css_var": null
+    },
+    "section-label": {
+      "figma_variable": "Semantic/color/text/subtle",
+      "resolved_value": "#3C4A57",
+      "existing_css_var": "--c-dropdown-menu-section-label",
+      "proposed_css_var": null
+    },
+    "font/size": {
+      "figma_variable": "Primitives/font/size/h6",
+      "resolved_value": "14px",
+      "existing_css_var": "--c-dropdown-menu-font-size",
+      "proposed_css_var": null
+    },
+    "font/line-height": {
+      "figma_variable": "Primitives/font/lineHeight/h6",
+      "resolved_value": "24px",
+      "existing_css_var": "--c-dropdown-menu-font-line-height",
+      "proposed_css_var": null
+    },
+    "search/placeholder": {
+      "figma_variable": "Semantic/color/text/disabled",
+      "resolved_value": "#ACB4BD",
+      "existing_css_var": "--c-dropdown-menu-search-placeholder",
+      "proposed_css_var": null
+    },
+    "search/radius": {
+      "figma_variable": "Primitives/radius/025",
+      "resolved_value": "2px",
+      "existing_css_var": "--c-dropdown-menu-search-radius",
+      "proposed_css_var": null
+    }
+  },
+  "icon_dependencies": [
+    {
+      "slot": "item-icon",
+      "icon_name": "any Prism icon (context-dependent)",
+      "size": "16",
+      "color_binding": "--s-icon-color-default (#3C4A57)"
+    },
+    {
+      "slot": "destructive-item-icon",
+      "icon_name": "any Prism icon (context-dependent)",
+      "size": "16",
+      "color_binding": "--s-color-status-danger-default (#DC3626)"
+    }
+  ],
+  "accessibility": {
+    "role": "menu",
+    "required_attributes": ["role=\"menu\"", "role=\"menuitem\" on each item", "aria-expanded on trigger", "aria-haspopup=\"menu\" on trigger", "aria-disabled on disabled items"],
+    "keyboard": [
+      "Enter / Space: activate item",
+      "Arrow Down / Up: navigate items",
+      "Escape: close menu",
+      "Tab: close menu and move focus"
+    ]
+  },
+  "usage_rules": [
+    "Use for lists of actions or commands triggered by a button. Do not use as a form select.",
+    "Always associate a visible trigger button — the menu panel is not self-triggering.",
+    "Use section-label to group related items.",
+    "Destructive actions use --s-color-status-danger-default for text and icon color.",
+    "Do not place more than ~8 items without a search field for filtering."
+  ],
+  "anti_patterns": [
+    "Do not use Dropdown Menu where a form select is needed — those use the Prism Dropdown component with --c-dropdown-* tokens.",
+    "Do not implement a custom floating panel — use Radix DropdownMenu.Content.",
+    "Do not mix --c-dropdown-* (form select) tokens with --c-dropdown-menu-* (action menu) tokens.",
+    "Do not add shadow other than --e-shadow-500.",
+    "Do not put destructive items at the top of the list."
+  ],
+  "extraction_notes": [
+    "RESOLVED: Shadow confirmed as --e-shadow-500 (NOT --p-shadow-200 or --p-shadow-500). The --e-shadow-500 value in CSS (0px 12px 32px 0px rgba(60,74,87,0.08), 0px 0px 1px 0px rgba(60,74,87,0.2)) matches the Figma effects/shadow/500 two-layer composite.",
+    "RESOLVED: Panel border uses --s-color-line-default, NOT --c-dropdown-border-default (the latter belongs to the form select trigger).",
+    "RESOLVED: Destructive item content uses --s-color-status-danger-default directly. No new token needed.",
+    "RESOLVED: All --c-dropdown-menu-* tokens confirmed to exist in CSS.",
+    "SEMANTIC CLARIFICATION: --c-dropdown-* tokens = form select trigger field. --c-dropdown-menu-* tokens = action menu floating panel. These must never be mixed.",
+    "BLOCKING: @radix-ui/react-dropdown-menu not in package.json. Stub component created. Install before full implementation.",
+    "Figma node ID remains UNRESOLVED."
+  ]
+}

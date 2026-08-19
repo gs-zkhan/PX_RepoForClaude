@@ -1,0 +1,358 @@
+{
+  "_meta": {
+    "figma_file_key": "U3D8WMBVFl9LvAZyLHhm24",
+    "figma_frame_node": "4214:34223",
+    "figma_frame_name": "Content/Component",
+    "audit_date": "2026-07-27",
+    "inspector": "Claude Sonnet 4.6 via Figma MCP",
+    "primary_nodes_inspected": [
+      "4214:34223 — Content/Component (root frame containing all list-page states)",
+      "3302:367  — List Page / Content Area (4-view carousel frame)",
+      "3302:6    — View=Table, State=With Data (1328×828)",
+      "3302:251  — View=Card,  State=With Data (1328×480)",
+      "3302:210  — View=Table, State=Empty     (1328×424)",
+      "3302:326  — View=Card,  State=Empty     (1328×424)",
+      "1896:6    — Table/Toolbar (same component as Table page)",
+      "1063:189  — Pagination (same component as Table page)"
+    ],
+    "confidence_legend": {
+      "high":   "confirmed by variable_defs + design_context code",
+      "medium": "read from metadata/code but not confirmed by variable_defs",
+      "low":    "inferred; not directly readable"
+    }
+  },
+
+  "page_container": {
+    "figma_frame":          "4214:34223 — Content/Component",
+    "frame_total_width":    { "value": "5544px (all 4 state views rendered side-by-side on canvas)", "source": "fixed-size", "confidence": "high" },
+    "single_view_width":    { "value": "1328px per view", "source": "fixed-size", "confidence": "high" },
+    "frame_total_height":   { "value": "908px", "source": "fixed-size", "confidence": "high" },
+    "width_behaviour":      { "value": "fixed canvas — in production the page fills available viewport width; each state view is a self-contained component instance", "source": "fixed-size", "confidence": "medium" },
+    "height_behaviour":     { "value": "fixed in Figma frame; in production the page scrolls vertically", "source": "fixed-size", "confidence": "medium" },
+    "page_background":      { "value": "not explicitly set on Content/Component frame — inherits canvas/page background", "source": "not found", "confidence": "medium" },
+    "content_area_frame":   "3302:367 — List Page / Content Area",
+    "content_area_width":   { "value": "5480px total (1328px × 4 views + 56px gaps between views)", "source": "fixed-size", "confidence": "high" },
+    "content_area_height":  { "value": "828px (With Data state)", "source": "fixed-size", "confidence": "high" },
+    "outer_padding_top":    { "value": "40px (content area y=40 inside root frame)", "source": "fixed-size", "confidence": "high" },
+    "outer_padding_bottom": { "value": "40px (908 − 40 − 828 = 40px)", "source": "fixed-size", "confidence": "high" },
+    "outer_padding_left":   { "value": "32px (content area x=32 inside root frame)", "source": "fixed-size", "confidence": "high" },
+    "outer_padding_right":  { "value": "32px (5544 − 5480 − 32 = 32px)", "source": "fixed-size", "confidence": "high" },
+    "gap_between_state_views": { "value": "56px (1384 − 1328 = 56px between view origins)", "source": "fixed-size", "confidence": "high" },
+    "grid_columns":         { "value": "not found — no explicit grid overlay visible in metadata", "source": "not found", "confidence": "medium" },
+    "responsive_constraints": { "value": "not found — only fixed-width instances present in Figma frame", "source": "not found", "confidence": "medium" }
+  },
+
+  "list_page_views": {
+    "view_table_with_data": {
+      "figma_node":  "3302:6",
+      "component_prop": "View=Table, State=With Data",
+      "width":  { "value": "1328px", "source": "fixed-size", "confidence": "high" },
+      "height": { "value": "828px",  "source": "fixed-size", "confidence": "high" },
+      "layout_breakdown": {
+        "toolbar_height":         48,
+        "table_header_height":    32,
+        "table_body_height_est":  708,
+        "pagination_height":      40,
+        "total":                  828,
+        "_note": "Body rows at 48px default: 708 / 48 ≈ 14.7 → ~14 rows visible"
+      }
+    },
+    "view_card_with_data": {
+      "figma_node":  "3302:251",
+      "component_prop": "View=Card, State=With Data",
+      "width":  { "value": "1328px", "source": "fixed-size", "confidence": "high" },
+      "height": { "value": "480px",  "source": "fixed-size", "confidence": "high" },
+      "_note": "Card/grid view is a separate layout — not a Table component state"
+    },
+    "view_table_empty": {
+      "figma_node":  "3302:210",
+      "component_prop": "View=Table, State=Empty",
+      "width":  { "value": "1328px", "source": "fixed-size", "confidence": "high" },
+      "height": { "value": "424px",  "source": "fixed-size", "confidence": "high" },
+      "_note": "Shorter height because body is replaced by Empty State content"
+    },
+    "view_card_empty": {
+      "figma_node":  "3302:326",
+      "component_prop": "View=Card, State=Empty",
+      "width":  { "value": "1328px", "source": "fixed-size", "confidence": "high" },
+      "height": { "value": "424px",  "source": "fixed-size", "confidence": "high" }
+    }
+  },
+
+  "toolbar": {
+    "_note": "Toolbar is the SAME component (1896:6) as documented on the Table component page. Values below are identical. The toolbar sits above the table scroll zone and is always visible.",
+    "figma_node":     "1896:6 — Table/Toolbar",
+    "height":         { "value": "48px", "token": "space/600", "resolved": 48, "source": "variable", "confidence": "high" },
+    "padding_left":   { "value": "16px", "token": "space/200", "resolved": 16, "source": "variable", "confidence": "high" },
+    "padding_right":  { "value": "8px",  "token": "space/100", "resolved": 8,  "source": "variable", "confidence": "high" },
+    "padding_top":    { "value": "8px",  "token": "space/100", "resolved": 8,  "source": "variable", "confidence": "high" },
+    "padding_bottom": { "value": "8px",  "token": "space/100", "resolved": 8,  "source": "variable", "confidence": "high" },
+    "background":     { "value": "#FFFFFF", "token": "table/header/background/default → color/surface/default", "source": "variable", "confidence": "high" },
+    "title_font":     { "value": "Noto Sans SemiBold 16px/24px", "token": "font/size/h5 + font/lineHeight/h5", "source": "text-style", "confidence": "high" },
+    "title_colour":   { "value": "#181F26", "token": "color/text/default", "source": "variable", "confidence": "high" },
+    "actions_gap":    { "value": "4px", "token": "space/050", "resolved": 4, "source": "variable", "confidence": "high" },
+    "icon_button_size": { "value": "32px", "source": "fixed-size", "confidence": "high" },
+    "icon_button_radius": { "value": "6px", "token": "radius/075", "source": "variable", "confidence": "high" },
+    "icon_size":      { "value": "24px", "token": "icon/size/024", "source": "variable", "confidence": "high" },
+    "icons_present":  ["icons/24/search", "icons/24/filter", "icons/24/add-column (column selector)", "icons/24/more-vertical"],
+    "sticky_behaviour": "sticky — sits outside scroll zone; always visible above table horizontal scroll",
+    "title_count_format": "Table Title (N) — count updates to reflect active filter results per Dos and Don'ts"
+  },
+
+  "table_positioning_on_page": {
+    "_note": "The Table component is positioned immediately below the Toolbar. The page adds no extra margin between toolbar and table header. Toolbar and Pagination are outside the table's horizontal scroll zone.",
+    "distance_from_page_top":      { "value": "40px outer padding (content area y=40)", "source": "fixed-size", "confidence": "high" },
+    "distance_from_toolbar":       { "value": "0px — table header abuts toolbar bottom edge directly", "source": "fixed-size", "confidence": "high" },
+    "distance_from_pagination":    { "value": "0px — pagination abuts last table row bottom border", "source": "fixed-size", "confidence": "high" },
+    "left_right_margins":          { "value": "32px left/right within the Content/Component frame (outer_padding)", "source": "fixed-size", "confidence": "high" },
+    "width_behaviour":             { "value": "fill available width (1328px in list page view)", "source": "fixed-size", "confidence": "high" },
+    "container_radius":            { "value": "not found — no radius on table container at page level", "source": "not found", "confidence": "high" },
+    "border":                      { "value": "not found — no outer border on table at page level; individual row borders apply", "source": "not found", "confidence": "high" },
+    "shadow":                      { "value": "not found — the table container has no shadow; shadow likely belongs to a page card wrapper not included in this Figma frame", "source": "not found", "confidence": "medium" },
+    "overflow":                    { "value": "scroll-x within table body; Toolbar and Pagination remain fixed", "source": "ai-doc", "confidence": "medium" },
+    "sticky_header_behaviour":     { "value": "header row sticky during vertical scroll (per AI instructions)", "source": "ai-doc", "confidence": "medium" },
+    "sticky_action_column_behaviour": { "value": "not confirmed at component level; introduced at page/implementation level if required", "source": "not found", "confidence": "low" },
+    "max_height":                  { "value": "not found — table grows with row count; pagination controls which rows are shown", "source": "not found", "confidence": "medium" },
+    "min_height":                  { "value": "not found", "source": "not found", "confidence": "medium" }
+  },
+
+  "pagination_footer": {
+    "_note": "Pagination is the SAME component (1063:237) as on the Table component page. It sits immediately below the last table row.",
+    "figma_node":        "2298:60763 — Pagination instance",
+    "height":            { "value": "40px", "source": "fixed-size", "confidence": "high" },
+    "padding_horizontal":{ "value": "16px", "token": "space/200", "resolved": 16, "source": "variable", "confidence": "high" },
+    "gap":               { "value": "12px", "token": "space/150", "resolved": 12, "source": "variable", "confidence": "high" },
+    "top_border":        { "value": "not found — last row's bottom border serves as visual separator", "source": "not found", "confidence": "medium" },
+    "background":        { "value": "#FFFFFF", "token": "color/surface/default", "source": "variable", "confidence": "high" },
+    "results_count_format": "1-10 of 600",
+    "results_count_colour": { "value": "#5F6C7A", "token": "color/text/subtlest", "source": "variable", "confidence": "high" },
+    "results_count_font": "Noto Sans SemiBold 12px/16px",
+    "divider_width":     { "value": "1px", "source": "fixed-size", "confidence": "high" },
+    "divider_height":    { "value": "20px", "source": "fixed-size", "confidence": "high" },
+    "divider_colour":    { "value": "#D5D9DE", "token": "color/line/default", "source": "variable", "confidence": "high" },
+    "per_page_default":  "25",
+    "per_page_selector_font": "Noto Sans SemiBold 12px/16px",
+    "per_page_text_colour": { "value": "#181F26", "token": "color/text/default", "source": "variable", "confidence": "high" },
+    "per_page_label_colour": { "value": "#5F6C7A", "token": "color/text/subtlest", "source": "variable", "confidence": "high" },
+    "nav_button_size":   { "value": "24px", "source": "fixed-size", "confidence": "high" },
+    "page_pill_width":   { "value": "32px", "source": "fixed-size", "confidence": "high" },
+    "page_pill_height":  { "value": "24px", "source": "fixed-size", "confidence": "high" },
+    "page_pill_radius":  { "value": "4px", "token": "radius/050", "resolved": 4, "source": "variable", "confidence": "high" },
+    "page_number_font":  "Noto Sans SemiBold 12px/16px",
+    "page_number_colour": { "value": "#181F26", "token": "color/text/default", "source": "variable", "confidence": "high" },
+    "alignment":         "flex row: results-count + divider + per-page (left); spacer; prev + page-pill + next (right)",
+    "sticky_behaviour":  "sticky — sits outside scroll zone per AI instructions"
+  },
+
+  "list_page_states": {
+    "default_populated": {
+      "figma_node":   "3302:6 — View=Table, State=With Data",
+      "description":  "Toolbar + column headers + body rows + pagination. Rows at Default 48px density.",
+      "width":  "1328px",
+      "height": "828px",
+      "confidence": "high"
+    },
+    "filtered_list": {
+      "figma_node":   "not found as separate variant — filtering is a toolbar state, not a separate page frame",
+      "description":  "Same as default populated; toolbar title updates to show filtered count (e.g. 'Accounts (12)')",
+      "confidence":   "medium"
+    },
+    "selected_row": {
+      "description":  "Row background = table/cell/background/selected (#E9F8FA); checkbox checked; background spans all cells",
+      "token":        "table/cell/background/selected",
+      "confidence":   "high"
+    },
+    "hover_row": {
+      "description":  "Row background = table/cell/background/hover (#F5F7F9); More icon becomes visible",
+      "token":        "table/cell/background/hover",
+      "confidence":   "high"
+    },
+    "empty_state": {
+      "figma_node":   "3302:210 — View=Table, State=Empty",
+      "width":        "1328px",
+      "height":       "424px",
+      "description":  "Toolbar is retained (48px); header row is retained (32px); table body replaced by empty state content; pagination is hidden or shows 0 results",
+      "confidence":   "high",
+      "empty_body_height": { "value": "344px approximate (424 - 48 toolbar - 32 header = 344px)", "source": "fixed-size", "confidence": "medium" }
+    },
+    "no_results_state": {
+      "description":  "Separate from empty state — triggered by active filter returning 0 rows. Not a distinct Figma variant in inspected frame; expected to match empty state layout with different copy.",
+      "confidence":   "low"
+    },
+    "loading_state": {
+      "figma_node":   "not found in inspected variants",
+      "description":  "Not found. Expected to show skeleton rows inside table body. Per AI instructions, Spinner Loader is shown inside the body during data fetch.",
+      "confidence":   "medium"
+    },
+    "error_state": {
+      "figma_node":   "not found in inspected variants",
+      "description":  "Not found in the 4 state views present in this frame.",
+      "confidence":   "medium"
+    },
+    "card_grid_view": {
+      "figma_node":   "3302:251 — View=Card, State=With Data",
+      "width":  "1328px",
+      "height": "480px",
+      "description":  "Alternative card/grid layout for the same dataset. Not a Table component state — separate view type controlled by view-toggle in Toolbar.",
+      "confidence":   "high"
+    },
+    "responsive_narrow_width": {
+      "figma_node":   "not found",
+      "description":  "No responsive/narrow-width variant present in this Figma frame. Responsive behaviour not designed at this scale.",
+      "confidence":   "medium"
+    }
+  },
+
+  "empty_state": {
+    "_note": "Empty state replaces the table body content. The Toolbar (48px) and Table Header (32px) are retained. Total frame height = 424px for the empty view, leaving ~344px for the empty body.",
+    "figma_node":          "3302:210 — View=Table, State=Empty",
+    "container_width":     { "value": "1328px (full view width)", "source": "fixed-size", "confidence": "high" },
+    "container_height":    { "value": "424px total; ~344px for the empty body area", "source": "fixed-size", "confidence": "high" },
+    "icon_size":           { "value": "not found — inner content not inspected (frame too large to fully parse)", "source": "not found", "confidence": "low" },
+    "icon_to_title_gap":   { "value": "not found", "source": "not found", "confidence": "low" },
+    "title_typography":    { "value": "not found — inner content not inspected", "source": "not found", "confidence": "low" },
+    "body_typography":     { "value": "not found", "source": "not found", "confidence": "low" },
+    "button_gap":          { "value": "not found", "source": "not found", "confidence": "low" },
+    "vertical_alignment":  { "value": "centered within the body area", "source": "medium", "confidence": "medium" },
+    "horizontal_alignment": { "value": "centered", "source": "medium", "confidence": "medium" },
+    "_action_required":    "Inspect node 3302:210 directly for empty state icon size, typography, and CTA button layout"
+  },
+
+  "list_page_vs_table_component_differences": {
+    "_description": "All cases where the List Page adds layout rules not owned by the Table component.",
+    "differences": [
+      {
+        "aspect":       "Outer padding",
+        "table_component": "No outer padding — component is borderless and fills its parent",
+        "list_page":    "32px left/right, 40px top/bottom applied by the Content/Component frame",
+        "owner":        "List Page layout — not a Table token",
+        "action":       "Layout guidance only; document as page-level padding"
+      },
+      {
+        "aspect":       "View width constraint",
+        "table_component": "Fill-width (flex-[1_0_0]); no fixed width on the component",
+        "list_page":    "Constrained to 1328px per view in the Figma frame",
+        "owner":        "List Page layout — not a Table token",
+        "action":       "Layout guidance — the 1328px is a design canvas constraint, not a coded breakpoint"
+      },
+      {
+        "aspect":       "Toolbar sticky behaviour",
+        "table_component": "Toolbar is part of the Table component but its stickiness is implemented at page level",
+        "list_page":    "Toolbar sits outside the horizontal scroll zone; stays fixed above scrolling table body",
+        "owner":        "Page-level CSS (position:sticky or layout architecture)",
+        "action":       "Implementation concern — not a token; document in component engineering spec"
+      },
+      {
+        "aspect":       "Pagination sticky behaviour",
+        "table_component": "Pagination is documented as part of the Table pattern but stickiness is page-level",
+        "list_page":    "Pagination sits outside the scroll zone; stays fixed below the scrolling table body",
+        "owner":        "Page-level CSS",
+        "action":       "Implementation concern — not a token"
+      },
+      {
+        "aspect":       "Card/grid view toggle",
+        "table_component": "No card view — Table component is always a table",
+        "list_page":    "View toggle in toolbar switches between Table view and Card/grid view",
+        "owner":        "List Page pattern — not a Table component variant",
+        "action":       "Separate Card component; toolbar view-toggle is a page-level control"
+      },
+      {
+        "aspect":       "Empty state",
+        "table_component": "No built-in empty state in the Table/Row or Table/Header components",
+        "list_page":    "Empty state (View=Table, State=Empty) is a page-level pattern that replaces the table body",
+        "owner":        "List Page pattern — not a Table component state",
+        "action":       "Empty state is a separate component composed at the list page level"
+      },
+      {
+        "aspect":       "Loading / spinner",
+        "table_component": "No built-in loading state in the table component variants",
+        "list_page":    "Per AI instructions, Spinner Loader is shown inside the body during data fetch",
+        "owner":        "List Page pattern — composed at page level",
+        "action":       "Use Spinner Loader component inside the table body area"
+      },
+      {
+        "aspect":       "Shadow / card wrapper",
+        "table_component": "No shadow on the Table component",
+        "list_page":    "Shadow likely applied by a page-level card or container wrapping the table",
+        "owner":        "Page-level component",
+        "action":       "Not a Table token; add shadow at the card/container level"
+      },
+      {
+        "aspect":       "Row height at page level",
+        "table_component": "Compact=32px, Default=48px, Comfortable=56px — all three density variants available",
+        "list_page":    "Only Default (48px) density is shown in the With Data view; no evidence of Compact/Comfortable being used in the list page pattern",
+        "owner":        "Consumer choice — density prop on Table component",
+        "action":       "Default density is the recommended choice for standard list pages"
+      },
+      {
+        "aspect":       "Toolbar 'adds' layout rules",
+        "table_component": "Toolbar is part of the Table pattern (fixed 48px height, same tokens)",
+        "list_page":    "No additional rules beyond what Table/Toolbar already specifies",
+        "owner":        "Table component — no list-page override",
+        "action":       "No change needed"
+      },
+      {
+        "aspect":       "Pagination 'adds' layout rules",
+        "table_component": "Pagination is a separate component placed below Table per pattern",
+        "list_page":    "No additional rules; same Pagination component used",
+        "owner":        "Table component pattern — no list-page override",
+        "action":       "No change needed"
+      }
+    ]
+  },
+
+  "variable_token_mapping": {
+    "_note": "The List Page does not introduce new table tokens. All table tokens in use are identical to those on the Table component page. The page adds primitive space/* tokens for outer layout.",
+    "page_level_primitives": [
+      { "primitive": "space/200 (16px)", "used_for": "outer left/right padding candidate (32px = 2 × 16px)" },
+      { "primitive": "space/300 (24px)", "used_for": "outer padding alternative; actual outer padding is 32px (not a named space token)" },
+      { "primitive": "space/050 (4px)",  "used_for": "not at page level" }
+    ],
+    "outer_padding_gap": {
+      "_note": "Outer padding 32px left/right and 40px top/bottom do not map to named space/* tokens in the file. 32px = 2×space/200 or 4×space/050×8, neither is a direct alias. 40px is not a named spacing token.",
+      "32px_padding_status": "not a named token — layout guidance only",
+      "40px_padding_status": "not a named token — layout guidance only"
+    },
+    "tokens_confirmed_on_list_page": [
+      "table/header/background/default → color/surface/default (#FFFFFF)",
+      "table/header/text (#5F6C7A)",
+      "table/header/border/bottom (#D5D9DE)",
+      "table/cell/background/default (#FFFFFF)",
+      "table/cell/background/hover (#F5F7F9)",
+      "table/cell/background/selected (#E9F8FA)",
+      "table/cell/border/row (#D5D9DE)",
+      "table/cell/text/default (#181F26)",
+      "table/cell/text/link (#0369E9)",
+      "color/surface/default (#FFFFFF) — pagination background",
+      "color/text/subtlest (#5F6C7A) — pagination results count",
+      "color/text/default (#181F26) — toolbar title, pagination page numbers",
+      "color/line/default (#D5D9DE) — pagination dividers",
+      "space/600 (48px) — toolbar height",
+      "space/200 (16px) — toolbar/pagination horizontal padding",
+      "space/150 (12px) — pagination gap, cell vertical padding",
+      "space/300 (24px) — cell padding left",
+      "space/100 (8px)  — cell padding right, toolbar right/top/bottom padding",
+      "space/050 (4px)  — toolbar actions gap",
+      "radius/075 (6px) — toolbar icon button radius",
+      "radius/050 (4px) — pagination page pill radius",
+      "icon/size/024 (24px) — toolbar icons",
+      "icon/color/default (#3C4A57) — toolbar icons",
+      "font/size/h5 (16px) — toolbar title",
+      "font/size/small (12px) — pagination text",
+      "font/lineHeight/h5 (24px) — toolbar title",
+      "font/lineHeight/small (16px) — pagination text"
+    ]
+  },
+
+  "values_not_readable": [
+    "Empty state inner anatomy (icon size, title/body typography, button layout) — frame 3302:210 was too large to fully parse inner layers via MCP",
+    "Loading state — not found in any inspected variant",
+    "Error state — not found in any inspected variant",
+    "Responsive / narrow-width breakpoint behaviour — not present in Figma frame",
+    "Sticky CSS implementation (position:sticky, z-index, overflow containers) — behaviour documented in AI instructions but not readable from Figma layer properties",
+    "Card/grid view inner anatomy (3302:251) — not inspected as it is out of scope for the table audit",
+    "Outer padding 32px/40px exact token aliases — these dimensions do not match a single named space/* token",
+    "Page-level shadow (if any) on card wrapper around table — not found in inspected nodes",
+    "View-toggle button state (Table ↔ Card) exact dimensions and placement"
+  ]
+}

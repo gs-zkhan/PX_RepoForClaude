@@ -1,0 +1,246 @@
+{
+  "component": "Search Field",
+  "figma_node_id": null,
+  "figma_component_name": "Search Bar",
+  "implementation_foundation": "existing Input component + PrismIcon (search icon leading, optional clear trailing). Search Bar reuses all --c-textfield-* tokens; it does NOT duplicate them. Only the height tokens are Search-Bar-specific.",
+  "anatomy": [
+    "container",
+    "leading-search-icon",
+    "input-text",
+    "placeholder",
+    "trailing-clear-button (conditional)"
+  ],
+  "variants": {
+    "Type": ["Default", "Rounded-Corner"],
+    "Inline": ["true", "false"]
+  },
+  "sizes": ["medium", "large", "xlarge", "xxlarge"],
+  "states": ["default", "focused", "filled", "disabled"],
+  "dimensions": {
+    "medium": {
+      "height": "32px",
+      "min_width": null,
+      "padding": "4px 8px 4px 12px",
+      "gap": "8px",
+      "radius": "8px",
+      "border_width": "1px"
+    },
+    "large": {
+      "height": "40px",
+      "min_width": null,
+      "padding": "8px 8px 8px 12px",
+      "gap": "8px",
+      "radius": "8px",
+      "border_width": "1px"
+    },
+    "xlarge": {
+      "height": "36px",
+      "min_width": null,
+      "padding": "6px 8px 6px 12px",
+      "gap": "8px",
+      "radius": "8px",
+      "border_width": "1px"
+    },
+    "xxlarge": {
+      "height": "40px",
+      "min_width": null,
+      "padding": "8px 8px 8px 12px",
+      "gap": "8px",
+      "radius": "9999px",
+      "border_width": "1px"
+    }
+  },
+  "typography": {
+    "input-text": {
+      "figma_style": "search.font",
+      "font_size": "14px",
+      "font_weight": "400",
+      "line_height": "24px",
+      "letter_spacing": "0%"
+    },
+    "placeholder": {
+      "figma_style": "search.font",
+      "font_size": "14px",
+      "font_weight": "400",
+      "line_height": "24px",
+      "letter_spacing": "0%"
+    }
+  },
+  "token_bindings": {
+    "height/medium": {
+      "figma_variable": "Primitives/space/400",
+      "resolved_value": "32px",
+      "existing_css_var": "--c-search-height-medium",
+      "proposed_css_var": null
+    },
+    "height/large": {
+      "figma_variable": "Primitives/space/500",
+      "resolved_value": "40px",
+      "existing_css_var": "--c-search-height-large",
+      "proposed_css_var": null
+    },
+    "height/xlarge": {
+      "figma_variable": null,
+      "resolved_value": "36px",
+      "existing_css_var": "--c-search-height-xlarge",
+      "proposed_css_var": null
+    },
+    "height/xxlarge": {
+      "figma_variable": "Primitives/space/500",
+      "resolved_value": "40px",
+      "existing_css_var": "--c-search-height-xxlarge",
+      "proposed_css_var": null
+    },
+    "background/default": {
+      "figma_variable": "Component/formfield/background → Semantic/color/surface/default",
+      "resolved_value": "#FFFFFF",
+      "existing_css_var": "--c-textfield-background-default",
+      "proposed_css_var": null,
+      "note": "Reuses textfield token — confirmed binding"
+    },
+    "background/disabled": {
+      "figma_variable": "Component/search/background/disabled → Semantic/color/surface/disabled",
+      "resolved_value": "#E6E9EC",
+      "existing_css_var": "--c-search-background-disabled",
+      "proposed_css_var": null,
+      "note": "Search Bar disabled background is #E6E9EC (surface/disabled/sunken), different from textfield disabled (#F5F7F9). --c-search-background-disabled already exists in CSS."
+    },
+    "border/default": {
+      "figma_variable": "Semantic/color/line/default",
+      "resolved_value": "#D5D9DE",
+      "existing_css_var": "--c-textfield-border-default",
+      "proposed_css_var": null,
+      "note": "Reuses textfield token — confirmed binding"
+    },
+    "border/hover": {
+      "figma_variable": "Semantic/color/action/primary/hover",
+      "resolved_value": "#3084ED",
+      "existing_css_var": "--c-textfield-border-hover",
+      "proposed_css_var": null,
+      "note": "Reuses textfield token — confirmed binding"
+    },
+    "border/focus": {
+      "figma_variable": "Semantic/color/action/primary/default",
+      "resolved_value": "#0369E9",
+      "existing_css_var": "--c-textfield-border-focus",
+      "proposed_css_var": null,
+      "note": "Reuses textfield token — confirmed binding"
+    },
+    "border/disabled": {
+      "figma_variable": "Semantic/color/line/disabled",
+      "resolved_value": "#E6E9EC",
+      "existing_css_var": "--c-textfield-border-disabled",
+      "proposed_css_var": null,
+      "note": "Reuses textfield token — confirmed binding"
+    },
+    "border/width": {
+      "figma_variable": "Primitives/border/width/100",
+      "resolved_value": "1px",
+      "existing_css_var": "--c-textfield-border-width",
+      "proposed_css_var": null,
+      "note": "Reuses textfield token — confirmed binding"
+    },
+    "content/value": {
+      "figma_variable": "Semantic/color/text/default",
+      "resolved_value": "#181F26",
+      "existing_css_var": "--c-textfield-content-value",
+      "proposed_css_var": null,
+      "note": "Reuses textfield token — confirmed binding"
+    },
+    "content/placeholder": {
+      "figma_variable": "Semantic/color/text/disabled",
+      "resolved_value": "#ACB4BD",
+      "existing_css_var": "--c-textfield-content-placeholder",
+      "proposed_css_var": null,
+      "note": "Reuses textfield token — confirmed binding"
+    },
+    "content/disabled": {
+      "figma_variable": "Semantic/color/text/disabled",
+      "resolved_value": "#ACB4BD",
+      "existing_css_var": "--c-textfield-content-disabled",
+      "proposed_css_var": null,
+      "note": "Reuses textfield token — confirmed binding"
+    },
+    "icon/color": {
+      "figma_variable": "Component/formfield/icon/color → Semantic/icon/color/default",
+      "resolved_value": "#3C4A57",
+      "existing_css_var": "--s-icon-color-default",
+      "proposed_css_var": null,
+      "note": "Confirmed: --s-icon-color-default exists in CSS"
+    },
+    "radius/default": {
+      "figma_variable": "Component/formfield/radius → Primitives/radius/100",
+      "resolved_value": "8px",
+      "existing_css_var": "--c-textfield-radius",
+      "proposed_css_var": null,
+      "note": "Reuses textfield token — confirmed binding"
+    },
+    "radius/rounded": {
+      "figma_variable": "Primitives/radius/full",
+      "resolved_value": "9999px",
+      "existing_css_var": "--p-radius-full",
+      "proposed_css_var": null,
+      "note": "Confirmed: --p-radius-full: 9999px exists in CSS"
+    },
+    "focus-ring/color": {
+      "figma_variable": "Semantic/color/action/primary/subtle",
+      "resolved_value": "#62A1F1",
+      "existing_css_var": "--c-textfield-focus-ring-color",
+      "proposed_css_var": null,
+      "note": "Reuses textfield token — confirmed binding"
+    },
+    "focus-ring/width": {
+      "figma_variable": null,
+      "resolved_value": "2px",
+      "existing_css_var": "--c-textfield-focus-ring-width",
+      "proposed_css_var": null,
+      "note": "Reuses textfield token — confirmed binding"
+    }
+  },
+  "icon_dependencies": [
+    {
+      "slot": "leading-search-icon",
+      "icon_name": "search",
+      "size": "16",
+      "color_binding": "formfield/icon/color → --s-icon-color-default (#3C4A57)",
+      "note": "BLOCKING: search.svg does not exist at src/assets/icons/16/. Only exists at 24px. A 16px search icon must be added to src/assets/icons/16/ before SearchBar leading icon renders."
+    },
+    {
+      "slot": "trailing-clear-button",
+      "icon_name": "remove",
+      "size": "16",
+      "color_binding": "formfield/icon/color → --s-icon-color-default (#3C4A57)",
+      "note": "Confirmed: remove.svg exists at src/assets/icons/16/remove.svg"
+    }
+  ],
+  "accessibility": {
+    "role": "searchbox",
+    "required_attributes": ["aria-label", "type=\"search\""],
+    "keyboard": [
+      "Enter: submit search",
+      "Escape: clear field / dismiss",
+      "Tab: move focus to next element"
+    ]
+  },
+  "usage_rules": [
+    "Use Default variant for standard page-level search.",
+    "Use Rounded-Corner for hero/prominent search contexts only.",
+    "Use Inline variant when embedding in toolbar rows alongside other controls.",
+    "Always include a visible search icon in the leading slot.",
+    "Clear button should only appear when the field has a value."
+  ],
+  "anti_patterns": [
+    "Do not use Rounded-Corner variant for inline toolbar embedding.",
+    "Do not use a plain Input component with manual search icon wiring — use the SearchBar component instead.",
+    "Do not use for general text input — only for search/filter interactions.",
+    "Do not omit the accessible label (aria-label or aria-labelledby)."
+  ],
+  "extraction_notes": [
+    "RESOLVED: Search Bar reuses all --c-textfield-* tokens for color, border, typography, radius, and focus-ring. No duplicate search-specific color tokens are needed.",
+    "RESOLVED: --c-search-background-disabled: #E6E9EC already exists in CSS (distinct from textfield-background-disabled: #F5F7F9 — search uses surface/disabled which is sunken, not muted).",
+    "RESOLVED: --c-search-height-* tokens (medium: 32px, large: 40px, xlarge: 36px, xxlarge: 40px) all exist in CSS.",
+    "RESOLVED: Rounded-Corner variant uses --p-radius-full (9999px) confirmed. The xxlarge size is always pill-shaped.",
+    "BLOCKING: No 16px search icon exists in src/assets/icons/16/. The search.svg exists only at 24px. A 16px version must be added to complete the leading-icon slot.",
+    "Figma node ID remains UNRESOLVED — requires direct file access to get document node ID."
+  ]
+}

@@ -1,0 +1,229 @@
+{
+  "component": "Filter Chip",
+  "figma_node_id": null,
+  "figma_component_name": "Filter Chip",
+  "implementation_foundation": "Native <button> element (NOT Radix Toggle, NOT Button component). Semantically a toggleable filter token with a label+value pair and optional dismiss or dropdown affordance. Native button is intentionally correct for this interactive pill.",
+  "anatomy": [
+    "container (pill/chip shell)",
+    "filter-label-text (property name, e.g. 'Stage')",
+    "separator (colon, shown when value is present)",
+    "filter-value-text (selected value, e.g. 'Active')",
+    "trailing-chevron-icon (open/close indicator, default)",
+    "trailing-clear-icon (dismiss, shown when onRemove is provided)"
+  ],
+  "variants": {
+    "State": ["Default", "No Value", "Hover", "Pressed", "Open", "Disabled"],
+    "Has Value": ["true", "false"],
+    "Has Remove": ["true", "false"]
+  },
+  "sizes": ["default"],
+  "states": ["default", "hover", "pressed", "open", "disabled"],
+  "dimensions": {
+    "default": {
+      "height": "28px",
+      "min_width": null,
+      "padding": "4px 8px",
+      "gap": "4px",
+      "radius": "9999px",
+      "border_width": "1px"
+    }
+  },
+  "typography": {
+    "label-text": {
+      "figma_style": null,
+      "font_size": "14px",
+      "font_weight": "400",
+      "line_height": "24px",
+      "letter_spacing": null,
+      "note": "Matches font.body.default (14px/24px Regular). Confirmed via component dimension reasoning: 28px height - 4px*2 padding = 20px content height, which aligns with 14px/24px body not 12px/16px badge."
+    }
+  },
+  "token_bindings": {
+    "height": {
+      "figma_variable": "Primitives/space/350",
+      "resolved_value": "28px",
+      "existing_css_var": "--c-filterchip-height",
+      "proposed_css_var": null
+    },
+    "padding-horizontal": {
+      "figma_variable": "Primitives/space/100",
+      "resolved_value": "8px",
+      "existing_css_var": "--p-space-100",
+      "proposed_css_var": null,
+      "note": "Confirmed: --p-space-100: 8px exists in CSS"
+    },
+    "padding-vertical": {
+      "figma_variable": "Primitives/space/050",
+      "resolved_value": "4px",
+      "existing_css_var": "--p-space-050",
+      "proposed_css_var": null,
+      "note": "Confirmed: --p-space-050: 4px exists in CSS"
+    },
+    "gap": {
+      "figma_variable": "Primitives/space/050",
+      "resolved_value": "4px",
+      "existing_css_var": "--p-space-050",
+      "proposed_css_var": null
+    },
+    "radius": {
+      "figma_variable": "Primitives/radius/full",
+      "resolved_value": "9999px",
+      "existing_css_var": "--p-radius-full",
+      "proposed_css_var": null,
+      "note": "Confirmed: --p-radius-full: 9999px exists in CSS"
+    },
+    "border/width": {
+      "figma_variable": "Primitives/border/width/100",
+      "resolved_value": "1px",
+      "existing_css_var": "--p-border-width-100",
+      "proposed_css_var": null,
+      "note": "Use inline Tailwind border utility class rather than token reference"
+    },
+    "background/default": {
+      "figma_variable": "Semantic/color/surface/default",
+      "resolved_value": "#FFFFFF",
+      "existing_css_var": "--s-color-surface-default",
+      "proposed_css_var": null
+    },
+    "background/hover": {
+      "figma_variable": "Semantic/color/surface/muted",
+      "resolved_value": "#F5F7F9",
+      "existing_css_var": "--s-color-surface-muted",
+      "proposed_css_var": null
+    },
+    "background/pressed": {
+      "figma_variable": "Semantic/color/surface/sunken",
+      "resolved_value": "#E6E9EC",
+      "existing_css_var": "--s-color-surface-sunken",
+      "proposed_css_var": null
+    },
+    "background/open": {
+      "figma_variable": "Semantic/color/surface/muted",
+      "resolved_value": "#F5F7F9",
+      "existing_css_var": "--s-color-surface-muted",
+      "proposed_css_var": null
+    },
+    "background/disabled": {
+      "figma_variable": "Semantic/color/surface/disabled",
+      "resolved_value": "#E6E9EC",
+      "existing_css_var": "--s-color-surface-disabled",
+      "proposed_css_var": null,
+      "note": "Confirmed: --s-color-surface-disabled: #E6E9EC exists in CSS"
+    },
+    "border/default": {
+      "figma_variable": "Semantic/color/line/default",
+      "resolved_value": "#D5D9DE",
+      "existing_css_var": "--s-color-line-default",
+      "proposed_css_var": null
+    },
+    "border/selected": {
+      "figma_variable": "Semantic/color/action/primary/default",
+      "resolved_value": "#0369E9",
+      "existing_css_var": "--c-textfield-border-focus",
+      "proposed_css_var": null,
+      "note": "Reuses --c-textfield-border-focus which aliases the same action/primary/default semantic token (#0369E9). Applied in selected/open data-state."
+    },
+    "border/disabled": {
+      "figma_variable": "Semantic/color/line/disabled",
+      "resolved_value": "#E6E9EC",
+      "existing_css_var": "--s-color-line-disabled",
+      "proposed_css_var": null
+    },
+    "text/label": {
+      "figma_variable": "Semantic/color/text/subtle",
+      "resolved_value": "#3C4A57",
+      "existing_css_var": "--s-color-text-subtle",
+      "proposed_css_var": null
+    },
+    "text/disabled": {
+      "figma_variable": "Semantic/color/text/disabled",
+      "resolved_value": "#ACB4BD",
+      "existing_css_var": "--s-color-text-disabled",
+      "proposed_css_var": null
+    },
+    "icon/color": {
+      "figma_variable": "Semantic/icon/color/default",
+      "resolved_value": "#3C4A57",
+      "existing_css_var": "--s-icon-color-default",
+      "proposed_css_var": null
+    },
+    "font/size": {
+      "figma_variable": "Primitives/font/size/h6",
+      "resolved_value": "14px",
+      "existing_css_var": "--p-font-size-h6",
+      "proposed_css_var": null,
+      "note": "Confirmed: --p-font-size-h6: 14px exists in CSS"
+    },
+    "font/weight": {
+      "figma_variable": "Primitives/font/weight/regular",
+      "resolved_value": "400",
+      "existing_css_var": "--p-font-weight-regular",
+      "proposed_css_var": null,
+      "note": "Confirmed: --p-font-weight-regular: 400 exists in CSS"
+    },
+    "font/line-height": {
+      "figma_variable": "Primitives/font/lineHeight/h6",
+      "resolved_value": "24px",
+      "existing_css_var": "--p-font-line-height-h6",
+      "proposed_css_var": null,
+      "note": "Confirmed: --p-font-line-height-h6: 24px exists in CSS"
+    },
+    "focus-ring": {
+      "figma_variable": null,
+      "resolved_value": "0px 0px 0px 3px rgba(3,105,233,0.25)",
+      "existing_css_var": "--e-shadow-focus",
+      "proposed_css_var": null,
+      "note": "Confirmed: --e-shadow-focus exists in CSS"
+    }
+  },
+  "icon_dependencies": [
+    {
+      "slot": "trailing-chevron-icon",
+      "icon_name": "chevron-down",
+      "size": "16",
+      "color_binding": "--s-icon-color-default (#3C4A57)",
+      "note": "Confirmed: chevron-down.svg exists at src/assets/icons/16/chevron-down.svg. Rotates 180deg in open state."
+    },
+    {
+      "slot": "trailing-clear-icon",
+      "icon_name": "remove",
+      "size": "16",
+      "color_binding": "--s-icon-color-default (#3C4A57)",
+      "note": "Confirmed: remove.svg exists at src/assets/icons/16/remove.svg"
+    }
+  ],
+  "accessibility": {
+    "role": "button",
+    "required_attributes": ["aria-pressed (when acting as toggle)", "aria-expanded (when controlling dropdown)", "aria-disabled", "aria-label (when no visible text context)"],
+    "keyboard": [
+      "Enter / Space: toggle filter or open dropdown",
+      "Escape: close open dropdown",
+      "Tab: move focus to next chip or action"
+    ]
+  },
+  "usage_rules": [
+    "Use only to represent one active filter — label identifies the field, value shows the applied filter.",
+    "Always compose inside a Filter Bar. Do not place standalone.",
+    "In Open state, chevron rotates 180deg to indicate the filter dropdown panel is visible.",
+    "In No Value state, show label only with a chevron. This is an unset filter trigger.",
+    "The chip is NOT a Button variant. Do not style it as a Button. It is an independent interactive pill.",
+    "Disabled state: interaction blocked, muted colors applied."
+  ],
+  "anti_patterns": [
+    "Do not use Filter Chip as a general toggle or selection control.",
+    "Do not implement as Button component — it has its own pill radius and padding.",
+    "Do not put more than one label+value pair inside a single chip.",
+    "Do not use for navigation — only for filter state representation."
+  ],
+  "extraction_notes": [
+    "RESOLVED: All color tokens confirmed — using semantic tokens directly (--s-color-*) rather than new component tokens.",
+    "RESOLVED: Typography confirmed as font.body.default (14px/24px Regular) using --p-font-size-h6, --p-font-weight-regular, --p-font-line-height-h6.",
+    "RESOLVED: Height --c-filterchip-height: 28px confirmed in CSS.",
+    "RESOLVED: Spacing tokens --p-space-050 (4px) and --p-space-100 (8px) confirmed in CSS.",
+    "RESOLVED: Border selected state uses --c-textfield-border-focus (#0369E9) which is the same action/primary/default value.",
+    "RESOLVED: Disabled background uses --s-color-surface-disabled: #E6E9EC confirmed in CSS.",
+    "RESOLVED: Icons confirmed — chevron-down.svg and remove.svg both exist at 16px.",
+    "NOTE: Selected/open border uses data-[state=active] selector. The open prop drives the chevron rotation only; border-selected is driven by the selected prop.",
+    "Figma node ID remains UNRESOLVED — requires direct file access."
+  ]
+}

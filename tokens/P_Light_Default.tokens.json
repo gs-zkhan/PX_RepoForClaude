@@ -1,0 +1,2632 @@
+{
+  "color": {
+    "royalBlue": {
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9607843160629272,
+            0.9764705896377563,
+            0.9960784316062927
+          ],
+          "alpha": 1,
+          "hex": "#F5F9FE"
+        },
+        "$description": "Royal blue tint 100 — #F5F9FE. Subtlest background for hover states and subtle highlights.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:3"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9019607901573181,
+            0.9411764740943909,
+            0.9921568632125854
+          ],
+          "alpha": 1,
+          "hex": "#E6F0FD"
+        },
+        "$description": "Royal blue tint 200 — #E6F0FD. Light background for selected states and active indicators.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:4"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8235294222831726,
+            0.8941176533699036,
+            0.9843137264251709
+          ],
+          "alpha": 1,
+          "hex": "#D2E4FB"
+        },
+        "$description": "Royal blue tint 300 — #D2E4FB. Soft blue for focus rings, subtle active backgrounds.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:5"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6352941393852234,
+            0.7803921699523926,
+            0.9686274528503418
+          ],
+          "alpha": 1,
+          "hex": "#A2C7F7"
+        },
+        "$description": "Royal blue tint 400 — #A2C7F7. Mid-tone blue for decorative elements and illustrations.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:6"
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3843137323856354,
+            0.6313725709915161,
+            0.9450980424880981
+          ],
+          "alpha": 1,
+          "hex": "#62A1F1"
+        },
+        "$description": "Royal blue tint 500 — #62A1F1. Accessible blue for secondary actions and charts.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:7"
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1882352977991104,
+            0.5176470875740051,
+            0.929411768913269
+          ],
+          "alpha": 1,
+          "hex": "#3084ED"
+        },
+        "$description": "Royal blue tint 600 — #3084ED. Brand blue hover state — used on primary action hover.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:8"
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0117647061124444,
+            0.4117647111415863,
+            0.9137254953384399
+          ],
+          "alpha": 1,
+          "hex": "#0369E9"
+        },
+        "$description": "Royal blue 700 — #0369E9. Primary brand blue. Default state for primary actions, links and focus rings.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:9"
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0117647061124444,
+            0.35686275362968445,
+            0.7764706015586853
+          ],
+          "alpha": 1,
+          "hex": "#035BC6"
+        },
+        "$description": "Royal blue 800 — #035BC6. Pressed/click state for primary actions. Also used for visited links.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:10"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0117647061124444,
+            0.29019609093666077,
+            0.6392157077789307
+          ],
+          "alpha": 1,
+          "hex": "#034AA3"
+        },
+        "$description": "Royal blue 900 — #034AA3. Darkest brand blue. Used for high-contrast text on light backgrounds.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:11"
+        }
+      },
+      "950": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.10196078568696976,
+            0.1764705926179886,
+            0.2705882489681244
+          ],
+          "alpha": 1,
+          "hex": "#1A2D45"
+        },
+        "$description": "Deepest Royal Blue — reserved for maximum contrast text on light blue surfaces.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:2678:2"
+        }
+      },
+      "A200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0117647061124444,
+            0.4117647111415863,
+            0.9137254953384399
+          ],
+          "alpha": 0.07999999821186066,
+          "hex": "#0369E9"
+        },
+        "$description": "Royal Blue at 8% opacity — used for subtle hover and selected state backgrounds.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:3535:8835"
+        }
+      }
+    },
+    "freshGreen": {
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9647058844566345,
+            0.9921568632125854,
+            0.9803921580314636
+          ],
+          "alpha": 1,
+          "hex": "#F6FDFA"
+        },
+        "$description": "Fresh green tint 100 — #F6FDFA. Subtlest success background.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:12"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9215686321258545,
+            0.9843137264251709,
+            0.9333333373069763
+          ],
+          "alpha": 1,
+          "hex": "#EBFBEE"
+        },
+        "$description": "Fresh green tint 200 — #EBFBEE. Light success background for status chips and badges.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:13"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8352941274642944,
+            0.9607843160629272,
+            0.8588235378265381
+          ],
+          "alpha": 1,
+          "hex": "#D5F5DB"
+        },
+        "$description": "Fresh green tint 300 — #D5F5DB. Soft success fill — used in success chip backgrounds.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:14"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5960784554481506,
+            0.9058823585510254,
+            0.6941176652908325
+          ],
+          "alpha": 1,
+          "hex": "#98E7B1"
+        },
+        "$description": "Fresh green tint 400 — #98E7B1. Mid success tone for charts and illustrations.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:15"
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.33725491166114807,
+            0.843137264251709,
+            0.5686274766921997
+          ],
+          "alpha": 1,
+          "hex": "#56D791"
+        },
+        "$description": "Fresh green tint 500 — #56D791. Bright success indicator.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:16"
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.07450980693101883,
+            0.7803921699523926,
+            0.49803921580314636
+          ],
+          "alpha": 1,
+          "hex": "#13C77F"
+        },
+        "$description": "Fresh green 600 — #13C77F. Vibrant success default — used for success icons and status dots.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:17"
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.07450980693101883,
+            0.6784313917160034,
+            0.40784314274787903
+          ],
+          "alpha": 1,
+          "hex": "#13AD68"
+        },
+        "$description": "Fresh green 700 — #13AD68. Success hover state.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:18"
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.07058823853731155,
+            0.6000000238418579,
+            0.35686275362968445
+          ],
+          "alpha": 1,
+          "hex": "#12995B"
+        },
+        "$description": "Fresh green 800 — #12995B. Success text on light backgrounds — readable and accessible.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:19"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.05882352963089943,
+            0.4901960790157318,
+            0.30588236451148987
+          ],
+          "alpha": 1,
+          "hex": "#0F7D4E"
+        },
+        "$description": "Fresh green 900 — #0F7D4E. Darkest success green — highest contrast success text.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:20"
+        }
+      }
+    },
+    "honeyAmber": {
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            0.9803921580314636,
+            0.9215686321258545
+          ],
+          "alpha": 1,
+          "hex": "#FFFAEB"
+        },
+        "$description": "Honey amber tint 100 — #FFFAEB. Subtlest warning background.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:21"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            0.9529411792755127,
+            0.8196078538894653
+          ],
+          "alpha": 1,
+          "hex": "#FFF3D1"
+        },
+        "$description": "Honey amber tint 200 — #FFF3D1. Light warning background for chips and alerts.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:22"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            0.9254902005195618,
+            0.7215686440467834
+          ],
+          "alpha": 1,
+          "hex": "#FFECB8"
+        },
+        "$description": "Honey amber tint 300 — #FFECB8. Soft warning fill — used in warning chip backgrounds.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:23"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            0.8823529481887817,
+            0.5607843399047852
+          ],
+          "alpha": 1,
+          "hex": "#FFE18F"
+        },
+        "$description": "Honey amber tint 400 — #FFE18F. Mid warning tone for charts and illustrations.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:24"
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            0.8313725590705872,
+            0.3607843220233917
+          ],
+          "alpha": 1,
+          "hex": "#FFD45C"
+        },
+        "$description": "Honey amber tint 500 — #FFD45C. Bright warning indicator.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:25"
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            0.7333333492279053,
+            0
+          ],
+          "alpha": 1,
+          "hex": "#FFBB00"
+        },
+        "$description": "Honey amber 600 — #FFBB00. Warning default — used for warning icons and status dots.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:26"
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.95686274766922,
+            0.6549019813537598,
+            0.007843137718737125
+          ],
+          "alpha": 1,
+          "hex": "#F4A702"
+        },
+        "$description": "Honey amber 700 — #F4A702. Warning hover state.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:27"
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8745098114013672,
+            0.5176470875740051,
+            0.01568627543747425
+          ],
+          "alpha": 1,
+          "hex": "#DF8404"
+        },
+        "$description": "Honey amber 800 — #DF8404. Warning text on light backgrounds.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:28"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7647058963775635,
+            0.4117647111415863,
+            0
+          ],
+          "alpha": 1,
+          "hex": "#C36900"
+        },
+        "$description": "Honey amber 900 — #C36900. Darkest warning amber — highest contrast warning text.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:29"
+        }
+      }
+    },
+    "tartRed": {
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            0.9764705896377563,
+            0.9764705896377563
+          ],
+          "alpha": 1,
+          "hex": "#FFF9F9"
+        },
+        "$description": "Tart red tint 100 — #FFF9F9. Subtlest danger background.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:30"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            0.9490196108818054,
+            0.9450980424880981
+          ],
+          "alpha": 1,
+          "hex": "#FFF2F1"
+        },
+        "$description": "Tart red tint 200 — #FFF2F1. Light danger background for chips and alerts.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:31"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9921568632125854,
+            0.8745098114013672,
+            0.8627451062202454
+          ],
+          "alpha": 1,
+          "hex": "#FDDFDC"
+        },
+        "$description": "Tart red tint 300 — #FDDFDC. Soft danger fill — used in danger chip backgrounds.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:32"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9882352948188782,
+            0.7450980544090271,
+            0.7254902124404907
+          ],
+          "alpha": 1,
+          "hex": "#FCBEB9"
+        },
+        "$description": "Tart red tint 400 — #FCBEB9. Mid danger tone for illustrations.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:33"
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9764705896377563,
+            0.5882353186607361,
+            0.5529412031173706
+          ],
+          "alpha": 1,
+          "hex": "#F9968D"
+        },
+        "$description": "Tart red tint 500 — #F9968D. Bright danger indicator.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:34"
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9686274528503418,
+            0.364705890417099,
+            0.30980393290519714
+          ],
+          "alpha": 1,
+          "hex": "#F75D4F"
+        },
+        "$description": "Tart red 600 — #F75D4F. Danger default — error borders and danger icons.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:35"
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8627451062202454,
+            0.21176470816135406,
+            0.14901961386203766
+          ],
+          "alpha": 1,
+          "hex": "#DC3626"
+        },
+        "$description": "Tart red 700 — #DC3626. Danger hover state.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:36"
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7490196228027344,
+            0.12941177189350128,
+            0.05098039284348488
+          ],
+          "alpha": 1,
+          "hex": "#BF210D"
+        },
+        "$description": "Tart red 800 — #BF210D. Danger text on light backgrounds.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:37"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6039215922355652,
+            0.10980392247438431,
+            0.04313725605607033
+          ],
+          "alpha": 1,
+          "hex": "#9A1C0B"
+        },
+        "$description": "Tart red 900 — #9A1C0B. Darkest danger red — highest contrast error text.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:38"
+        }
+      }
+    },
+    "neutral": {
+      "0": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ],
+          "alpha": 1,
+          "hex": "#FFFFFF"
+        },
+        "$description": "Pure white — #FFFFFF. Default surface background. Light mode canvas.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:39"
+        }
+      },
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9921568632125854,
+            0.9921568632125854,
+            0.9960784316062927
+          ],
+          "alpha": 1,
+          "hex": "#FDFDFE"
+        },
+        "$description": "Near white — #FDFDFE. Subtle off-white for alternate row backgrounds.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:40"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9607843160629272,
+            0.9686274528503418,
+            0.9764705896377563
+          ],
+          "alpha": 1,
+          "hex": "#F5F7F9"
+        },
+        "$description": "Light grey — #F5F7F9. Muted surface. Used for disabled backgrounds and skeleton loaders.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:41"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9019607901573181,
+            0.9137254953384399,
+            0.9254902005195618
+          ],
+          "alpha": 1,
+          "hex": "#E6E9EC"
+        },
+        "$description": "Grey 300 — #E6E9EC. Divider and border colour in resting state.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:42"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8352941274642944,
+            0.8509804010391235,
+            0.8705882430076599
+          ],
+          "alpha": 1,
+          "hex": "#D5D9DE"
+        },
+        "$description": "Grey 400 — #D5D9DE. Subtle border — used for line separators.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:43"
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6745098233222961,
+            0.7058823704719543,
+            0.7411764860153198
+          ],
+          "alpha": 1,
+          "hex": "#ACB4BD"
+        },
+        "$description": "Grey 500 — #ACB4BD. Placeholder and icon colour in inactive state.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:44"
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.37254902720451355,
+            0.42352941632270813,
+            0.47843137383461
+          ],
+          "alpha": 1,
+          "hex": "#5F6C7A"
+        },
+        "$description": "Grey 600 — #5F6C7A. Subdued text and secondary metadata.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:45"
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.23529411852359772,
+            0.29019609093666077,
+            0.34117648005485535
+          ],
+          "alpha": 1,
+          "hex": "#3C4A57"
+        },
+        "$description": "Grey 700 — #3C4A57. Secondary body text and subtle labels.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:46"
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.14509804546833038,
+            0.1921568661928177,
+            0.23137255012989044
+          ],
+          "alpha": 1,
+          "hex": "#25313B"
+        },
+        "$description": "Grey 800 — #25313B. Primary dark surface — navigation background.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:47"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0941176488995552,
+            0.12156862765550613,
+            0.14901961386203766
+          ],
+          "alpha": 1,
+          "hex": "#181F26"
+        },
+        "$description": "Darkest neutral — #181F26. Primary text colour on light backgrounds.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:48"
+        }
+      },
+      "A100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0941176488995552,
+            0.12156862765550613,
+            0.14901961386203766
+          ],
+          "alpha": 0.03999999910593033,
+          "hex": "#181F26"
+        },
+        "$description": "Neutral alpha 4% — for very subtle overlay tints.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:49"
+        }
+      },
+      "A200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0941176488995552,
+            0.12156862765550613,
+            0.14901961386203766
+          ],
+          "alpha": 0.07999999821186066,
+          "hex": "#181F26"
+        },
+        "$description": "Neutral alpha 8% — for hover states on transparent surfaces.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:50"
+        }
+      },
+      "A300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0941176488995552,
+            0.12156862765550613,
+            0.14901961386203766
+          ],
+          "alpha": 0.1599999964237213,
+          "hex": "#181F26"
+        },
+        "$description": "Neutral alpha 16% — for pressed states on transparent surfaces.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:51"
+        }
+      },
+      "A400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0941176488995552,
+            0.12156862765550613,
+            0.14901961386203766
+          ],
+          "alpha": 0.3199999928474426,
+          "hex": "#181F26"
+        },
+        "$description": "Neutral alpha 32% — for modal scrim and medium overlays.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:52"
+        }
+      },
+      "A500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0941176488995552,
+            0.12156862765550613,
+            0.14901961386203766
+          ],
+          "alpha": 0.47999998927116394,
+          "hex": "#181F26"
+        },
+        "$description": "Neutral alpha 48% — for strong overlays and disabled surface tints.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:53"
+        }
+      },
+      "B500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ],
+          "alpha": 0.47999998927116394,
+          "hex": "#FFFFFF"
+        },
+        "$description": "White at 48% opacity — inverse neutral overlay for dark surfaces.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:3719:6113"
+        }
+      },
+      "B200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            1,
+            1
+          ],
+          "alpha": 0.07999999821186066,
+          "hex": "#FFFFFF"
+        },
+        "$description": "White at 8% opacity — subtle inverse overlay for dark surfaces.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:3757:35745"
+        }
+      }
+    },
+    "purple": {
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9803921580314636,
+            0.9607843160629272,
+            0.9960784316062927
+          ],
+          "alpha": 1,
+          "hex": "#FAF5FE"
+        },
+        "$description": "Purple tint 100 — subtlest purple background. Used for beta/accent chip backgrounds.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:784:6"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9411764740943909,
+            0.8980392217636108,
+            0.9803921580314636
+          ],
+          "alpha": 1,
+          "hex": "#F0E5FA"
+        },
+        "$description": "Purple tint 200 — light purple. Used for beta chip background (subtlest).",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:784:7"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8784313797950745,
+            0.800000011920929,
+            0.9607843160629272
+          ],
+          "alpha": 1,
+          "hex": "#E0CCF5"
+        },
+        "$description": "Purple tint 300 — soft purple fill.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:784:8"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7843137383460999,
+            0.658823549747467,
+            0.929411768913269
+          ],
+          "alpha": 1,
+          "hex": "#C8A8ED"
+        },
+        "$description": "Purple tint 400 — mid purple for illustrations.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:784:9"
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6745098233222961,
+            0.4901960790157318,
+            0.886274516582489
+          ],
+          "alpha": 1,
+          "hex": "#AC7DE2"
+        },
+        "$description": "Purple 500 — bright accent purple.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:784:10"
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5607843399047852,
+            0.3294117748737335,
+            0.8313725590705872
+          ],
+          "alpha": 1,
+          "hex": "#8F54D4"
+        },
+        "$description": "Purple 600 — accent purple default.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:784:11"
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4313725531101227,
+            0.19607843458652496,
+            0.6823529601097107
+          ],
+          "alpha": 1,
+          "hex": "#6E32AE"
+        },
+        "$description": "Purple 700 — accent text purple. Used for beta chip text and accent labels.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:784:12"
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3529411852359772,
+            0.14901961386203766,
+            0.5647059082984924
+          ],
+          "alpha": 1,
+          "hex": "#5A2690"
+        },
+        "$description": "Purple 800 — dark accent purple. High contrast accent text.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:784:13"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.25882354378700256,
+            0.10980392247438431,
+            0.4274509847164154
+          ],
+          "alpha": 1,
+          "hex": "#421C6D"
+        },
+        "$description": "Purple 900 — darkest accent purple.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:784:14"
+        }
+      }
+    },
+    "pacificBlue": {
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9411764740943909,
+            0.9843137264251709,
+            0.9882352948188782
+          ],
+          "alpha": 1,
+          "hex": "#F0FBFC"
+        },
+        "$description": "Pacific blue tint 100 — subtlest teal background.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:1849:6"
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9137254953384399,
+            0.9725490212440491,
+            0.9803921580314636
+          ],
+          "alpha": 1,
+          "hex": "#E9F8FA"
+        },
+        "$description": "Pacific blue tint 200 — light teal.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:1849:7"
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8313725590705872,
+            0.9450980424880981,
+            0.9607843160629272
+          ],
+          "alpha": 1,
+          "hex": "#D4F1F5"
+        },
+        "$description": "Pacific blue tint 300 — soft teal fill.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:1849:8"
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7254902124404907,
+            0.9098039269447327,
+            0.9372549057006836
+          ],
+          "alpha": 1,
+          "hex": "#B9E8EF"
+        },
+        "$description": "Pacific blue tint 400 — mid teal.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:1849:9"
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6509804129600525,
+            0.886274516582489,
+            0.9215686321258545
+          ],
+          "alpha": 1,
+          "hex": "#A6E2EB"
+        },
+        "$description": "Pacific blue 500 — bright teal.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:1849:10"
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3450980484485626,
+            0.772549033164978,
+            0.8352941274642944
+          ],
+          "alpha": 1,
+          "hex": "#58C5D5"
+        },
+        "$description": "Pacific blue 600 — teal default.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:1849:11"
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.16470588743686676,
+            0.7098039388656616,
+            0.7960784435272217
+          ],
+          "alpha": 1,
+          "hex": "#2AB5CB"
+        },
+        "$description": "Pacific blue 700 — teal for text.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:1849:12"
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1411764770746231,
+            0.6509804129600525,
+            0.729411780834198
+          ],
+          "alpha": 1,
+          "hex": "#24A6BA"
+        },
+        "$description": "Pacific blue 800 — dark teal text.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:1849:13"
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.10196078568696976,
+            0.45098039507865906,
+            0.5058823823928833
+          ],
+          "alpha": 1,
+          "hex": "#1A7381"
+        },
+        "$description": "Pacific blue 900 — darkest teal.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:1849:15"
+        }
+      },
+      "A200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.16470588743686676,
+            0.7098039388656616,
+            0.7960784435272217
+          ],
+          "alpha": 0.07999999821186066,
+          "hex": "#2AB5CB"
+        },
+        "$description": "Pacific Blue at 8% opacity — used for subtle blue-tinted surfaces.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:3535:8836"
+        }
+      }
+    },
+    "bellBlue": {
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9411764740943909,
+            0.9450980424880981,
+            0.9882352948188782
+          ],
+          "alpha": 1,
+          "hex": "#F0F1FC"
+        },
+        "$description": "Lightest bellBlue tint — subtle tinted surface backgrounds. #F0F1FC.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:6",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7843137383460999,
+            0.800000011920929,
+            0.9333333373069763
+          ],
+          "alpha": 1,
+          "hex": "#C8CCEE"
+        },
+        "$description": "Very light bellBlue — chart/series/2 light fill for area charts. #C8CCEE.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:7",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.658823549747467,
+            0.686274528503418,
+            0.8745098114013672
+          ],
+          "alpha": 1,
+          "hex": "#A8AFDF"
+        },
+        "$description": "Light bellBlue — hover highlights on bellBlue-tinted surfaces. #A8AFDF.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:8",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5333333611488342,
+            0.5647059082984924,
+            0.8470588326454163
+          ],
+          "alpha": 1,
+          "hex": "#8890D8"
+        },
+        "$description": "Medium-light bellBlue. #8890D8.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:9",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4901960790157318,
+            0.5176470875740051,
+            0.8274509906768799
+          ],
+          "alpha": 1,
+          "hex": "#7D84D3"
+        },
+        "$description": "Medium bellBlue. #7D84D3.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:10",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.47058823704719543,
+            0.501960813999176,
+            0.8117647171020508
+          ],
+          "alpha": 1,
+          "hex": "#7880CF"
+        },
+        "$description": "Medium-dark bellBlue. #7880CF.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:11",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.41960784792900085,
+            0.4588235318660736,
+            0.8039215803146362
+          ],
+          "alpha": 1,
+          "hex": "#6B75CD"
+        },
+        "$description": "Core bellBlue — primary chart series 2 color. #6B75CD.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:12",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3333333432674408,
+            0.3764705955982208,
+            0.7215686440467834
+          ],
+          "alpha": 1,
+          "hex": "#5560B8"
+        },
+        "$description": "Dark bellBlue — pressed and active states. #5560B8.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:13",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.250980406999588,
+            0.29019609093666077,
+            0.6117647290229797
+          ],
+          "alpha": 1,
+          "hex": "#404A9C"
+        },
+        "$description": "Darkest bellBlue — high-contrast text and icons. #404A9C.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:14",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      }
+    },
+    "dustyRose": {
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9921568632125854,
+            0.9490196108818054,
+            0.9607843160629272
+          ],
+          "alpha": 1,
+          "hex": "#FDF2F5"
+        },
+        "$description": "Lightest dustyRose tint — subtle warm tinted surfaces. #FDF2F5.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:15",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9490196108818054,
+            0.7882353067398071,
+            0.8274509906768799
+          ],
+          "alpha": 1,
+          "hex": "#F2C9D3"
+        },
+        "$description": "Very light dustyRose — chart/series/3 light fill. #F2C9D3.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:16",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9176470637321472,
+            0.658823549747467,
+            0.7215686440467834
+          ],
+          "alpha": 1,
+          "hex": "#EAA8B8"
+        },
+        "$description": "Light dustyRose. #EAA8B8.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:17",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8901960849761963,
+            0.5882353186607361,
+            0.6549019813537598
+          ],
+          "alpha": 1,
+          "hex": "#E396A7"
+        },
+        "$description": "Medium-light dustyRose. #E396A7.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:18",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8705882430076599,
+            0.5686274766921997,
+            0.6431372761726379
+          ],
+          "alpha": 1,
+          "hex": "#DE91A4"
+        },
+        "$description": "Medium dustyRose. #DE91A4.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:19",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8588235378265381,
+            0.5176470875740051,
+            0.6039215922355652
+          ],
+          "alpha": 1,
+          "hex": "#DB849A"
+        },
+        "$description": "Medium-dark dustyRose. #DB849A.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:20",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8313725590705872,
+            0.4470588266849518,
+            0.5490196347236633
+          ],
+          "alpha": 1,
+          "hex": "#D4728C"
+        },
+        "$description": "Core dustyRose — primary chart series 3 color. #D4728C.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:21",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7372549176216125,
+            0.35686275362968445,
+            0.4627451002597809
+          ],
+          "alpha": 1,
+          "hex": "#BC5B76"
+        },
+        "$description": "Dark dustyRose — pressed states. #BC5B76.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:22",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6196078658103943,
+            0.24705882370471954,
+            0.3529411852359772
+          ],
+          "alpha": 1,
+          "hex": "#9E3F5A"
+        },
+        "$description": "Darkest dustyRose. #9E3F5A.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:23",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      }
+    },
+    "teal": {
+      "100": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9019607901573181,
+            0.9803921580314636,
+            0.9803921580314636
+          ],
+          "alpha": 1,
+          "hex": "#E6FAFA"
+        },
+        "$description": "Lightest teal tint — subtle cyan-tinted surfaces. #E6FAFA.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:24",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "200": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7019608020782471,
+            0.9333333373069763,
+            0.9176470637321472
+          ],
+          "alpha": 1,
+          "hex": "#B3EEEA"
+        },
+        "$description": "Very light teal — chart/series/4 light fill. #B3EEEA.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:25",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "300": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.501960813999176,
+            0.8901960849761963,
+            0.8745098114013672
+          ],
+          "alpha": 1,
+          "hex": "#80E3DF"
+        },
+        "$description": "Light teal. #80E3DF.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:26",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "400": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3019607961177826,
+            0.8470588326454163,
+            0.8274509906768799
+          ],
+          "alpha": 1,
+          "hex": "#4DD8D3"
+        },
+        "$description": "Medium-light teal. #4DD8D3.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:27",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "500": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.1764705926179886,
+            0.8156862854957581,
+            0.7607843279838562
+          ],
+          "alpha": 1,
+          "hex": "#2DD0C2"
+        },
+        "$description": "Medium teal. #2DD0C2.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:28",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "600": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0784313753247261,
+            0.7882353067398071,
+            0.729411780834198
+          ],
+          "alpha": 1,
+          "hex": "#14C9BA"
+        },
+        "$description": "Medium-dark teal. #14C9BA.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:29",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "700": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0.7686274647712708,
+            0.7058823704719543
+          ],
+          "alpha": 1,
+          "hex": "#00C4B4"
+        },
+        "$description": "Core teal — primary chart series 4 color. #00C4B4.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:30",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "800": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0.658823549747467,
+            0.5960784554481506
+          ],
+          "alpha": 1,
+          "hex": "#00A898"
+        },
+        "$description": "Dark teal — pressed states. #00A898.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:31",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "900": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0.5215686559677124,
+            0.46666666865348816
+          ],
+          "alpha": 1,
+          "hex": "#008577"
+        },
+        "$description": "Darkest teal. #008577.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:4952:32",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      }
+    }
+  },
+  "space": {
+    "100": {
+      "$type": "number",
+      "$value": 8,
+      "$description": "8px — base spacing unit. Default padding and gap for most components.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:184:54",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "150": {
+      "$type": "number",
+      "$value": 12,
+      "$description": "12px — medium spacing. Section padding and list item gaps.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:184:55",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "200": {
+      "$type": "number",
+      "$value": 16,
+      "$description": "16px — large spacing. Card padding and layout gutters.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:184:56",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "250": {
+      "$type": "number",
+      "$value": 20,
+      "$description": "20px — extra large spacing. Page section margins.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:513:1156",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "300": {
+      "$type": "number",
+      "$value": 24,
+      "$description": "24px — 3× base. Standard vertical spacing between sections.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:184:57",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "350": {
+      "$type": "number",
+      "$value": 28,
+      "$description": "28px — 3.5× base. Used for medium-large layout gaps between content groups.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:2579:18001",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "400": {
+      "$type": "number",
+      "$value": 32,
+      "$description": "32px — 4× base. Large layout gaps and page margins.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:184:58",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "500": {
+      "$type": "number",
+      "$value": 40,
+      "$description": "40px — 5× base. Extra large page spacing.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:1194:6",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "600": {
+      "$type": "number",
+      "$value": 48,
+      "$description": "48px — 6× base. Maximum component padding and hero sections.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:184:59",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "700": {
+      "$type": "number",
+      "$value": 56,
+      "$description": "56px — 7× base. Used for extra-large page-level spacing and hero section padding.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:3757:36543",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "025": {
+      "$type": "number",
+      "$value": 2,
+      "$description": "2px — micro spacing. Used for tight label gaps and icon-to-text nudges.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:184:60",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "050": {
+      "$type": "number",
+      "$value": 4,
+      "$description": "4px — extra small spacing. Inner padding for compact elements like badges and tags.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:184:61",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "075": {
+      "$type": "number",
+      "$value": 6,
+      "$description": "6px — small spacing. Padding inside icon instances and small interactive areas.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:184:62",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "negative": {
+      "100": {
+        "$type": "number",
+        "$value": -8,
+        "$description": "-8px — negative base offset. Used for icon alignment corrections.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:65",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "025": {
+        "$type": "number",
+        "$value": -2,
+        "$description": "-2px — negative micro offset. Used for overlapping elements.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:63",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "050": {
+        "$type": "number",
+        "$value": -4,
+        "$description": "-4px — negative extra small offset.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:64",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      }
+    }
+  },
+  "radius": {
+    "100": {
+      "$type": "number",
+      "$value": 8,
+      "$description": "8px — default corner radius. Used for cards, modals, dropdowns and most components.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:184:66",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "150": {
+      "$type": "number",
+      "$value": 12,
+      "$description": "12px — medium-large radius. Used for larger cards and panels.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:184:67",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "200": {
+      "$type": "number",
+      "$value": 16,
+      "$description": "16px — large radius. Used for bottom sheets and overlays.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:184:68",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "025": {
+      "$type": "number",
+      "$value": 2,
+      "$description": "2px — minimal rounding. Used for subtle tag corners.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:184:69",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "050": {
+      "$type": "number",
+      "$value": 4,
+      "$description": "4px — small radius. Used for input fields and compact components.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:184:70",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "075": {
+      "$type": "number",
+      "$value": 6,
+      "$description": "6px — medium-small radius.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:184:71",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    },
+    "full": {
+      "$type": "number",
+      "$value": 9999,
+      "$description": "9999px — pill/full radius. Used for toggle tracks, badges and circular elements.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:184:72",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ]
+      }
+    }
+  },
+  "border": {
+    "width": {
+      "100": {
+        "$type": "number",
+        "$value": 1,
+        "$description": "1px — default border width. Used on all input fields, cards and separators.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:73",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "200": {
+        "$type": "number",
+        "$value": 2,
+        "$description": "2px — emphasis border width. Used for focus rings and selected states.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:74",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      }
+    }
+  },
+  "font": {
+    "size": {
+      "hero": {
+        "$type": "number",
+        "$value": 42,
+        "$description": "42px — hero display size. Used for landing page headlines and marketing hero text.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:75",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "h1": {
+        "$type": "number",
+        "$value": 28,
+        "$description": "28px — H1 heading size. Page-level primary headings.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:76",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "h2": {
+        "$type": "number",
+        "$value": 26,
+        "$description": "26px — H2 heading size. Section-level primary headings.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:77",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "h3": {
+        "$type": "number",
+        "$value": 21,
+        "$description": "21px — H3 heading size. Sub-section headings.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:78",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "h4": {
+        "$type": "number",
+        "$value": 18,
+        "$description": "18px — H4 heading size. Modal titles and page titles.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:79",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "h5": {
+        "$type": "number",
+        "$value": 16,
+        "$description": "16px — H5 heading size. Card titles and section headers.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:80",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "h6": {
+        "$type": "number",
+        "$value": 14,
+        "$description": "14px — H6 heading size. Subsection labels and component labels.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:81",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "h7": {
+        "$type": "number",
+        "$value": 12,
+        "$description": "12px — H7 heading size. Small labels, table headers.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:82",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "h8": {
+        "$type": "number",
+        "$value": 11,
+        "$description": "11px — H8 heading size. Overlines and extra-small labels.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:83",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "large": {
+        "$type": "number",
+        "$value": 16,
+        "$description": "16px — large body text. Used for introductory or featured body content.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:84",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "medium": {
+        "$type": "number",
+        "$value": 14,
+        "$description": "14px — default body text size. Standard reading size across the UI.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:85",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "small": {
+        "$type": "number",
+        "$value": 12,
+        "$description": "12px — small text. Helper text, labels and secondary metadata.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:86",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "xsmall": {
+        "$type": "number",
+        "$value": 11,
+        "$description": "11px — extra small text. Overlines, counters, compact labels.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:87",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "stat": {
+        "$type": "number",
+        "$value": 24,
+        "$description": "Font size for large statistical/metric display numbers.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:2733:2",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      }
+    },
+    "lineHeight": {
+      "hero": {
+        "$type": "number",
+        "$value": 64,
+        "$description": "64px — line height for 42px hero text. Ratio: 1.52.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:88",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "h1": {
+        "$type": "number",
+        "$value": 40,
+        "$description": "40px — line height for H1 (28px). Ratio: 1.43.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:89",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "h2": {
+        "$type": "number",
+        "$value": 40,
+        "$description": "40px — line height for H2 (26px). Ratio: 1.54.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:90",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "h3": {
+        "$type": "number",
+        "$value": 32,
+        "$description": "32px — line height for H3 (21px). Ratio: 1.52.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:91",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "h4": {
+        "$type": "number",
+        "$value": 24,
+        "$description": "24px — line height for H4 (18px). Ratio: 1.33.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:92",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "h5": {
+        "$type": "number",
+        "$value": 24,
+        "$description": "24px — line height for H5 (16px). Ratio: 1.50.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:93",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "h6": {
+        "$type": "number",
+        "$value": 24,
+        "$description": "24px — line height for H6 (14px). Ratio: 1.71.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:94",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "h7": {
+        "$type": "number",
+        "$value": 16,
+        "$description": "16px — line height for H7 (12px). Ratio: 1.33.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:95",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "h8": {
+        "$type": "number",
+        "$value": 16,
+        "$description": "16px — line height for H8 (11px). Ratio: 1.45.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:96",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "large": {
+        "$type": "number",
+        "$value": 24,
+        "$description": "24px — line height for large body (16px). Ratio: 1.50.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:97",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "medium": {
+        "$type": "number",
+        "$value": 24,
+        "$description": "24px — line height for default body (14px). Ratio: 1.71.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:98",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "small": {
+        "$type": "number",
+        "$value": 16,
+        "$description": "16px — line height for small text (12px). Ratio: 1.33.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:99",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "xsmall": {
+        "$type": "number",
+        "$value": 16,
+        "$description": "16px — line height for xsmall text (11px). Ratio: 1.45.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:100",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "stat": {
+        "$type": "number",
+        "$value": 32,
+        "$description": "Line height for large statistical/metric display numbers.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:2733:3",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      }
+    },
+    "weight": {
+      "light": {
+        "$type": "number",
+        "$value": 300,
+        "$description": "300 — light weight. Used for hero and H1 decorative text only.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:101",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "regular": {
+        "$type": "number",
+        "$value": 400,
+        "$description": "400 — regular weight. Default weight for body, labels and placeholders.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:102",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "medium": {
+        "$type": "number",
+        "$value": 500,
+        "$description": "500 — medium weight. Used for subtle emphasis without full semibold.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:103",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      },
+      "semiBold": {
+        "$type": "number",
+        "$value": 600,
+        "$description": "600 — semibold weight. Used for headings, active labels and CTAs.",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:184:104",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ]
+        }
+      }
+    }
+  },
+  "shadow": {
+    "100": {
+      "$type": "string",
+      "$value": "0 1px 3px rgba(24,31,38,0.08)",
+      "$description": "Level 1 shadow — 0 1px 3px rgba(24,31,38,0.08). Subtle card resting elevation.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:184:105",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.type": "string"
+      }
+    },
+    "200": {
+      "$type": "string",
+      "$value": "0 4px 6px rgba(24,31,38,0.08)",
+      "$description": "Level 2 shadow — 0 4px 6px rgba(24,31,38,0.08). Hover card and dropdown elevation.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:184:106",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.type": "string"
+      }
+    },
+    "300": {
+      "$type": "string",
+      "$value": "0 8px 16px rgba(24,31,38,0.10)",
+      "$description": "Level 3 shadow — 0 8px 16px rgba(24,31,38,0.10). Popover and floating panel elevation.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:184:107",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.type": "string"
+      }
+    },
+    "400": {
+      "$type": "string",
+      "$value": "0 12px 24px rgba(24,31,38,0.12)",
+      "$description": "Level 4 shadow — 0 12px 24px rgba(24,31,38,0.12). Modal and dialog elevation.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:184:108",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.type": "string"
+      }
+    },
+    "500": {
+      "$type": "string",
+      "$value": "0 20px 40px rgba(24,31,38,0.16)",
+      "$description": "Level 5 shadow — 0 20px 40px rgba(24,31,38,0.16). Highest elevation — full-screen overlays.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:184:109",
+        "com.figma.scopes": [
+          "ALL_SCOPES"
+        ],
+        "com.figma.type": "string"
+      }
+    },
+    "base": {
+      "$type": "color",
+      "$value": "{color.neutral.700}",
+      "$description": "Base shadow colour — dark navy at full opacity. Used as the color component of all drop shadows.",
+      "$extensions": {
+        "com.figma.variableId": "VariableID:1119:6"
+      }
+    }
+  },
+  "icon": {
+    "size": {
+      "012": {
+        "$type": "number",
+        "$value": 12,
+        "$description": "Tiny — status dots, badge icons",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:451:6",
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      },
+      "016": {
+        "$type": "number",
+        "$value": 16,
+        "$description": "Small — inline labels, compact buttons (Small)",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:451:7",
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      },
+      "020": {
+        "$type": "number",
+        "$value": 20,
+        "$description": "Compact — dense tables, sidebars",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:451:8",
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      },
+      "024": {
+        "$type": "number",
+        "$value": 24,
+        "$description": "Default — buttons (Large/Medium), nav, toolbars",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:451:9",
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      },
+      "032": {
+        "$type": "number",
+        "$value": 32,
+        "$description": "Medium — section headers, cards",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:451:10",
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      },
+      "040": {
+        "$type": "number",
+        "$value": 40,
+        "$description": "Large — feature callouts",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:451:11",
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      },
+      "048": {
+        "$type": "number",
+        "$value": 48,
+        "$description": "Hero — empty states, onboarding",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:451:12",
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      },
+      "064": {
+        "$type": "number",
+        "$value": 64,
+        "$description": "Extra large — colour/status/upload icons at max size",
+        "$extensions": {
+          "com.figma.variableId": "VariableID:495:62",
+          "com.figma.scopes": [
+            "WIDTH_HEIGHT"
+          ]
+        }
+      }
+    }
+  },
+  "$extensions": {
+    "com.figma.modeName": "Default"
+  }
+}

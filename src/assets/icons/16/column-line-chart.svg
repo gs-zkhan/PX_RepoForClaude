@@ -1,0 +1,8 @@
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="2.4" y="12.85" width="3.2" height="2.2" rx="0.7" transform="rotate(-90 2.4 12.85)" stroke="currentColor" stroke-width="1.2"/>
+<rect x="6.4" y="12.85" width="5.2" height="2.2" rx="0.7" transform="rotate(-90 6.4 12.85)" stroke="currentColor" stroke-width="1.2"/>
+<rect x="10.4" y="12.85" width="7.2" height="2.2" rx="0.7" transform="rotate(-90 10.4 12.85)" stroke="currentColor" stroke-width="1.2"/>
+<path d="M2 15.25L14 15.25" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+<path d="M10.0896 3.97223L10.3127 1.96632L8.36883 1.51477" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M10.3127 1.96631L4.8517 5.79015" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
