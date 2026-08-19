@@ -11,7 +11,7 @@
 
 | Component | Figma Name | Status | Node ID |
 |---|---|---|---|
-| Search Field | Search Bar | **Ready** — all tokens resolved, reuses textfield tokens, blocking: no 16px search icon | UNRESOLVED |
+| Search Field | Search Bar | **Ready** — all tokens resolved, reuses textfield tokens; current implementation renders the available 24px search icon, with the missing 16px asset tracked as a fidelity gap | UNRESOLVED |
 | Filter Chip | Filter Chip | **Ready** — all tokens resolved, uses semantic tokens directly | UNRESOLVED |
 | Dropdown Menu | Dropdown List (floating panel) | **Ready** — comprehensive `--c-dropdown-menu-*` token set confirmed, shadow resolved to `--e-shadow-500`. **Blocking: Radix package missing.** | UNRESOLVED |
 | Avatar | Avatar | **Ready** — all 3 size tokens + fallback colors + typography confirmed. **Blocking: Radix package missing.** | UNRESOLVED |
@@ -41,7 +41,7 @@ All three components are **stubbed** with typed APIs and clear BLOCKING comments
 |---|---|---|---|
 | `search.svg` at 16px | SearchBar leading icon | `src/assets/icons/16/` | MISSING — only exists at 24px |
 
-A 16px version of `search.svg` must be added to `src/assets/icons/16/` before the SearchBar leading icon renders. The component renders correctly without it (icon slot is empty, no crash).
+A 16px version of `search.svg` is still absent from `src/assets/icons/16/`. The current SearchBar explicitly renders the available 24px asset, so its leading icon is visible; adding a 16px asset remains a fidelity gap rather than a rendering blocker.
 
 ---
 

@@ -36,7 +36,7 @@ function Calendar({
         // Fiscal Quarter, and its next-month chevron appeared beside the
         // "Fiscal Quarter" tab label.
         "relative",
-        "p-[var(--c-datepicker-panel-padding,16px)]",
+        "p-[var(--c-datepicker-padding-panel)]",
         "bg-[var(--c-datepicker-panel-background)]",
         className
       )}

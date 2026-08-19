@@ -28,6 +28,7 @@ import {
 import { IconButton } from "@/components/ui/icon-button"
 import { Pagination } from "@/components/ui/pagination"
 import { SearchBar } from "@/components/ui/search-bar"
+import { StatusLabel } from "@/components/ui/status-label"
 import {
   Table,
   TableActionCell,
@@ -203,7 +204,7 @@ function EngagementsTable({
                     <TableCell>{row.company}</TableCell>
                     <TableCell>{row.title}</TableCell>
                     <TableCell>
-                      <StatusPill>{row.status}</StatusPill>
+                      <StatusLabel variant="open">{row.status}</StatusLabel>
                     </TableCell>
                     <TableActionCell>
                       <DropdownMenu>
@@ -248,27 +249,6 @@ function EngagementsTable({
         )}
       </div>
     </section>
-  )
-}
-
-// Native rendition of a Prism DS "Open" status label. The full StatusLabel
-// component isn't in this repo yet; when it lands, replace this with
-// <StatusLabel variant="open">Open</StatusLabel>.
-function StatusPill({ children }: { children: React.ReactNode }) {
-  return (
-    <span
-      className={cn(
-        "inline-flex items-center",
-        "rounded-[var(--p-radius-100)]",
-        "bg-[var(--s-color-surface-muted)]",
-        "px-2 py-0.5",
-        "text-[length:var(--p-font-size-small)]",
-        "leading-[var(--p-font-line-height-small)]",
-        "text-[var(--s-color-text-subtle)]",
-      )}
-    >
-      {children}
-    </span>
   )
 }
 

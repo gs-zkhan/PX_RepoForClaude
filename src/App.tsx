@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { EngagementsListExample } from "@/pages/engagements-list-example"
-import { AudienceExplorer } from "@/pages/audience-explorer"
 import { UserExplorer } from "@/pages/user-explorer"
 import { WorkInProgress } from "@/pages/work-in-progress"
 import { ValidationGallery } from "@/ValidationGallery"
@@ -22,7 +21,7 @@ function App() {
   // placeholder rather than repeating the same table.
   if (activeKey === "engagements") {
     return (
-      <AudienceExplorer
+      <EngagementsListExample
         activeKey={activeKey}
         onNavigate={setActiveKey}
         mode={navMode}

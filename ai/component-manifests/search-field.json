@@ -203,7 +203,7 @@
       "icon_name": "search",
       "size": "16",
       "color_binding": "formfield/icon/color → --s-icon-color-default (#3C4A57)",
-      "note": "BLOCKING: search.svg does not exist at src/assets/icons/16/. Only exists at 24px. A 16px search icon must be added to src/assets/icons/16/ before SearchBar leading icon renders."
+      "note": "search.svg does not exist at src/assets/icons/16/ and currently exists only at 24px. SearchBar explicitly renders the available 24px asset, so the leading icon remains visible; a 16px asset is still needed only if Figma fidelity requires that source size."
     },
     {
       "slot": "trailing-clear-button",
@@ -240,7 +240,7 @@
     "RESOLVED: --c-search-background-disabled: #E6E9EC already exists in CSS (distinct from textfield-background-disabled: #F5F7F9 — search uses surface/disabled which is sunken, not muted).",
     "RESOLVED: --c-search-height-* tokens (medium: 32px, large: 40px, xlarge: 36px, xxlarge: 40px) all exist in CSS.",
     "RESOLVED: Rounded-Corner variant uses --p-radius-full (9999px) confirmed. The xxlarge size is always pill-shaped.",
-    "BLOCKING: No 16px search icon exists in src/assets/icons/16/. The search.svg exists only at 24px. A 16px version must be added to complete the leading-icon slot.",
+    "No 16px search icon exists in src/assets/icons/16/. SearchBar currently renders the available 24px search.svg, so the leading-icon slot is populated; a 16px asset remains a fidelity gap rather than an implementation blocker.",
     "Figma node ID remains UNRESOLVED — requires direct file access to get document node ID."
   ]
 }

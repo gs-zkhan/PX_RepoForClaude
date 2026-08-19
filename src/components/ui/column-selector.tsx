@@ -230,7 +230,7 @@ function ColumnSelector({
                 className={cn(
                   "flex items-center gap-[var(--p-space-100)] px-[var(--p-space-200)] py-[var(--p-space-100)]",
                   "hover:bg-[var(--s-color-surface-muted)]",
-                  isDragOver && "bg-[var(--s-color-surface-sunken)] outline outline-1 outline-[var(--s-color-action-default)]",
+                  isDragOver && "bg-[var(--s-color-surface-sunken)] outline outline-1 outline-[var(--s-color-action-primary-default)]",
                   isDragging && "opacity-40",
                   col.disabled && "opacity-60",
                 )}

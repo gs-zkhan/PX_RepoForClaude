@@ -73,7 +73,7 @@ The pattern used by both Engagements and Audience Explorer:
       <Pagination ... /> {/* shrink-0, always visible */}
     </div>
 
-    {/* optional Filter Slider — shrink-0, fixed 772px, always visible */}
+    {/* optional Filter Slider — shrink-0, 336px wide / 772px tall, always visible */}
     {filterOpen && <PxFilterSlider ... />}
   </div>
 </section>
@@ -181,22 +181,20 @@ Effect: `--e-shadow-100`, `--e-shadow-focus`.
 ## Component dependencies (all reused)
 
 - `PxShellRail` (`src/components/px-shell-rail.tsx`)
-- `IconButton`, `Button`, `PrismIcon`, `Avatar`, `TooltipProvider` (all in `src/components/ui/`)
+- `IconButton`, `Button`, `PrismIcon`, `Avatar`, `TooltipProvider`, `Tabs`, and `StatusLabel` (all in `src/components/ui/`)
 
-`PxHeader`, `PxFilterSlider`, and the internal `TabsStrip` are new. The tabs implementation is intentionally internal to the shell so the pattern owns the 48 px bar alignment; promote to `src/components/ui/tabs.tsx` when a second usage site appears.
+`PxHeader`, `PxFilterSlider`, and the internal `TabsStrip` are pattern-owned composition helpers. `TabsStrip` composes the shared Radix-backed `Tabs`, `TabsList`, and `TabsTrigger` components; the 48 px secondary-bar geometry remains owned by the shell container.
 
 ## Known limitations
 
 - Tabs overflow into a "More" dropdown when the centre cell narrows — not yet implemented. The current strip clips instead.
-- `StatusLabel` is not yet a component in this repo, so the example page uses a compact inline pill. Replace with `<StatusLabel variant="open">` when it lands.
-- `PxShellRail` is currently 56 px wide, not the DS-canonical 48 px. Handled outside this pattern.
 
 ## Component Composition Audit
 
-- **Approved components reused:** `PxShellRail`, `Button`, `IconButton`, `PrismIcon`, `Avatar`, `TooltipProvider`, `Table*`, `Pagination`, `DropdownMenu*` (all in the example).
-- **New components created:** `PxListShell` (pattern), `PxHeader` (pattern-owned), `PxFilterSlider` (pattern-owned), `TabsStrip` (internal — no standalone `Tabs` component exists yet).
-- **Native interactive elements introduced:** the tabs in `PxHeader` and `PxFilterSlider` are native `<button role="tab">`. Justified: no `Tabs` component exists in this repo, and Prism DS spec for the Primary Tab pattern (border-indicator, badge-capable) is what the shell needs. Escalate to a shared `Tabs` component when a second consumer arrives.
-- **`className` overrides on approved components:** none applied to `Button`, `IconButton`, `Avatar`. `PrismIcon` receives colour classes only (allowed — icon colour follows `currentColor`).
+- **Approved components reused:** `PxShellRail`, `Button`, `IconButton`, `PrismIcon`, `Avatar`, `TooltipProvider`, `Tabs`, `TabsList`, `TabsTrigger`, `StatusLabel`, `Table*`, `Pagination`, and `DropdownMenu*`.
+- **New components created:** `PxListShell` (pattern), `PxHeader` (pattern-owned), `PxFilterSlider` (pattern-owned), and `TabsStrip` (pattern-owned composition helper around the shared Tabs API).
+- **Native interactive elements introduced:** none by the shell pattern. Tab semantics and keyboard behaviour come from the shared Radix-backed Tabs components.
+- **`className` overrides on approved components:** none applied to `Button`, `IconButton`, `Avatar`, `TabsList`, `TabsTrigger`, or `StatusLabel`. `PxFilterSlider` still passes a current-colour class to the empty-state `PrismIcon`; icon sizing uses the typed `size` and `sourceSize` props, but colour ownership remains an unresolved API/composition gap.
 - **Cross-component token references:** none. All values come from primitive `--p-*` or semantic `--s-*` / effect `--e-*` tokens.
-- **Duplicate implementations found:** none. The old inline `PxShellTopBar` in `audience-explorer.tsx` remains only for the legacy Audience Explorer route; new screens should use `PxListShell` per CLAUDE.md.
-- **Unresolved API or token gaps:** (1) `StatusLabel` component missing — flagged in Known Limitations. (2) `Tabs` component missing — kept internal for now.
+- **Duplicate implementations found:** none in the remediated shell example; Engagements uses the approved `StatusLabel` rather than a local pill implementation.
+- **Unresolved API or token gaps:** `PrismIcon` has no typed tone prop for the filter empty-state icon, so the pattern currently supplies colour through `className`. Tabs overflow remains a documented responsive behaviour gap.

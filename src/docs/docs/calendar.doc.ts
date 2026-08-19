@@ -88,7 +88,7 @@ export const calendarDoc: ComponentDoc = {
     "--c-datepicker-input-content-value",
     "--c-datepicker-input-focus-ring-color",
     "--c-datepicker-panel-background",
-    "--c-datepicker-panel-padding",
+    "--c-datepicker-padding-panel",
     "--c-datepicker-preset-item-text-active",
     "--c-datepicker-weekday-font-line-height",
     "--c-datepicker-weekday-font-size",

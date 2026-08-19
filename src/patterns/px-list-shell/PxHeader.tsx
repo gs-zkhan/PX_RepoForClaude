@@ -271,9 +271,7 @@ function TabsStrip({
 }) {
   return (
     <Tabs value={activeId} onValueChange={onChange}>
-      {/* space/200 (16px) gap — measured in the real instance (the prose spec
-          said 24px minimum; trusting the measured instance instead). */}
-      <TabsList variant="primary" size="large" className="h-12 gap-[var(--p-space-200)]">
+      <TabsList variant="primary" size="large">
         {tabs.map((tab) => (
           <TabsTrigger key={tab.id} value={tab.id} disabled={tab.disabled}>
             {tab.label}
