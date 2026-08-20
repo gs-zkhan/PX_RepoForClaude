@@ -9,6 +9,15 @@
   }
 }
 
+html {
+  /* Defence in depth alongside table.tsx's own wheel handler: Chrome's
+     two-finger-trackpad horizontal gesture is the same one it uses for
+     back/forward navigation, so a nested scroll container reaching its
+     boundary can otherwise hand off to page-level rubber-banding or
+     navigation. Nothing in this app relies on horizontal document scroll. */
+  overscroll-behavior-x: none;
+}
+
 body {
   margin: 0;
   min-width: 320px;

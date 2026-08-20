@@ -58,6 +58,7 @@ import {
   TableSelectionCell,
   TableSelectionHead,
   TableSortHeader,
+  type TableColumnPin,
   type TableDensity,
   type TableSortDirection,
 } from "@/components/ui/table"
@@ -67,6 +68,8 @@ import {
 // ---------------------------------------------------------------------------
 
 type UserStatus = "active" | "invited" | "inactive" | "suspended"
+
+type UserPlan = "Free" | "Pro" | "Enterprise"
 
 type User = {
   id: string
@@ -79,7 +82,19 @@ type User = {
   sessions: number
   /** ISO 8601 — kept sortable; formatted only at render time. */
   lastSeenAt: string
+  // The five columns below exist to give this table enough columns to
+  // require horizontal scroll at a normal viewport width, for exercising
+  // column pinning — same reason they're derived rather than hand-authored
+  // per row (see USERS below).
+  phone: string
+  department: string
+  country: string
+  manager: string
+  plan: UserPlan
 }
+
+/** The 8 hand-authored fields per seed row — the 5 derived fields are added by `USERS` below. */
+type SeedUser = Omit<User, "phone" | "department" | "country" | "manager" | "plan">
 
 const STATUS_LABELS: Record<UserStatus, string> = {
   active: "Active",
@@ -121,7 +136,49 @@ const ROLES = [
   "Viewer",
 ] as const
 
-const SEED_USERS: User[] = [
+const DEPARTMENTS = [
+  "Engineering",
+  "Sales",
+  "Marketing",
+  "Customer Success",
+  "Product",
+  "Finance",
+  "People",
+  "Support",
+] as const
+
+const COUNTRIES = [
+  "United States",
+  "Germany",
+  "Nigeria",
+  "Sweden",
+  "Japan",
+  "Brazil",
+  "India",
+  "Poland",
+  "Canada",
+  "Turkey",
+] as const
+
+const MANAGERS = [
+  "Elena Cross",
+  "Marcus Webb",
+  "Priya Shah",
+  "David Kim",
+  "Sofia Reyes",
+  "James Ndlovu",
+] as const
+
+const PLANS: UserPlan[] = ["Free", "Pro", "Enterprise"]
+
+/** Deterministic per-row phone number — stable across renders, no per-row authoring needed. */
+function phoneFor(index: number): string {
+  const n = 2000000 + ((index * 7919) % 7999999)
+  const digits = String(n)
+  return `+1 555-${digits.slice(0, 3)}-${digits.slice(3, 7)}`
+}
+
+const SEED_USERS: SeedUser[] = [
   { id: "usr-001", firstName: "Amara",     lastName: "Okonkwo",       email: "amara.okonkwo@northwindlabs.com",       company: "Northwind Labs",   role: "Administrator",   status: "active",    sessions: 1284, lastSeenAt: "2026-08-05T14:22:00Z" },
   { id: "usr-002", firstName: "Priya",     lastName: "Raghunathan",   email: "priya.raghunathan@cobaltmetrics.io",    company: "Cobalt Metrics",   role: "Analyst",         status: "active",    sessions: 973,  lastSeenAt: "2026-08-05T09:41:00Z" },
   { id: "usr-003", firstName: "Tomas",     lastName: "Lindqvist",     email: "tomas.lindqvist@heliofreight.com",      company: "Helio Freight",    role: "Developer",       status: "active",    sessions: 2140, lastSeenAt: "2026-08-04T18:03:00Z" },
@@ -170,7 +227,51 @@ const SEED_USERS: User[] = [
   { id: "usr-046", firstName: "Beatriz",   lastName: "Salgado",       email: "beatriz.salgado@ashgrove.co",           company: "Ashgrove Retail",  role: "Viewer",          status: "invited",   sessions: 0,    lastSeenAt: "2026-07-28T16:20:00Z" },
   { id: "usr-047", firstName: "Lars",      lastName: "Mikkelsen",     email: "lars.mikkelsen@pinnaclevoss.com",       company: "Pinnacle Voss",    role: "Developer",       status: "active",    sessions: 1237, lastSeenAt: "2026-08-04T22:08:00Z" },
   { id: "usr-048", firstName: "Yara",      lastName: "Haddadin",      email: "yara.haddadin@marrowfinch.com",         company: "Marrow & Finch",   role: "Product Manager", status: "active",    sessions: 954,  lastSeenAt: "2026-08-05T13:12:00Z" },
+  { id: "usr-049", firstName: "Marco",     lastName: "Antunes",       email: "marco.antunes@northwindlabs.com",       company: "Northwind Labs",   role: "Analyst",         status: "active",    sessions: 934,  lastSeenAt: "2026-08-06T10:15:00Z" },
+  { id: "usr-050", firstName: "Ingrid",    lastName: "Lundberg",      email: "ingrid.lundberg@cobaltmetrics.io",      company: "Cobalt Metrics",   role: "Developer",       status: "active",    sessions: 1456, lastSeenAt: "2026-08-05T09:02:00Z" },
+  { id: "usr-051", firstName: "Kwame",     lastName: "Asante",        email: "kwame.asante@heliofreight.com",         company: "Helio Freight",    role: "Support Agent",   status: "active",    sessions: 512,  lastSeenAt: "2026-08-04T14:37:00Z" },
+  { id: "usr-052", firstName: "Yuki",      lastName: "Tanaka",        email: "yuki.tanaka@junipersys.com",            company: "Juniper Systems",  role: "Product Manager", status: "active",    sessions: 1789, lastSeenAt: "2026-08-06T07:44:00Z" },
+  { id: "usr-053", firstName: "Helena",    lastName: "Kovač",         email: "helena.kovac@tidewaterhealth.org",      company: "Tidewater Health", role: "Viewer",          status: "inactive",  sessions: 88,   lastSeenAt: "2026-02-11T09:20:00Z" },
+  { id: "usr-054", firstName: "Diego",     lastName: "Fernández",     email: "diego.fernandez@ashgrove.co",           company: "Ashgrove Retail",  role: "Administrator",   status: "active",    sessions: 2034, lastSeenAt: "2026-08-05T18:52:00Z" },
+  { id: "usr-055", firstName: "Aiko",      lastName: "Watanabe",      email: "aiko.watanabe@pinnaclevoss.com",        company: "Pinnacle Voss",    role: "Analyst",         status: "active",    sessions: 673,  lastSeenAt: "2026-08-03T12:09:00Z" },
+  { id: "usr-056", firstName: "Sami",      lastName: "Al-Farsi",      email: "sami.alfarsi@marrowfinch.com",          company: "Marrow & Finch",   role: "Developer",       status: "suspended", sessions: 210,  lastSeenAt: "2026-04-22T08:31:00Z" },
+  { id: "usr-057", firstName: "Liliana",   lastName: "Popescu",       email: "liliana.popescu@northwindlabs.com",     company: "Northwind Labs",   role: "Support Agent",   status: "active",    sessions: 845,  lastSeenAt: "2026-08-06T11:05:00Z" },
+  { id: "usr-058", firstName: "Connor",    lastName: "Byrne",         email: "connor.byrne@cobaltmetrics.io",         company: "Cobalt Metrics",   role: "Viewer",          status: "active",    sessions: 397,  lastSeenAt: "2026-08-02T16:48:00Z" },
+  { id: "usr-059", firstName: "Zainab",    lastName: "Yusuf",         email: "zainab.yusuf@heliofreight.com",         company: "Helio Freight",    role: "Product Manager", status: "active",    sessions: 1211, lastSeenAt: "2026-08-05T20:14:00Z" },
+  { id: "usr-060", firstName: "Pieter",    lastName: "van Dijk",      email: "pieter.vandijk@junipersys.com",         company: "Juniper Systems",  role: "Administrator",   status: "active",    sessions: 1948, lastSeenAt: "2026-08-06T06:27:00Z" },
+  { id: "usr-061", firstName: "Naledi",    lastName: "Mokoena",       email: "naledi.mokoena@tidewaterhealth.org",    company: "Tidewater Health", role: "Analyst",         status: "invited",   sessions: 0,    lastSeenAt: "2026-08-01T13:00:00Z" },
+  { id: "usr-062", firstName: "Bruno",     lastName: "Salgado",       email: "bruno.salgado@ashgrove.co",             company: "Ashgrove Retail",  role: "Developer",       status: "active",    sessions: 1567, lastSeenAt: "2026-08-04T19:33:00Z" },
+  { id: "usr-063", firstName: "Isabela",   lastName: "Cardoso",       email: "isabela.cardoso@pinnaclevoss.com",      company: "Pinnacle Voss",    role: "Support Agent",   status: "active",    sessions: 623,  lastSeenAt: "2026-08-03T08:19:00Z" },
+  { id: "usr-064", firstName: "Timo",      lastName: "Saarinen",      email: "timo.saarinen@marrowfinch.com",         company: "Marrow & Finch",   role: "Viewer",          status: "inactive",  sessions: 156,  lastSeenAt: "2026-01-30T10:41:00Z" },
+  { id: "usr-065", firstName: "Grace",     lastName: "Mensah",        email: "grace.mensah@northwindlabs.com",        company: "Northwind Labs",   role: "Product Manager", status: "active",    sessions: 1342, lastSeenAt: "2026-08-06T09:58:00Z" },
+  { id: "usr-066", firstName: "Adrian",    lastName: "Kowalski",      email: "adrian.kowalski@cobaltmetrics.io",      company: "Cobalt Metrics",   role: "Analyst",         status: "active",    sessions: 789,  lastSeenAt: "2026-08-05T15:22:00Z" },
+  { id: "usr-067", firstName: "Farah",     lastName: "Haidari",       email: "farah.haidari@heliofreight.com",        company: "Helio Freight",    role: "Administrator",   status: "active",    sessions: 2201, lastSeenAt: "2026-08-06T08:04:00Z" },
+  { id: "usr-068", firstName: "Lucas",     lastName: "Moretti",       email: "lucas.moretti@junipersys.com",          company: "Juniper Systems",  role: "Developer",       status: "active",    sessions: 1678, lastSeenAt: "2026-08-04T21:15:00Z" },
+  { id: "usr-069", firstName: "Sanne",     lastName: "Bakker",        email: "sanne.bakker@tidewaterhealth.org",      company: "Tidewater Health", role: "Support Agent",   status: "suspended", sessions: 302,  lastSeenAt: "2026-05-14T09:47:00Z" },
+  { id: "usr-070", firstName: "Kofi",      lastName: "Owusu",         email: "kofi.owusu@ashgrove.co",                company: "Ashgrove Retail",  role: "Viewer",          status: "active",    sessions: 445,  lastSeenAt: "2026-08-02T13:26:00Z" },
+  { id: "usr-071", firstName: "Meera",     lastName: "Pillai",        email: "meera.pillai@pinnaclevoss.com",         company: "Pinnacle Voss",    role: "Product Manager", status: "active",    sessions: 1523, lastSeenAt: "2026-08-05T22:03:00Z" },
+  { id: "usr-072", firstName: "Erik",      lastName: "Solberg",       email: "erik.solberg@marrowfinch.com",          company: "Marrow & Finch",   role: "Analyst",         status: "active",    sessions: 967,  lastSeenAt: "2026-08-06T05:39:00Z" },
+  { id: "usr-073", firstName: "Amina",     lastName: "Diallo",        email: "amina.diallo@northwindlabs.com",        company: "Northwind Labs",   role: "Developer",       status: "invited",   sessions: 0,    lastSeenAt: "2026-07-30T14:10:00Z" },
+  { id: "usr-074", firstName: "Hoang",     lastName: "Minh Duc",      email: "hoang.duc@cobaltmetrics.io",            company: "Cobalt Metrics",   role: "Administrator",   status: "active",    sessions: 2456, lastSeenAt: "2026-08-06T07:12:00Z" },
+  { id: "usr-075", firstName: "Paula",     lastName: "Jiménez",       email: "paula.jimenez@heliofreight.com",        company: "Helio Freight",    role: "Support Agent",   status: "active",    sessions: 578,  lastSeenAt: "2026-08-03T17:41:00Z" },
+  { id: "usr-076", firstName: "Viktor",    lastName: "Novák",         email: "viktor.novak@junipersys.com",           company: "Juniper Systems",  role: "Viewer",          status: "inactive",  sessions: 134,  lastSeenAt: "2026-03-08T11:29:00Z" },
+  { id: "usr-077", firstName: "Chidinma",  lastName: "Eze",           email: "chidinma.eze@tidewaterhealth.org",      company: "Tidewater Health", role: "Product Manager", status: "active",    sessions: 1809, lastSeenAt: "2026-08-05T10:52:00Z" },
+  { id: "usr-078", firstName: "Oskar",     lastName: "Lindholm",      email: "oskar.lindholm@ashgrove.co",            company: "Ashgrove Retail",  role: "Analyst",         status: "active",    sessions: 712,  lastSeenAt: "2026-08-04T16:08:00Z" },
+  { id: "usr-079", firstName: "Ana",       lastName: "Belić",         email: "ana.belic@pinnaclevoss.com",            company: "Pinnacle Voss",    role: "Developer",       status: "active",    sessions: 1295, lastSeenAt: "2026-08-06T09:21:00Z" },
+  { id: "usr-080", firstName: "Rami",      lastName: "Haddad",        email: "rami.haddad@marrowfinch.com",           company: "Marrow & Finch",   role: "Administrator",   status: "suspended", sessions: 267,  lastSeenAt: "2026-06-19T12:55:00Z" },
+  { id: "usr-081", firstName: "Ingrid",    lastName: "Bachmann",      email: "ingrid.bachmann@northwindlabs.com",     company: "Northwind Labs",   role: "Support Agent",   status: "active",    sessions: 891,  lastSeenAt: "2026-08-05T14:44:00Z" },
+  { id: "usr-082", firstName: "Takeshi",   lastName: "Mori",          email: "takeshi.mori@cobaltmetrics.io",         company: "Cobalt Metrics",   role: "Viewer",          status: "active",    sessions: 356,  lastSeenAt: "2026-08-02T10:17:00Z" },
+  { id: "usr-083", firstName: "Fatima",    lastName: "Zohra",         email: "fatima.zohra@heliofreight.com",         company: "Helio Freight",    role: "Product Manager", status: "active",    sessions: 1620, lastSeenAt: "2026-08-06T13:30:00Z" },
 ]
+
+const USERS: User[] = SEED_USERS.map((u, index) => ({
+  ...u,
+  phone: phoneFor(index),
+  department: DEPARTMENTS[index % DEPARTMENTS.length],
+  country: COUNTRIES[index % COUNTRIES.length],
+  manager: MANAGERS[index % MANAGERS.length],
+  plan: PLANS[index % PLANS.length],
+}))
 
 // ---------------------------------------------------------------------------
 // Filter definitions
@@ -258,7 +359,20 @@ function matchesQuery(user: User, query: string): boolean {
 // Sorting
 // ---------------------------------------------------------------------------
 
-type SortKey = "firstName" | "lastName" | "email" | "company" | "role" | "status" | "sessions" | "lastSeenAt"
+type SortKey =
+  | "firstName"
+  | "lastName"
+  | "email"
+  | "company"
+  | "role"
+  | "status"
+  | "sessions"
+  | "lastSeenAt"
+  | "phone"
+  | "department"
+  | "country"
+  | "manager"
+  | "plan"
 
 function sortValue(user: User, key: SortKey): string | number {
   switch (key) {
@@ -324,6 +438,14 @@ const COLUMNS: ColumnDef[] = [
     label: "Last Seen",
     render: (u) => format(parseISO(u.lastSeenAt), "MMM d, yyyy h:mm a"),
   },
+  // The five columns below exist to force horizontal overflow at a normal
+  // viewport width, so column pinning has something real to scroll past —
+  // see the `User` type comment for why their data is derived, not authored.
+  { key: "phone",      label: "Phone",      render: (u) => u.phone },
+  { key: "department", label: "Department", render: (u) => u.department },
+  { key: "country",    label: "Country",    render: (u) => u.country },
+  { key: "manager",    label: "Manager",    render: (u) => u.manager },
+  { key: "plan",       label: "Plan",       render: (u) => u.plan },
 ]
 
 const DEFAULT_COLUMN_IDS: string[] = COLUMNS.map((c) => c.key)
@@ -379,7 +501,7 @@ type UserExplorerProps = {
 }
 
 function UserExplorer({ activeKey, onNavigate, mode, onModeChange }: UserExplorerProps) {
-  const [users, setUsers] = React.useState(SEED_USERS)
+  const [users, setUsers] = React.useState(USERS)
   const [query, setQuery] = React.useState("")
   const [filterBarOpen, setFilterBarOpen] = React.useState(false)
   const [filters, setFilters] = React.useState<ActiveFilter[]>([])
@@ -404,6 +526,12 @@ function UserExplorer({ activeKey, onNavigate, mode, onModeChange }: UserExplore
   const [colSelectorView, setColSelectorView] = React.useState<ColumnSelectorView>("selection")
   const colSelectorIsDragging = React.useRef(false)
   const [density, setDensity] = React.useState<TableDensity>("default")
+
+  // Column pinning — first slice: at most one pinned column per side, no
+  // persistence, no cumulative offset math (see table.tsx TableColumnPin
+  // comment). The checkbox/action columns are never pinned in this slice.
+  const [pinnedLeftColumnId, setPinnedLeftColumnId] = React.useState<SortKey | null>(null)
+  const [pinnedRightColumnId, setPinnedRightColumnId] = React.useState<SortKey | null>(null)
 
   // --- filtering / sorting / paging ----------------------------------------
 
@@ -439,6 +567,40 @@ function UserExplorer({ activeKey, onNavigate, mode, onModeChange }: UserExplore
 
   // checkbox selection col + data cols + row-action col
   const tableColSpan = 1 + activeColumns.length + 1
+
+  // --- column pinning ---------------------------------------------------
+  //
+  // Interaction assumption (Figma node 3187:9 / component-audit node
+  // 1842:38 confirm a single pin-line icon revealed on header-cell hover,
+  // but neither documents how a click chooses left vs. right for the
+  // reference's "pin either edge" case): a column's pin icon is a single
+  // direct toggle. Unpinning always turns the icon off. Pinning decides the
+  // side from the column's position among the currently active columns —
+  // the first half pins left, the second half pins right — which matches
+  // the Figma reference's own arrangement (leading columns pinned left,
+  // trailing columns like Status pinned right) without requiring a second
+  // affordance or a menu.
+
+  function pinnedSideFor(key: SortKey): TableColumnPin | undefined {
+    if (pinnedLeftColumnId === key) return "left"
+    if (pinnedRightColumnId === key) return "right"
+    return undefined
+  }
+
+  function togglePin(key: SortKey) {
+    if (pinnedLeftColumnId === key) {
+      setPinnedLeftColumnId(null)
+      return
+    }
+    if (pinnedRightColumnId === key) {
+      setPinnedRightColumnId(null)
+      return
+    }
+    const index = activeColumns.findIndex((c) => c.key === key)
+    const side: TableColumnPin = index < activeColumns.length / 2 ? "left" : "right"
+    if (side === "left") setPinnedLeftColumnId(key)
+    else setPinnedRightColumnId(key)
+  }
 
   const pageCount = Math.max(1, Math.ceil(sortedUsers.length / pageSize))
   // Guards against a filter change stranding the view past the last page.
@@ -768,20 +930,41 @@ function UserExplorer({ activeKey, onNavigate, mode, onModeChange }: UserExplore
                 />
               </TableSelectionHead>
 
-              {activeColumns.map((col) => (
-                <TableHead
-                  key={col.key}
-                  sortable
-                  sortDirection={sortKey === col.key ? sortDirection : undefined}
-                >
-                  <TableSortHeader
-                    direction={sortKey === col.key ? sortDirection : undefined}
-                    onClick={() => cycleSort(col.key)}
+              {activeColumns.map((col) => {
+                const pinSide = pinnedSideFor(col.key)
+                const isPinned = pinSide !== undefined
+                return (
+                  <TableHead
+                    key={col.key}
+                    sortable
+                    sortDirection={sortKey === col.key ? sortDirection : undefined}
+                    pinned={pinSide}
                   >
-                    {col.label}
-                  </TableSortHeader>
-                </TableHead>
-              ))}
+                    <div className="group/pin flex items-center justify-between gap-[var(--p-space-100)]">
+                      <TableSortHeader
+                        direction={sortKey === col.key ? sortDirection : undefined}
+                        onClick={() => cycleSort(col.key)}
+                      >
+                        {col.label}
+                      </TableSortHeader>
+                      <div
+                        className={cn(
+                          "transition-opacity",
+                          isPinned
+                            ? "opacity-100"
+                            : "opacity-0 group-hover/pin:opacity-100 group-focus-within/pin:opacity-100",
+                        )}
+                      >
+                        <IconButton
+                          icon={isPinned ? "pin-filled" : "pin-line"}
+                          label={isPinned ? `Unpin ${col.label}` : `Pin ${col.label}`}
+                          onClick={() => togglePin(col.key)}
+                        />
+                      </div>
+                    </div>
+                  </TableHead>
+                )
+              })}
 
               <TableActionHead />
             </TableRow>
@@ -802,7 +985,7 @@ function UserExplorer({ activeKey, onNavigate, mode, onModeChange }: UserExplore
                     </TableSelectionCell>
 
                     {activeColumns.map((col) => (
-                      <TableCell key={col.key} align={col.align}>
+                      <TableCell key={col.key} align={col.align} pinned={pinnedSideFor(col.key)}>
                         {col.key === "status" ? (
                           <DropdownMenu>
                             <DropdownMenuTrigger asChild>

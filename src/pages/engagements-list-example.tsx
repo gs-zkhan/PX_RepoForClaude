@@ -3,8 +3,9 @@
  *
  * Reproduces the Figma frame `Shell/ListPage` (node 7306:20074) from the
  * Prism V1 - ShadCN file: PX rail on the left, PX Header with module name +
- * PEC + utilities on top, and a bordered card containing a titled toolbar,
- * data table, and pagination inside the shell content slot.
+ * PEC + utilities on top, and a card (no border/shadow — see List Page /
+ * Content Area, node 3302:6) containing a titled toolbar, data table, and
+ * pagination inside the shell content slot.
  *
  * Everything feature-specific (columns, data, actions, PEC options) lives in
  * this file. The shell is responsible for chrome only.
@@ -17,7 +18,6 @@ import { PxListShell, PxFilterSlider, type PxFilterSliderTab } from "@/patterns/
 import { PECDropdown, type PECOption } from "@/components/px-pec-dropdown"
 import { PX_NAV_LABELS, type PxShellNavKey, type PxShellRailMode } from "@/components/px-shell-rail"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,7 +27,6 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { IconButton } from "@/components/ui/icon-button"
 import { Pagination } from "@/components/ui/pagination"
-import { SearchBar } from "@/components/ui/search-bar"
 import { StatusLabel } from "@/components/ui/status-label"
 import {
   Table,
@@ -38,7 +37,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  type TableDensity,
 } from "@/components/ui/table"
+import { TableCustomizationMenu } from "@/components/ui/table-customization-menu"
+import type { ColumnSelectorColumn } from "@/components/ui/column-selector"
 
 // ---------------------------------------------------------------------------
 // Sample data — matches the Figma Shell/ListPage frame
@@ -76,6 +78,23 @@ const TOTAL_ROWS = 248
 const PAGE_SIZE_OPTIONS = [10, 25, 50]
 
 // ---------------------------------------------------------------------------
+// Column definitions — feature-owned. TableCustomizationMenu only renders
+// the Arrange Columns / Row Density disclosure UI; it never knows what a
+// column means.
+// ---------------------------------------------------------------------------
+
+const ENGAGEMENT_COLUMNS: ColumnSelectorColumn[] = [
+  { id: "userName", label: "User Name" },
+  { id: "userId", label: "User ID" },
+  { id: "email", label: "Email" },
+  { id: "company", label: "Company" },
+  { id: "title", label: "Title" },
+  { id: "status", label: "Status" },
+]
+
+const ENGAGEMENT_COLUMN_IDS = ENGAGEMENT_COLUMNS.map((c) => c.id)
+
+// ---------------------------------------------------------------------------
 // PEC Dropdown sample data — same option shape used by AudienceExplorer.
 // ---------------------------------------------------------------------------
 
@@ -110,9 +129,6 @@ type EngagementsTableProps = {
   pageSize: number
   onPageChange: (page: number) => void
   onPageSizeChange: (size: number) => void
-  query: string
-  onQueryChange: (value: string) => void
-  onCreate?: () => void
 }
 
 function EngagementsTable({
@@ -121,9 +137,6 @@ function EngagementsTable({
   pageSize,
   onPageChange,
   onPageSizeChange,
-  query,
-  onQueryChange,
-  onCreate,
 }: EngagementsTableProps) {
   const pageCount = Math.max(1, Math.ceil(TOTAL_ROWS / pageSize))
 
@@ -133,28 +146,47 @@ function EngagementsTable({
   const [filterOpen, setFilterOpen] = React.useState(false)
   const [filterTab, setFilterTab] = React.useState<PxFilterSliderTab>("filter")
 
+  // Table customization — Arrange Columns + Row Density, per Figma node
+  // 3187:9 ("Row Density - Menu" frame). Column selection/order state is
+  // committed here (feature-owned); the demo table below still renders its
+  // fixed column set — making the table itself column-driven is a separate,
+  // larger change than this menu wiring.
+  const [density, setDensity] = React.useState<TableDensity>("default")
+  const [selectedColumns, setSelectedColumns] = React.useState(ENGAGEMENT_COLUMN_IDS)
+  const [columnOrder, setColumnOrder] = React.useState(ENGAGEMENT_COLUMN_IDS)
+
   return (
     <section
       className={cn(
         "flex h-full flex-col overflow-hidden",
         "rounded-[var(--p-radius-150)]",
-        "border border-[var(--s-color-line-default)]",
         "bg-[var(--s-color-surface-default)]",
-        "shadow-[var(--e-shadow-100)]",
       )}
     >
-      {/* Toolbar — search bar (left) · filter, more options, Create (right) */}
-      <div className="flex shrink-0 items-center gap-4 px-6 py-4">
-        <div className="w-[280px]">
-          <SearchBar
-            size="small"
-            placeholder="Search engagements"
-            value={query}
-            onChange={(e) => onQueryChange(e.target.value)}
-          />
-        </div>
+      {/*
+        Title bar — matches Figma node 3302:6 (List Page / Content Area,
+        View=Table, State=With Data): plain title on the LHS, uniform 16px
+        (space/200) padding, and an icon-only RHS action group (search,
+        filter, more) with a 16px gap. Create is hidden in this exact
+        reference state.
+      */}
+      <div className="flex shrink-0 items-center gap-[var(--p-space-200)] p-[var(--p-space-200)]">
+        <span
+          className={cn(
+            "text-[length:var(--p-font-size-medium)]",
+            "font-[var(--p-font-weight-regular)]",
+            "leading-[var(--p-font-line-height-medium)]",
+            "text-[var(--s-color-text-default)]",
+          )}
+        >
+          All Engagements
+        </span>
 
-        <div className="flex flex-1 items-center justify-end gap-[var(--p-space-300)]">
+        <div className="flex-1" />
+
+        <div className="flex items-center gap-[var(--p-space-200)]">
+          <IconButton icon="search" label="Search" />
+
           <IconButton
             icon="filter"
             label="Filter"
@@ -162,28 +194,26 @@ function EngagementsTable({
             onClick={() => setFilterOpen((v) => !v)}
           />
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <IconButton icon="more-vertical" label="More options" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem icon="new-window">Export CSV</DropdownMenuItem>
-              <DropdownMenuItem icon="refresh">Refresh</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem icon="settings">Configure columns</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          <Button variant="primary" size="large" onClick={onCreate}>
-            Create
-          </Button>
+          <TableCustomizationMenu
+            columns={ENGAGEMENT_COLUMNS}
+            selectedColumns={selectedColumns}
+            onSelectedColumnsChange={setSelectedColumns}
+            columnOrder={columnOrder}
+            onColumnOrderChange={setColumnOrder}
+            onResetColumns={() => {
+              setSelectedColumns(ENGAGEMENT_COLUMN_IDS)
+              setColumnOrder(ENGAGEMENT_COLUMN_IDS)
+            }}
+            density={density}
+            onDensityChange={setDensity}
+          />
         </div>
       </div>
 
       {/* Table + Filter Slider row — slider narrows only this row, never the toolbar above */}
-      <div className="flex min-h-0 flex-1 border-t border-[var(--s-color-line-default)]">
+      <div className="flex min-h-0 flex-1">
         <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
-            <Table containerClassName="min-h-0 flex-1">
+            <Table density={density} containerClassName="min-h-0 flex-1">
               <TableHeader>
                 <TableRow>
                   <TableHead>User Name</TableHead>
@@ -271,7 +301,6 @@ function EngagementsListExample({
 }: EngagementsListExampleProps) {
   const [page, setPage] = React.useState(1)
   const [pageSize, setPageSize] = React.useState(10)
-  const [query, setQuery] = React.useState("")
 
   const [pecProduct, setPecProduct] = React.useState("px")
   const [pecEnvironment, setPecEnvironment] = React.useState("production")
@@ -315,11 +344,6 @@ function EngagementsListExample({
         onPageChange={setPage}
         onPageSizeChange={(size) => {
           setPageSize(size)
-          setPage(1)
-        }}
-        query={query}
-        onQueryChange={(v) => {
-          setQuery(v)
           setPage(1)
         }}
       />
