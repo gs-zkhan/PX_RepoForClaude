@@ -35,11 +35,12 @@ import pxNavLogoExpandedUrl from "@/assets/icons/pxnav-logo-expanded-1.svg"
 // -----------------------------------------------------------------------------
 
 // Item identity/order matches the real Figma "Left Navigation" layer names
-// (node 4183:13270, Shell/NavOnly) exactly: Search, Dashboard, Audience,
-// Accounts, Analytics, Engagements, KC Bot, Product Mapper, Segments,
-// [divider], Administration. "Validation Gallery" is this app's own internal
-// tooling (not part of the Figma design) — kept as an extra 12th item per
-// explicit instruction, appended after the Figma-defined items.
+// (node 4183:13270, Shell/NavOnly) exactly: Search, Dashboard, Audience
+// Explorer, Accounts Explorer, Analytics, Engagements, In-App Hub, Product
+// Mapper, Segments, [divider], Administration. "Validation Gallery" and
+// "Design System Docs" are this app's own internal tooling (not part of the
+// Figma design) — kept as extra items per explicit instruction, appended
+// after the Figma-defined items and before the Administration divider.
 export type PxShellNavKey =
   | "search"
   | "dashboard"
@@ -61,20 +62,20 @@ type PxShellNavItem = {
 }
 
 const SHELL_NAV: PxShellNavItem[] = [
-  { key: "dashboard",       icon: "dashboard",           label: "Dashboard"        },
-  { key: "audience",        icon: "users",               label: "Audience"         },
-  { key: "accounts",        icon: "pxaccount-explorer",  label: "Accounts"         },
-  { key: "analytics",       icon: "pxanalytics",         label: "Analytics"        },
-  { key: "engagements",     icon: "pxengagements",       label: "Engagements"      },
-  { key: "kc-bot",          icon: "pxkcbot",             label: "Inapp Hub"        },
-  { key: "product-mapper",  icon: "pxproduct-mapper",    label: "Product Mapper"   },
-  { key: "segments",        icon: "pxsegments",          label: "Segments"         },
+  { key: "dashboard",       icon: "dashboard",           label: "Dashboard"          },
+  { key: "audience",        icon: "users",               label: "Audience Explorer"  },
+  { key: "accounts",        icon: "pxaccount-explorer",  label: "Accounts Explorer"  },
+  { key: "analytics",       icon: "pxanalytics",         label: "Analytics"          },
+  { key: "engagements",     icon: "pxengagements",       label: "Engagements"        },
+  { key: "kc-bot",          icon: "pxkcbot",             label: "In-App Hub"         },
+  { key: "product-mapper",  icon: "pxproduct-mapper",    label: "Product Mapper"     },
+  { key: "segments",        icon: "pxsegments",          label: "Segments"           },
   { key: "validation",      icon: "blocks",              label: "Validation Gallery" },
   { key: "docs",            icon: "document",            label: "Design System Docs" },
 ]
 
 const SEARCH_ITEM: PxShellNavItem = { key: "search", icon: "search", label: "Search" }
-const SETTINGS_ITEM: PxShellNavItem = { key: "settings", icon: "settings", label: "Settings" }
+const SETTINGS_ITEM: PxShellNavItem = { key: "settings", icon: "settings", label: "Administration" }
 
 // Single source of truth for nav item labels — pages must use this (not a
 // hand-typed string) as their PxHeader `moduleName` so the two never drift.
@@ -97,15 +98,16 @@ const DEFAULT_ADMIN_SECTIONS: PxNavAdminSection[] = [
     id: "set-up",
     title: "Set Up",
     items: [
-      { id: "subscription-settings", label: "Subscription Settings" },
+      { id: "company-timezone", label: "Company & Timezone" },
       { id: "products", label: "Products" },
       { id: "user-management", label: "User Management" },
+      { id: "account-settings", label: "Account Settings" },
       { id: "attributes", label: "Attributes" },
       { id: "events", label: "Events" },
-      { id: "brand-kit", label: "Brand Kit" },
+      { id: "session-recording", label: "Session Recording" },
+      { id: "brand-settings", label: "Brand Settings" },
       { id: "sdk-settings", label: "SDK Settings" },
       { id: "localization", label: "Localization" },
-      { id: "feedback", label: "Feedback" },
     ],
   },
   {
@@ -123,15 +125,24 @@ const DEFAULT_ADMIN_SECTIONS: PxNavAdminSection[] = [
     ],
   },
   {
-    id: "bulk-data-exports",
-    title: "Bulk Data Exports",
+    id: "bulk-data-export",
+    title: "Bulk Data Export",
     items: [{ id: "data-exports", label: "Data Exports" }],
+  },
+  {
+    id: "engagement",
+    title: "Engagement",
+    items: [
+      { id: "throttling", label: "Throttling" },
+      { id: "feedback", label: "Feedback" },
+    ],
   },
   {
     id: "security",
     title: "Security",
     items: [
       { id: "sso-saml", label: "SSO / SAML" },
+      { id: "identity-verification", label: "Identity Verification" },
       { id: "checksum", label: "Checksum" },
       { id: "engagements-security", label: "Engagements" },
     ],
@@ -351,7 +362,7 @@ function CollapsedBody({
         />
       ))}
 
-      <div className="mt-auto border-t border-[var(--c-nav-item-divider)] py-[var(--c-nav-padding-item)]">
+      <div className="border-t border-[var(--c-nav-item-divider)] py-[var(--c-nav-padding-item)]">
         <CollapsedNavButton
           item={SETTINGS_ITEM}
           active={activeKey === "settings"}
@@ -484,7 +495,9 @@ function ExpandedBody({
             </span>
           </button>
 
-          {/* Main items ------------------------------------------------ */}
+          {/* Main items, followed immediately by Administration as the
+              last item in the flowing list (not pinned to the rail's
+              bottom edge) ------------------------------------------- */}
           <div className="flex flex-1 flex-col overflow-y-auto">
             {SHELL_NAV.map((item) => (
               <ExpandedNavRow
@@ -494,16 +507,15 @@ function ExpandedBody({
                 onClick={() => onNavigate(item.key)}
               />
             ))}
-          </div>
 
-          {/* Settings — pinned, divider above, opens Admin mode -------- */}
-          <div className="shrink-0 border-t border-[var(--c-nav-item-divider)] py-[var(--c-nav-padding-item)]">
-            <ExpandedNavRow
-              item={SETTINGS_ITEM}
-              active={activeKey === "settings"}
-              trailingIcon="chevron-right"
-              onClick={onAdminEntry}
-            />
+            <div className="shrink-0 border-t border-[var(--c-nav-item-divider)] py-[var(--c-nav-padding-item)]">
+              <ExpandedNavRow
+                item={SETTINGS_ITEM}
+                active={activeKey === "settings"}
+                trailingIcon="chevron-right"
+                onClick={onAdminEntry}
+              />
+            </div>
           </div>
         </>
       )}
