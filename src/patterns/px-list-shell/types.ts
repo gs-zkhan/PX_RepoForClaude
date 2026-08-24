@@ -73,10 +73,16 @@ export type PxHeaderProps = {
   /** Page/record title shown in the Secondary Bar. */
   title?: string
 
-  /** Edit-pencil handler after the title. Renders the pencil when provided. */
-  onEditTitle?: () => void
+  /**
+   * Edit-pencil handler after the title. Renders the pencil when provided
+   * and enables inline editing — clicking the pencil swaps the title for an
+   * `<Input inline>`. Called with the committed value on blur or Enter; the
+   * caller owns persisting it and updating `title`. Escape cancels without
+   * calling this.
+   */
+  onEditTitle?: (newTitle: string) => void
 
-  /** Optional chip after the title (e.g. environment). */
+  /** Optional chip after the title (e.g. environment). Typically a <Chip>. */
   titleChip?: React.ReactNode
 
   /** Tabs strip centred in the Secondary Bar. */

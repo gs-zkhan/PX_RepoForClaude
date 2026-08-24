@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { EngagementsListExample } from "@/pages/engagements-list-example"
 import { UserExplorer } from "@/pages/user-explorer"
+import { AiGeneratedAudienceExplorer } from "@/pages/ai-generated-audience-explorer"
 import { WorkInProgress } from "@/pages/work-in-progress"
 import { ValidationGallery } from "@/ValidationGallery"
 import { DocsApp } from "@/docs/docs-app"
@@ -67,6 +68,17 @@ function App() {
   if (activeKey === "audience") {
     return (
       <UserExplorer
+        activeKey={activeKey}
+        onNavigate={setActiveKey}
+        mode={navMode}
+        onModeChange={setNavMode}
+      />
+    )
+  }
+
+  if (activeKey === "audience-ai-demo") {
+    return (
+      <AiGeneratedAudienceExplorer
         activeKey={activeKey}
         onNavigate={setActiveKey}
         mode={navMode}

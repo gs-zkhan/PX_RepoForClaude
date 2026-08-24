@@ -6073,8 +6073,8 @@
           "$extensions": {
             "com.figma.variableId": "VariableID:2380:9",
             "com.figma.aliasData": {
-              "targetVariableId": "VariableID:f098381b7260c68e047ec2cac99a856e4532d688/-1:-1",
-              "targetVariableName": "color/status/neutral/subtlest",
+              "targetVariableId": "VariableID:d634517bce1152046421d0c988f13c8842b9da67/-1:-1",
+              "targetVariableName": "color/surface/muted",
               "targetVariableSetId": "VariableCollectionId:42fd80ab767ef5acfed10cf742951a2c2b8ea6a9/-1:-1",
               "targetVariableSetName": "✅ Semantic — Use these"
             }
@@ -6112,19 +6112,19 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.9647058844566345,
-              0.9921568632125854,
-              0.9803921580314636
+              0.8352941274642944,
+              0.9607843160629272,
+              0.8588235378265381
             ],
             "alpha": 1,
-            "hex": "#F6FDFA"
+            "hex": "#D5F5DB"
           },
           "$description": "Background — success variant. Aliases color/status/success/subtle.",
           "$extensions": {
             "com.figma.variableId": "VariableID:2380:11",
             "com.figma.aliasData": {
-              "targetVariableId": "VariableID:042138f798beb2fa384699272ac32b7f4dd459bb/-1:-1",
-              "targetVariableName": "color/status/success/subtlest",
+              "targetVariableId": "VariableID:f30f74a1384b0871088676b7813546f0c3f84099/-1:-1",
+              "targetVariableName": "color/status/success/subtle",
               "targetVariableSetId": "VariableCollectionId:42fd80ab767ef5acfed10cf742951a2c2b8ea6a9/-1:-1",
               "targetVariableSetName": "✅ Semantic — Use these"
             }
@@ -6162,19 +6162,19 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              1,
-              0.9764705896377563,
-              0.9764705896377563
+              0.9921568632125854,
+              0.8745098114013672,
+              0.8627451062202454
             ],
             "alpha": 1,
-            "hex": "#FFF9F9"
+            "hex": "#FDDFDC"
           },
           "$description": "Background — danger variant. Aliases color/status/danger/subtle.",
           "$extensions": {
             "com.figma.variableId": "VariableID:2380:13",
             "com.figma.aliasData": {
-              "targetVariableId": "VariableID:6a272516e8b8c7459282683f710f98270b15c284/-1:-1",
-              "targetVariableName": "color/status/danger/subtlest",
+              "targetVariableId": "VariableID:20212cd52e158715c13042c4b364997e67fc1e3e/-1:-1",
+              "targetVariableName": "color/status/danger/subtle",
               "targetVariableSetId": "VariableCollectionId:42fd80ab767ef5acfed10cf742951a2c2b8ea6a9/-1:-1",
               "targetVariableSetName": "✅ Semantic — Use these"
             }
@@ -6213,18 +6213,18 @@
             "colorSpace": "srgb",
             "components": [
               1,
-              0.9803921580314636,
-              0.9215686321258545
+              0.9254902005195618,
+              0.7215686440467834
             ],
             "alpha": 1,
-            "hex": "#FFFAEB"
+            "hex": "#FFECB8"
           },
           "$description": "Background — warning variant. Aliases color/status/warning/subtle.",
           "$extensions": {
             "com.figma.variableId": "VariableID:2380:15",
             "com.figma.aliasData": {
-              "targetVariableId": "VariableID:491d86a2bc22d22e08626e995e9868844006be66/-1:-1",
-              "targetVariableName": "color/status/warning/subtlest",
+              "targetVariableId": "VariableID:aeff34a3f963f8d9079a2d1ee960e7e806ded37a/-1:-1",
+              "targetVariableName": "color/status/warning/subtle",
               "targetVariableSetId": "VariableCollectionId:42fd80ab767ef5acfed10cf742951a2c2b8ea6a9/-1:-1",
               "targetVariableSetName": "✅ Semantic — Use these"
             }
@@ -6238,21 +6238,21 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.9411764740943909,
-            0.8980392217636108,
-            0.9803921580314636
+            0.8784313797950745,
+            0.800000011920929,
+            0.9607843160629272
           ],
           "alpha": 1,
-          "hex": "#F0E5FA"
+          "hex": "#E0CCF5"
         },
         "$description": "Background — beta label variant. Aliases color/purple/200.",
         "$extensions": {
           "com.figma.variableId": "VariableID:2380:17",
           "com.figma.aliasData": {
-            "targetVariableId": "VariableID:7e11692fbe851b2206462a60376b1805c1113aab/-1:-1",
-            "targetVariableName": "color/purple/200",
-            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
-            "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            "targetVariableId": "VariableID:b753aa18dea5b3ceda2fd0d2ff26c2908fcb3e0e/-1:-1",
+            "targetVariableName": "color/status/beta/subtle",
+            "targetVariableSetId": "VariableCollectionId:42fd80ab767ef5acfed10cf742951a2c2b8ea6a9/-1:-1",
+            "targetVariableSetName": "✅ Semantic — Use these"
           }
         }
       },
@@ -6286,19 +6286,19 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.9607843160629272,
-            0.9764705896377563,
-            0.9960784316062927
+            0.8235294222831726,
+            0.8941176533699036,
+            0.9843137264251709
           ],
           "alpha": 1,
-          "hex": "#F5F9FE"
+          "hex": "#D2E4FB"
         },
         "$description": "Background — new label variant. Aliases color/status/information/subtle.",
         "$extensions": {
           "com.figma.variableId": "VariableID:2380:19",
           "com.figma.aliasData": {
-            "targetVariableId": "VariableID:462bd56caeb57bd29ab0e71e35ca98d46f4786bc/-1:-1",
-            "targetVariableName": "color/status/information/subtlest",
+            "targetVariableId": "VariableID:74777ca68fb74fe87bf1f07d59a9a2a9d84feefc/-1:-1",
+            "targetVariableName": "color/status/information/subtle",
             "targetVariableSetId": "VariableCollectionId:42fd80ab767ef5acfed10cf742951a2c2b8ea6a9/-1:-1",
             "targetVariableSetName": "✅ Semantic — Use these"
           }
@@ -6345,8 +6345,8 @@
         "$extensions": {
           "com.figma.variableId": "VariableID:2380:20",
           "com.figma.aliasData": {
-            "targetVariableId": "VariableID:f098381b7260c68e047ec2cac99a856e4532d688/-1:-1",
-            "targetVariableName": "color/status/neutral/subtlest",
+            "targetVariableId": "VariableID:d634517bce1152046421d0c988f13c8842b9da67/-1:-1",
+            "targetVariableName": "color/surface/muted",
             "targetVariableSetId": "VariableCollectionId:42fd80ab767ef5acfed10cf742951a2c2b8ea6a9/-1:-1",
             "targetVariableSetName": "✅ Semantic — Use these"
           }
@@ -6383,18 +6383,18 @@
           "colorSpace": "srgb",
           "components": [
             1,
-            0.9803921580314636,
-            0.9215686321258545
+            0.9254902005195618,
+            0.7215686440467834
           ],
           "alpha": 1,
-          "hex": "#FFFAEB"
+          "hex": "#FFECB8"
         },
         "$description": "Background — tip/advice variant. Aliases color/status/warning/subtle.",
         "$extensions": {
           "com.figma.variableId": "VariableID:2380:22",
           "com.figma.aliasData": {
-            "targetVariableId": "VariableID:491d86a2bc22d22e08626e995e9868844006be66/-1:-1",
-            "targetVariableName": "color/status/warning/subtlest",
+            "targetVariableId": "VariableID:aeff34a3f963f8d9079a2d1ee960e7e806ded37a/-1:-1",
+            "targetVariableName": "color/status/warning/subtle",
             "targetVariableSetId": "VariableCollectionId:42fd80ab767ef5acfed10cf742951a2c2b8ea6a9/-1:-1",
             "targetVariableSetName": "✅ Semantic — Use these"
           }
@@ -6447,6 +6447,31 @@
             "targetVariableSetName": "✅ Semantic — Use these"
           }
         }
+      },
+      "bg": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8352941274642944,
+            0.9607843160629272,
+            0.8588235378265381
+          ],
+          "alpha": 1,
+          "hex": "#D5F5DB"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:9456:45875",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:f30f74a1384b0871088676b7813546f0c3f84099/-1:-1",
+            "targetVariableName": "color/status/success/subtle",
+            "targetVariableSetId": "VariableCollectionId:42fd80ab767ef5acfed10cf742951a2c2b8ea6a9/-1:-1",
+            "targetVariableSetName": "✅ Semantic — Use these"
+          }
+        }
       }
     },
     "inactive": {
@@ -6468,6 +6493,31 @@
           "com.figma.aliasData": {
             "targetVariableId": "VariableID:a6e7a0858db318f27cf0513ad76ab2465d749838/-1:-1",
             "targetVariableName": "color/status/neutral/default",
+            "targetVariableSetId": "VariableCollectionId:42fd80ab767ef5acfed10cf742951a2c2b8ea6a9/-1:-1",
+            "targetVariableSetName": "✅ Semantic — Use these"
+          }
+        }
+      },
+      "bg": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9019607901573181,
+            0.9137254953384399,
+            0.9254902005195618
+          ],
+          "alpha": 1,
+          "hex": "#E6E9EC"
+        },
+        "$extensions": {
+          "com.figma.variableId": "VariableID:9456:45876",
+          "com.figma.scopes": [
+            "ALL_SCOPES"
+          ],
+          "com.figma.aliasData": {
+            "targetVariableId": "VariableID:595fca8c65986c4e24bd9c736131191af86942d9/-1:-1",
+            "targetVariableName": "color/status/neutral/subtle",
             "targetVariableSetId": "VariableCollectionId:42fd80ab767ef5acfed10cf742951a2c2b8ea6a9/-1:-1",
             "targetVariableSetName": "✅ Semantic — Use these"
           }

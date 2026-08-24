@@ -31,17 +31,23 @@ type PrismIconProps = React.HTMLAttributes<HTMLSpanElement> & {
   label?: string
 }
 
-type SvgLoader = () => Promise<string>
-
+// Eager: all 441 icons (~1.8MB raw text) are inlined into the module graph
+// at build/dev time — zero runtime network requests, so no per-icon fetch
+// race and no silent "icon never arrived" failures (each glob entry used to
+// be a lazy dynamic import, meaning every rendered icon fired its own
+// `?import&raw` HTTP request; a page with many icons could fire hundreds of
+// concurrent requests, and any that stalled or dropped left that icon blank
+// forever since there was no retry).
 const iconModules = import.meta.glob<string>(
   "/src/assets/icons/**/*.svg",
   {
     query: "?raw",
     import: "default",
+    eager: true,
   }
-) as Record<string, SvgLoader>
+) as Record<string, string>
 
-const iconCache = new Map<string, string>()
+const preparedIconCache = new Map<string, string>()
 
 function prepareSvg(svg: string) {
   return svg
@@ -70,44 +76,19 @@ function PrismIcon({
     iconStyle === "filled"
       ? `/src/assets/icons/filled/${folderSize}/${name}.svg`
       : `/src/assets/icons/${folderSize}/${name}.svg`
-  const [source, setSource] = React.useState<string | undefined>(
-    () => iconCache.get(path)
-  )
 
-  React.useEffect(() => {
-    let active = true
-    const loader = iconModules[path]
+  let source = preparedIconCache.get(path)
 
-    if (!loader) {
+  if (source === undefined) {
+    const raw = iconModules[path]
+
+    if (raw === undefined) {
       console.warn(`Prism icon not found: ${path}`)
-      setSource(undefined)
-      return
+    } else {
+      source = prepareSvg(raw)
+      preparedIconCache.set(path, source)
     }
-
-    const cached = iconCache.get(path)
-
-    if (cached) {
-      setSource(cached)
-      return
-    }
-
-    loader()
-      .then((svg) => {
-        const prepared = prepareSvg(svg)
-        iconCache.set(path, prepared)
-
-        if (active) {
-          setSource(prepared)
-        }
-      })
-      .catch((error) => {
-        console.error(`Failed to load Prism icon: ${path}`, error)
-      })
-
-    return () => {
-      active = false
-    }
-  }, [path])
+  }
 
   return (
     <span

@@ -1,6 +1,9 @@
+import * as React from "react"
+
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { IconButton } from "@/components/ui/icon-button"
+import { Input } from "@/components/ui/input"
 import { PrismIcon } from "@/components/ui/prism-icon"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
@@ -33,6 +36,19 @@ import type {
 //
 // The header is a composition-only component — it does not own the visual
 // recipes of Button, IconButton, PrismIcon, or Avatar (all delegated).
+//
+// Secondary Bar anatomy update — Figma replaced the LHS/Tabs/RHS frames with
+// three "TableSecHeader" component sets (nodes 9452:13655 LHS, 9452:13691
+// Center, 9452:13699 RHS), still on the same Page Header page:
+// - LHS: property1=BackArrow (back arrow + title-as-field + edit + chip) or
+//   SecTitle (bold title + edit, no back arrow) — driven here by whether
+//   `onBack` is passed, same as before.
+// - Center: unchanged — the existing Tabs strip already matches.
+// - RHS: unchanged — utilities + divider + actions already matches
+//   Button+Icon/Only Button/Empty.
+// The one real behavior change: title now supports inline editing — clicking
+// the edit pencil swaps the static title for an `<Input inline>` (see
+// isEditingTitle below), matching TableSecHeader's editable title-field look.
 // -----------------------------------------------------------------------------
 
 function PxHeader({
@@ -51,6 +67,26 @@ function PxHeader({
   secondaryUtilities,
   secondaryActions,
 }: PxHeaderProps) {
+  const [isEditingTitle, setIsEditingTitle] = React.useState(false)
+  // Only meaningful while isEditingTitle is true — always reseeded fresh in
+  // startEditingTitle, so it doesn't need to track `title` while at rest.
+  const [draftTitle, setDraftTitle] = React.useState(title ?? "")
+
+  function startEditingTitle() {
+    setDraftTitle(title ?? "")
+    setIsEditingTitle(true)
+  }
+
+  function commitTitleEdit() {
+    setIsEditingTitle(false)
+    onEditTitle?.(draftTitle)
+  }
+
+  function cancelTitleEdit() {
+    setIsEditingTitle(false)
+    setDraftTitle(title ?? "")
+  }
+
   const hasSecondaryContent =
     onBack !== undefined ||
     title !== undefined ||
@@ -128,24 +164,49 @@ function PxHeader({
               />
             )}
 
-            {title && (
-              <span
-                className={cn(
-                  "text-[length:var(--t-font-heading-small-size)]",
-                  "font-[number:var(--t-font-heading-small-weight)]",
-                  "leading-[var(--t-font-heading-small-line-height)]",
-                  "text-[var(--s-color-text-default)]",
-                )}
-              >
-                {title}
-              </span>
+            {isEditingTitle ? (
+              <Input
+                autoFocus
+                inline
+                size="small"
+                value={draftTitle}
+                onChange={(e) => setDraftTitle(e.target.value)}
+                onBlur={commitTitleEdit}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") commitTitleEdit()
+                  if (e.key === "Escape") cancelTitleEdit()
+                }}
+                aria-label="Title"
+                className="w-auto"
+              />
+            ) : (
+              title && (
+                <span
+                  className={cn(
+                    onBack
+                      ? cn(
+                          "text-[length:var(--c-textfield-font-size)]",
+                          "font-[number:var(--c-textfield-font-weight)]",
+                          "leading-[var(--c-textfield-font-line-height)]",
+                        )
+                      : cn(
+                          "text-[length:var(--t-font-heading-small-size)]",
+                          "font-[number:var(--t-font-heading-small-weight)]",
+                          "leading-[var(--t-font-heading-small-line-height)]",
+                        ),
+                    "text-[var(--s-color-text-default)]",
+                  )}
+                >
+                  {title}
+                </span>
+              )
             )}
 
-            {onEditTitle && (
+            {onEditTitle && !isEditingTitle && (
               <IconButton
                 icon="edit"
                 label="Edit title"
-                onClick={onEditTitle}
+                onClick={startEditingTitle}
               />
             )}
 
