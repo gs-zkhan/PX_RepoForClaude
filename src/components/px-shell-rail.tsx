@@ -9,7 +9,12 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import pxNavLogoUrl from "@/assets/icons/pxnav-logo.svg"
-import pxNavLogoExpandedUrl from "@/assets/icons/pxnav-logo-expanded-1.svg"
+// Raw import, not a URL: at 7.9KB this file is over Vite's 4KB
+// assetsInlineLimit, so `import ... from "*.svg"` would emit it as a
+// separate static asset and every rail-expand would depend on a real HTTP
+// request — the exact same "sometimes invisible" flakiness fixed in
+// PrismIcon. Inlining the markup directly removes that dependency entirely.
+import pxNavLogoExpandedSvg from "@/assets/icons/pxnav-logo-expanded-1.svg?raw"
 
 // -----------------------------------------------------------------------------
 // PxShellRail — Left Navigation, Figma "Left Navigation" instance shared by
@@ -452,7 +457,12 @@ function ExpandedBody({
     <>
       {/* Header: wordmark + pin toggle ------------------------------------ */}
       <div className="flex h-12 shrink-0 items-center justify-between border-b border-[var(--c-nav-item-divider)] px-[var(--c-nav-padding-item)]">
-        <img src={pxNavLogoExpandedUrl} alt="Gainsight PX" className="h-6 w-auto" />
+        <span
+          role="img"
+          aria-label="Gainsight PX"
+          className="h-6 w-auto [&_svg]:h-6 [&_svg]:w-auto"
+          dangerouslySetInnerHTML={{ __html: pxNavLogoExpandedSvg }}
+        />
         <button
           type="button"
           aria-label={pinned ? "Unpin navigation" : "Pin navigation"}

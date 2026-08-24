@@ -7,6 +7,7 @@
 import * as React from "react"
 import { SearchBar } from "@/components/ui/search-bar"
 import { FilterChip } from "@/components/ui/filter-chip"
+import { Chip } from "@/components/ui/chip"
 import { FilterBar, type FilterBarChip } from "@/components/ui/filter-bar"
 import { FilterDropdownPanel, type NumberOperator } from "@/components/ui/filter-dropdown-panel"
 import { DateFilter, type DateFilterValue } from "@/components/ui/date-filter"
@@ -912,7 +913,8 @@ function ValidationGallery() {
                   ]}
                   onBack={() => {}}
                   title="All Engagements"
-                  onEditTitle={() => {}}
+                  onEditTitle={(newTitle) => console.log("commit title", newTitle)}
+                  titleChip={<Chip color="gray">Gray</Chip>}
                   tabs={[
                     { id: "active", label: "Active" },
                     { id: "archived", label: "Archived" },
@@ -926,6 +928,25 @@ function ValidationGallery() {
                   ]}
                   secondaryActions={[
                     { id: "export", label: "Export", variant: "secondary" },
+                    { id: "create", label: "Create Engagement" },
+                  ]}
+                  avatar={
+                    <Avatar size="medium">
+                      <AvatarFallback>ZK</AvatarFallback>
+                    </Avatar>
+                  }
+                />
+              </div>
+            </div>
+          </Row>
+          <Row label="Page Header — SecTitle variant (no onBack, bold title, no chip)">
+            <div className="w-full overflow-x-auto rounded border border-[var(--s-color-line-default)]">
+              <div className="min-w-[900px]">
+                <PxHeader
+                  moduleName="Engagements"
+                  title="All Engagements"
+                  onEditTitle={(newTitle) => console.log("commit title", newTitle)}
+                  secondaryActions={[
                     { id: "create", label: "Create Engagement" },
                   ]}
                   avatar={
@@ -1030,6 +1051,47 @@ function ValidationGallery() {
               disabled
               placeholder="Disabled search…"
             />
+          </Row>
+        </Section>
+
+        {/* ------------------------------------------------------------------ */}
+        {/* Chip                                                                 */}
+        {/* ------------------------------------------------------------------ */}
+        <Section title="Chip">
+          <Row label="base colors (regular)">
+            <Chip color="gray">Gray</Chip>
+            <Chip color="green">Green</Chip>
+            <Chip color="red">Red</Chip>
+            <Chip color="yellow">Yellow</Chip>
+          </Row>
+          <Row label="accent colors (regular)">
+            <Chip color="beta">Beta</Chip>
+            <Chip color="new">New</Chip>
+            <Chip color="tutorial">Tutorial</Chip>
+            <Chip color="tip">Tip</Chip>
+            <Chip color="active">Active</Chip>
+            <Chip color="inactive">Inactive</Chip>
+          </Row>
+          <Row label="small size">
+            <Chip color="gray" size="small">Gray</Chip>
+            <Chip color="green" size="small">Green</Chip>
+            <Chip color="red" size="small">Red</Chip>
+            <Chip color="yellow" size="small">Yellow</Chip>
+          </Row>
+          <Row label="selected (base colors only)">
+            <Chip color="gray" selected>Gray</Chip>
+            <Chip color="green" selected>Green</Chip>
+            <Chip color="red" selected>Red</Chip>
+            <Chip color="yellow" selected>Yellow</Chip>
+          </Row>
+          <Row label="disabled (any color)">
+            <Chip color="gray" disabled>Gray</Chip>
+            <Chip color="beta" disabled>Beta</Chip>
+          </Row>
+          <Row label="dismissible">
+            <Chip color="gray" dismissible onDismiss={() => console.log("dismiss gray")}>Gray</Chip>
+            <Chip color="green" dismissible onDismiss={() => console.log("dismiss green")}>Green</Chip>
+            <Chip color="gray" dismissible disabled>Gray</Chip>
           </Row>
         </Section>
 
