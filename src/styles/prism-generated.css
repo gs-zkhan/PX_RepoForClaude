@@ -355,7 +355,7 @@
   --c-banner-danger-background: var(--s-color-status-danger-subtlest);
   --c-banner-danger-border: var(--s-color-status-danger-default);
   --c-banner-icon-danger: var(--s-icon-color-danger);
-  --c-banner-icon-information: var(--c-icon-color-selected);
+  --c-banner-icon-information: var(--s-icon-color-selected);
   --c-banner-icon-success: var(--s-icon-color-success);
   --c-banner-icon-warning: var(--s-icon-color-warning);
   --c-banner-information-background: var(--s-color-status-information-subtlest);
@@ -442,7 +442,7 @@
   --c-calendar-panel-header-font-size: var(--p-font-size-medium);
   --c-calendar-panel-header-padding: var(--p-space-200);
   --c-calendar-panel-header-radius: var(--p-radius-150);
-  --c-calendar-panel-nav-icon-color: var(--c-icon-color-default);
+  --c-calendar-panel-nav-icon-color: var(--s-icon-color-default);
   --c-calendar-panel-nav-icon-size: var(--p-icon-size-016);
   --c-calendar-panel-padding: var(--p-space-075);
   --c-calendar-panel-text-default: var(--s-color-text-default);
@@ -454,7 +454,7 @@
   --c-checkbox-background-default: var(--s-color-control-surface-default);
   --c-checkbox-background-disabled: var(--s-color-control-surface-disabled);
   --c-checkbox-background-hover: var(--s-color-control-surface-hover);
-  --c-checkbox-border-default: var(--c-icon-color-default);
+  --c-checkbox-border-default: var(--s-icon-color-default);
   --c-checkbox-border-disabled: var(--s-icon-color-disabled);
   --c-checkbox-border-error: var(--s-color-control-border-invalid);
   --c-checkbox-border-hover: var(--s-color-control-border-hover);
@@ -548,7 +548,7 @@
   --c-datepicker-header-font-line-height: var(--p-font-line-height-h4);
   --c-datepicker-header-font-size: var(--p-font-size-h4);
   --c-datepicker-header-font-weight: var(--p-font-weight-semi-bold);
-  --c-datepicker-icon-color-default: var(--c-icon-color-default);
+  --c-datepicker-icon-color-default: var(--s-icon-color-default);
   --c-datepicker-icon-color-disabled: var(--s-icon-color-disabled);
   --c-datepicker-icon-padding: var(--p-space-075);
   --c-datepicker-icon-size-default: var(--s-icon-size-default);
@@ -688,7 +688,7 @@
   --c-filter-chip-font-line-height: var(--p-font-line-height-medium);
   --c-filter-chip-font-size: var(--p-font-size-medium);
   --c-filter-chip-gap: var(--p-space-050);
-  --c-filter-chip-icon-default: var(--c-icon-color-default);
+  --c-filter-chip-icon-default: var(--s-icon-color-default);
   --c-filter-chip-icon-disabled: var(--s-icon-color-disabled);
   --c-filter-chip-icon-size: var(--p-icon-size-016);
   --c-filter-chip-padding-horizontal: var(--p-space-100);
@@ -708,7 +708,7 @@
   --c-filter-dropdown-gap: var(--p-space-300);
   --c-filter-dropdown-gap-actions: var(--p-space-200);
   --c-filter-dropdown-gap-date: var(--p-space-025);
-  --c-filter-dropdown-icon-default: var(--c-icon-color-default);
+  --c-filter-dropdown-icon-default: var(--s-icon-color-default);
   --c-filter-dropdown-icon-padding: var(--p-space-075);
   --c-filter-dropdown-icon-size: var(--p-icon-size-024);
   --c-filter-dropdown-op-background-active: var(--s-color-action-primary-subtlest);
@@ -724,9 +724,9 @@
   --c-helper-font-line-height: var(--p-font-line-height-small);
   --c-helper-font-size: var(--p-font-size-small);
   --c-helper-font-weight: var(--p-font-weight-regular);
-  --c-icon-color-default: #3C4A57;
+  --c-icon-color-default: var(--s-icon-color-default);
   --c-icon-color-focus: var(--s-color-text-subtle);
-  --c-icon-color-hover: #25313B;
+  --c-icon-color-hover: var(--s-icon-color-hover);
   --c-icon-color-selected: var(--s-color-action-primary-default);
   --c-link-color-default: var(--s-color-action-primary-default);
   --c-link-color-disabled: var(--s-color-text-disabled);
@@ -756,7 +756,7 @@
   --c-nav-item-active-background: var(--s-color-text-inverse);
   --c-nav-item-content: var(--s-color-text-inverse);
   --c-nav-item-content-subtle: var(--s-color-text-disabled);
-  --c-nav-item-divider: var(--c-icon-color-default);
+  --c-nav-item-divider: var(--s-icon-color-default);
   --c-nav-item-font-line-height: var(--p-font-line-height-h6);
   --c-nav-item-font-size: var(--p-font-size-h6);
   --c-nav-item-font-weight: var(--p-font-weight-regular);
@@ -799,7 +799,7 @@
   --c-pagination-font-weight: var(--p-font-weight-regular);
   --c-pagination-font-weight-strong: var(--p-font-weight-semi-bold);
   --c-pagination-gap: var(--p-space-150);
-  --c-pagination-icon-default: var(--c-icon-color-default);
+  --c-pagination-icon-default: var(--s-icon-color-default);
   --c-pagination-icon-disabled: var(--s-icon-color-subtle);
   --c-pagination-padding-horizontal: var(--p-space-200);
   --c-pagination-per-page-gap: var(--p-space-050);
@@ -816,7 +816,7 @@
   --c-progressbar-radius: var(--p-radius-full);
   --c-progressbar-track-background: var(--s-color-surface-muted);
   --c-radio-background-disabled: var(--s-color-control-surface-disabled);
-  --c-radio-border-default: var(--c-icon-color-default);
+  --c-radio-border-default: var(--s-icon-color-default);
   --c-radio-border-disabled: var(--s-icon-color-disabled);
   --c-radio-border-error: var(--s-color-control-border-invalid);
   --c-radio-border-hover: var(--s-color-control-border-hover);
@@ -848,7 +848,7 @@
   --c-search-height-medium: var(--p-space-400);
   --c-search-height-xlarge: 36px;
   --c-search-height-xxlarge: var(--p-space-500);
-  --c-search-icon-default: var(--c-icon-color-default);
+  --c-search-icon-default: var(--s-icon-color-default);
   --c-search-icon-disabled: var(--s-icon-color-disabled);
   --c-search-icon-size: var(--p-icon-size-024);
   --c-search-padding-left: var(--p-space-150);
@@ -910,8 +910,8 @@
   --c-table-cell-font-line-height: var(--p-font-line-height-h6);
   --c-table-cell-font-size: var(--p-font-size-h6);
   --c-table-cell-font-weight: var(--p-font-weight-regular);
-  --c-table-cell-icon-action-hover: var(--c-icon-color-hover);
-  --c-table-cell-icon-default: var(--c-icon-color-default);
+  --c-table-cell-icon-action-hover: var(--s-icon-color-hover);
+  --c-table-cell-icon-default: var(--s-icon-color-default);
   --c-table-cell-icon-subtle: var(--s-icon-color-subtle);
   --c-table-cell-text-default: var(--s-color-text-default);
   --c-table-cell-text-disabled: var(--s-color-text-disabled);
@@ -927,7 +927,7 @@
   --c-table-header-font-size: var(--p-font-size-h7);
   --c-table-header-font-weight: var(--p-font-weight-regular);
   --c-table-header-height: var(--p-space-400);
-  --c-table-header-icon: var(--c-icon-color-default);
+  --c-table-header-icon: var(--s-icon-color-default);
   --c-table-header-icon-sort-active: var(--s-color-action-primary-default);
   --c-table-header-text: var(--s-color-text-subtlest);
   --c-table-pagination-height: var(--p-space-500);
@@ -935,7 +935,7 @@
   --c-table-row-height-compact: var(--p-space-400);
   --c-table-row-height-default: var(--p-space-600);
   --c-tabs-gap-icon: var(--p-space-100);
-  --c-tabs-icon-default: var(--c-icon-color-default);
+  --c-tabs-icon-default: var(--s-icon-color-default);
   --c-tabs-indicator-color: var(--s-color-action-primary-default);
   --c-tabs-label-active: var(--s-color-text-default);
   --c-tabs-label-default: var(--s-color-text-subtlest);
@@ -1041,7 +1041,7 @@
   --c-views-border-hover: var(--s-color-action-primary-default);
   --c-views-gap-icon: var(--p-space-050);
   --c-views-gap-inline: var(--p-space-100);
-  --c-views-icon-color: var(--c-icon-color-default);
+  --c-views-icon-color: var(--s-icon-color-default);
   --c-views-icon-size-large: var(--p-icon-size-024);
   --c-views-icon-size-small: var(--p-icon-size-016);
   --c-views-inline-hover-bg: var(--s-color-surface-muted);

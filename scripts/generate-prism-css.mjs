@@ -161,28 +161,110 @@ const loadedSources = sources.map((source) => {
   }
 })
 
+// Each token path maps to every source that defines it. A path defined in
+// more than one source (e.g. a component token and a semantic token sharing
+// the same dot-path) is a collision: the bracket reference syntax used in
+// $value ("{some.path}") carries no source/layer qualifier, so there is no
+// safe way to guess which one a reference was meant to resolve to.
 const tokenIndex = new Map()
 
 for (const source of loadedSources) {
   for (const tokenPath of Object.keys(source.tokens)) {
-    tokenIndex.set(tokenPath, cssName(source.prefix, tokenPath))
+    const candidate = { prefix: source.prefix, label: source.label, cssName: cssName(source.prefix, tokenPath) }
+
+    if (tokenIndex.has(tokenPath)) {
+      tokenIndex.get(tokenPath).push(candidate)
+    } else {
+      tokenIndex.set(tokenPath, [candidate])
+    }
   }
 }
+
+const collisions = [...tokenIndex.entries()].filter(([, candidates]) => candidates.length > 1)
+
+if (collisions.length > 0) {
+  console.warn(
+    `Warning: ${collisions.length} token path(s) are defined in more than one source. ` +
+      `Any unqualified reference to these paths is ambiguous and will fail to resolve ` +
+      `until disambiguated (a qualified reference such as "{s.path}" is unaffected):`,
+  )
+
+  for (const [tokenPath, candidates] of collisions) {
+    console.warn(
+      `  "${tokenPath}" -> ${candidates.map((c) => `${c.label} (${c.cssName})`).join(", ")}`,
+    )
+  }
+}
+
+// Sources are also indexed by their prefix so a qualified reference
+// ("{s.color.surface.disabled}") can resolve inside exactly one named
+// source, bypassing cross-source ambiguity by construction rather than by
+// guessing. Unqualified references ("{color.surface.disabled}") keep going
+// through the flat, collision-checked tokenIndex above unchanged.
+const sourcesByPrefix = new Map(loadedSources.map((source) => [source.prefix, source]))
+
+// A qualified reference always starts with a single-letter prefix followed
+// by a dot ("{s.color.surface.disabled}"). Every real token path segment
+// exported from Figma is a multi-character word (verified: no source has a
+// single-letter top-level group), so this pattern only ever matches an
+// intentional qualifier, never a bare path — letting an unknown prefix be
+// reported as its own distinct failure rather than a generic "not found".
+const qualifiedReferencePattern = /^([a-z])\.(.+)$/
 
 function valueToCss(tokenPath, value) {
   if (typeof value === "string") {
     const reference = value.match(/^\{(.+)\}$/)
 
     if (reference) {
-      const referencedVariable = tokenIndex.get(reference[1])
+      const qualified = reference[1].match(qualifiedReferencePattern)
 
-      if (!referencedVariable) {
+      if (qualified) {
+        const [, sourcePrefix, remainder] = qualified
+        const source = sourcesByPrefix.get(sourcePrefix)
+
+        if (!source) {
+          throw new Error(
+            `Unknown source prefix "${sourcePrefix}" in qualified reference "${value}" ` +
+              `in token "${tokenPath}". Known prefixes: ` +
+              `${loadedSources.map((s) => `"${s.prefix}" (${s.label})`).join(", ")}.`,
+          )
+        }
+
+        const referencedToken = source.tokens[remainder]
+
+        if (!referencedToken) {
+          throw new Error(
+            `Unresolved qualified reference "${value}" in token "${tokenPath}": ` +
+              `"${remainder}" does not exist in ${source.label}`,
+          )
+        }
+
+        return `var(${cssName(source.prefix, remainder)})`
+      }
+
+      const candidates = tokenIndex.get(reference[1])
+
+      if (!candidates) {
         throw new Error(
           `Unresolved reference "${value}" in token "${tokenPath}"`,
         )
       }
 
-      return `var(${referencedVariable})`
+      if (candidates.length > 1) {
+        const qualifiedOptions = candidates
+          .map((c) => `"{${c.prefix}.${reference[1]}}" for ${c.label}`)
+          .join(", or ")
+
+        throw new Error(
+          `Ambiguous reference "${value}" in token "${tokenPath}": "${reference[1]}" ` +
+            `is defined in ${candidates.length} sources ` +
+            `(${candidates.map((c) => `${c.label} -> ${c.cssName}`).join(", ")}). ` +
+            `The reference syntax does not carry source/layer information, so this ` +
+            `cannot be resolved safely. Use a qualified reference instead: ${qualifiedOptions}.`,
+        )
+      }
+
+      return `var(${candidates[0].cssName})`
     }
 
     return value
