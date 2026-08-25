@@ -24,32 +24,8 @@
           "visible": true
         }
       ],
-      "$extensions": { "figmaStyleName": "shadow/100" },
-      "top": {
-        "$type": "shadow",
-        "$value": [
-          {
-            "type": "dropShadow",
-            "offsetX": "0px",
-            "offsetY": "-2px",
-            "blur": "4px",
-            "spread": "0px",
-            "color": "rgba(60, 74, 87, 0.06)",
-            "blendMode": "NORMAL",
-            "visible": true
-          },
-          {
-            "type": "dropShadow",
-            "offsetX": "0px",
-            "offsetY": "0px",
-            "blur": "1px",
-            "spread": "0px",
-            "color": "rgba(60, 74, 87, 0.24)",
-            "blendMode": "NORMAL",
-            "visible": true
-          }
-        ],
-        "$extensions": { "figmaStyleName": "shadow/100/top" }
+      "$extensions": {
+        "figmaStyleName": "shadow/100"
       }
     },
     "200": {
@@ -76,32 +52,8 @@
           "visible": true
         }
       ],
-      "$extensions": { "figmaStyleName": "shadow/200" },
-      "top": {
-        "$type": "shadow",
-        "$value": [
-          {
-            "type": "dropShadow",
-            "offsetX": "0px",
-            "offsetY": "-6px",
-            "blur": "12px",
-            "spread": "0px",
-            "color": "rgba(60, 74, 87, 0.06)",
-            "blendMode": "NORMAL",
-            "visible": true
-          },
-          {
-            "type": "dropShadow",
-            "offsetX": "0px",
-            "offsetY": "0px",
-            "blur": "1px",
-            "spread": "0px",
-            "color": "rgba(60, 74, 87, 0.2)",
-            "blendMode": "NORMAL",
-            "visible": true
-          }
-        ],
-        "$extensions": { "figmaStyleName": "shadow/200/top" }
+      "$extensions": {
+        "figmaStyleName": "shadow/200"
       }
     },
     "300": {
@@ -128,32 +80,8 @@
           "visible": true
         }
       ],
-      "$extensions": { "figmaStyleName": "shadow/300" },
-      "top": {
-        "$type": "shadow",
-        "$value": [
-          {
-            "type": "dropShadow",
-            "offsetX": "0px",
-            "offsetY": "-8px",
-            "blur": "16px",
-            "spread": "0px",
-            "color": "rgba(60, 74, 87, 0.1)",
-            "blendMode": "NORMAL",
-            "visible": true
-          },
-          {
-            "type": "dropShadow",
-            "offsetX": "0px",
-            "offsetY": "0px",
-            "blur": "1px",
-            "spread": "0px",
-            "color": "rgba(60, 74, 87, 0.2)",
-            "blendMode": "NORMAL",
-            "visible": true
-          }
-        ],
-        "$extensions": { "figmaStyleName": "shadow/300/top" }
+      "$extensions": {
+        "figmaStyleName": "shadow/300"
       }
     },
     "400": {
@@ -180,32 +108,8 @@
           "visible": true
         }
       ],
-      "$extensions": { "figmaStyleName": "shadow/400" },
-      "top": {
-        "$type": "shadow",
-        "$value": [
-          {
-            "type": "dropShadow",
-            "offsetX": "0px",
-            "offsetY": "-12px",
-            "blur": "32px",
-            "spread": "0px",
-            "color": "rgba(60, 74, 87, 0.1)",
-            "blendMode": "NORMAL",
-            "visible": true
-          },
-          {
-            "type": "dropShadow",
-            "offsetX": "0px",
-            "offsetY": "0px",
-            "blur": "1px",
-            "spread": "0px",
-            "color": "rgba(60, 74, 87, 0.2)",
-            "blendMode": "NORMAL",
-            "visible": true
-          }
-        ],
-        "$extensions": { "figmaStyleName": "shadow/400/top" }
+      "$extensions": {
+        "figmaStyleName": "shadow/400"
       }
     },
     "500": {
@@ -232,32 +136,8 @@
           "visible": true
         }
       ],
-      "$extensions": { "figmaStyleName": "shadow/500" },
-      "top": {
-        "$type": "shadow",
-        "$value": [
-          {
-            "type": "dropShadow",
-            "offsetX": "0px",
-            "offsetY": "-24px",
-            "blur": "56px",
-            "spread": "0px",
-            "color": "rgba(60, 74, 87, 0.08)",
-            "blendMode": "NORMAL",
-            "visible": true
-          },
-          {
-            "type": "dropShadow",
-            "offsetX": "0px",
-            "offsetY": "0px",
-            "blur": "1px",
-            "spread": "0px",
-            "color": "rgba(60, 74, 87, 0.2)",
-            "blendMode": "NORMAL",
-            "visible": true
-          }
-        ],
-        "$extensions": { "figmaStyleName": "shadow/500/top" }
+      "$extensions": {
+        "figmaStyleName": "shadow/500"
       }
     },
     "600": {
@@ -284,7 +164,151 @@
           "visible": true
         }
       ],
-      "$extensions": { "figmaStyleName": "shadow/600" }
+      "$extensions": {
+        "figmaStyleName": "shadow/600"
+      }
+    },
+    "top": {
+      "100": {
+        "$type": "shadow",
+        "$value": [
+          {
+            "type": "dropShadow",
+            "offsetX": "0px",
+            "offsetY": "-2px",
+            "blur": "4px",
+            "spread": "0px",
+            "color": "rgba(60, 74, 87, 0.06)",
+            "blendMode": "NORMAL",
+            "visible": true
+          },
+          {
+            "type": "dropShadow",
+            "offsetX": "0px",
+            "offsetY": "0px",
+            "blur": "1px",
+            "spread": "0px",
+            "color": "rgba(60, 74, 87, 0.24)",
+            "blendMode": "NORMAL",
+            "visible": true
+          }
+        ],
+        "$extensions": {
+          "figmaStyleName": "shadow/top/100"
+        }
+      },
+      "200": {
+        "$type": "shadow",
+        "$value": [
+          {
+            "type": "dropShadow",
+            "offsetX": "0px",
+            "offsetY": "-6px",
+            "blur": "12px",
+            "spread": "0px",
+            "color": "rgba(60, 74, 87, 0.06)",
+            "blendMode": "NORMAL",
+            "visible": true
+          },
+          {
+            "type": "dropShadow",
+            "offsetX": "0px",
+            "offsetY": "0px",
+            "blur": "1px",
+            "spread": "0px",
+            "color": "rgba(60, 74, 87, 0.2)",
+            "blendMode": "NORMAL",
+            "visible": true
+          }
+        ],
+        "$extensions": {
+          "figmaStyleName": "shadow/top/200"
+        }
+      },
+      "300": {
+        "$type": "shadow",
+        "$value": [
+          {
+            "type": "dropShadow",
+            "offsetX": "0px",
+            "offsetY": "-8px",
+            "blur": "16px",
+            "spread": "0px",
+            "color": "rgba(60, 74, 87, 0.1)",
+            "blendMode": "NORMAL",
+            "visible": true
+          },
+          {
+            "type": "dropShadow",
+            "offsetX": "0px",
+            "offsetY": "0px",
+            "blur": "1px",
+            "spread": "0px",
+            "color": "rgba(60, 74, 87, 0.2)",
+            "blendMode": "NORMAL",
+            "visible": true
+          }
+        ],
+        "$extensions": {
+          "figmaStyleName": "shadow/top/300"
+        }
+      },
+      "400": {
+        "$type": "shadow",
+        "$value": [
+          {
+            "type": "dropShadow",
+            "offsetX": "0px",
+            "offsetY": "-12px",
+            "blur": "32px",
+            "spread": "0px",
+            "color": "rgba(60, 74, 87, 0.1)",
+            "blendMode": "NORMAL",
+            "visible": true
+          },
+          {
+            "type": "dropShadow",
+            "offsetX": "0px",
+            "offsetY": "0px",
+            "blur": "1px",
+            "spread": "0px",
+            "color": "rgba(60, 74, 87, 0.2)",
+            "blendMode": "NORMAL",
+            "visible": true
+          }
+        ],
+        "$extensions": {
+          "figmaStyleName": "shadow/top/400"
+        }
+      },
+      "500": {
+        "$type": "shadow",
+        "$value": [
+          {
+            "type": "dropShadow",
+            "offsetX": "0px",
+            "offsetY": "-24px",
+            "blur": "56px",
+            "spread": "0px",
+            "color": "rgba(60, 74, 87, 0.08)",
+            "blendMode": "NORMAL",
+            "visible": true
+          },
+          {
+            "type": "dropShadow",
+            "offsetX": "0px",
+            "offsetY": "0px",
+            "blur": "1px",
+            "spread": "0px",
+            "color": "rgba(60, 74, 87, 0.2)",
+            "blendMode": "NORMAL",
+            "visible": true
+          }
+        ],
+        "$extensions": {
+          "figmaStyleName": "shadow/top/500"
+        }
+      }
     },
     "focus": {
       "$type": "shadow",
@@ -300,7 +324,9 @@
           "visible": true
         }
       ],
-      "$extensions": { "figmaStyleName": "shadow/focus" }
+      "$extensions": {
+        "figmaStyleName": "shadow/focus"
+      }
     },
     "selected": {
       "$type": "shadow",
@@ -316,7 +342,9 @@
           "visible": true
         }
       ],
-      "$extensions": { "figmaStyleName": "shadow/selected" }
+      "$extensions": {
+        "figmaStyleName": "shadow/selected"
+      }
     },
     "inverse": {
       "$type": "shadow",
@@ -342,7 +370,9 @@
           "visible": true
         }
       ],
-      "$extensions": { "figmaStyleName": "shadow/inverse" }
+      "$extensions": {
+        "figmaStyleName": "shadow/inverse"
+      }
     },
     "button": {
       "hover": {
@@ -369,7 +399,9 @@
             "visible": true
           }
         ],
-        "$extensions": { "figmaStyleName": "shadow/button/hover" }
+        "$extensions": {
+          "figmaStyleName": "shadow/button/hover"
+        }
       }
     },
     "blue": {
@@ -387,7 +419,9 @@
             "visible": true
           }
         ],
-        "$extensions": { "figmaStyleName": "shadow/blue/100" }
+        "$extensions": {
+          "figmaStyleName": "shadow/blue/100"
+        }
       },
       "400": {
         "$type": "shadow",
@@ -403,7 +437,9 @@
             "visible": true
           }
         ],
-        "$extensions": { "figmaStyleName": "shadow/blue/400" }
+        "$extensions": {
+          "figmaStyleName": "shadow/blue/400"
+        }
       }
     },
     "green": {
@@ -421,7 +457,9 @@
             "visible": true
           }
         ],
-        "$extensions": { "figmaStyleName": "shadow/green/100" }
+        "$extensions": {
+          "figmaStyleName": "shadow/green/100"
+        }
       },
       "400": {
         "$type": "shadow",
@@ -437,7 +475,9 @@
             "visible": true
           }
         ],
-        "$extensions": { "figmaStyleName": "shadow/green/400" }
+        "$extensions": {
+          "figmaStyleName": "shadow/green/400"
+        }
       }
     },
     "yellow": {
@@ -455,7 +495,9 @@
             "visible": true
           }
         ],
-        "$extensions": { "figmaStyleName": "shadow/yellow/100" }
+        "$extensions": {
+          "figmaStyleName": "shadow/yellow/100"
+        }
       },
       "400": {
         "$type": "shadow",
@@ -471,7 +513,9 @@
             "visible": true
           }
         ],
-        "$extensions": { "figmaStyleName": "shadow/yellow/400" }
+        "$extensions": {
+          "figmaStyleName": "shadow/yellow/400"
+        }
       }
     },
     "red": {
@@ -489,7 +533,9 @@
             "visible": true
           }
         ],
-        "$extensions": { "figmaStyleName": "shadow/red/100" }
+        "$extensions": {
+          "figmaStyleName": "shadow/red/100"
+        }
       },
       "400": {
         "$type": "shadow",
@@ -505,7 +551,9 @@
             "visible": true
           }
         ],
-        "$extensions": { "figmaStyleName": "shadow/red/400" }
+        "$extensions": {
+          "figmaStyleName": "shadow/red/400"
+        }
       }
     }
   }
