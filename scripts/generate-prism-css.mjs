@@ -3,7 +3,10 @@ import path from "node:path"
 
 const root = process.cwd()
 
-const sources = [
+// Light sources feed the :root block. Component/Typography/Effects have no
+// dark-mode variant — they stay defined once, and cascade through whichever
+// Primitive/Semantic values are active via the CSS variables they reference.
+const lightSourceDefs = [
   {
     prefix: "p",
     label: "Primitive tokens",
@@ -28,6 +31,23 @@ const sources = [
     prefix: "e",
     label: "Effect styles",
     file: "tokens/E_Effects.styles.json",
+  },
+]
+
+// Dark sources feed the .dark block. Same prefixes ("p", "s") as light, on
+// purpose — variable names must stay identical between :root and .dark so
+// the browser's cascade is what switches the theme, not a second naming
+// scheme. Only Primitive and Semantic have dark exports today.
+const darkSourceDefs = [
+  {
+    prefix: "p",
+    label: "Primitive tokens (Dark)",
+    file: "tokens/P_Dark.tokens.json",
+  },
+  {
+    prefix: "s",
+    label: "Semantic tokens (Dark)",
+    file: "tokens/S_Dark.tokens.json",
   },
 ]
 
@@ -146,63 +166,6 @@ function shadowToCss(value) {
     .join(", ")
 }
 
-const loadedSources = sources.map((source) => {
-  const absolutePath = path.join(root, source.file)
-
-  if (!fs.existsSync(absolutePath)) {
-    throw new Error(`Missing token file: ${source.file}`)
-  }
-
-  const json = JSON.parse(fs.readFileSync(absolutePath, "utf8"))
-
-  return {
-    ...source,
-    tokens: flattenTokens(json),
-  }
-})
-
-// Each token path maps to every source that defines it. A path defined in
-// more than one source (e.g. a component token and a semantic token sharing
-// the same dot-path) is a collision: the bracket reference syntax used in
-// $value ("{some.path}") carries no source/layer qualifier, so there is no
-// safe way to guess which one a reference was meant to resolve to.
-const tokenIndex = new Map()
-
-for (const source of loadedSources) {
-  for (const tokenPath of Object.keys(source.tokens)) {
-    const candidate = { prefix: source.prefix, label: source.label, cssName: cssName(source.prefix, tokenPath) }
-
-    if (tokenIndex.has(tokenPath)) {
-      tokenIndex.get(tokenPath).push(candidate)
-    } else {
-      tokenIndex.set(tokenPath, [candidate])
-    }
-  }
-}
-
-const collisions = [...tokenIndex.entries()].filter(([, candidates]) => candidates.length > 1)
-
-if (collisions.length > 0) {
-  console.warn(
-    `Warning: ${collisions.length} token path(s) are defined in more than one source. ` +
-      `Any unqualified reference to these paths is ambiguous and will fail to resolve ` +
-      `until disambiguated (a qualified reference such as "{s.path}" is unaffected):`,
-  )
-
-  for (const [tokenPath, candidates] of collisions) {
-    console.warn(
-      `  "${tokenPath}" -> ${candidates.map((c) => `${c.label} (${c.cssName})`).join(", ")}`,
-    )
-  }
-}
-
-// Sources are also indexed by their prefix so a qualified reference
-// ("{s.color.surface.disabled}") can resolve inside exactly one named
-// source, bypassing cross-source ambiguity by construction rather than by
-// guessing. Unqualified references ("{color.surface.disabled}") keep going
-// through the flat, collision-checked tokenIndex above unchanged.
-const sourcesByPrefix = new Map(loadedSources.map((source) => [source.prefix, source]))
-
 // A qualified reference always starts with a single-letter prefix followed
 // by a dot ("{s.color.surface.disabled}"). Every real token path segment
 // exported from Figma is a multi-character word (verified: no source has a
@@ -211,7 +174,74 @@ const sourcesByPrefix = new Map(loadedSources.map((source) => [source.prefix, so
 // reported as its own distinct failure rather than a generic "not found".
 const qualifiedReferencePattern = /^([a-z])\.(.+)$/
 
-function valueToCss(tokenPath, value) {
+// Builds a self-contained resolution context (loaded/flattened sources, a
+// collision-aware flat path index for bare references, and a prefix index
+// for qualified references) from a list of source definitions. Used once
+// for the light sources and once for the dark sources — light and dark
+// never share a context, so a dark reference can never accidentally
+// resolve against a light source, or vice versa.
+function buildContext(sourceDefs, contextLabel) {
+  const loadedSources = sourceDefs.map((source) => {
+    const absolutePath = path.join(root, source.file)
+
+    if (!fs.existsSync(absolutePath)) {
+      throw new Error(`Missing token file: ${source.file}`)
+    }
+
+    const json = JSON.parse(fs.readFileSync(absolutePath, "utf8"))
+
+    return {
+      ...source,
+      tokens: flattenTokens(json),
+    }
+  })
+
+  // Each token path maps to every source (within this context) that defines
+  // it. A path defined in more than one source is a collision: the bracket
+  // reference syntax used in $value ("{some.path}") carries no source/layer
+  // qualifier, so there is no safe way to guess which one a bare reference
+  // was meant to resolve to.
+  const tokenIndex = new Map()
+
+  for (const source of loadedSources) {
+    for (const tokenPath of Object.keys(source.tokens)) {
+      const candidate = { prefix: source.prefix, label: source.label, cssName: cssName(source.prefix, tokenPath) }
+
+      if (tokenIndex.has(tokenPath)) {
+        tokenIndex.get(tokenPath).push(candidate)
+      } else {
+        tokenIndex.set(tokenPath, [candidate])
+      }
+    }
+  }
+
+  const collisions = [...tokenIndex.entries()].filter(([, candidates]) => candidates.length > 1)
+
+  if (collisions.length > 0) {
+    console.warn(
+      `Warning (${contextLabel}): ${collisions.length} token path(s) are defined in more than one source. ` +
+        `Any unqualified reference to these paths is ambiguous and will fail to resolve ` +
+        `until disambiguated (a qualified reference such as "{s.path}" is unaffected):`,
+    )
+
+    for (const [tokenPath, candidates] of collisions) {
+      console.warn(
+        `  "${tokenPath}" -> ${candidates.map((c) => `${c.label} (${c.cssName})`).join(", ")}`,
+      )
+    }
+  }
+
+  // Sources are also indexed by their prefix so a qualified reference
+  // ("{s.color.surface.disabled}") can resolve inside exactly one named
+  // source, bypassing cross-source ambiguity by construction rather than by
+  // guessing. Unqualified references ("{color.surface.disabled}") keep going
+  // through the flat, collision-checked tokenIndex above unchanged.
+  const sourcesByPrefix = new Map(loadedSources.map((source) => [source.prefix, source]))
+
+  return { loadedSources, tokenIndex, collisions, sourcesByPrefix }
+}
+
+function valueToCss(tokenPath, value, context) {
   if (typeof value === "string") {
     const reference = value.match(/^\{(.+)\}$/)
 
@@ -220,13 +250,13 @@ function valueToCss(tokenPath, value) {
 
       if (qualified) {
         const [, sourcePrefix, remainder] = qualified
-        const source = sourcesByPrefix.get(sourcePrefix)
+        const source = context.sourcesByPrefix.get(sourcePrefix)
 
         if (!source) {
           throw new Error(
             `Unknown source prefix "${sourcePrefix}" in qualified reference "${value}" ` +
               `in token "${tokenPath}". Known prefixes: ` +
-              `${loadedSources.map((s) => `"${s.prefix}" (${s.label})`).join(", ")}.`,
+              `${context.loadedSources.map((s) => `"${s.prefix}" (${s.label})`).join(", ")}.`,
           )
         }
 
@@ -242,7 +272,7 @@ function valueToCss(tokenPath, value) {
         return `var(${cssName(source.prefix, remainder)})`
       }
 
-      const candidates = tokenIndex.get(reference[1])
+      const candidates = context.tokenIndex.get(reference[1])
 
       if (!candidates) {
         throw new Error(
@@ -283,18 +313,8 @@ function valueToCss(tokenPath, value) {
   return JSON.stringify(value)
 }
 
-const lines = [
-  "/*",
-  " * Generated from Prism token and style exports.",
-  " * Do not edit this file manually.",
-  " * Run: npm run tokens:generate",
-  " */",
-  "",
-  ":root {",
-]
-
-for (const source of loadedSources) {
-  lines.push(`  /* ${source.label} */`)
+function renderSourceTokens(source, context) {
+  const lines = [`  /* ${source.label} */`]
 
   const sortedEntries = Object.entries(source.tokens).sort(([a], [b]) =>
     a.localeCompare(b),
@@ -319,12 +339,38 @@ for (const source of loadedSources) {
     }
 
     const variableName = cssName(source.prefix, tokenPath)
-    const variableValue = valueToCss(tokenPath, token.$value)
+    const variableValue = valueToCss(tokenPath, token.$value, context)
 
     lines.push(`  ${variableName}: ${variableValue};`)
   }
 
   lines.push("")
+
+  return lines
+}
+
+const lightContext = buildContext(lightSourceDefs, "light")
+const darkContext = buildContext(darkSourceDefs, "dark")
+
+const lines = [
+  "/*",
+  " * Generated from Prism token and style exports.",
+  " * Do not edit this file manually.",
+  " * Run: npm run tokens:generate",
+  " */",
+  "",
+  ":root {",
+]
+
+for (const source of lightContext.loadedSources) {
+  lines.push(...renderSourceTokens(source, lightContext))
+}
+
+lines.push("}", "")
+lines.push(".dark {")
+
+for (const source of darkContext.loadedSources) {
+  lines.push(...renderSourceTokens(source, darkContext))
 }
 
 lines.push("}", "")
@@ -335,5 +381,7 @@ fs.mkdirSync(path.dirname(outputPath), { recursive: true })
 fs.writeFileSync(outputPath, lines.join("\n"), "utf8")
 
 console.log(
-  `Generated ${path.relative(root, outputPath)} from ${loadedSources.length} token files.`,
+  `Generated ${path.relative(root, outputPath)} from ` +
+    `${lightContext.loadedSources.length + darkContext.loadedSources.length} token files ` +
+    `(${lightContext.loadedSources.length} light, ${darkContext.loadedSources.length} dark).`,
 )
