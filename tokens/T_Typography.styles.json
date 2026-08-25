@@ -15,7 +15,9 @@
             "textCase": "none",
             "textDecoration": "none"
           },
-          "$extensions": { "figmaStyleName": "font.heading.XXXLarge.semibold" }
+          "$extensions": {
+            "figmaStyleName": "font.heading.XXXLarge.semibold"
+          }
         },
         "regular": {
           "$type": "typography",
@@ -30,7 +32,9 @@
             "textCase": "none",
             "textDecoration": "none"
           },
-          "$extensions": { "figmaStyleName": "font.heading.XXXLarge.regular" }
+          "$extensions": {
+            "figmaStyleName": "font.heading.XXXLarge.regular"
+          }
         },
         "light": {
           "$type": "typography",
@@ -45,7 +49,9 @@
             "textCase": "none",
             "textDecoration": "none"
           },
-          "$extensions": { "figmaStyleName": "font.heading.XXXLarge.light" }
+          "$extensions": {
+            "figmaStyleName": "font.heading.XXXLarge.light"
+          }
         }
       },
       "XXLarge": {
@@ -62,7 +68,9 @@
             "textCase": "none",
             "textDecoration": "none"
           },
-          "$extensions": { "figmaStyleName": "font.heading.XXLarge.semibold" }
+          "$extensions": {
+            "figmaStyleName": "font.heading.XXLarge.semibold"
+          }
         }
       },
       "XLarge": {
@@ -79,7 +87,9 @@
             "textCase": "none",
             "textDecoration": "none"
           },
-          "$extensions": { "figmaStyleName": "font.heading.XLarge.semibold" }
+          "$extensions": {
+            "figmaStyleName": "font.heading.XLarge.semibold"
+          }
         }
       },
       "large": {
@@ -95,7 +105,9 @@
           "textCase": "none",
           "textDecoration": "none"
         },
-        "$extensions": { "figmaStyleName": "font.heading.large" }
+        "$extensions": {
+          "figmaStyleName": "font.heading.large"
+        }
       },
       "medium": {
         "$type": "typography",
@@ -110,7 +122,9 @@
           "textCase": "none",
           "textDecoration": "none"
         },
-        "$extensions": { "figmaStyleName": "font.heading.medium" }
+        "$extensions": {
+          "figmaStyleName": "font.heading.medium"
+        }
       },
       "small": {
         "$type": "typography",
@@ -125,7 +139,9 @@
           "textCase": "none",
           "textDecoration": "none"
         },
-        "$extensions": { "figmaStyleName": "font.heading.small" }
+        "$extensions": {
+          "figmaStyleName": "font.heading.small"
+        }
       },
       "xsmall": {
         "$type": "typography",
@@ -140,7 +156,9 @@
           "textCase": "none",
           "textDecoration": "none"
         },
-        "$extensions": { "figmaStyleName": "font.heading.xsmall" }
+        "$extensions": {
+          "figmaStyleName": "font.heading.xsmall"
+        }
       },
       "xxsmall": {
         "$type": "typography",
@@ -155,7 +173,9 @@
           "textCase": "none",
           "textDecoration": "none"
         },
-        "$extensions": { "figmaStyleName": "font.heading.xxsmall" }
+        "$extensions": {
+          "figmaStyleName": "font.heading.xxsmall"
+        }
       },
       "xxxsmall": {
         "$type": "typography",
@@ -170,7 +190,9 @@
           "textCase": "none",
           "textDecoration": "none"
         },
-        "$extensions": { "figmaStyleName": "font.heading.xxxsmall" }
+        "$extensions": {
+          "figmaStyleName": "font.heading.xxxsmall"
+        }
       }
     },
     "body": {
@@ -187,7 +209,9 @@
           "textCase": "none",
           "textDecoration": "none"
         },
-        "$extensions": { "figmaStyleName": "font.body.large" }
+        "$extensions": {
+          "figmaStyleName": "font.body.large"
+        }
       },
       "medium": {
         "$type": "typography",
@@ -202,7 +226,9 @@
           "textCase": "none",
           "textDecoration": "none"
         },
-        "$extensions": { "figmaStyleName": "font.body.medium" }
+        "$extensions": {
+          "figmaStyleName": "font.body.medium"
+        }
       }
     },
     "label": {
@@ -219,7 +245,9 @@
           "textCase": "none",
           "textDecoration": "none"
         },
-        "$extensions": { "figmaStyleName": "font.label.small" }
+        "$extensions": {
+          "figmaStyleName": "font.label.small"
+        }
       },
       "xsmall": {
         "$type": "typography",
@@ -234,25 +262,31 @@
           "textCase": "none",
           "textDecoration": "none"
         },
-        "$extensions": { "figmaStyleName": "font.label.xsmall" }
+        "$extensions": {
+          "figmaStyleName": "font.label.xsmall"
+        }
       }
     }
   },
   "button": {
     "font": {
-      "$type": "typography",
-      "$value": {
-        "fontFamily": "Noto Sans",
-        "fontStyle": "SemiBold",
-        "fontWeight": 600,
-        "fontSize": "14px",
-        "lineHeight": "24px",
-        "letterSpacing": "0%",
-        "paragraphSpacing": "0px",
-        "textCase": "none",
-        "textDecoration": "none"
+      "default": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Noto Sans",
+          "fontStyle": "SemiBold",
+          "fontWeight": 600,
+          "fontSize": "14px",
+          "lineHeight": "24px",
+          "letterSpacing": "0%",
+          "paragraphSpacing": "0px",
+          "textCase": "none",
+          "textDecoration": "none"
+        },
+        "$extensions": {
+          "figmaStyleName": "button/font/default"
+        }
       },
-      "$extensions": { "figmaStyleName": "button.font" },
       "small": {
         "$type": "typography",
         "$value": {
@@ -266,7 +300,9 @@
           "textCase": "none",
           "textDecoration": "none"
         },
-        "$extensions": { "figmaStyleName": "button.font.small" }
+        "$extensions": {
+          "figmaStyleName": "button.font.small"
+        }
       }
     }
   },
@@ -284,7 +320,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "dropdown.font" }
+      "$extensions": {
+        "figmaStyleName": "dropdown.font"
+      }
     }
   },
   "search": {
@@ -301,7 +339,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "search.font" }
+      "$extensions": {
+        "figmaStyleName": "search.font"
+      }
     }
   },
   "tab": {
@@ -318,7 +358,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "tab.font" }
+      "$extensions": {
+        "figmaStyleName": "tab.font"
+      }
     }
   },
   "tooltip": {
@@ -335,7 +377,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "tooltip.font" }
+      "$extensions": {
+        "figmaStyleName": "tooltip.font"
+      }
     }
   },
   "toast": {
@@ -352,7 +396,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "toast.font" }
+      "$extensions": {
+        "figmaStyleName": "toast.font"
+      }
     }
   },
   "banner": {
@@ -369,7 +415,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "banner.font" }
+      "$extensions": {
+        "figmaStyleName": "banner.font"
+      }
     }
   },
   "modal": {
@@ -386,7 +434,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "modal.font" }
+      "$extensions": {
+        "figmaStyleName": "modal.font"
+      }
     }
   },
   "breadcrumb": {
@@ -403,7 +453,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "breadcrumb.font" }
+      "$extensions": {
+        "figmaStyleName": "breadcrumb.font"
+      }
     }
   },
   "pagination": {
@@ -420,7 +472,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "pagination.font" }
+      "$extensions": {
+        "figmaStyleName": "pagination.font"
+      }
     }
   },
   "table": {
@@ -437,7 +491,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "table.font" }
+      "$extensions": {
+        "figmaStyleName": "table.font"
+      }
     }
   },
   "accordion": {
@@ -454,7 +510,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "accordion.font" }
+      "$extensions": {
+        "figmaStyleName": "accordion.font"
+      }
     }
   },
   "inputnumber": {
@@ -471,7 +529,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "inputnumber.font" }
+      "$extensions": {
+        "figmaStyleName": "inputnumber.font"
+      }
     }
   },
   "chip": {
@@ -488,7 +548,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "chip.font" }
+      "$extensions": {
+        "figmaStyleName": "chip.font"
+      }
     }
   },
   "statuslabel": {
@@ -505,7 +567,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "statuslabel.font" }
+      "$extensions": {
+        "figmaStyleName": "statuslabel.font"
+      }
     }
   },
   "checkbox": {
@@ -522,7 +586,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "checkbox.font" }
+      "$extensions": {
+        "figmaStyleName": "checkbox.font"
+      }
     }
   },
   "radio": {
@@ -539,7 +605,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "radio.font" }
+      "$extensions": {
+        "figmaStyleName": "radio.font"
+      }
     }
   },
   "textfield": {
@@ -556,7 +624,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "textfield.font" }
+      "$extensions": {
+        "figmaStyleName": "textfield.font"
+      }
     }
   },
   "formfield": {
@@ -573,7 +643,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "formfield.font" }
+      "$extensions": {
+        "figmaStyleName": "formfield.font"
+      }
     }
   },
   "datepicker": {
@@ -590,7 +662,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "datepicker.font" }
+      "$extensions": {
+        "figmaStyleName": "datepicker.font"
+      }
     }
   },
   "tree": {
@@ -608,7 +682,9 @@
           "textCase": "none",
           "textDecoration": "none"
         },
-        "$extensions": { "figmaStyleName": "tree.font.default" }
+        "$extensions": {
+          "figmaStyleName": "tree.font.default"
+        }
       },
       "selected": {
         "$type": "typography",
@@ -623,7 +699,9 @@
           "textCase": "none",
           "textDecoration": "none"
         },
-        "$extensions": { "figmaStyleName": "tree.font.selected" }
+        "$extensions": {
+          "figmaStyleName": "tree.font.selected"
+        }
       }
     }
   },
@@ -641,7 +719,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "metricXXLarge.font" }
+      "$extensions": {
+        "figmaStyleName": "metricXXLarge.font"
+      }
     }
   },
   "metricXLarge": {
@@ -658,7 +738,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "metricXLarge.font" }
+      "$extensions": {
+        "figmaStyleName": "metricXLarge.font"
+      }
     }
   },
   "metricLarge": {
@@ -675,7 +757,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "metricLarge.font" }
+      "$extensions": {
+        "figmaStyleName": "metricLarge.font"
+      }
     }
   },
   "metricDefault": {
@@ -692,7 +776,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "metricDefault.font" }
+      "$extensions": {
+        "figmaStyleName": "metricDefault.font"
+      }
     }
   },
   "metricLabel": {
@@ -709,7 +795,9 @@
         "textCase": "none",
         "textDecoration": "none"
       },
-      "$extensions": { "figmaStyleName": "metricLabel.font" }
+      "$extensions": {
+        "figmaStyleName": "metricLabel.font"
+      }
     }
   }
 }

@@ -14,7 +14,7 @@
             "alpha": 1,
             "hex": "#0369E9"
           },
-          "$description": "Primary action default — button fill, link colour, active nav indicator. Light: royalBlue/700. Dark: royalBlue/600.",
+          "$description": "Primary action default — button fill, link colour, active nav indicator. Aliases color/royalBlue/700 (Light), color/royalBlue/600 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:185:3",
             "com.figma.scopes": [
@@ -40,7 +40,7 @@
             "alpha": 1,
             "hex": "#3084ED"
           },
-          "$description": "Primary action hover — darken on pointer-over. Light: royalBlue/600. Dark: royalBlue/600.",
+          "$description": "Primary action hover — darken on pointer-over. Aliases color/royalBlue/600.",
           "$extensions": {
             "com.figma.variableId": "VariableID:185:4",
             "com.figma.scopes": [
@@ -66,7 +66,7 @@
             "alpha": 1,
             "hex": "#035BC6"
           },
-          "$description": "Primary action pressed — deepest shade on mouse-down. Light: royalBlue/800. Dark: royalBlue/800.",
+          "$description": "Primary action pressed — deepest shade on mouse-down. Aliases color/royalBlue/800.",
           "$extensions": {
             "com.figma.variableId": "VariableID:185:5",
             "com.figma.scopes": [
@@ -92,7 +92,7 @@
             "alpha": 1,
             "hex": "#62A1F1"
           },
-          "$description": "Primary action subtle — soft accent for selected rows and active states. Light: royalBlue/500. Dark: royalBlue/400.",
+          "$description": "Primary action subtle — soft accent for selected rows and active states. Aliases color/royalBlue/500 (Light), color/royalBlue/400 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:185:6",
             "com.figma.scopes": [
@@ -118,7 +118,7 @@
             "alpha": 1,
             "hex": "#F5F9FE"
           },
-          "$description": "Primary action subtlest — lightest tint for hover backgrounds and focus areas. Light: royalBlue/100. Dark: royalBlue/900.",
+          "$description": "Primary action subtlest — lightest tint for hover backgrounds and focus areas. Aliases color/royalBlue/100 (Light), color/royalBlue/900 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:185:7",
             "com.figma.scopes": [
@@ -144,7 +144,7 @@
             "alpha": 1,
             "hex": "#035BC6"
           },
-          "$description": "Visited link colour. Light: royalBlue/800. Dark: royalBlue/300.",
+          "$description": "Visited link colour. Aliases color/royalBlue/800 (Light), color/royalBlue/300 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:827:106",
             "com.figma.scopes": [
@@ -172,7 +172,7 @@
             "alpha": 1,
             "hex": "#FFFFFF"
           },
-          "$description": "Secondary action default — ghost button border and text. Light: royalBlue/700.",
+          "$description": "Secondary action default — ghost button border and text. Aliases color/neutral/0 (Light), color/neutral/800 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:185:8",
             "com.figma.scopes": [
@@ -198,7 +198,7 @@
             "alpha": 1,
             "hex": "#E6F0FD"
           },
-          "$description": "Secondary action hover background. Light: royalBlue/100.",
+          "$description": "Secondary action hover background. Aliases color/royalBlue/200 (Light), color/royalBlue/800 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:185:9",
             "com.figma.scopes": [
@@ -224,7 +224,7 @@
             "alpha": 1,
             "hex": "#D2E4FB"
           },
-          "$description": "Secondary action pressed background. Light: royalBlue/200.",
+          "$description": "Secondary action pressed background. Aliases color/royalBlue/300 (Light), color/royalBlue/900 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:185:10",
             "com.figma.scopes": [
@@ -245,22 +245,22 @@
           "$value": {
             "colorSpace": "srgb",
             "components": [
-              0.8627451062202454,
-              0.21176470816135406,
-              0.14901961386203766
+              0.7490196228027344,
+              0.12941177189350128,
+              0.05098039284348488
             ],
             "alpha": 1,
-            "hex": "#DC3626"
+            "hex": "#BF210D"
           },
-          "$description": "Destructive action — delete, irreversible operations",
+          "$description": "Destructive action — delete, irreversible operations. Aliases color/tartRed/800 (Light), color/tartRed/500 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:185:11",
             "com.figma.scopes": [
               "ALL_SCOPES"
             ],
             "com.figma.aliasData": {
-              "targetVariableId": "VariableID:459f443f701bd8e540a8e264930fe2ab4753ceaf/-1:-1",
-              "targetVariableName": "color/tartRed/700",
+              "targetVariableId": "VariableID:b22195c0aba2a739803b9c99461c1cc8bbc1d611/-1:-1",
+              "targetVariableName": "color/tartRed/800",
               "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
               "targetVariableSetName": "⛔ Primitives — Do not use directly"
             }
@@ -278,7 +278,7 @@
             "alpha": 1,
             "hex": "#BF210D"
           },
-          "$description": "Destructive action hover — darker red for delete/danger button hover state.",
+          "$description": "Destructive action hover — darker red for delete/danger button hover state. Aliases color/tartRed/800 (Light), color/tartRed/500 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:185:12",
             "com.figma.scopes": [
@@ -304,7 +304,7 @@
             "alpha": 1,
             "hex": "#9A1C0B"
           },
-          "$description": "Destructive action pressed — deepest red for delete/danger button mouse-down.",
+          "$description": "Destructive action pressed — deepest red for delete/danger button mouse-down. Aliases color/tartRed/900 (Light), color/tartRed/400 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:185:13",
             "com.figma.scopes": [
@@ -332,7 +332,7 @@
             "alpha": 1,
             "hex": "#FFFFFF"
           },
-          "$description": "Neutral action default — tertiary button resting state. Transparent surface.",
+          "$description": "Neutral action default — tertiary button resting state. Transparent surface. Aliases color/neutral/0 (Light), color/neutral/900 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:704:137",
             "com.figma.scopes": [
@@ -358,7 +358,7 @@
             "alpha": 1,
             "hex": "#FDFDFE"
           },
-          "$description": "Neutral action hover — subtle grey fill on pointer-over.",
+          "$description": "Neutral action hover — subtle grey fill on pointer-over. Aliases color/neutral/100 (Light), color/neutral/800 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:704:138",
             "com.figma.scopes": [
@@ -384,7 +384,7 @@
             "alpha": 1,
             "hex": "#F5F7F9"
           },
-          "$description": "Neutral action active/pressed — slightly deeper grey on mouse-down.",
+          "$description": "Neutral action active/pressed — slightly deeper grey on mouse-down. Aliases color/neutral/200 (Light), color/neutral/700 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:704:139",
             "com.figma.scopes": [
@@ -412,7 +412,7 @@
             "alpha": 1,
             "hex": "#58C5D5"
           },
-          "$description": "Accent action color for secondary interactive elements — distinct from primary action.",
+          "$description": "Accent action color for secondary interactive elements — distinct from primary action. Aliases color/pacificBlue/600 (Light), color/pacificBlue/500 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:3660:13746",
             "com.figma.scopes": [
@@ -438,7 +438,7 @@
             "alpha": 1,
             "hex": "#24A6BA"
           },
-          "$description": "Accent action color on hover state.",
+          "$description": "Accent action color on hover state. Aliases color/pacificBlue/800 (Light), color/pacificBlue/200 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:3660:13747",
             "com.figma.scopes": [
@@ -467,7 +467,7 @@
           "alpha": 1,
           "hex": "#181F26"
         },
-        "$description": "Primary text — body copy, headings. Light: neutral/900. Dark: neutral/100.",
+        "$description": "Primary text — body copy, headings. Aliases color/neutral/900 (Light), color/neutral/100 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:185:14",
           "com.figma.scopes": [
@@ -493,7 +493,7 @@
           "alpha": 1,
           "hex": "#3C4A57"
         },
-        "$description": "Secondary text — metadata, supporting labels. Light: neutral/700. Dark: neutral/400.",
+        "$description": "Secondary text — metadata, supporting labels. Aliases color/neutral/700 (Light), color/neutral/400 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:185:15",
           "com.figma.scopes": [
@@ -519,7 +519,7 @@
           "alpha": 1,
           "hex": "#5F6C7A"
         },
-        "$description": "Tertiary text — placeholders, disabled labels. Light: neutral/600. Dark: neutral/500.",
+        "$description": "Tertiary text — placeholders, disabled labels. Aliases color/neutral/600 (Light), color/neutral/500 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:185:16",
           "com.figma.scopes": [
@@ -545,7 +545,7 @@
           "alpha": 1,
           "hex": "#ACB4BD"
         },
-        "$description": "Disabled text — non-interactive labels. Light: neutral/500. Dark: neutral/600.",
+        "$description": "Disabled text — non-interactive labels. Aliases color/neutral/500 (Light), color/neutral/600 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:185:17",
           "com.figma.scopes": [
@@ -571,7 +571,7 @@
           "alpha": 1,
           "hex": "#6E32AE"
         },
-        "$description": "Purple accent text — for beta and accent labels. Pending Brand collection migration.",
+        "$description": "Purple accent text — for beta and accent labels. Pending Brand collection migration. Aliases color/purple/700 (Light), color/purple/300 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:785:6",
           "com.figma.scopes": [
@@ -597,7 +597,7 @@
           "alpha": 1,
           "hex": "#12995B"
         },
-        "$description": "Success text — for status labels and success messages on light backgrounds. Light: freshGreen/800. Dark: freshGreen/400.",
+        "$description": "Success text — for status labels and success messages on light backgrounds. Aliases color/freshGreen/800 (Light), color/freshGreen/400 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:2425:2",
           "com.figma.scopes": [
@@ -623,7 +623,7 @@
           "alpha": 1,
           "hex": "#DF8404"
         },
-        "$description": "Warning text — for warning labels on light backgrounds. Light: honeyAmber/800. Dark: honeyAmber/400.",
+        "$description": "Warning text — for warning labels on light backgrounds. Aliases color/honeyAmber/800 (Light), color/honeyAmber/400 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:2425:3",
           "com.figma.scopes": [
@@ -649,7 +649,7 @@
           "alpha": 1,
           "hex": "#035BC6"
         },
-        "$description": "Information/brand text — for info labels and branded accent text. Light: royalBlue/800. Dark: royalBlue/400.",
+        "$description": "Information/brand text — for info labels and branded accent text. Aliases color/royalBlue/800 (Light), color/royalBlue/400 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:2425:4",
           "com.figma.scopes": [
@@ -675,7 +675,7 @@
           "alpha": 1,
           "hex": "#0369E9"
         },
-        "$description": "Text color for selected items — e.g. selected table rows, active nav items.",
+        "$description": "Text color for selected items — e.g. selected table rows, active nav items. Aliases color/royalBlue/700 (Light), color/royalBlue/300 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:2814:33786",
           "com.figma.scopes": [
@@ -702,7 +702,7 @@
             "alpha": 1,
             "hex": "#3C4A57"
           },
-          "$description": "Inverse subtle text — secondary text on dark surfaces (toast actions). Light: neutral/800. Dark: neutral/300.",
+          "$description": "Inverse subtle text — secondary text on dark surfaces (toast actions). Aliases color/neutral/700 (Light), color/neutral/400 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:2370:2",
             "com.figma.scopes": [
@@ -728,7 +728,7 @@
             "alpha": 1,
             "hex": "#5F6C7A"
           },
-          "$description": "Inverse subtlest text — tertiary text on dark surfaces (toast hover actions). Light: neutral/700. Dark: neutral/400.",
+          "$description": "Inverse subtlest text — tertiary text on dark surfaces (toast hover actions). Aliases color/neutral/600 (Light), color/neutral/500 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:2370:3",
             "com.figma.scopes": [
@@ -754,7 +754,7 @@
             "alpha": 1,
             "hex": "#FFFFFF"
           },
-          "$description": "Inverse text — white text on dark surfaces (toasts, dark nav). Light: neutral/0. Dark: neutral/900.",
+          "$description": "Inverse text — white text on dark surfaces (toasts, dark nav). Aliases color/neutral/0 (Light), color/neutral/900 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:185:18",
             "com.figma.scopes": [
@@ -783,7 +783,7 @@
           "alpha": 1,
           "hex": "#F5F7F9"
         },
-        "$description": "App / page canvas background",
+        "$description": "App / page canvas background. Aliases color/neutral/200 (Light), color/neutral/900 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:185:26",
           "com.figma.scopes": [
@@ -809,7 +809,7 @@
           "alpha": 1,
           "hex": "#FFFFFF"
         },
-        "$description": "Default page/canvas background. Light: neutral/0. Dark: neutral/900.",
+        "$description": "Default page/canvas background. Aliases color/neutral/0 (Light), color/neutral/800 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:185:27",
           "com.figma.scopes": [
@@ -835,7 +835,7 @@
           "alpha": 1,
           "hex": "#F5F7F9"
         },
-        "$description": "Muted surface — disabled backgrounds and skeleton loaders. Light: neutral/200. Dark: neutral/700.",
+        "$description": "Muted surface — disabled backgrounds and skeleton loaders. Aliases color/neutral/200 (Light), color/neutral/700 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:185:28",
           "com.figma.scopes": [
@@ -861,7 +861,7 @@
           "alpha": 1,
           "hex": "#E6E9EC"
         },
-        "$description": "Recessed surface — below default elevation (wells, code blocks). Light: neutral/300. Dark: neutral/800.",
+        "$description": "Recessed surface — below default elevation (wells, code blocks). Aliases color/neutral/300 (Light), color/neutral/900 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:185:29",
           "com.figma.scopes": [
@@ -887,7 +887,7 @@
           "alpha": 1,
           "hex": "#E6E9EC"
         },
-        "$description": "Disabled surface background — for non-interactive panels and containers.",
+        "$description": "Disabled surface background — for non-interactive panels and containers. Aliases color/neutral/300 (Light), color/neutral/700 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:185:30",
           "com.figma.scopes": [
@@ -913,7 +913,7 @@
           "alpha": 1,
           "hex": "#181F26"
         },
-        "$description": "Inverse surface — dark surface on light mode (toasts, dark tooltips). Light: neutral/900. Dark: neutral/0.",
+        "$description": "Inverse surface — dark surface on light mode (toasts, dark tooltips). Aliases color/neutral/900 (Light), color/neutral/0 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:185:31",
           "com.figma.scopes": [
@@ -939,7 +939,7 @@
           "alpha": 1,
           "hex": "#FFFFFF"
         },
-        "$description": "Overlay surface — modal and dialog backgrounds. Light: neutral/0. Dark: neutral/800.",
+        "$description": "Overlay surface — modal and dialog backgrounds. Aliases color/neutral/0 (Light), color/neutral/800 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:185:32",
           "com.figma.scopes": [
@@ -965,7 +965,7 @@
           "alpha": 1,
           "hex": "#E9F8FA"
         },
-        "$description": "Selected row/item background. Light: royalBlue/100.",
+        "$description": "Selected row/item background. Aliases color/pacificBlue/200 (Light), color/pacificBlue/900 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:1790:6",
           "com.figma.scopes": [
@@ -1012,7 +1012,7 @@
             "alpha": 1,
             "hex": "#F0E5FA"
           },
-          "$description": "Purple subtle surface — light purple background. Pending Brand collection migration.",
+          "$description": "Purple subtle surface — light purple background. Pending Brand collection migration. Aliases color/purple/200 (Light), color/purple/800 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:785:8",
             "com.figma.scopes": [
@@ -1038,7 +1038,7 @@
             "alpha": 1,
             "hex": "#6E32AE"
           },
-          "$description": "Purple bold surface — dark purple background. Pending Brand collection migration.",
+          "$description": "Purple bold surface — dark purple background. Pending Brand collection migration. Aliases color/purple/700 (Light), color/purple/300 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:785:9",
             "com.figma.scopes": [
@@ -1067,7 +1067,7 @@
           "alpha": 1,
           "hex": "#D5D9DE"
         },
-        "$description": "Default border/divider — input borders, separators, card outlines. Light: neutral/300. Dark: neutral/600.",
+        "$description": "Default border/divider — input borders, separators, card outlines. Aliases color/neutral/400 (Light), color/neutral/600 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:185:33",
           "com.figma.scopes": [
@@ -1093,7 +1093,7 @@
           "alpha": 1,
           "hex": "#D2E4FB"
         },
-        "$description": "Subtle border — lighter dividers, inner separators. Light: neutral/200. Dark: neutral/700.",
+        "$description": "Subtle border — lighter dividers, inner separators. Aliases color/royalBlue/300 (Light), color/royalBlue/800 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:185:34",
           "com.figma.scopes": [
@@ -1119,7 +1119,7 @@
           "alpha": 1,
           "hex": "#3C4A57"
         },
-        "$description": "Bold border — strong emphasis borders. Heavier than line/default.",
+        "$description": "Bold border — strong emphasis borders. Heavier than line/default. Aliases color/neutral/700 (Light), color/neutral/300 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:185:35",
           "com.figma.scopes": [
@@ -1145,7 +1145,7 @@
           "alpha": 1,
           "hex": "#0369E9"
         },
-        "$description": "Active / focused border — brand blue",
+        "$description": "Active / focused border — brand blue. Aliases color/royalBlue/700 (Light), color/royalBlue/400 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:185:36",
           "com.figma.scopes": [
@@ -1171,7 +1171,7 @@
           "alpha": 1,
           "hex": "#E6E9EC"
         },
-        "$description": "Disabled border — for non-interactive field outlines.",
+        "$description": "Disabled border — for non-interactive field outlines. Aliases color/neutral/300 (Light), color/neutral/700 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:185:37",
           "com.figma.scopes": [
@@ -1200,7 +1200,7 @@
             "alpha": 1,
             "hex": "#13AD68"
           },
-          "$description": "Success fill — green badge background, status dot. Light: freshGreen/600.",
+          "$description": "Success fill — green badge background, status dot. Aliases color/freshGreen/700 (Light), color/freshGreen/400 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:185:38",
             "com.figma.scopes": [
@@ -1226,7 +1226,7 @@
             "alpha": 1,
             "hex": "#F6FDFA"
           },
-          "$description": "Success subtle — light green chip and alert background. Light: freshGreen/300.",
+          "$description": "Success subtle — light green chip and alert background. Aliases color/freshGreen/100 (Light), color/freshGreen/900 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:185:39",
             "com.figma.scopes": [
@@ -1252,7 +1252,7 @@
             "alpha": 1,
             "hex": "#98E7B1"
           },
-          "$description": "Success status — background hover state on success badges and chips. Aliases color/freshGreen/400.",
+          "$description": "Success status — background hover state on success badges and chips. Aliases color/freshGreen/400 (Light), color/freshGreen/600 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:7395:10251",
             "com.figma.scopes": [
@@ -1278,7 +1278,7 @@
             "alpha": 1,
             "hex": "#0F7D4E"
           },
-          "$description": "Success status — selected/pressed text and icon fill. Aliases color/freshGreen/900.",
+          "$description": "Success status — selected/pressed text and icon fill. Aliases color/freshGreen/900 (Light), color/freshGreen/100 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:7395:18093",
             "com.figma.scopes": [
@@ -1331,7 +1331,7 @@
             "alpha": 1,
             "hex": "#F4A702"
           },
-          "$description": "Warning fill — amber badge background, status dot. Light: honeyAmber/600.",
+          "$description": "Warning fill — amber badge background, status dot. Aliases color/honeyAmber/700 (Light), color/honeyAmber/400 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:185:40",
             "com.figma.scopes": [
@@ -1357,7 +1357,7 @@
             "alpha": 1,
             "hex": "#FFFAEB"
           },
-          "$description": "Warning subtle — light amber chip and alert background. Light: honeyAmber/300.",
+          "$description": "Warning subtle — light amber chip and alert background. Aliases color/honeyAmber/100 (Light), color/honeyAmber/900 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:185:41",
             "com.figma.scopes": [
@@ -1383,7 +1383,7 @@
             "alpha": 1,
             "hex": "#FFE18F"
           },
-          "$description": "Warning status — background hover state. Aliases color/honeyAmber/400.",
+          "$description": "Warning status — background hover state. Aliases color/honeyAmber/400 (Light), color/honeyAmber/600 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:7395:10252",
             "com.figma.scopes": [
@@ -1409,7 +1409,7 @@
             "alpha": 1,
             "hex": "#C36900"
           },
-          "$description": "Warning status — selected/pressed fill. Aliases color/honeyAmber/900.",
+          "$description": "Warning status — selected/pressed fill. Aliases color/honeyAmber/900 (Light), color/honeyAmber/100 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:7395:18094",
             "com.figma.scopes": [
@@ -1449,137 +1449,6 @@
           }
         }
       },
-      "neutral": {
-        "default": {
-          "$type": "color",
-          "$value": {
-            "colorSpace": "srgb",
-            "components": [
-              0.23529411852359772,
-              0.29019609093666077,
-              0.34117648005485535
-            ],
-            "alpha": 1,
-            "hex": "#3C4A57"
-          },
-          "$description": "Neutral status color — used for inactive or default status labels.",
-          "$extensions": {
-            "com.figma.variableId": "VariableID:3684:10047",
-            "com.figma.scopes": [
-              "ALL_SCOPES"
-            ],
-            "com.figma.aliasData": {
-              "targetVariableId": "VariableID:f8059a30a0af86896199b924b93612cb4edf85b4/-1:-1",
-              "targetVariableName": "color/neutral/700",
-              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
-              "targetVariableSetName": "⛔ Primitives — Do not use directly"
-            }
-          }
-        },
-        "subtlest": {
-          "$type": "color",
-          "$value": {
-            "colorSpace": "srgb",
-            "components": [
-              0.9607843160629272,
-              0.9686274528503418,
-              0.9764705896377563
-            ],
-            "alpha": 1,
-            "hex": "#F5F7F9"
-          },
-          "$description": "Neutral status subtlest background — used for inactive or default status chips and alerts. Aliases color/neutral/200.",
-          "$extensions": {
-            "com.figma.variableId": "VariableID:3179:2745",
-            "com.figma.scopes": [
-              "ALL_SCOPES"
-            ],
-            "com.figma.aliasData": {
-              "targetVariableId": "VariableID:fa2f0949b9027edc4381da26cc630063678be603/-1:-1",
-              "targetVariableName": "color/neutral/200",
-              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
-              "targetVariableSetName": "⛔ Primitives — Do not use directly"
-            }
-          }
-        },
-        "hover": {
-          "$type": "color",
-          "$value": {
-            "colorSpace": "srgb",
-            "components": [
-              0.8352941274642944,
-              0.8509804010391235,
-              0.8705882430076599
-            ],
-            "alpha": 1,
-            "hex": "#D5D9DE"
-          },
-          "$description": "Neutral status — background hover state. Aliases color/neutral/400.",
-          "$extensions": {
-            "com.figma.variableId": "VariableID:7395:10253",
-            "com.figma.scopes": [
-              "ALL_SCOPES"
-            ],
-            "com.figma.aliasData": {
-              "targetVariableId": "VariableID:437c4818651498931ca1b366012718bb772c6a71/-1:-1",
-              "targetVariableName": "color/neutral/400",
-              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
-              "targetVariableSetName": "⛔ Primitives — Do not use directly"
-            }
-          }
-        },
-        "selected": {
-          "$type": "color",
-          "$value": {
-            "colorSpace": "srgb",
-            "components": [
-              0.0941176488995552,
-              0.12156862765550613,
-              0.14901961386203766
-            ],
-            "alpha": 1,
-            "hex": "#181F26"
-          },
-          "$description": "Neutral status — selected/pressed fill. Aliases color/neutral/900.",
-          "$extensions": {
-            "com.figma.variableId": "VariableID:7395:18095",
-            "com.figma.scopes": [
-              "ALL_SCOPES"
-            ],
-            "com.figma.aliasData": {
-              "targetVariableId": "VariableID:5502683fa03ac5f9b88b7cffdff847900d0f31a8/-1:-1",
-              "targetVariableName": "color/neutral/900",
-              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
-              "targetVariableSetName": "⛔ Primitives — Do not use directly"
-            }
-          }
-        },
-        "subtle": {
-          "$type": "color",
-          "$value": {
-            "colorSpace": "srgb",
-            "components": [
-              0.9019607901573181,
-              0.9137254953384399,
-              0.9254902005195618
-            ],
-            "alpha": 1,
-            "hex": "#E6E9EC"
-          },
-          "$extensions": {
-            "com.figma.variableId": "VariableID:9141:176",
-            "com.figma.scopes": [
-              "ALL_SCOPES"
-            ],
-            "com.figma.aliasData": {
-              "targetVariableId": "VariableID:7575b4f953b44d9db17c19bfcedffa67d72cd2e5/-1:-1",
-              "targetVariableName": "color/neutral/300",
-              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
-              "targetVariableSetName": "⛔ Primitives — Do not use directly"
-            }
-          }
-        }
-      },
       "new": {
         "default": {
           "$type": "color",
@@ -1593,7 +1462,7 @@
             "alpha": 1,
             "hex": "#0369E9"
           },
-          "$description": "New readonly chip — icon and text fill. Aliases color/royalBlue/700.",
+          "$description": "New readonly chip — icon and text fill. Aliases color/royalBlue/700 (Light), color/royalBlue/200 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:7395:18101",
             "com.figma.scopes": [
@@ -1619,7 +1488,7 @@
             "alpha": 1,
             "hex": "#E6F0FD"
           },
-          "$description": "New readonly chip — background fill. Aliases color/royalBlue/200.",
+          "$description": "New readonly chip — background fill. Aliases color/royalBlue/200 (Light), color/royalBlue/700 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:7395:18102",
             "com.figma.scopes": [
@@ -1672,7 +1541,7 @@
             "alpha": 1,
             "hex": "#3C4A57"
           },
-          "$description": "Tutorial readonly chip — icon and text fill. Aliases color/neutral/700.",
+          "$description": "Tutorial readonly chip — icon and text fill. Aliases color/neutral/700 (Light), color/neutral/200 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:7395:18103",
             "com.figma.scopes": [
@@ -1698,7 +1567,7 @@
             "alpha": 1,
             "hex": "#F5F7F9"
           },
-          "$description": "Tutorial readonly chip — background fill. Aliases color/neutral/200.",
+          "$description": "Tutorial readonly chip — background fill. Aliases color/neutral/200 (Light), color/neutral/700 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:7395:18104",
             "com.figma.scopes": [
@@ -1751,7 +1620,7 @@
             "alpha": 1,
             "hex": "#6E32AE"
           },
-          "$description": "Beta readonly chip — icon and text fill. Aliases color/purple/700.",
+          "$description": "Beta readonly chip — icon and text fill. Aliases color/purple/700 (Light), color/purple/200 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:7395:18098",
             "com.figma.scopes": [
@@ -1777,7 +1646,7 @@
             "alpha": 1,
             "hex": "#F0E5FA"
           },
-          "$description": "Beta readonly chip — background fill. Aliases color/purple/200.",
+          "$description": "Beta readonly chip — background fill. Aliases color/purple/200 (Light), color/purple/700 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:7395:18099",
             "com.figma.scopes": [
@@ -1817,6 +1686,137 @@
           }
         }
       },
+      "neutral": {
+        "default": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.23529411852359772,
+              0.29019609093666077,
+              0.34117648005485535
+            ],
+            "alpha": 1,
+            "hex": "#3C4A57"
+          },
+          "$description": "Neutral status color — used for inactive or default status labels. Aliases color/neutral/700 (Light), color/neutral/400 (Dark).",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:3684:10047",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:f8059a30a0af86896199b924b93612cb4edf85b4/-1:-1",
+              "targetVariableName": "color/neutral/700",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtlest": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9607843160629272,
+              0.9686274528503418,
+              0.9764705896377563
+            ],
+            "alpha": 1,
+            "hex": "#F5F7F9"
+          },
+          "$description": "Subtlest neutral status background used for inactive, default or low-emphasis status treatments. Aliases color/neutral/200 (Light), color/neutral/600 (Dark).",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:3179:2745",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:fa2f0949b9027edc4381da26cc630063678be603/-1:-1",
+              "targetVariableName": "color/neutral/200",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "hover": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8352941274642944,
+              0.8509804010391235,
+              0.8705882430076599
+            ],
+            "alpha": 1,
+            "hex": "#D5D9DE"
+          },
+          "$description": "Neutral status — background hover state. Aliases color/neutral/400 (Light), color/neutral/600 (Dark).",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:7395:10253",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:437c4818651498931ca1b366012718bb772c6a71/-1:-1",
+              "targetVariableName": "color/neutral/400",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "selected": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0941176488995552,
+              0.12156862765550613,
+              0.14901961386203766
+            ],
+            "alpha": 1,
+            "hex": "#181F26"
+          },
+          "$description": "Neutral status — selected/pressed fill. Aliases color/neutral/900 (Light), color/neutral/100 (Dark).",
+          "$extensions": {
+            "com.figma.variableId": "VariableID:7395:18095",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:5502683fa03ac5f9b88b7cffdff847900d0f31a8/-1:-1",
+              "targetVariableName": "color/neutral/900",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9019607901573181,
+              0.9137254953384399,
+              0.9254902005195618
+            ],
+            "alpha": 1,
+            "hex": "#E6E9EC"
+          },
+          "$extensions": {
+            "com.figma.variableId": "VariableID:9141:176",
+            "com.figma.scopes": [
+              "ALL_SCOPES"
+            ],
+            "com.figma.aliasData": {
+              "targetVariableId": "VariableID:7575b4f953b44d9db17c19bfcedffa67d72cd2e5/-1:-1",
+              "targetVariableName": "color/neutral/300",
+              "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
+              "targetVariableSetName": "⛔ Primitives — Do not use directly"
+            }
+          }
+        }
+      },
       "danger": {
         "default": {
           "$type": "color",
@@ -1830,7 +1830,7 @@
             "alpha": 1,
             "hex": "#DC3626"
           },
-          "$description": "Danger fill — red badge background, error border. Light: tartRed/600.",
+          "$description": "Danger fill — red badge background, error border. Aliases color/tartRed/700 (Light), color/tartRed/400 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:185:42",
             "com.figma.scopes": [
@@ -1856,7 +1856,7 @@
             "alpha": 1,
             "hex": "#FFF9F9"
           },
-          "$description": "Danger subtle — light red chip and alert background. Light: tartRed/300.",
+          "$description": "Danger subtle — light red chip and alert background. Aliases color/tartRed/100 (Light), color/tartRed/900 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:185:43",
             "com.figma.scopes": [
@@ -1882,7 +1882,7 @@
             "alpha": 1,
             "hex": "#FCBEB9"
           },
-          "$description": "Danger status — background hover state. Aliases color/tartRed/400.",
+          "$description": "Danger status — background hover state. Aliases color/tartRed/400 (Light), color/tartRed/600 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:7395:18091",
             "com.figma.scopes": [
@@ -1908,7 +1908,7 @@
             "alpha": 1,
             "hex": "#9A1C0B"
           },
-          "$description": "Danger status — selected/pressed fill. Aliases color/tartRed/900.",
+          "$description": "Danger status — selected/pressed fill. Aliases color/tartRed/900 (Light), color/tartRed/100 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:7395:18096",
             "com.figma.scopes": [
@@ -1961,7 +1961,7 @@
             "alpha": 1,
             "hex": "#0369E9"
           },
-          "$description": "Information fill — blue badge background. Light: royalBlue/600.",
+          "$description": "Information fill — blue badge background. Aliases color/royalBlue/700 (Light), color/royalBlue/400 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:185:44",
             "com.figma.scopes": [
@@ -1987,7 +1987,7 @@
             "alpha": 1,
             "hex": "#F5F9FE"
           },
-          "$description": "Information subtle — light blue chip and alert background. Light: royalBlue/200.",
+          "$description": "Information subtle — light blue chip and alert background. Aliases color/royalBlue/100 (Light), color/royalBlue/900 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:185:45",
             "com.figma.scopes": [
@@ -2013,7 +2013,7 @@
             "alpha": 1,
             "hex": "#A2C7F7"
           },
-          "$description": "Information status — background hover state. Aliases color/royalBlue/400.",
+          "$description": "Information status — background hover state. Aliases color/royalBlue/400 (Light), color/royalBlue/600 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:7395:18092",
             "com.figma.scopes": [
@@ -2039,7 +2039,7 @@
             "alpha": 1,
             "hex": "#034AA3"
           },
-          "$description": "Information status — selected/pressed fill. Aliases color/royalBlue/900.",
+          "$description": "Information status — selected/pressed fill. Aliases color/royalBlue/900 (Light), color/royalBlue/100 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:7395:18097",
             "com.figma.scopes": [
@@ -2093,7 +2093,7 @@
           "alpha": 0.47999998927116394,
           "hex": "#181F26"
         },
-        "$description": "Modal backdrop — semi-transparent dark overlay",
+        "$description": "Modal backdrop — semi-transparent dark overlay. Aliases color/neutral/A500 (Light), color/neutral/B500 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:185:46",
           "com.figma.scopes": [
@@ -2111,60 +2111,30 @@
     "link": {
       "default": {
         "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.0117647061124444,
-            0.4117647111415863,
-            0.9137254953384399
-          ],
-          "alpha": 1,
-          "hex": "#0369E9"
-        },
-        "$description": "Link default colour. Aliases color/royalBlue/700.",
+        "$value": "{color.action.primary.default}",
+        "$description": "Link default colour. Aliases color/action/primary/default (Light), color/royalBlue/400 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:185:50",
           "com.figma.scopes": [
             "ALL_SCOPES"
-          ],
-          "com.figma.aliasData": {
-            "targetVariableId": "VariableID:40e739b8b2fd713faaed9424d685c306da9cdef7/-1:-1",
-            "targetVariableName": "color/royalBlue/700",
-            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
-            "targetVariableSetName": "⛔ Primitives — Do not use directly"
-          }
+          ]
         }
       },
       "hover": {
         "$type": "color",
-        "$value": {
-          "colorSpace": "srgb",
-          "components": [
-            0.0117647061124444,
-            0.35686275362968445,
-            0.7764706015586853
-          ],
-          "alpha": 1,
-          "hex": "#035BC6"
-        },
-        "$description": "Link hover colour. Aliases color/royalBlue/800.",
+        "$value": "{color.action.primary.click}",
+        "$description": "Link hover colour. Aliases color/action/primary/click (Light), color/royalBlue/300 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:185:51",
           "com.figma.scopes": [
             "ALL_SCOPES"
-          ],
-          "com.figma.aliasData": {
-            "targetVariableId": "VariableID:39f2b9231f2aad6a8860b42ad3e6b3e758e1da42/-1:-1",
-            "targetVariableName": "color/royalBlue/800",
-            "targetVariableSetId": "VariableCollectionId:43305920e4f31882c133e8c66518883b79d83e92/-1:-1",
-            "targetVariableSetName": "⛔ Primitives — Do not use directly"
-          }
+          ]
         }
       },
       "visited": {
         "$type": "color",
-        "$value": "{color.action.primary.visited}",
-        "$description": "Color for visited hyperlinks.",
+        "$value": "{color.action.destructive.click}",
+        "$description": "Color for visited hyperlinks. Aliases color/action/destructive/click.",
         "$extensions": {
           "com.figma.variableId": "VariableID:3844:6",
           "com.figma.scopes": [
@@ -2178,7 +2148,7 @@
         "default": {
           "$type": "color",
           "$value": "{color.action.primary.default}",
-          "$description": "Selection highlight — text selection background. Light: royalBlue/200.",
+          "$description": "Selection highlight — text selection background. Aliases color/action/primary/default.",
           "$extensions": {
             "com.figma.variableId": "VariableID:704:140",
             "com.figma.scopes": [
@@ -2189,7 +2159,7 @@
         "hover": {
           "$type": "color",
           "$value": "{color.action.primary.hover}",
-          "$description": "Selection hover — background tint when hovering over a selectable item.",
+          "$description": "Selection hover — background tint when hovering over a selectable item. Aliases color/action/primary/hover.",
           "$extensions": {
             "com.figma.variableId": "VariableID:704:141",
             "com.figma.scopes": [
@@ -2200,7 +2170,7 @@
         "active": {
           "$type": "color",
           "$value": "{color.action.primary.click}",
-          "$description": "Selection active — background for currently active/focused selectable item.",
+          "$description": "Selection active — background for currently active/focused selectable item. Aliases color/action/primary/click.",
           "$extensions": {
             "com.figma.variableId": "VariableID:704:142",
             "com.figma.scopes": [
@@ -2211,7 +2181,7 @@
         "disabled": {
           "$type": "color",
           "$value": "{color.surface.muted}",
-          "$description": "Disabled selection. Light: surface/muted.",
+          "$description": "Disabled selection. Aliases color/surface/muted (Light), color/neutral/800 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:704:143",
             "com.figma.scopes": [
@@ -2222,7 +2192,7 @@
         "mark": {
           "$type": "color",
           "$value": "{color.text.inverse.$root}",
-          "$description": "Selection mark colour — checkmark or tick inside a selected control.",
+          "$description": "Selection mark colour — checkmark or tick inside a selected control. Aliases color/text/inverse.",
           "$extensions": {
             "com.figma.variableId": "VariableID:704:144",
             "com.figma.scopes": [
@@ -2235,7 +2205,7 @@
         "default": {
           "$type": "color",
           "$value": "{color.line.default}",
-          "$description": "Control default border. Light: neutral/400.",
+          "$description": "Control default border. Aliases color/line/default (Light), color/neutral/600 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:704:145",
             "com.figma.scopes": [
@@ -2246,7 +2216,7 @@
         "hover": {
           "$type": "color",
           "$value": "{color.action.primary.hover}",
-          "$description": "Control hover border. Light: royalBlue/700.",
+          "$description": "Control hover border. Aliases color/action/primary/hover.",
           "$extensions": {
             "com.figma.variableId": "VariableID:704:146",
             "com.figma.scopes": [
@@ -2257,7 +2227,7 @@
         "focus": {
           "$type": "color",
           "$value": "{color.action.primary.default}",
-          "$description": "Control focus border — border colour when checkbox/radio has keyboard focus.",
+          "$description": "Control focus border — border colour when checkbox/radio has keyboard focus. Aliases color/action/primary/default.",
           "$extensions": {
             "com.figma.variableId": "VariableID:704:147",
             "com.figma.scopes": [
@@ -2268,7 +2238,7 @@
         "invalid": {
           "$type": "color",
           "$value": "{color.status.danger.default}",
-          "$description": "Control invalid border — border colour when checkbox/radio has a validation error.",
+          "$description": "Control invalid border — border colour when checkbox/radio has a validation error. Aliases color/status/danger/default.",
           "$extensions": {
             "com.figma.variableId": "VariableID:704:148",
             "com.figma.scopes": [
@@ -2279,7 +2249,7 @@
         "disabled": {
           "$type": "color",
           "$value": "{color.line.disabled}",
-          "$description": "Control disabled border. Light: neutral/300.",
+          "$description": "Control disabled border. Aliases color/line/disabled (Light), color/neutral/700 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:704:149",
             "com.figma.scopes": [
@@ -2292,7 +2262,7 @@
         "default": {
           "$type": "color",
           "$value": "{color.action.neutral.default}",
-          "$description": "Control (checkbox, radio) default background. Light: neutral/0.",
+          "$description": "Control (checkbox, radio) default background. Aliases color/action/neutral/default (Light), color/neutral/900 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:704:150",
             "com.figma.scopes": [
@@ -2303,7 +2273,7 @@
         "hover": {
           "$type": "color",
           "$value": "{color.action.neutral.hover}",
-          "$description": "Control hover background. Light: royalBlue/100.",
+          "$description": "Control hover background. Aliases color/action/neutral/hover (Light), color/neutral/800 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:704:151",
             "com.figma.scopes": [
@@ -2314,7 +2284,7 @@
         "disabled": {
           "$type": "color",
           "$value": "{color.surface.muted}",
-          "$description": "Control disabled background. Light: neutral/200.",
+          "$description": "Control disabled background. Aliases color/surface/muted (Light), color/neutral/800 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:704:152",
             "com.figma.scopes": [
@@ -2338,7 +2308,7 @@
             "alpha": 1,
             "hex": "#E6F0FD"
           },
-          "$description": "Background color for file uploader drop zone on hover.",
+          "$description": "Background color for file uploader drop zone on hover. Aliases color/royalBlue/200 (Light), color/royalBlue/950 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:2674:2",
             "com.figma.scopes": [
@@ -2364,7 +2334,7 @@
             "alpha": 1,
             "hex": "#D2E4FB"
           },
-          "$description": "Border color for file uploader drop zone on hover.",
+          "$description": "Border color for file uploader drop zone on hover. Aliases color/royalBlue/300 (Light), color/royalBlue/800 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:2674:3",
             "com.figma.scopes": [
@@ -2419,7 +2389,7 @@
           "alpha": 1,
           "hex": "#3C4A57"
         },
-        "$description": "Semantic shadow colour alias — points to shadow/base primitive. Use in component drop shadows.",
+        "$description": "Semantic shadow colour alias — points to shadow/base primitive. Use in component drop shadows. Aliases color/neutral/700 (Light), color/neutral/300 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:1119:7",
           "com.figma.scopes": [
@@ -2440,7 +2410,7 @@
       "inline": {
         "$type": "number",
         "$value": 16,
-        "$description": "Inside text, labels, helpers",
+        "$description": "Inside text, labels, helpers. Aliases icon/size/016.",
         "$extensions": {
           "com.figma.variableId": "VariableID:451:13",
           "com.figma.scopes": [
@@ -2457,7 +2427,7 @@
       "compact": {
         "$type": "number",
         "$value": 20,
-        "$description": "Dense tables, sidebars, chips",
+        "$description": "Dense tables, sidebars, chips. Aliases icon/size/020.",
         "$extensions": {
           "com.figma.variableId": "VariableID:451:14",
           "com.figma.scopes": [
@@ -2474,7 +2444,7 @@
       "default": {
         "$type": "number",
         "$value": 24,
-        "$description": "Standard UI — buttons, nav, toolbars",
+        "$description": "Standard UI — buttons, nav, toolbars. Aliases icon/size/024.",
         "$extensions": {
           "com.figma.variableId": "VariableID:451:15",
           "com.figma.scopes": [
@@ -2491,7 +2461,7 @@
       "medium": {
         "$type": "number",
         "$value": 32,
-        "$description": "Cards, section headers",
+        "$description": "Cards, section headers. Aliases icon/size/032.",
         "$extensions": {
           "com.figma.variableId": "VariableID:451:16",
           "com.figma.scopes": [
@@ -2508,7 +2478,7 @@
       "large": {
         "$type": "number",
         "$value": 40,
-        "$description": "Feature callouts, onboarding",
+        "$description": "Feature callouts, onboarding. Aliases icon/size/040.",
         "$extensions": {
           "com.figma.variableId": "VariableID:451:17",
           "com.figma.scopes": [
@@ -2525,7 +2495,7 @@
       "hero": {
         "$type": "number",
         "$value": 48,
-        "$description": "Empty states, hero sections",
+        "$description": "Empty states, hero sections. Aliases icon/size/048.",
         "$extensions": {
           "com.figma.variableId": "VariableID:451:18",
           "com.figma.scopes": [
@@ -2542,7 +2512,7 @@
       "xlarge": {
         "$type": "number",
         "$value": 64,
-        "$description": "Extra large icons — colour status, upload, empty state",
+        "$description": "Extra large icons — colour status, upload, empty state. Aliases icon/size/064.",
         "$extensions": {
           "com.figma.variableId": "VariableID:495:63",
           "com.figma.scopes": [
@@ -2570,7 +2540,7 @@
           "alpha": 1,
           "hex": "#3C4A57"
         },
-        "$description": "Default icon colour. Aliases color/neutral/700.",
+        "$description": "Default icon colour. Aliases color/neutral/700 (Light), color/neutral/200 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:451:19",
           "com.figma.scopes": [
@@ -2596,7 +2566,7 @@
           "alpha": 1,
           "hex": "#ACB4BD"
         },
-        "$description": "Subtle icon colour — secondary/supporting icons. Light: neutral/600. Dark: neutral/400.",
+        "$description": "Subtle icon colour — secondary/supporting icons. Aliases color/neutral/500 (Light), color/neutral/400 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:451:20",
           "com.figma.scopes": [
@@ -2622,7 +2592,7 @@
           "alpha": 1,
           "hex": "#0369E9"
         },
-        "$description": "Icon colour — selected/active state. Aliases color/royalBlue/700.",
+        "$description": "Icon colour — selected/active state. Aliases color/royalBlue/700 (Light), color/royalBlue/400 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:451:21",
           "com.figma.scopes": [
@@ -2648,7 +2618,7 @@
           "alpha": 1,
           "hex": "#FFFFFF"
         },
-        "$description": "Inverse icon colour — icons on dark surfaces. Light: neutral/0.",
+        "$description": "Inverse icon colour — icons on dark surfaces. Aliases color/neutral/0 (Light), color/neutral/900 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:451:22",
           "com.figma.scopes": [
@@ -2674,7 +2644,7 @@
           "alpha": 1,
           "hex": "#13AD68"
         },
-        "$description": "Success icon colour. Light: freshGreen/600.",
+        "$description": "Success icon colour. Aliases color/freshGreen/700 (Light), color/freshGreen/400 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:451:23",
           "com.figma.scopes": [
@@ -2700,7 +2670,7 @@
           "alpha": 1,
           "hex": "#F4A702"
         },
-        "$description": "Warning icon colour. Light: honeyAmber/600.",
+        "$description": "Warning icon colour. Aliases color/honeyAmber/700 (Light), color/honeyAmber/400 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:451:24",
           "com.figma.scopes": [
@@ -2726,7 +2696,7 @@
           "alpha": 1,
           "hex": "#DC3626"
         },
-        "$description": "Danger icon colour. Light: tartRed/600.",
+        "$description": "Danger icon colour. Aliases color/tartRed/700 (Light), color/tartRed/400 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:451:25",
           "com.figma.scopes": [
@@ -2743,7 +2713,7 @@
       "disabled": {
         "$type": "color",
         "$value": "{color.text.disabled}",
-        "$description": "Disabled icon colour. Light: neutral/400. Dark: neutral/600.",
+        "$description": "Disabled icon colour. Aliases color/text/disabled (Light), color/neutral/500 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:451:26",
           "com.figma.scopes": [
@@ -2763,7 +2733,7 @@
           "alpha": 1,
           "hex": "#25313B"
         },
-        "$description": "Icon colour — hover state. Aliases color/neutral/800.",
+        "$description": "Icon colour — hover state. Aliases color/neutral/800 (Light), color/neutral/300 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:1617:22455",
           "com.figma.scopes": [
@@ -2789,7 +2759,7 @@
           "alpha": 0.07999999821186066,
           "hex": "#181F26"
         },
-        "$description": "Icon background tint on hover — subtle fill behind icon on pointer-over.",
+        "$description": "Icon background tint on hover — subtle fill behind icon on pointer-over. Aliases color/neutral/A200 (Light), color/neutral/B200 (Dark).",
         "$extensions": {
           "com.figma.variableId": "VariableID:1617:22456",
           "com.figma.scopes": [
@@ -2820,7 +2790,7 @@
             "alpha": 1,
             "hex": "#EBFBEE"
           },
-          "$description": "Chart — Healthy segment light fill; area chart fills and bar backgrounds. Aliases color/freshGreen/200.",
+          "$description": "Chart — Healthy segment light fill; area chart fills and bar backgrounds. Aliases color/freshGreen/200 (Light), color/freshGreen/800 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:4952:45",
             "com.figma.scopes": [
@@ -2846,7 +2816,7 @@
             "alpha": 1,
             "hex": "#13AD68"
           },
-          "$description": "Chart — Healthy status segment fill (donut, gauge, health score). Aliases color/freshGreen/700. Data viz only — not for UI feedback.",
+          "$description": "Chart — Healthy status segment fill (donut, gauge, health score).Data viz only — not for UI feedback. Aliases color/freshGreen/700 (Light), color/freshGreen/600 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:4952:42",
             "com.figma.scopes": [
@@ -2874,7 +2844,7 @@
             "alpha": 1,
             "hex": "#FFECB8"
           },
-          "$description": "Chart — Warning segment light fill. Aliases color/honeyAmber/300.",
+          "$description": "Chart — Warning segment light fill. Aliases color/honeyAmber/300 (Light), color/honeyAmber/700 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:4952:46",
             "com.figma.scopes": [
@@ -2900,7 +2870,7 @@
             "alpha": 1,
             "hex": "#FFBB00"
           },
-          "$description": "Chart — Warning status segment fill. Aliases color/honeyAmber/600. Data viz only.",
+          "$description": "Chart — Warning status segment fill.Data viz only. Aliases color/honeyAmber/600 (Light), color/honeyAmber/500 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:4952:43",
             "com.figma.scopes": [
@@ -2928,7 +2898,7 @@
             "alpha": 1,
             "hex": "#FDDFDC"
           },
-          "$description": "Chart — At Risk segment light fill. Aliases color/tartRed/300.",
+          "$description": "Chart — At Risk segment light fill. Aliases color/tartRed/300 (Light), color/tartRed/700 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:4952:47",
             "com.figma.scopes": [
@@ -2954,7 +2924,7 @@
             "alpha": 1,
             "hex": "#F75D4F"
           },
-          "$description": "Chart — At Risk status segment fill. Aliases color/tartRed/600. Data viz only.",
+          "$description": "Chart — At Risk status segment fill.Data viz only. Aliases color/tartRed/600 (Light), color/tartRed/500 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:4952:44",
             "com.figma.scopes": [
@@ -2984,7 +2954,7 @@
             "alpha": 1,
             "hex": "#2AB5CB"
           },
-          "$description": "First data series — always start here. Aliases color/pacificBlue/700.",
+          "$description": "First data series — always start here. Aliases color/pacificBlue/700 (Light), color/pacificBlue/600 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:4952:48",
             "com.figma.scopes": [
@@ -3088,7 +3058,7 @@
             "alpha": 1,
             "hex": "#6B75CD"
           },
-          "$description": "Second data series. Aliases color/bellBlue/700.",
+          "$description": "Second data series. Aliases color/bellBlue/700 (Light), color/bellBlue/600 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:4952:49",
             "com.figma.scopes": [
@@ -3192,7 +3162,7 @@
             "alpha": 1,
             "hex": "#D4728C"
           },
-          "$description": "Third data series. Aliases color/dustyRose/700.",
+          "$description": "Third data series. Aliases color/dustyRose/700 (Light), color/dustyRose/600 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:4952:50",
             "com.figma.scopes": [
@@ -3296,7 +3266,7 @@
             "alpha": 1,
             "hex": "#00C4B4"
           },
-          "$description": "Fourth data series. Aliases color/teal/700.",
+          "$description": "Fourth data series. Aliases color/teal/700 (Light), color/teal/600 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:4952:51",
             "com.figma.scopes": [
@@ -3400,7 +3370,7 @@
             "alpha": 1,
             "hex": "#6E32AE"
           },
-          "$description": "Fifth data series. Aliases color/purple/700.",
+          "$description": "Fifth data series. Aliases color/purple/700 (Light), color/purple/600 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:4952:52",
             "com.figma.scopes": [
@@ -3504,7 +3474,7 @@
             "alpha": 1,
             "hex": "#3C4A57"
           },
-          "$description": "Sixth data series — neutral gray. Aliases color/neutral/700.",
+          "$description": "Sixth data series — neutral gray. Aliases color/neutral/700 (Light), color/neutral/500 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:4952:53",
             "com.figma.scopes": [
@@ -3530,7 +3500,7 @@
             "alpha": 1,
             "hex": "#F5F7F9"
           },
-          "$description": "Series 6 light fill. Aliases color/neutral/200.",
+          "$description": "Series 6 light fill. Aliases color/neutral/200 (Light), color/neutral/300 (Dark).",
           "$extensions": {
             "com.figma.variableId": "VariableID:4952:59",
             "com.figma.scopes": [

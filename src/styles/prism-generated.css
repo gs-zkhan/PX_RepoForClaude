@@ -217,7 +217,7 @@
   --s-color-action-accent-default: #58C5D5;
   --s-color-action-accent-hover: #24A6BA;
   --s-color-action-destructive-click: #9A1C0B;
-  --s-color-action-destructive-default: #DC3626;
+  --s-color-action-destructive-default: #BF210D;
   --s-color-action-destructive-hover: #BF210D;
   --s-color-action-neutral-active: #F5F7F9;
   --s-color-action-neutral-default: #FFFFFF;
@@ -249,9 +249,9 @@
   --s-color-line-default: #D5D9DE;
   --s-color-line-disabled: #E6E9EC;
   --s-color-line-subtle: #D2E4FB;
-  --s-color-link-default: #0369E9;
-  --s-color-link-hover: #035BC6;
-  --s-color-link-visited: var(--s-color-action-primary-visited);
+  --s-color-link-default: var(--s-color-action-primary-default);
+  --s-color-link-hover: var(--s-color-action-primary-click);
+  --s-color-link-visited: var(--s-color-action-destructive-click);
   --s-color-overlay-backdrop: rgba(24, 31, 38, 0.47999998927116394);
   --s-color-status-beta-default: #6E32AE;
   --s-color-status-beta-subtle: #E0CCF5;
@@ -1106,15 +1106,15 @@
   --t-breadcrumb-font-paragraph-spacing: 0px;
   --t-breadcrumb-font-text-case: none;
   --t-breadcrumb-font-text-decoration: none;
-  --t-button-font-family: "Noto Sans";
-  --t-button-font-style: SemiBold;
-  --t-button-font-weight: 600;
-  --t-button-font-size: 14px;
-  --t-button-font-line-height: 24px;
-  --t-button-font-letter-spacing: 0%;
-  --t-button-font-paragraph-spacing: 0px;
-  --t-button-font-text-case: none;
-  --t-button-font-text-decoration: none;
+  --t-button-font-default-family: "Noto Sans";
+  --t-button-font-default-style: SemiBold;
+  --t-button-font-default-weight: 600;
+  --t-button-font-default-size: 14px;
+  --t-button-font-default-line-height: 24px;
+  --t-button-font-default-letter-spacing: 0%;
+  --t-button-font-default-paragraph-spacing: 0px;
+  --t-button-font-default-text-case: none;
+  --t-button-font-default-text-decoration: none;
   --t-button-font-small-family: "Noto Sans";
   --t-button-font-small-style: SemiBold;
   --t-button-font-small-weight: 600;
@@ -1469,15 +1469,10 @@
 
   /* Effect styles */
   --e-shadow-100:  0px 2px 4px 0px rgba(60, 74, 87, 0.06),  0px 0px 1px 0px rgba(60, 74, 87, 0.24);
-  --e-shadow-100-top:  0px -2px 4px 0px rgba(60, 74, 87, 0.06),  0px 0px 1px 0px rgba(60, 74, 87, 0.24);
   --e-shadow-200:  0px 6px 12px 0px rgba(60, 74, 87, 0.06),  0px 0px 1px 0px rgba(60, 74, 87, 0.2);
-  --e-shadow-200-top:  0px -6px 12px 0px rgba(60, 74, 87, 0.06),  0px 0px 1px 0px rgba(60, 74, 87, 0.2);
   --e-shadow-300:  0px 8px 16px 0px rgba(60, 74, 87, 0.1),  0px 0px 1px 0px rgba(60, 74, 87, 0.2);
-  --e-shadow-300-top:  0px -8px 16px 0px rgba(60, 74, 87, 0.1),  0px 0px 1px 0px rgba(60, 74, 87, 0.2);
   --e-shadow-400:  0px 8px 16px 0px rgba(60, 74, 87, 0.1),  0px 0px 1px 0px rgba(60, 74, 87, 0.2);
-  --e-shadow-400-top:  0px -12px 32px 0px rgba(60, 74, 87, 0.1),  0px 0px 1px 0px rgba(60, 74, 87, 0.2);
   --e-shadow-500:  0px 12px 32px 0px rgba(60, 74, 87, 0.08),  0px 0px 1px 0px rgba(60, 74, 87, 0.2);
-  --e-shadow-500-top:  0px -24px 56px 0px rgba(60, 74, 87, 0.08),  0px 0px 1px 0px rgba(60, 74, 87, 0.2);
   --e-shadow-600:  0px 24px 56px 0px rgba(60, 74, 87, 0.08),  0px 0px 1px 0px rgba(60, 74, 87, 0.2);
   --e-shadow-blue-100:  0px 4px 6px 0px rgba(3, 105, 233, 0.08);
   --e-shadow-blue-400:  0px 8px 16px 0px rgba(3, 105, 233, 0.08);
@@ -1489,6 +1484,11 @@
   --e-shadow-red-100:  0px 4px 6px 0px rgba(220, 54, 38, 0.08);
   --e-shadow-red-400:  0px 8px 16px 0px rgba(220, 54, 38, 0.08);
   --e-shadow-selected:  0px 0px 0px 2px rgba(3, 105, 233, 0.2);
+  --e-shadow-top-100:  0px -2px 4px 0px rgba(60, 74, 87, 0.06),  0px 0px 1px 0px rgba(60, 74, 87, 0.24);
+  --e-shadow-top-200:  0px -6px 12px 0px rgba(60, 74, 87, 0.06),  0px 0px 1px 0px rgba(60, 74, 87, 0.2);
+  --e-shadow-top-300:  0px -8px 16px 0px rgba(60, 74, 87, 0.1),  0px 0px 1px 0px rgba(60, 74, 87, 0.2);
+  --e-shadow-top-400:  0px -12px 32px 0px rgba(60, 74, 87, 0.1),  0px 0px 1px 0px rgba(60, 74, 87, 0.2);
+  --e-shadow-top-500:  0px -24px 56px 0px rgba(60, 74, 87, 0.08),  0px 0px 1px 0px rgba(60, 74, 87, 0.2);
   --e-shadow-yellow-100:  0px 4px 6px 0px rgba(244, 167, 2, 0.12);
   --e-shadow-yellow-400:  0px 8px 16px 0px rgba(244, 167, 2, 0.12);
 

@@ -163,7 +163,7 @@
             "alpha": 1,
             "hex": "#0369E9"
           },
-          "$description": "Primary button background — pressed. Aliases color/action/primary/click.",
+          "$description": "Primary button background — pressed. Aliases color/action/primary/default.",
           "$extensions": {
             "com.figma.variableId": "VariableID:196:13",
             "com.figma.aliasData": {
@@ -357,7 +357,7 @@
             "alpha": 1,
             "hex": "#D2E4FB"
           },
-          "$description": "Secondary button border — hover. Aliases color/action/primary/default.",
+          "$description": "Secondary button border — hover. Aliases color/line/subtle.",
           "$extensions": {
             "com.figma.variableId": "VariableID:196:21",
             "com.figma.aliasData": {
@@ -380,7 +380,7 @@
             "alpha": 1,
             "hex": "#D2E4FB"
           },
-          "$description": "Secondary button border — pressed. Aliases color/action/primary/default.",
+          "$description": "Secondary button border — pressed. Aliases color/line/subtle.",
           "$extensions": {
             "com.figma.variableId": "VariableID:196:22",
             "com.figma.aliasData": {
@@ -478,7 +478,7 @@
             "alpha": 1,
             "hex": "#D2E4FB"
           },
-          "$description": "Tertiary button background — pressed. Aliases color/action/neutral/active.",
+          "$description": "Tertiary button background — pressed. Aliases color/action/secondary/click.",
           "$extensions": {
             "com.figma.variableId": "VariableID:196:27",
             "com.figma.aliasData": {
@@ -912,7 +912,7 @@
             "alpha": 1,
             "hex": "#D5D9DE"
           },
-          "$description": "Bulk action border — disabled. Aliases color/line/disabled.",
+          "$description": "Bulk action border — disabled. Aliases color/line/default.",
           "$extensions": {
             "com.figma.variableId": "VariableID:557:82",
             "com.figma.aliasData": {
@@ -985,7 +985,7 @@
             "alpha": 1,
             "hex": "#0369E9"
           },
-          "$description": "Primary-split button background — pressed. Aliases color/action/primary/click.",
+          "$description": "Primary-split button background — pressed. Aliases color/action/primary/default.",
           "$extensions": {
             "com.figma.variableId": "VariableID:196:43",
             "com.figma.aliasData": {
@@ -1932,7 +1932,7 @@
       "label": {
         "$type": "number",
         "$value": 4,
-        "$description": "Gap between label and input area. Aliases space/100 (8px).",
+        "$description": "Gap between label and input area. Aliases space/050 (4px).",
         "$extensions": {
           "com.figma.variableId": "VariableID:603:31",
           "com.figma.scopes": [
@@ -2681,7 +2681,7 @@
       "height": {
         "$type": "number",
         "$value": 32,
-        "$description": "Table header-row height. This remains unchanged across all density variants.",
+        "$description": "Table header-row height. This remains unchanged across all density variants. Aliases space/400.",
         "$extensions": {
           "com.figma.variableId": "VariableID:9198:1450",
           "com.figma.scopes": [
@@ -3296,7 +3296,7 @@
         "compact": {
           "$type": "number",
           "$value": 32,
-          "$description": "Body-row height for Compact density.",
+          "$description": "Body-row height for Compact density. Aliases space/400.",
           "$extensions": {
             "com.figma.variableId": "VariableID:9198:1447",
             "com.figma.scopes": [
@@ -3313,7 +3313,7 @@
         "default": {
           "$type": "number",
           "$value": 48,
-          "$description": "Body-row height for Default density. This is the recommended density for standard list pages.",
+          "$description": "Body-row height for Default density. This is the recommended density for standard list pages. Aliases space/600.",
           "$extensions": {
             "com.figma.variableId": "VariableID:9198:1448",
             "com.figma.scopes": [
@@ -3330,7 +3330,7 @@
         "comfortable": {
           "$type": "number",
           "$value": 56,
-          "$description": "Body-row height for Comfortable density, intended for rows containing avatars, subtitles, or multi-line metadata.",
+          "$description": "Body-row height for Comfortable density, intended for rows containing avatars, subtitles, or multi-line metadata. Aliases space/700.",
           "$extensions": {
             "com.figma.variableId": "VariableID:9198:1449",
             "com.figma.scopes": [
@@ -3351,7 +3351,7 @@
         "action": {
           "$type": "number",
           "$value": 48,
-          "$description": "Fixed width for Checkbox and More/Actions columns.",
+          "$description": "Fixed width for Checkbox and More/Actions columns. Aliases space/600.",
           "$extensions": {
             "com.figma.variableId": "VariableID:9198:1451",
             "com.figma.scopes": [
@@ -3371,7 +3371,7 @@
       "height": {
         "$type": "number",
         "$value": 40,
-        "$description": "Fixed height of the Table pagination/footer row.",
+        "$description": "Fixed height of the Table pagination/footer row. Aliases space/500.",
         "$extensions": {
           "com.figma.variableId": "VariableID:9198:1452",
           "com.figma.scopes": [
@@ -6069,7 +6069,7 @@
             "alpha": 1,
             "hex": "#F5F7F9"
           },
-          "$description": "Background — neutral/default variant. Aliases color/status/neutral/subtle.",
+          "$description": "Background — neutral/default variant. Aliases color/surface/muted.",
           "$extensions": {
             "com.figma.variableId": "VariableID:2380:9",
             "com.figma.aliasData": {
@@ -6245,7 +6245,7 @@
           "alpha": 1,
           "hex": "#E0CCF5"
         },
-        "$description": "Background — beta label variant. Aliases color/purple/200.",
+        "$description": "Background — beta label variant. Aliases color/status/beta/subtle.",
         "$extensions": {
           "com.figma.variableId": "VariableID:2380:17",
           "com.figma.aliasData": {
@@ -6341,7 +6341,7 @@
           "alpha": 1,
           "hex": "#F5F7F9"
         },
-        "$description": "Background — tutorial variant. Aliases color/status/neutral/subtle.",
+        "$description": "Background — tutorial variant. Aliases color/surface/muted.",
         "$extensions": {
           "com.figma.variableId": "VariableID:2380:20",
           "com.figma.aliasData": {
@@ -6691,7 +6691,7 @@
           "alpha": 1,
           "hex": "#F6FDFA"
         },
-        "$description": "Banner background — success variant. Aliases color/status/success/subtle.",
+        "$description": "Banner background — success variant. Aliases color/status/success/subtlest.",
         "$extensions": {
           "com.figma.variableId": "VariableID:2573:2",
           "com.figma.aliasData": {
@@ -6739,7 +6739,7 @@
           "alpha": 1,
           "hex": "#FFFAEB"
         },
-        "$description": "Banner background — warning variant. Aliases color/status/warning/subtle.",
+        "$description": "Banner background — warning variant. Aliases color/status/warning/subtlest.",
         "$extensions": {
           "com.figma.variableId": "VariableID:2573:3",
           "com.figma.aliasData": {
@@ -6787,7 +6787,7 @@
           "alpha": 1,
           "hex": "#FFF9F9"
         },
-        "$description": "Banner background — danger variant. Aliases color/status/danger/subtle.",
+        "$description": "Banner background — danger variant. Aliases color/status/danger/subtlest.",
         "$extensions": {
           "com.figma.variableId": "VariableID:2573:4",
           "com.figma.aliasData": {
@@ -6835,7 +6835,7 @@
           "alpha": 1,
           "hex": "#F5F9FE"
         },
-        "$description": "Banner background — information variant. Aliases color/status/information/subtle.",
+        "$description": "Banner background — information variant. Aliases color/status/information/subtlest.",
         "$extensions": {
           "com.figma.variableId": "VariableID:2573:5",
           "com.figma.aliasData": {

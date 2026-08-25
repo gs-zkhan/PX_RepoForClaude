@@ -2528,7 +2528,7 @@
     "base": {
       "$type": "color",
       "$value": "{color.neutral.700}",
-      "$description": "Base shadow colour — dark navy at full opacity. Used as the color component of all drop shadows.",
+      "$description": "Base shadow colour — dark navy at full opacity. Used as the color component of all drop shadows. Aliases color/neutral/700.",
       "$extensions": {
         "com.figma.variableId": "VariableID:1119:6"
       }
