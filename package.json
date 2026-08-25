@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "build:docs-standalone": "vite build --config vite.docs.config.ts",
     "tokens:generate": "node scripts/generate-prism-css.mjs",
+    "tokens:validate": "node scripts/validate-prism-tokens.mjs",
     "icons:import": "node scripts/import-prism-icons.mjs",
     "icons:normalise": "node scripts/normalise-prism-icons.mjs"
   },
