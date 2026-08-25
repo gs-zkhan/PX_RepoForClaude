@@ -51,6 +51,11 @@ const darkSourceDefs = [
   },
 ]
 
+// Every prefix ever used as a qualified-reference qualifier, derived from
+// the actual source definitions rather than hardcoded, so it can never
+// silently drift out of sync with them.
+const RESERVED_PREFIXES = new Set([...lightSourceDefs, ...darkSourceDefs].map((source) => source.prefix))
+
 function flattenTokens(node, currentPath = [], output = {}) {
   if (!node || typeof node !== "object" || Array.isArray(node)) {
     return output
@@ -189,6 +194,26 @@ function buildContext(sourceDefs, contextLabel) {
     }
 
     const json = JSON.parse(fs.readFileSync(absolutePath, "utf8"))
+    const topLevelGroups = Object.keys(json).filter((key) => !key.startsWith("$"))
+
+    // Defense in depth: scripts/validate-prism-tokens.mjs is the primary
+    // guard for this (with a clearer, per-source error), but the generator
+    // can be run on its own. The reference grammar treats ANY single
+    // lowercase letter before a dot as a source qualifier ({z.foo}, not
+    // just {p.foo}), so a top-level group named any single letter — not
+    // only a currently configured prefix — must not be silently misparsed.
+    for (const group of topLevelGroups) {
+      if (/^[a-z]$/.test(group)) {
+        const configuredNote = RESERVED_PREFIXES.has(group)
+          ? ` It is also a currently configured source prefix (e.g. "{${group}.path}").`
+          : ""
+        throw new Error(
+          `${source.label} has a top-level group named "${group}", a single lowercase letter, which is ` +
+            `reserved for source-qualified reference syntax ("{${group}.path}"). Run npm run tokens:validate ` +
+            `for details, or rename this group in the Figma export.${configuredNote}`,
+        )
+      }
+    }
 
     return {
       ...source,

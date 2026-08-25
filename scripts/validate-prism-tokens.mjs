@@ -20,31 +20,63 @@ import path from "node:path"
 
 const root = process.cwd()
 
+// requiredGroups: exact top-level group names that must always be present.
+// For Primitive/Semantic/Effects this is the *entire* current group list —
+// those layers model a small, closed taxonomy of design concepts (color
+// scale, spacing, radius, border, font metrics, shadow, icon sizing; or
+// color/shadow/icon/chart categories) that essentially never grows or
+// shrinks, so requiring 100% of it is strict but not brittle.
+//
+// Component and Typography model individual components instead — an
+// open-ended catalog that legitimately grows (and occasionally loses a
+// deprecated entry) over time. Requiring every current group there would
+// fail on ordinary, healthy design-system growth. Instead each requires
+// only the one group that is genuinely load-bearing for the rest of the
+// catalog — "icon" for Component (referenced by ~15 other component groups
+// via qualified/bare references), "font" for Typography (the generic base
+// vocabulary, distinct from every per-component group) — plus a 90%
+// group-COUNT floor (smallest robust alternative: catches "several groups
+// vanished at once" without pinning down which ones are allowed to exist).
 const lightSourceDefs = [
-  { prefix: "p", label: "Primitive (Light)", file: "tokens/P_Light_Default.tokens.json", floor: 154 },
-  { prefix: "s", label: "Semantic (Light)", file: "tokens/S_Light.tokens.json", floor: 136 },
-  { prefix: "c", label: "Component", file: "tokens/C_Default.tokens.json", floor: 668 },
-  { prefix: "t", label: "Typography", file: "tokens/T_Typography.styles.json", floor: 38 },
-  { prefix: "e", label: "Effects", file: "tokens/E_Effects.styles.json", floor: 20 },
+  { prefix: "p", label: "Primitive (Light)", file: "tokens/P_Light_Default.tokens.json", floor: 154, requiredGroups: ["color", "space", "radius", "border", "font", "shadow", "icon"] },
+  { prefix: "s", label: "Semantic (Light)", file: "tokens/S_Light.tokens.json", floor: 136, requiredGroups: ["color", "shadow", "icon", "chart"] },
+  { prefix: "c", label: "Component", file: "tokens/C_Default.tokens.json", floor: 668, requiredGroups: ["icon"], groupCountFloor: 35 },
+  { prefix: "t", label: "Typography", file: "tokens/T_Typography.styles.json", floor: 38, requiredGroups: ["font"], groupCountFloor: 24 },
+  { prefix: "e", label: "Effects", file: "tokens/E_Effects.styles.json", floor: 20, requiredGroups: ["shadow"] },
 ]
 
 // Dark floors reuse the same 90%-of-baseline reasoning as light. Baseline
 // dark counts are currently identical to their light counterparts (172
-// Primitive, 152 Semantic), so the floors are identical too.
+// Primitive, 152 Semantic), so the floors — and required groups — are
+// identical too.
 const darkSourceDefs = [
-  { prefix: "p", label: "Primitive (Dark)", file: "tokens/P_Dark.tokens.json", floor: 154 },
-  { prefix: "s", label: "Semantic (Dark)", file: "tokens/S_Dark.tokens.json", floor: 136 },
+  { prefix: "p", label: "Primitive (Dark)", file: "tokens/P_Dark.tokens.json", floor: 154, requiredGroups: ["color", "space", "radius", "border", "font", "shadow", "icon"] },
+  { prefix: "s", label: "Semantic (Dark)", file: "tokens/S_Dark.tokens.json", floor: 136, requiredGroups: ["color", "shadow", "icon", "chart"] },
 ]
-// Floors are 90% of the current baseline count, rounded down. 90% is a
-// deliberate compromise: a legitimate content change (adding or removing a
-// handful of tokens) never crosses it, but a truncated or partially-failed
-// Figma export — which tends to drop a whole page, section, or mode at once
-// — almost always does.
+// Token-count floors are 90% of the current baseline count, rounded down.
+// 90% is a deliberate compromise: a legitimate content change (adding or
+// removing a handful of tokens) never crosses it, but a truncated or
+// partially-failed Figma export — which tends to drop a whole page,
+// section, or mode at once — almost always does. Group-count floors (35 of
+// 39 Component groups, 24 of 27 Typography groups) use the same 90%
+// reasoning, one level higher up the structure, and exist specifically to
+// catch a truncated export that drops several whole groups while the flat
+// token-count floor still happens to hold (a handful of large surviving
+// groups can mask several small missing ones in the flat count alone).
 
 const SET_NAME_TO_PREFIX = {
   "⛔ Primitives — Do not use directly": "p",
   "✅ Semantic — Use these": "s",
 }
+
+// The reference syntax treats any bare single-letter-plus-dot path segment
+// as a qualified-source qualifier ({p.foo}, {s.foo}, ...). If a future
+// Figma export ever introduced a real top-level group literally named one
+// of these letters, every bare reference into that group would become
+// silently ambiguous with the qualifier syntax itself — not a collision
+// between two sources, but a collision between a source's own content and
+// the reference *grammar*. This must never be silently reinterpreted.
+const RESERVED_PREFIXES = new Set([...lightSourceDefs, ...darkSourceDefs].map((source) => source.prefix))
 
 const errors = []
 const warnings = []
@@ -104,7 +136,8 @@ function buildAndValidateContext(sourceDefs, modeLabel) {
 
   const loaded = sourceDefs.map((s) => {
     const json = JSON.parse(fs.readFileSync(path.join(root, s.file), "utf8"))
-    return { ...s, tokens: flattenTokens(json) }
+    const topLevelGroups = Object.keys(json).filter((k) => !k.startsWith("$"))
+    return { ...s, tokens: flattenTokens(json), topLevelGroups }
   })
   const byPrefix = new Map(loaded.map((s) => [s.prefix, s]))
 
@@ -114,6 +147,52 @@ function buildAndValidateContext(sourceDefs, modeLabel) {
     counts[s.prefix] = count
     if (count < s.floor) {
       fail(`[${modeLabel}] ${s.label} token count (${count}) is below the minimum floor (${s.floor}) — export looks truncated`)
+    }
+  }
+
+  // --- Single-letter top-level group namespace guard -----------------------
+  // A hard failure, not a dormant-vs-active collision distinction like H
+  // below: the reference grammar treats ANY single-lowercase-letter path
+  // segment before a dot as a source qualifier ({z.foo.bar}, not just
+  // {p.foo.bar}) — so the namespace it reserves is "any single ASCII
+  // lowercase letter", not just the letters that happen to be configured
+  // prefixes today. A top-level group named "z" is just as structurally
+  // ambiguous as one named "p", even though "z" isn't a configured source —
+  // it would simply fail differently (as an unknown-prefix error instead of
+  // a silent misresolution), which is still wrong. This must never be
+  // silently reinterpreted, whether or not anything currently references it.
+  for (const s of loaded) {
+    for (const group of s.topLevelGroups) {
+      if (/^[a-z]$/.test(group)) {
+        const configuredNote = RESERVED_PREFIXES.has(group)
+          ? ` It is also a currently configured source prefix (used for qualified references like "{${group}.path}").`
+          : ""
+        fail(
+          `[${modeLabel}] ${s.label}: top-level group "${group}" is a single lowercase letter, which is ` +
+            `reserved for source-qualified reference syntax ("{${group}.path}"). Rename this group in the ` +
+            `Figma export — any single-letter top-level group makes bare references into it ambiguous with ` +
+            `the qualifier grammar itself, regardless of whether "${group}" is currently a configured ` +
+            `source prefix.${configuredNote}`,
+        )
+      }
+    }
+  }
+
+  // --- Structural export-integrity (top-level group presence) -------------
+  for (const s of loaded) {
+    const present = new Set(s.topLevelGroups)
+
+    for (const requiredGroup of s.requiredGroups ?? []) {
+      if (!present.has(requiredGroup)) {
+        fail(`[${modeLabel}] ${s.label}: required top-level group "${requiredGroup}" is missing — export looks incomplete`)
+      }
+    }
+
+    if (s.groupCountFloor !== undefined && s.topLevelGroups.length < s.groupCountFloor) {
+      fail(
+        `[${modeLabel}] ${s.label}: top-level group count (${s.topLevelGroups.length}) is below the minimum floor ` +
+          `(${s.groupCountFloor}) — export looks like it dropped several groups at once`,
+      )
     }
   }
 
@@ -414,11 +493,18 @@ function printReportAndExit() {
   lines.push("Prism token validation")
   lines.push("")
 
+  function groupsText(s) {
+    if (!s.topLevelGroups) return ""
+    const requiredText = s.requiredGroups?.length ? `, required: [${s.requiredGroups.join(", ")}]` : ""
+    const floorText = s.groupCountFloor !== undefined ? `, group floor ${s.groupCountFloor}` : ""
+    return ` — ${s.topLevelGroups.length} groups${requiredText}${floorText}`
+  }
+
   lines.push("Light:")
   for (const s of lightContext?.loaded ?? lightSourceDefs) {
     const count = lightContext?.counts?.[s.prefix]
     const countText = count === undefined ? "unavailable" : `${count} (floor ${s.floor})`
-    lines.push(`  ${s.label.padEnd(16)} ${countText}`)
+    lines.push(`  ${s.label.padEnd(16)} ${countText}${groupsText(s)}`)
   }
 
   lines.push("")
@@ -426,7 +512,7 @@ function printReportAndExit() {
   for (const s of darkContext?.loaded ?? darkSourceDefs) {
     const count = darkContext?.counts?.[s.prefix]
     const countText = count === undefined ? "unavailable" : `${count} (floor ${s.floor})`
-    lines.push(`  ${s.label.padEnd(16)} ${countText}`)
+    lines.push(`  ${s.label.padEnd(16)} ${countText}${groupsText(s)}`)
   }
 
   lines.push("")
