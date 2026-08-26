@@ -84,10 +84,10 @@ download.
 OS sends downloads by default. The panel updates to show how many
 variables were exported once the file is ready.
 
-**This snapshot is read-only export data and is NOT yet imported into Git
-automatically.** Nothing in this plugin writes to the repository, opens a
-branch, or calls GitHub — the JSON file it produces is the *input* to a
-later, separate step (Step 4B) that hasn't been built yet.
+**This snapshot is read-only export data — nothing in this plugin writes to
+the repository, opens a branch, or calls GitHub.** The JSON file it
+produces is the *input* to the separate repo-side tooling described below
+("Syncing a snapshot into the repo").
 
 The snapshot's top-level shape:
 
@@ -137,6 +137,40 @@ collection name, then collection id, then variable name, then key, then id.
 Each variable's `modes` follow the order Figma defines on the collection —
 never re-sorted. This keeps the export byte-stable between runs when
 nothing in Figma has changed, aside from `exportedAt`.
+
+## Syncing a snapshot into the repo
+
+The full current flow, end to end:
+
+1. Open **Prism V1** in Figma.
+2. Run **Prism Pipeline POC** (this plugin).
+3. Click **Export Prism snapshot**.
+4. From the repo root, run:
+   ```bash
+   npm run figma:sync -- --snapshot="/path/to/prism-figma-snapshot.json"
+   ```
+5. The automation (`scripts/figma-sync.mjs`) validates the snapshot, dry-runs
+   the importer, applies only deterministic literal changes, re-validates,
+   regenerates CSS, builds, and — only if every one of those steps
+   succeeds — creates a `figma-sync/<timestamp>` branch, commits, and
+   pushes it.
+6. A branch is prepared for a pull request into `main` (created
+   automatically via `gh` if available and authenticated; otherwise the
+   command prints the exact compare URL/next command).
+7. The existing **Prism Token CI** workflow runs against that PR, exactly
+   as it does for any other PR — this automation does not replace or
+   duplicate that gate.
+8. A human reviews the PR.
+9. A human merges it.
+
+**There is no auto-merge anywhere in this flow.** If the snapshot contains
+no new safe changes (for example, because it was already synced), the
+command reports that and exits without creating a branch, commit, PR, or
+push. See [`scripts/figma-sync.mjs`](../scripts/figma-sync.mjs) and
+[`scripts/figma-snapshot-import.mjs`](../scripts/figma-snapshot-import.mjs)
+for exactly what is and isn't applied automatically (only deterministic
+literal value changes — alias-target changes and the known pre-existing
+literal/alias structural differences always require manual review).
 
 ## Read-only / network safety
 
