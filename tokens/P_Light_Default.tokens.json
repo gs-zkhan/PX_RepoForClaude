@@ -796,12 +796,12 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.14509804546833038,
-            0.1921568661928177,
-            0.23137255012989044
+            0.20529885590076447,
+            0.6554988026618958,
+            0.2278088629245758
           ],
           "alpha": 1,
-          "hex": "#25313B"
+          "hex": "#34A73A"
         },
         "$description": "Grey 800 — #25313B. Primary dark surface — navigation background.",
         "$extensions": {
