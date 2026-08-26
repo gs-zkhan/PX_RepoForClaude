@@ -12,6 +12,7 @@
     "tokens:generate": "node scripts/generate-prism-css.mjs",
     "tokens:validate": "node scripts/validate-prism-tokens.mjs",
     "figma:sync": "node scripts/figma-sync.mjs",
+    "figma:bridge": "node scripts/figma-local-bridge.mjs",
     "icons:import": "node scripts/import-prism-icons.mjs",
     "icons:normalise": "node scripts/normalise-prism-icons.mjs"
   },

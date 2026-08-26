@@ -4,9 +4,17 @@ import { spawnSync } from "node:child_process"
 
 // Step 5A: orchestrates the ALREADY-PROVEN manual workflow end to end —
 //
-//   snapshot -> importer dry-run -> safety check -> importer --apply ->
-//   validate -> generate -> verify changed files -> validate again ->
-//   build -> convergence check -> branch -> commit -> push -> PR
+//   snapshot -> importer dry-run -> safety check -> create sync branch ->
+//   importer --apply -> verify changed files -> validate -> generate ->
+//   verify changed files -> validate again -> build -> convergence check ->
+//   commit -> push -> PR
+//
+// The sync branch is created (from a fixed base branch, see BASE_BRANCH)
+// BEFORE any file is touched — Step 5B found that creating it afterward
+// meant a second run, left sitting on the first run's sync branch, could
+// stack a new sync branch on top of the previous one instead of on the
+// real baseline. Branching first, from an explicit base ref, makes this
+// correct regardless of what was checked out when the script started.
 //
 // This script does not reimplement any comparison/validation/generation
 // logic. It calls scripts/figma-snapshot-import.mjs,
@@ -27,6 +35,16 @@ const noPush = args.includes("--no-push")
 
 const EXPECTED_FIGMA_FILE_NAME = "Prism V1 - ShadCN"
 const SUPPORTED_SCHEMA_VERSION = "1.0.0"
+
+// Every sync branch is created FROM this branch explicitly — never from
+// "whatever is currently checked out". A successful sync leaves the repo
+// on the new figma-sync/<timestamp> branch (by design, so it can be
+// pushed/reviewed); without this, a second sync run before switching back
+// would silently stack a new sync branch on top of the previous one
+// instead of on the real infrastructure baseline. Using an explicit start
+// point for `git checkout -b` makes this correct regardless of what's
+// currently checked out, with no network fetch required.
+const BASE_BRANCH = "poc/prism-figma-pipeline"
 
 // Every file the rest of this pipeline is allowed to touch. Anything else
 // appearing in `git diff --name-only` after apply/generate is treated as a
@@ -89,6 +107,34 @@ if (porcelain.length > 0) {
   )
 }
 console.log("  Working tree is clean.")
+
+const baseBranchCheck = run("git", ["rev-parse", "--verify", "--quiet", BASE_BRANCH])
+if (baseBranchCheck.status !== 0) {
+  fail(
+    `Base branch "${BASE_BRANCH}" does not exist locally. Every sync branch is created from it explicitly — ` +
+      `fetch/checkout it once (e.g. "git fetch origin ${BASE_BRANCH} && git checkout ${BASE_BRANCH}") and re-run.`,
+  )
+}
+// Switch to BASE_BRANCH itself here, before the dry-run comparison runs —
+// not just before creating the sync branch. A leftover branch from a
+// previous sync (which the script deliberately leaves checked out on
+// success) has its own committed changes on disk; comparing the snapshot
+// against THAT content, rather than the true base, would report
+// misleading counts (verified empirically: doing this comparison before
+// switching branches made a later run report 2 changed literals when only
+// 1 was real — the stale count came from a leftover branch's already-
+// applied fix looking like a "difference" against the fresh snapshot).
+// Safe because the working tree was just confirmed clean above.
+const currentBranch = gitOutput(["branch", "--show-current"])
+if (currentBranch !== BASE_BRANCH) {
+  const switchToBase = run("git", ["checkout", BASE_BRANCH])
+  if (switchToBase.status !== 0) {
+    fail(`Failed to switch to base branch "${BASE_BRANCH}" from "${currentBranch}":\n${switchToBase.stderr}`)
+  }
+  console.log(`  Switched from "${currentBranch || "(detached HEAD)"}" to base branch "${BASE_BRANCH}".`)
+} else {
+  console.log(`  On base branch "${BASE_BRANCH}".`)
+}
 
 if (!fs.existsSync(snapshotPath)) {
   fail(`Snapshot file not found: ${snapshotPath}`)
@@ -208,7 +254,44 @@ if (before.changedLiteral === 0) {
 }
 console.log(`  ${before.changedLiteral} safe deterministic literal change(s) will be applied.`)
 
-// --- [5] Apply -----------------------------------------------------------------
+// --- [5] Create sync branch (before any mutation) ----------------------------
+//
+// Deliberately done BEFORE apply/generate, not after: every mutation this
+// run makes then happens on a clean checkout of the new branch (itself
+// created from BASE_BRANCH, not from whatever was previously checked
+// out), so there is never a "switch branches while carrying uncommitted
+// changes" step that could conflict with a leftover branch from an
+// earlier sync.
+
+stage(`Creating sync branch from ${BASE_BRANCH}`)
+
+function branchExists(branchName) {
+  const local = run("git", ["rev-parse", "--verify", "--quiet", branchName])
+  if (local.status === 0) return true
+  const remote = gitOutput(["ls-remote", "--heads", "origin", branchName])
+  return remote.length > 0
+}
+
+function timestampSlug() {
+  const now = new Date()
+  const pad = (n) => String(n).padStart(2, "0")
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}-${pad(now.getHours())}${pad(now.getMinutes())}`
+}
+
+let branchName = `figma-sync/${timestampSlug()}`
+let suffix = 2
+while (branchExists(branchName)) {
+  branchName = `figma-sync/${timestampSlug()}-${suffix}`
+  suffix++
+}
+
+const checkoutResult = run("git", ["checkout", "-b", branchName, BASE_BRANCH])
+if (checkoutResult.status !== 0) {
+  fail(`Failed to create branch "${branchName}" from "${BASE_BRANCH}":\n${checkoutResult.stderr}`)
+}
+console.log(`  Created branch: ${branchName} (from ${BASE_BRANCH})`)
+
+// --- [6] Apply -----------------------------------------------------------------
 
 stage("Applying safe changes")
 
@@ -234,7 +317,7 @@ function checkChangedFilesAreAllowed(stageName) {
 checkChangedFilesAreAllowed("apply")
 console.log("  Only expected token source files were modified.")
 
-// --- [6] Validate --------------------------------------------------------------
+// --- [7] Validate --------------------------------------------------------------
 
 stage("Validating tokens")
 
@@ -247,7 +330,7 @@ if (validateAfterApply.status !== 0) {
   )
 }
 
-// --- [7] Generate ---------------------------------------------------------------
+// --- [8] Generate ---------------------------------------------------------------
 
 stage("Regenerating Prism CSS")
 
@@ -262,7 +345,7 @@ if (generateRun.status !== 0) {
 const changedAfterGenerate = checkChangedFilesAreAllowed("generation")
 console.log(`  Changed files: ${changedAfterGenerate.join(", ")}`)
 
-// --- [8] Re-validate -------------------------------------------------------------
+// --- [9] Re-validate -------------------------------------------------------------
 
 stage("Re-validating tokens after generation")
 
@@ -275,7 +358,7 @@ if (validateAfterGenerate.status !== 0) {
 }
 console.log("  PASS")
 
-// --- [9] Build -------------------------------------------------------------------
+// --- [10] Build -------------------------------------------------------------------
 
 stage("Building")
 
@@ -288,7 +371,7 @@ if (buildRun.status !== 0) {
 }
 console.log("  Build succeeded.")
 
-// --- [10] Convergence check -------------------------------------------------------
+// --- [11] Convergence check -------------------------------------------------------
 
 stage("Confirming repo now matches Figma (convergence check)")
 
@@ -306,35 +389,10 @@ if (after.changedLiteral !== 0) {
 }
 console.log(`  Converged: 0 changedLiteral remaining. (changedAliasStructure: ${after.changedAliasStructure}, unchanged deferred debt.)`)
 
-// --- [11] Branch, commit, push, PR -------------------------------------------------
+// --- [12] Commit, push, PR ----------------------------------------------------
+// (Branch already created in stage [5], before any file was touched.)
 
-stage("Creating sync branch, committing, and pushing")
-
-function branchExists(branchName) {
-  const local = run("git", ["rev-parse", "--verify", "--quiet", branchName])
-  if (local.status === 0) return true
-  const remote = gitOutput(["ls-remote", "--heads", "origin", branchName])
-  return remote.length > 0
-}
-
-function timestampSlug() {
-  const now = new Date()
-  const pad = (n) => String(n).padStart(2, "0")
-  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}-${pad(now.getHours())}${pad(now.getMinutes())}`
-}
-
-let branchName = `figma-sync/${timestampSlug()}`
-let suffix = 2
-while (branchExists(branchName)) {
-  branchName = `figma-sync/${timestampSlug()}-${suffix}`
-  suffix++
-}
-
-const checkoutResult = run("git", ["checkout", "-b", branchName])
-if (checkoutResult.status !== 0) {
-  fail(`Failed to create branch "${branchName}":\n${checkoutResult.stderr}`)
-}
-console.log(`  Created branch: ${branchName}`)
+stage("Committing and pushing")
 
 const addResult = run("git", ["add", ...changedAfterGenerate])
 if (addResult.status !== 0) {

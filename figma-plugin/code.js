@@ -377,6 +377,19 @@ figma.ui.onmessage = async (message) => {
       figma.ui.postMessage({ type: "snapshot-result", payload: snapshot })
       return
     }
+
+    if (message.type === "sync-to-git") {
+      // Reuses buildSnapshot() exactly as-is — "Sync to Git" sends the same
+      // deterministic snapshot "Export Prism snapshot" would produce, just
+      // over HTTP to the local bridge instead of as a downloaded file. The
+      // actual network request happens in ui.html, not here: this thread's
+      // fetch/CORS behavior under the plugin sandbox isn't something this
+      // POC could verify without a live Figma runtime, whereas the UI
+      // iframe is a normal, well-understood web context (see README).
+      const snapshot = await buildSnapshot()
+      figma.ui.postMessage({ type: "sync-payload", payload: snapshot })
+      return
+    }
   } catch (error) {
     figma.ui.postMessage({ type: "error", message: String((error && error.message) || error) })
   }

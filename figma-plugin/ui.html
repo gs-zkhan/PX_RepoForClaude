@@ -73,6 +73,25 @@
     </div>
 
     <div class="section">
+      <div>
+        <input
+          id="bridge-token"
+          type="text"
+          placeholder="Bridge token (from `npm run figma:bridge` terminal output)"
+          style="width: 100%; box-sizing: border-box; padding: 4px; font-size: 11px; margin-bottom: 6px"
+        />
+      </div>
+      <button id="btn-sync-to-git">Sync to Git</button>
+      <div class="hint">
+        Requires <code>npm run figma:bridge</code> running locally. Re-reads every local
+        collection/variable live and sends it to the local bridge, which runs the same
+        validated <code>figma:sync</code> pipeline used for a manual snapshot. The token
+        above is never saved — paste it fresh each time you start the bridge.
+      </div>
+      <div id="sync-status" class="hint"></div>
+    </div>
+
+    <div class="section">
       <pre id="output">No output yet.</pre>
     </div>
 
@@ -118,12 +137,114 @@
         el("export-status").textContent = text
       }
 
+      const BRIDGE_ORIGIN = "http://localhost:3847"
+
+      function setSyncStatus(text) {
+        el("sync-status").textContent = text
+      }
+
+      // A plain fetch() rejection ("Failed to fetch") means one of two
+      // very different things — nothing is listening on this port, or
+      // something IS listening but the browser's CORS policy blocked
+      // script access to the response — and the Fetch API deliberately
+      // reports both identically (this is intentional web-platform
+      // behavior, not a bug). A `mode: "no-cors"` request still resolves
+      // (with an opaque, unreadable response) as long as *some* server
+      // responds at all, even one with no CORS headers — so retrying the
+      // failed request that way is the only way from here to tell "not
+      // running" apart from "running, but blocked".
+      async function isBridgeReachable() {
+        try {
+          await fetch(`${BRIDGE_ORIGIN}/health`, { mode: "no-cors" })
+          return true
+        } catch {
+          return false
+        }
+      }
+
+      // Runs entirely in this iframe, not code.js — this is a normal web
+      // context with ordinary fetch/CORS semantics (unlike the plugin
+      // sandbox thread), and manifest.json's networkAccess whitelists
+      // exactly this one loopback origin.
+      async function syncSnapshotToGit(snapshot) {
+        const token = el("bridge-token").value.trim()
+
+        setSyncStatus("Checking local bridge…")
+        let health
+        try {
+          health = await fetch(`${BRIDGE_ORIGIN}/health`)
+        } catch (error) {
+          const reachable = await isBridgeReachable()
+          setSyncStatus(
+            reachable
+              ? "Local bridge is running but this browser request was blocked (CORS/network policy). Check the bridge's terminal output, and that manifest.json's networkAccess.devAllowedDomains matches the bridge's URL."
+              : "Local Prism bridge is not running. In Terminal, from the repo root, run: npm run figma:bridge",
+          )
+          return
+        }
+        if (!health.ok) {
+          setSyncStatus(`Local bridge responded unexpectedly (HTTP ${health.status}). Is the right process running on port 3847?`)
+          return
+        }
+
+        setSyncStatus("Sending snapshot…")
+        const runningTimer = setTimeout(() => {
+          setSyncStatus("Sync running… (validating, generating, building, then branch/commit/push — this can take a bit)")
+        }, 1000)
+
+        let response
+        try {
+          response = await fetch(`${BRIDGE_ORIGIN}/sync`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(snapshot),
+          })
+        } catch (error) {
+          clearTimeout(runningTimer)
+          const reachable = await isBridgeReachable()
+          setSyncStatus(
+            reachable
+              ? "Local bridge is running but this browser request was blocked (CORS/network policy) partway through syncing. Check the bridge's terminal output."
+              : "Lost connection to the local bridge while syncing. Check the bridge's terminal for details.",
+          )
+          return
+        }
+        clearTimeout(runningTimer)
+
+        let result
+        try {
+          result = await response.json()
+        } catch (error) {
+          setSyncStatus(`Bridge returned an unreadable response (HTTP ${response.status}).`)
+          return
+        }
+
+        if (response.status === 401) {
+          setSyncStatus("Bridge rejected the token. Copy the current token from the bridge's terminal output and paste it in again.")
+          return
+        }
+
+        if (!response.ok) {
+          setSyncStatus(`Bridge returned an HTTP error (status ${response.status}). See details below.`)
+          el("output").textContent = result.error || result.output || JSON.stringify(result, null, 2)
+          return
+        }
+
+        setSyncStatus(result.success ? "Sync complete." : "Sync finished with a non-zero exit — see details below.")
+        el("output").textContent = result.output || JSON.stringify(result, null, 2)
+      }
+
       window.onmessage = (event) => {
         const message = event.data.pluginMessage
         if (!message) return
 
         if (message.type === "summary") {
           renderSummary(message.payload)
+        } else if (message.type === "sync-payload") {
+          syncSnapshotToGit(message.payload)
         } else if (message.type === "snapshot-result") {
           const snapshot = message.payload
           downloadJson("prism-figma-snapshot.json", snapshot)
@@ -161,6 +282,15 @@
       el("btn-export-snapshot").onclick = () => {
         setExportStatus("Exporting…")
         parent.postMessage({ pluginMessage: { type: "export-snapshot" } }, "*")
+      }
+
+      el("btn-sync-to-git").onclick = () => {
+        if (!el("bridge-token").value.trim()) {
+          setSyncStatus("Paste the bridge token first (printed when you run npm run figma:bridge).")
+          return
+        }
+        setSyncStatus("Building snapshot…")
+        parent.postMessage({ pluginMessage: { type: "sync-to-git" } }, "*")
       }
 
       parent.postMessage({ pluginMessage: { type: "get-summary" } }, "*")
