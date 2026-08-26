@@ -813,12 +813,12 @@
         "$value": {
           "colorSpace": "srgb",
           "components": [
-            0.0941176488995552,
-            0.12156862765550613,
-            0.14901961386203766
+            0.5810734629631042,
+            0.15296174585819244,
+            0.5382623076438904
           ],
           "alpha": 1,
-          "hex": "#181F26"
+          "hex": "#942789"
         },
         "$description": "Darkest neutral — #181F26. Primary text colour on light backgrounds.",
         "$extensions": {
