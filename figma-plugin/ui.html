@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Prism Pipeline POC</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 12px;
+        margin: 0;
+        padding: 12px;
+        color: #181f26;
+      }
+      h1 {
+        font-size: 14px;
+        margin: 0 0 8px;
+      }
+      .stat-line {
+        margin: 2px 0;
+      }
+      .collection-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 2px 0;
+        border-bottom: 1px solid #e6e9ec;
+      }
+      button {
+        margin-top: 8px;
+        margin-right: 6px;
+        padding: 6px 10px;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      pre {
+        background: #f5f7f9;
+        padding: 8px;
+        overflow: auto;
+        max-height: 320px;
+        font-size: 11px;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      .section {
+        margin-top: 14px;
+      }
+      .hint {
+        color: #5f6c7a;
+        margin-top: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Prism Pipeline POC</h1>
+    <div id="summary">Loading…</div>
+
+    <div class="section">
+      <button id="btn-inspect-primitive">Inspect test variable</button>
+      <button id="btn-inspect-component-alias">Inspect component alias example</button>
+      <div class="hint">
+        "Inspect test variable" looks for <code>color/royalBlue/700</code> — if it doesn't
+        exist in this file, real candidate Primitive color names are listed instead.
+      </div>
+    </div>
+
+    <div class="section">
+      <button id="btn-export-snapshot">Export Prism snapshot</button>
+      <div class="hint">
+        Re-reads every local collection/variable and downloads
+        <code>prism-figma-snapshot.json</code>. This is read-only export data — it is not
+        yet imported into Git automatically.
+      </div>
+      <div id="export-status" class="hint"></div>
+    </div>
+
+    <div class="section">
+      <pre id="output">No output yet.</pre>
+    </div>
+
+    <script>
+      function el(id) {
+        return document.getElementById(id)
+      }
+
+      function renderSummary(summary) {
+        const collectionsHtml = summary.collections
+          .map(
+            (c) =>
+              `<div class="collection-row"><span>${c.name}</span><span>${c.variableCount}</span></div>`,
+          )
+          .join("")
+
+        el("summary").innerHTML = `
+          <div class="stat-line"><strong>File:</strong> ${summary.fileName}</div>
+          <div class="stat-line"><strong>Collections:</strong> ${summary.totalCollections}</div>
+          <div class="stat-line"><strong>Variables:</strong> ${summary.totalVariables}</div>
+          <div class="section">${collectionsHtml}</div>
+        `
+      }
+
+      // Triggers a standard browser file download from inside the plugin's
+      // UI iframe. No Figma-specific API is needed for this — ui.html runs
+      // in a real sandboxed iframe with normal DOM/Blob support, unlike
+      // code.js's separate plugin-sandbox thread.
+      function downloadJson(filename, data) {
+        const json = JSON.stringify(data, null, 2)
+        const blob = new Blob([json], { type: "application/json" })
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement("a")
+        link.href = url
+        link.download = filename
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        URL.revokeObjectURL(url)
+      }
+
+      function setExportStatus(text) {
+        el("export-status").textContent = text
+      }
+
+      window.onmessage = (event) => {
+        const message = event.data.pluginMessage
+        if (!message) return
+
+        if (message.type === "summary") {
+          renderSummary(message.payload)
+        } else if (message.type === "snapshot-result") {
+          const snapshot = message.payload
+          downloadJson("prism-figma-snapshot.json", snapshot)
+          setExportStatus(
+            `${snapshot.totalVariables} variables exported — snapshot ready/downloaded`,
+          )
+          el("output").textContent = JSON.stringify(
+            {
+              schemaVersion: snapshot.schemaVersion,
+              exportedAt: snapshot.exportedAt,
+              figmaFileName: snapshot.figmaFileName,
+              totalCollections: snapshot.totalCollections,
+              totalVariables: snapshot.totalVariables,
+            },
+            null,
+            2,
+          )
+        } else if (message.type === "error") {
+          setExportStatus("")
+          el("output").textContent = "Error: " + message.message
+        } else {
+          const body = message.error ? { error: message.error } : message.payload
+          el("output").textContent = JSON.stringify(body, null, 2)
+        }
+      }
+
+      el("btn-inspect-primitive").onclick = () => {
+        parent.postMessage({ pluginMessage: { type: "find-primitive-color" } }, "*")
+      }
+
+      el("btn-inspect-component-alias").onclick = () => {
+        parent.postMessage({ pluginMessage: { type: "find-component-alias" } }, "*")
+      }
+
+      el("btn-export-snapshot").onclick = () => {
+        setExportStatus("Exporting…")
+        parent.postMessage({ pluginMessage: { type: "export-snapshot" } }, "*")
+      }
+
+      parent.postMessage({ pluginMessage: { type: "get-summary" } }, "*")
+    </script>
+  </body>
+</html>
