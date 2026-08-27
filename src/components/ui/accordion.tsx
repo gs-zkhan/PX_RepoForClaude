@@ -25,6 +25,17 @@ import type { PrismIconName } from "@/components/ui/prism-icon"
 // rotation and (for off-material types) hover background. Content panel
 // uses conditional rendering rather than aria-hidden so screen readers
 // don't see stale content when closed.
+//
+// AccordionItem has two distinct, non-overloaded leading-visual props:
+//   - `icon?: PrismIconName` — unchanged, renders the shared 24px icon.
+//   - `leading?: ReactNode` — added to support numbered/lettered badges
+//     (e.g. a standalone <Letter>) that some real Accordion instances use
+//     in place of a named icon (see Shell/Create · Edit Form's Accordion
+//     example, node 3796:2504, which numbers its sections 1-4). Kept as a
+//     separate prop rather than widening `icon` to `PrismIconName |
+//     ReactNode`, so nothing has to branch on `typeof icon === "string"` at
+//     runtime to figure out which one was passed — each prop has exactly
+//     one shape, and `leading` takes precedence if both happen to be set.
 // -----------------------------------------------------------------------------
 
 type AccordionSize = 48 | 56 | 64
@@ -104,12 +115,21 @@ type AccordionItemProps = {
   value: string
   title: React.ReactNode
   subtitle?: React.ReactNode
+  /** Named leading icon — unchanged, renders the shared 24px PrismIcon. */
   icon?: PrismIconName
+  /**
+   * Arbitrary leading visual, rendered as-is instead of `icon` when
+   * present — for numbered/lettered badges (e.g. a standalone `<Letter>`)
+   * that Figma's own Accordion instances use in some contexts (see Shell/
+   * Create · Edit Form's Accordion example, node 3796:2504) and that a
+   * named icon can't express. Takes precedence over `icon` if both are set.
+   */
+  leading?: React.ReactNode
   children: React.ReactNode
   className?: string
 }
 
-function AccordionItem({ value, title, subtitle, icon, children, className }: AccordionItemProps) {
+function AccordionItem({ value, title, subtitle, icon, leading, children, className }: AccordionItemProps) {
   const ctx = React.useContext(AccordionContext)
   if (!ctx) throw new Error("<AccordionItem> must be used inside <Accordion>.")
 
@@ -143,14 +163,15 @@ function AccordionItem({ value, title, subtitle, icon, children, className }: Ac
           type === "off-material-shadow" && "rounded-[var(--p-radius-150)]",
         )}
       >
-        {icon ? (
-          <PrismIcon
-            name={icon}
-            size={24}
-            decorative
-            className="shrink-0 text-[var(--s-icon-color-default)]"
-          />
-        ) : null}
+        {leading ??
+          (icon ? (
+            <PrismIcon
+              name={icon}
+              size={24}
+              decorative
+              className="shrink-0 text-[var(--s-icon-color-default)]"
+            />
+          ) : null)}
         <div className="flex min-w-0 flex-1 flex-col">
           <span className="truncate text-[length:var(--t-font-heading-xsmall-size)] font-[number:var(--t-font-heading-xsmall-weight)] leading-[var(--t-font-heading-xsmall-line-height)] text-[var(--c-accordion-label)]">
             {title}

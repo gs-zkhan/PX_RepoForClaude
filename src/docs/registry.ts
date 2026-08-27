@@ -50,6 +50,7 @@ import { statusSelectDoc } from "@/docs/docs/status-select.doc"
 import { summaryStatDoc } from "@/docs/docs/summary-stat.doc"
 import { tableDoc } from "@/docs/docs/table.doc"
 import { tabsDoc } from "@/docs/docs/tabs.doc"
+import { textareaDoc } from "@/docs/docs/textarea.doc"
 import { textFieldDoc } from "@/docs/docs/text-field.doc"
 import { thirdPaneDoc } from "@/docs/docs/third-pane.doc"
 import { toastDoc } from "@/docs/docs/toast.doc"
@@ -155,6 +156,7 @@ const allDocs: ComponentDoc[] = [
   summaryStatDoc,
   tableDoc,
   tabsDoc,
+  textareaDoc,
   textFieldDoc,
   thirdPaneDoc,
   toastDoc,
@@ -195,6 +197,7 @@ export const navGroups: DocNavGroup[] = [
       inputDoc,
       inputNumberDoc,
       textFieldDoc,
+      textareaDoc,
       dateFieldDoc,
       datePickerDoc,
       dropdownFieldDoc,

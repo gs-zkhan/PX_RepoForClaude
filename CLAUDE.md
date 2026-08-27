@@ -310,8 +310,13 @@ The authoritative registry of extracted PX shells lives at [`ai/shell-registry.m
 
 - **List-type pages** (Audience Explorer, Accounts, Engagements, Segments, Feature Adoption, and every other table-driven PX screen) MUST reuse `PxListShell` from `src/patterns/px-list-shell`. Do NOT rebuild the left rail, page header, or content padding — they are the shell's responsibility.
 - Screens supply feature content via `children`, filters via the `filterSlider` slot, and header composition via the typed `header` prop.
+- **Record create/edit forms** MUST reuse `PxCreateEditShell` from `src/patterns/px-create-edit-shell` — pick the tier per the Figma "Create · Edit Form" AI instructions (node `7128:873`): `PxCreateEditShellModal` for ≤6 fields with no branching, `PxCreateEditShellAccordion` for independent multi-section forms, `PxCreateEditShellWizard` only when a later step depends on an earlier one. Do NOT hand-roll a Modal + form fields, or a second sub-header/footer, for a create/edit screen — compose one of these three.
 - Do NOT re-add page padding, page background, or top-bar chrome inside `children` — the shell already applies `--p-space-300` on all four sides and `--s-color-surface-page` behind the content.
 - Do NOT render `<PxShellRail>` or a hand-rolled top bar next to `<PxListShell>`. The shell already includes both.
 - When Figma shows the two-bar header, pass any of `title`, `tabs`, `onBack`, `secondaryActions`, `titleChip`, `secondaryUtilities` — the Secondary Bar renders automatically. Pass `showSecondary={false}` to force a one-bar header.
 
 Before proposing a NEW shell, check the registry first — if the target page fits an existing shell, reuse it and do not clone.
+
+## Canonical application references
+
+- **[`src/pages/user-explorer.tsx`](./src/pages/user-explorer.tsx)** is the canonical existing application reference for how a real PX screen composes shells, patterns, and approved components together (filtering, sorting, pagination, column customization, inline status editing, etc.). When building a new screen, study its architectural and composition lessons — but do not treat its specific visual layout (a single dense table page) as appropriate for every shell; a create/edit form, for example, has a materially different anatomy and should follow `PxCreateEditShell` instead.

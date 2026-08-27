@@ -105,6 +105,9 @@ import type { PxShellNavKey } from "@/components/px-shell-rail"
 import { PxHeader } from "@/patterns/px-list-shell/PxHeader"
 import { PECDropdown, type PECOption } from "@/components/px-pec-dropdown"
 import { PxFilterSlider } from "@/patterns/px-list-shell/PxFilterSlider"
+import { PxCreateEditShellModal } from "@/patterns/px-create-edit-shell"
+import { Textarea } from "@/components/ui/textarea"
+import { CreateEditShellExample } from "@/pages/create-edit-shell-example"
 
 // ---------------------------------------------------------------------------
 // Section wrapper
@@ -216,6 +219,9 @@ function ValidationGallery() {
   const [pageSize, setPageSize] = React.useState(10)
   const [navKey, setNavKey] = React.useState<PxShellNavKey>("audience")
   const [navMode, setNavMode] = React.useState<PxShellRailMode>("collapsed")
+  const [createEditNavKey, setCreateEditNavKey] = React.useState<PxShellNavKey>("engagements")
+  const [createEditNavMode, setCreateEditNavMode] = React.useState<PxShellRailMode>("collapsed")
+  const [createEditModalOpen, setCreateEditModalOpen] = React.useState(false)
   const [pec, setPec] = React.useState({ product: "px", environment: "production", channels: ["web-app"] })
   const [filterTab, setFilterTab] = React.useState<"filter" | "global-context">("filter")
   const [filterBarOpenChip, setFilterBarOpenChip] = React.useState<string | undefined>(undefined)
@@ -972,6 +978,44 @@ function ValidationGallery() {
             The full <code>PxListShell</code> composition (rail + header + content + optional filter) is best
             reviewed at full size — see the "Engagements" rail item, which renders{" "}
             <code>src/pages/engagements-list-example.tsx</code>.
+          </p>
+        </Section>
+
+        {/* ------------------------------------------------------------------ */}
+        {/* Create · Edit Shell (PxCreateEditShell)                              */}
+        {/* ------------------------------------------------------------------ */}
+        <Section title="Create · Edit Shell (PxCreateEditShell)">
+          <Row label="Live example — all 3 tiers">
+            <div className="h-[700px] w-full overflow-hidden rounded border border-[var(--s-color-line-default)]">
+              <CreateEditShellExample
+                activeKey={createEditNavKey}
+                onNavigate={setCreateEditNavKey}
+                mode={createEditNavMode}
+                onModeChange={setCreateEditNavMode}
+              />
+            </div>
+          </Row>
+          <Row label="Modal tier — Add Weblink">
+            <Button onClick={() => setCreateEditModalOpen(true)}>Open Add Weblink</Button>
+            <PxCreateEditShellModal
+              open={createEditModalOpen}
+              onOpenChange={setCreateEditModalOpen}
+              title="Add Weblink"
+              onCancel={() => setCreateEditModalOpen(false)}
+              primaryAction={{ label: "Save", onClick: () => setCreateEditModalOpen(false) }}
+            >
+              <div className="flex flex-col gap-[var(--p-space-300)]">
+                <TextField label="Title" required placeholder="Placeholder text" />
+                <Textarea label="Description" />
+                <Textarea label="URL" />
+              </div>
+            </PxCreateEditShellModal>
+          </Row>
+          <p className="text-xs text-[var(--s-color-text-subtlest)]">
+            Figma: Shell/Create · Edit Form 🟢 (node 3187:10). See{" "}
+            <code>src/patterns/px-create-edit-shell/README.md</code> for the full anatomy, Figma node
+            traceability, and known Figma inconsistencies. Full worked example:{" "}
+            <code>src/pages/create-edit-shell-example.tsx</code>.
           </p>
         </Section>
 

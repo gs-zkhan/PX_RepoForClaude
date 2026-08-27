@@ -1,8 +1,6 @@
 import { cn } from "@/lib/utils"
-import { PxShellRail } from "@/components/px-shell-rail"
-import { TooltipProvider } from "@/components/ui/tooltip"
+import { PxMainContainer } from "@/patterns/px-main-container"
 
-import { PxHeader } from "./PxHeader"
 import type { PxListShellProps } from "./types"
 
 // -----------------------------------------------------------------------------
@@ -22,6 +20,14 @@ import type { PxListShellProps } from "./types"
 //   - Content SLOT padding: 24px (space/300) on all four sides.
 //   - Filter Slider width: 336px, right-aligned, full height.
 //
+// Composed from PxMainContainer (rail + header + content row — see
+// src/patterns/px-main-container) plus the one thing that's genuinely
+// list-specific: the padded <main> + optional filterSlider sitting side by
+// side in that content row. This is a pure extraction — the rendered DOM
+// for the rail/header/main/filterSlider is unchanged; only the outermost
+// wrapper's data-slot moved from "px-list-shell" to PxMainContainer's own
+// "px-main-container" (nothing in the repo queries that attribute's value).
+//
 // Composition rules (see README):
 //   1. Always compose page content via `children`.
 //   2. Never re-add page padding inside children — the shell handles 24px.
@@ -36,40 +42,19 @@ function PxListShell({
   children,
 }: PxListShellProps) {
   return (
-    <TooltipProvider delayDuration={300}>
-      <div
-        data-slot="px-list-shell"
+    <PxMainContainer nav={nav} header={header}>
+      <main
+        data-slot="px-list-shell-content"
         className={cn(
-          "flex h-screen w-full",
-          "bg-[var(--s-color-surface-page)]",
+          "flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden",
+          "p-[var(--p-space-300)]",
         )}
       >
-        <PxShellRail
-          activeKey={nav.activeKey}
-          onNavigate={nav.onNavigate}
-          mode={nav.mode}
-          onModeChange={nav.onModeChange}
-        />
+        {children}
+      </main>
 
-        <div className="flex min-w-0 flex-1 flex-col">
-          <PxHeader {...header} />
-
-          <div className="flex min-h-0 flex-1">
-            <main
-              data-slot="px-list-shell-content"
-              className={cn(
-                "flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden",
-                "p-[var(--p-space-300)]",
-              )}
-            >
-              {children}
-            </main>
-
-            {filterSlider}
-          </div>
-        </div>
-      </div>
-    </TooltipProvider>
+      {filterSlider}
+    </PxMainContainer>
   )
 }
 
