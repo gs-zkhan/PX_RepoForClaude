@@ -47,6 +47,9 @@
         color: #5f6c7a;
         margin-top: 4px;
       }
+      #sync-status {
+        white-space: pre-line;
+      }
     </style>
   </head>
   <body>
@@ -233,7 +236,25 @@
           return
         }
 
-        setSyncStatus(result.success ? "Sync complete." : "Sync finished with a non-zero exit — see details below.")
+        if (!result.success) {
+          setSyncStatus("Sync finished with a non-zero exit — see details below.")
+          el("output").textContent = result.output || JSON.stringify(result, null, 2)
+          return
+        }
+
+        // branch/prUrl/compareUrl come straight from figma-sync.mjs's own
+        // result (relayed as-is by the bridge) — never recomputed here.
+        if (result.status === "no-changes") {
+          setSyncStatus("Sync complete. No new safe Figma changes detected — nothing to push.")
+        } else if (result.branch && result.prUrl) {
+          setSyncStatus(`Sync complete\nBranch: ${result.branch}\nPR: ${result.prUrl}`)
+        } else if (result.branch && result.compareUrl) {
+          setSyncStatus(`Sync complete\nBranch pushed: ${result.branch}\nPR creation unavailable\nOpen: ${result.compareUrl}`)
+        } else if (result.branch) {
+          setSyncStatus(`Sync complete\nBranch pushed: ${result.branch}\nPR creation unavailable — see details below for how to open one manually.`)
+        } else {
+          setSyncStatus("Sync complete.")
+        }
         el("output").textContent = result.output || JSON.stringify(result, null, 2)
       }
 

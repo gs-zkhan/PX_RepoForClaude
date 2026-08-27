@@ -83,6 +83,21 @@ function readBody(req, limit) {
   })
 }
 
+// figma-sync.mjs prints one machine-readable line (__FIGMA_SYNC_RESULT__)
+// at every terminal exit point, alongside its normal human-readable log —
+// this just extracts that line so the plugin can show branch/PR/compare
+// info without the bridge re-deriving or re-parsing any of figma-sync.mjs's
+// own prose output itself.
+function parseSyncResultLine(stdout) {
+  const match = stdout.match(/__FIGMA_SYNC_RESULT__ (.+)/)
+  if (!match) return { status: null, branch: null, prUrl: null, compareUrl: null }
+  try {
+    return JSON.parse(match[1])
+  } catch {
+    return { status: null, branch: null, prUrl: null, compareUrl: null }
+  }
+}
+
 // Checked before anything touches the filesystem or git. Mirrors (but does
 // not replace) the deeper checks figma-sync.mjs and the importer already
 // do — this is a fast, cheap reject for the bridge's own endpoint, not a
@@ -188,6 +203,7 @@ const requestHandler = async (req, res) => {
         success: syncResult.status === 0,
         exitCode: syncResult.status,
         output,
+        ...parseSyncResultLine(syncResult.stdout ?? ""),
       },
       cors,
     )

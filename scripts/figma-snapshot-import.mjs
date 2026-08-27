@@ -371,9 +371,23 @@ console.log(`Repo tokens with no id:     ${summary.repoNoIdentity}`)
 console.log(`Repo alias unresolvable:    ${summary.repoAliasUnresolvedLocally}`)
 console.log("")
 
+// Same fields the "controlled test token" debug block below already uses
+// (repoValue?.hex / figmaModeEntry?.rawValue?.normalized?.hex) — falls
+// back to a raw JSON dump for any non-color resolvedType, since not every
+// token has a ".hex" shape.
+function formatLiteralValue(value) {
+  if (value && typeof value === "object" && "hex" in value) return value.hex
+  return JSON.stringify(value)
+}
+
 function printRecord(r) {
   console.log(`  [${r.layer}] ${r.file} :: ${r.tokenPath}`)
   if (r.detail) console.log(`    ${r.detail}`)
+  if (r.category === "changedLiteral" && r.figmaModeEntry) {
+    const oldValue = formatLiteralValue(r.repoValue)
+    const newValue = formatLiteralValue(r.figmaModeEntry.rawValue?.normalized ?? r.figmaModeEntry.rawValue)
+    console.log(`    ${oldValue} -> ${newValue}`)
+  }
   if (r.figmaVariable) console.log(`    figma: ${r.figmaVariable.name} (${r.figmaVariable.id})`)
 }
 

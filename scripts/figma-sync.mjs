@@ -89,6 +89,38 @@ function gitOutput(gitArgs) {
   return (result.stdout ?? "").trim()
 }
 
+// Step 5C: a single machine-readable line, printed at every terminal exit
+// point below, so a caller (the local bridge) can report status/branch/PR
+// details to the Figma UI without re-deriving anything or re-parsing the
+// full human-readable log. This does not replace the console output above
+// it — both are always printed; this line is just for a caller who wants
+// structured fields instead of scraping prose.
+const RESULT_MARKER = "__FIGMA_SYNC_RESULT__"
+
+function printSyncResult(result) {
+  console.log(`\n${RESULT_MARKER} ${JSON.stringify(result)}`)
+}
+
+// GH_BIN is an optional escape hatch for a machine where a plain `gh` on
+// PATH doesn't work (e.g. a managed Mac killing an unmanaged copy via
+// Gatekeeper/MDM policy — no longer this repo's situation now that `gh`
+// is installed through Homebrew, but the override costs nothing to keep).
+// Never a hardcoded path, username, or version. Returns null (not a
+// guess) if neither is usable; callers already treat a null/unavailable
+// gh as "PR creation unavailable".
+function resolveGhBinary() {
+  const envPath = process.env.GH_BIN
+  if (envPath) {
+    if (fs.existsSync(envPath)) return envPath
+    console.log(`  Note: GH_BIN="${envPath}" is set but no file exists there — falling back to PATH.`)
+  }
+
+  const pathLookup = run("gh", ["--version"])
+  if (pathLookup.error === undefined && pathLookup.status === 0) return "gh"
+
+  return null
+}
+
 // --- [1] Preconditions -------------------------------------------------------
 
 stage("Checking repository preconditions")
@@ -197,7 +229,34 @@ function parseSummary(output) {
   return summary
 }
 
+// Pulls the actual per-token old -> new values the importer already
+// printed for each changedLiteral record (see figma-snapshot-import.mjs's
+// printRecord) — never invented here, only parsed from what the importer
+// itself reported for this exact snapshot. Used only for the PR body.
+function parseChangedLiteralDetails(output) {
+  const section = output.match(/--- changedLiteral \(\d+\) ---\n([\s\S]*?)\n\n/)
+  if (!section) return []
+  const entries = []
+  let current = null
+  for (const line of section[1].split("\n")) {
+    const header = line.match(/^ {2}\[(\w+)\] (\S+) :: (\S+)$/)
+    if (header) {
+      if (current) entries.push(current)
+      current = { layer: header[1], file: header[2], tokenPath: header[3], oldValue: null, newValue: null }
+      continue
+    }
+    const valueLine = line.match(/^ {4}(.+) -> (.+)$/)
+    if (valueLine && current && current.oldValue === null) {
+      current.oldValue = valueLine[1]
+      current.newValue = valueLine[2]
+    }
+  }
+  if (current) entries.push(current)
+  return entries
+}
+
 const before = parseSummary(dryRun.stdout)
+const changedTokenDetails = parseChangedLiteralDetails(dryRun.stdout)
 console.log(`  Matched: ${before.matched}, changedLiteral: ${before.changedLiteral}, changedAliasTarget: ${before.changedAliasTarget}`)
 console.log(`  changedAliasStructure (known deferred debt): ${before.changedAliasStructure}`)
 console.log(`  unmatchedRepo: ${before.unmatchedRepo}, unmatchedFigma: ${before.unmatchedFigma}, ambiguous: ${before.ambiguous}, modeMismatch: ${before.modeMismatch}`)
@@ -250,6 +309,7 @@ if (before.changedAliasStructure > 0) {
 
 if (before.changedLiteral === 0) {
   console.log("\nNo new safe Figma changes detected. Nothing to sync.")
+  printSyncResult({ status: "no-changes", branch: null, prUrl: null, compareUrl: null })
   process.exit(0)
 }
 console.log(`  ${before.changedLiteral} safe deterministic literal change(s) will be applied.`)
@@ -399,6 +459,8 @@ if (addResult.status !== 0) {
   fail(`Failed to stage changed files: ${addResult.stderr}`)
 }
 
+const changedTokensList = changedTokenDetails.map((d) => `  - ${d.tokenPath}: ${d.oldValue} → ${d.newValue}`).join("\n")
+
 const commitBody =
   `Source: ${snapshot.figmaFileName}\n` +
   `Snapshot exported: ${snapshot.exportedAt}\n` +
@@ -416,6 +478,7 @@ console.log(`  Committed: "${commitMessage}"`)
 
 if (noPush) {
   console.log("\n--no-push specified — stopping before push. Branch and commit were created locally only.")
+  printSyncResult({ status: "committed-not-pushed", branch: branchName, prUrl: null, compareUrl: null })
   process.exit(0)
 }
 
@@ -429,43 +492,71 @@ if (pushResult.status !== 0) {
 console.log(`  Pushed branch: ${branchName}`)
 
 // --- PR ---------------------------------------------------------------------------
+// The branch and commit above are already valid and pushed by this point —
+// nothing below this line ever deletes the branch, resets the commit, or
+// force-pushes, no matter how PR creation goes. Worst case, this stage
+// just prints a compare URL for a human to open manually.
 
 const remoteUrl = gitOutput(["remote", "get-url", "origin"])
 const repoMatch = remoteUrl.match(/github\.com[:/]([^/]+)\/([^/.]+)/)
 const owner = repoMatch ? repoMatch[1] : null
 const repoName = repoMatch ? repoMatch[2] : null
+const compareUrl = owner && repoName ? `https://github.com/${owner}/${repoName}/compare/main...${branchName}?expand=1` : null
 
 const prTitle = "chore: sync Prism tokens from Figma"
 const prBody =
   `Prism Figma Sync\n\n` +
   `Source:\n${snapshot.figmaFileName}\n\n` +
+  `Snapshot:\n${snapshot.exportedAt}\n\n` +
   `Applied:\n${before.changedLiteral} safe literal token change(s)\n\n` +
-  `Deferred:\n${before.changedAliasStructure} alias-structure difference(s) requiring separate cleanup\n\n` +
+  (changedTokensList.length > 0 ? `Changed tokens:\n${changedTokensList}\n\n` : "") +
+  `Deferred:\n${before.changedAliasStructure} known alias-structure difference(s) requiring separate cleanup\n\n` +
   `Verification:\n✓ token validation\n✓ token generation\n✓ convergence check\n✓ build\n\n` +
   `No auto-merge — this PR requires human review.`
 
-const ghAuthCheck = run("gh", ["auth", "status"])
-const ghAvailable = ghAuthCheck.error === undefined
+// gh's own auth, not git's HTTPS credential (osxkeychain) used for the
+// push above — these are two separate mechanisms. If "gh" isn't installed
+// or isn't authenticated, there is currently no other sanctioned way to
+// call the GitHub API here (no GITHUB_TOKEN/GH_TOKEN, and reading the
+// keychain credential git uses, or embedding a PAT, is deliberately out
+// of scope for this bridge/script) — the compare-URL fallback below is
+// the intended behavior in that case, not a bug to work around.
+const ghBinary = resolveGhBinary()
+if (ghBinary) console.log(`  Using gh binary: ${ghBinary}`)
+const ghAuthCheck = ghBinary ? run(ghBinary, ["auth", "status"]) : { error: new Error("gh not found"), status: null }
+const ghAvailable = ghBinary !== null && ghAuthCheck.error === undefined
 const ghAuthenticated = ghAvailable && ghAuthCheck.status === 0
 
+let prUrl = null
+
 if (ghAuthenticated) {
-  const prResult = run("gh", [
-    "pr",
-    "create",
-    "--title",
-    prTitle,
-    "--body",
-    prBody,
-    "--base",
-    "main",
-    "--head",
-    branchName,
-  ])
-  if (prResult.status === 0) {
-    console.log(`\n  Pull request created:\n${prResult.stdout.trim()}`)
+  // Never create a second PR for the same branch — `gh pr list --head`
+  // matches by head branch across the whole repo, not just the current
+  // checkout, so this catches a PR created by an earlier run (or by a
+  // human) even if this process has no other memory of it.
+  const existingPrCheck = run(ghBinary, ["pr", "list", "--head", branchName, "--state", "open", "--json", "url"])
+  let existingPrUrl = null
+  if (existingPrCheck.status === 0) {
+    try {
+      const existing = JSON.parse(existingPrCheck.stdout || "[]")
+      if (existing.length > 0) existingPrUrl = existing[0].url
+    } catch {
+      // Unparseable gh output — fall through and attempt creation as normal.
+    }
+  }
+
+  if (existingPrUrl) {
+    prUrl = existingPrUrl
+    console.log(`\n  An open PR for "${branchName}" already exists — reusing it instead of creating a duplicate:\n  ${prUrl}`)
   } else {
-    console.log(`\n  "gh pr create" failed (exit ${prResult.status}): ${prResult.stderr.trim()}`)
-    console.log(`  Branch was pushed successfully. Create the PR manually — see below.`)
+    const prResult = run(ghBinary, ["pr", "create", "--title", prTitle, "--body", prBody, "--base", "main", "--head", branchName])
+    if (prResult.status === 0) {
+      prUrl = prResult.stdout.trim()
+      console.log(`\n  Pull request created:\n  ${prUrl}`)
+    } else {
+      console.log(`\n  "gh pr create" failed (exit ${prResult.status}): ${prResult.stderr.trim()}`)
+      console.log(`  Branch was pushed successfully. Create the PR manually — see below.`)
+    }
   }
 } else {
   console.log(
@@ -473,10 +564,10 @@ if (ghAuthenticated) {
   )
 }
 
-if (!ghAuthenticated || owner === null) {
+if (!prUrl) {
   console.log(`\nNext step — create the PR manually:`)
-  if (owner && repoName) {
-    console.log(`  Compare/PR URL: https://github.com/${owner}/${repoName}/compare/main...${branchName}?expand=1`)
+  if (compareUrl) {
+    console.log(`  Compare/PR URL: ${compareUrl}`)
   }
   console.log(`  Or, once "gh" is installed and authenticated, run:`)
   console.log(
@@ -487,4 +578,10 @@ if (!ghAuthenticated || owner === null) {
 console.log(
   `\nDone. Branch "${branchName}" is pushed. This PR still requires human review — nothing was auto-merged.`,
 )
+printSyncResult({
+  status: prUrl ? "pr-created" : "pushed-no-pr",
+  branch: branchName,
+  prUrl: prUrl ?? null,
+  compareUrl: compareUrl ?? null,
+})
 process.exit(0)

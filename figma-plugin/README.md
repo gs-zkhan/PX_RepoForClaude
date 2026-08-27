@@ -163,31 +163,108 @@ shell commands or write into this repo's working tree itself (see
    This starts a small local-only server, reachable at
    `http://localhost:3847`, and prints a session token. Copy that token —
    it's generated fresh each time the bridge starts and is never written
-   to disk.
+   to disk. If a plain `gh` doesn't work on your machine (see "GitHub PR
+   creation" below), start it with `GH_BIN` instead so PR creation still
+   works — the bridge passes its own environment straight through to the
+   `figma-sync.mjs` subprocess it runs, so no other change is needed:
+   ```bash
+   GH_BIN="/path/to/your/gh" npm run figma:bridge
+   ```
+   Plain `npm run figma:bridge` (no `GH_BIN`) still works — it just skips
+   automatic PR creation if no working `gh` can be found any other way,
+   falling back to a printed compare URL as before.
 2. Open **Prism V1** in Figma and run **Prism Pipeline POC**.
 3. Paste the token into the "Bridge token" field.
 4. Click **Sync to Git**. The panel walks through: "Checking local
    bridge…" → "Sending snapshot…" → "Sync running… (validating,
    generating, building, then branch/commit/push — this can take a
-   bit)" → "Sync complete." (or a specific failure reason — failures are
-   always shown, never hidden).
+   bit)" → a final result (see below) — failures are always shown, never
+   hidden.
 5. Behind the scenes, the bridge hands the snapshot to the *same*
    `scripts/figma-sync.mjs` pipeline described below (validate → dry-run
    the importer → apply only deterministic literal changes → re-validate
    → regenerate CSS → build → convergence check → create a
    `figma-sync/<timestamp>` branch from the stable base branch → commit →
-   push). The bridge does not reimplement any of this logic.
-6. **GitHub PR creation still requires opening the compare URL the sync
-   step prints** — this repo's environment doesn't have `gh` installed/
-   authenticated, and Step 5B intentionally didn't add it. Open the
-   printed URL, create the PR, and let the existing **Prism Token CI**
-   workflow run against it exactly as it does for any other PR.
+   push → **create a GitHub PR, if possible (Step 5C)**). The bridge does
+   not reimplement any of this logic.
+6. **PR creation (Step 5C):** if the GitHub CLI (`gh`) is installed and
+   authenticated on this machine, `figma-sync.mjs` opens the PR itself
+   (checking first whether an open PR for that branch already exists, so
+   re-running a sync never creates a duplicate) and the panel shows:
+   ```
+   Sync complete
+   Branch: figma-sync/2026-...
+   PR: https://github.com/<owner>/<repo>/pull/<number>
+   ```
+   **If `gh` isn't installed/authenticated** (the case in this repo's own
+   dev environment as of Step 5C — see "GitHub PR creation" below), the
+   branch and commit are still pushed exactly the same way, and the panel
+   shows:
+   ```
+   Sync complete
+   Branch pushed: figma-sync/2026-...
+   PR creation unavailable
+   Open: https://github.com/<owner>/<repo>/compare/main...figma-sync/2026-...?expand=1
+   ```
+   Open that URL and create the PR yourself. Either way, the existing
+   **Prism Token CI** workflow runs against the PR exactly as it does for
+   any other PR.
 7. A human reviews and merges the PR. **There is no auto-merge anywhere
-   in this flow, and the bridge never pushes to `main`.**
+   in this flow, and neither the bridge nor `figma-sync.mjs` ever pushes
+   to `main` directly.**
 
 If the bridge isn't running, "Sync to Git" reports exactly that ("Local
 Prism bridge is not running. In Terminal, from the repo root, run:
 `npm run figma:bridge`") instead of failing silently or hanging.
+
+### GitHub PR creation (Step 5C)
+
+Automatic PR creation uses the **GitHub CLI (`gh`)** exclusively, via its
+own `gh auth login` session — never a raw PAT, never `GITHUB_TOKEN`/
+`GH_TOKEN` (checked for existence only, never read/logged), and never the
+`osxkeychain` credential `git push` itself already uses transparently for
+HTTPS (that credential is never read or reused for API calls — this
+bridge/script only ever shells out to `git` and, if present, `gh`, each
+using their own existing auth).
+
+**Finding `gh` itself:** resolution order, most to least explicit:
+
+1. **`GH_BIN`** — an optional escape hatch: an explicit path you set
+   yourself, for a machine where a plain `gh` on `PATH` doesn't work for
+   some reason (for example, a managed Mac's security policy silently
+   killing an unmanaged copy of the binary the moment it runs — this
+   isn't this repo's situation once `gh` is installed through Homebrew,
+   but the override costs nothing to keep):
+   ```bash
+   GH_BIN="/path/to/your/gh" npm run figma:bridge
+   ```
+2. Plain `gh` on `PATH` — the normal case. `figma-sync.mjs` doesn't just
+   check whether `gh` exists, it actually runs `gh --version` and only
+   trusts a clean exit, so a present-but-non-functional binary is treated
+   the same as a missing one rather than causing a confusing failure
+   later.
+
+Neither of these ever reads a token, inspects Keychain, or embeds a
+credential — they only ever locate a *binary path*, then run
+`<binary> auth status` / `pr list` / `pr create` using `gh`'s own already
+-established `gh auth login` session (never a raw PAT, never
+`GITHUB_TOKEN`/`GH_TOKEN` — checked for existence only, never read/logged
+— and never the `osxkeychain` credential `git push` already uses for
+HTTPS, which is a separate mechanism this script never touches).
+
+**If no working `gh` is found**, this isn't a bug to work around —
+`figma-sync.mjs` falls back to printing the branch name and a compare
+URL, exactly as it always has. Nothing is invented to substitute for a
+missing CLI (no embedded PAT, no Keychain read, no credentials handed to
+the plugin).
+
+**To enable automatic PR creation:** install the GitHub CLI yourself
+(e.g. via [cli.github.com](https://cli.github.com) or `brew install gh`)
+and run `gh auth login` once, interactively, in your own terminal — this
+is a one-time, per-machine setup step you perform yourself; the
+automation here deliberately never attempts to install or authenticate
+`gh` on your behalf. Once `gh auth status` succeeds, the very next sync
+automatically creates (or reuses) the PR — no code change is needed.
 
 **Security notes:** the bridge only ever binds to loopback addresses —
 `127.0.0.1` and `::1` (never `0.0.0.0` or the IPv6 all-interfaces `::`) —
