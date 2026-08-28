@@ -28,15 +28,21 @@ export const accordionDoc: ComponentDoc = {
       id: "types",
       title: "Types",
       body:
-        "Three outer shells, set with `type` on the group. off-material (default) has a 1px border and radius/150 for standalone cards on the page surface. off-material-shadow drops the border for a shadow/400 floating card. on-material is a bottom hairline only, with no fill or radius — it requires a distinct, coloured parent surface to read correctly; don't use it directly on the page background.",
+        "Three outer shells, set with `type` on the group. off-material (default) has a 1px border and radius/150 for standalone cards on the page surface. off-material-shadow drops the border for a shadow/400 floating card. on-material is a bottom hairline only, with no fill or radius — it has no background of its own and sits directly on whatever page/surface background it inherits; don't wrap it in an extra card/container to \"give it a surface\" (design-owner correction, 2026-08-27).",
       exampleId: "accordion/types",
     },
     {
       id: "with-icon",
       title: "With icon and subtitle",
       body:
-        "AccordionItem accepts an optional leading `icon` (a PrismIconName, rendered at 24px) and a `subtitle` shown beneath the title. Subtitle only reads correctly at the 64px size — pair the two.",
+        "AccordionItem accepts an optional leading `icon` (a PrismIconName, rendered at 24px), a `leading` node for arbitrary leading visuals such as numbered badges (takes precedence over `icon` if both are set), and a `subtitle` shown beneath the title. Subtitle only reads correctly at the 64px size — pair the two. When an item has a subtitle and is expanded, the panel gets exactly 24px of top padding above its content (space/300).",
       exampleId: "accordion/with-icon",
+    },
+    {
+      id: "hover-and-expanded-state",
+      title: "Hover and expanded state",
+      body:
+        "Collapsed rows show a full-width hover background. Once a row is expanded, that full-width hover is replaced with a smaller hover highlight confined to the chevron only — the header row is still the single click/keyboard toggle target throughout; only the visual hover feedback changes scope (design-owner correction, 2026-08-27).",
     },
   ],
 
@@ -102,6 +108,11 @@ export const accordionDoc: ComponentDoc = {
       description: "Optional leading icon, rendered at 24px.",
     },
     {
+      name: "leading",
+      type: "React.ReactNode",
+      description: "Optional arbitrary leading visual (e.g. a numbered <Letter>), rendered as-is instead of `icon` when present. Takes precedence over `icon` if both are set.",
+    },
+    {
       name: "children (AccordionItem)",
       type: "React.ReactNode",
       required: true,
@@ -125,7 +136,10 @@ export const accordionDoc: ComponentDoc = {
     "--c-accordion-padding-64",
     "--e-shadow-400",
     "--p-radius-150",
+    "--p-radius-full",
+    "--p-space-050",
     "--p-space-200",
+    "--p-space-300",
     "--s-color-text-default",
     "--s-color-text-subtle",
     "--s-icon-color-default",
@@ -141,12 +155,12 @@ export const accordionDoc: ComponentDoc = {
   guidelines: {
     dos: [
       "Use 64px size only when an item has a subtitle.",
-      "Use on-material only on top of a distinct, coloured parent surface — never directly on the page background.",
+      "Let on-material sit directly on the page's normal background — no extra wrapper card needed.",
       "Let the group manage open/closed state uncontrolled unless another part of the screen needs to react to it.",
       "Keep each item's title short enough to sit on one line at the header height.",
     ],
     donts: [
-      "Don't apply on-material without a coloured parent — the hairline alone won't read as a boundary.",
+      "Don't wrap on-material in an extra card/container to give it a background — it has none of its own by design.",
       "Don't mix types within the same group; pick one shell for the whole group.",
       "Don't put a subtitle on a 48px or 56px item — there's no room for it.",
       "Don't override the header height or padding via className; use the `size` prop.",

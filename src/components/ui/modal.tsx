@@ -26,6 +26,24 @@ import { Button } from "@/components/ui/button"
 // while the measured instances showed 72/92px; re-verified 2026-08-06 after
 // the update and the live geometry now matches the doc exactly: 56/72).
 //
+// Design-owner corrections, 2026-08-27:
+//   - Header separation: no bottom border, no bottom shadow — the header
+//     sits flush above the body with nothing drawing a line between them
+//     (this replaces the header's previous `border-b`, which was incorrect).
+//   - Title-to-microcopy gap: exactly 4px (space/050), applied as a `gap`
+//     on the header's flex column rather than left to fall out of line-height.
+//   - Microcopy typography: font.label.small (12px/16px) + the semantic
+//     subtle text colour (--s-color-text-subtle), not hard-coded Tailwind
+//     text-sm/leading-4 and not the subtlest colour previously used.
+//   - Minimum height: Modal 272px, ModalConfirmation 184px — content-heavy
+//     instances still grow naturally past these; nothing caps growth. No
+//     dedicated component token exists for these two figures (only the
+//     title's font tokens are componentised under `modal.font.*`) — they
+//     are applied as verified raw pixel constants per Token Ownership's
+//     "raw constant only when no token exists" rule, same as the header's
+//     56/72px. Flagged here as a documented gap, same treatment as
+//     Textarea's token gap.
+//
 // `ModalFooter` is a separate component that stacks flush (0 gap) below the
 // Modal body — composed by the caller as a sibling inside `<Modal>`'s
 // children, matching Figma's own "two separate components" structure. Its
@@ -97,7 +115,7 @@ function Modal({ open, onOpenChange, size = "medium", title, description, childr
           data-slot="modal"
           className={cn(
             "fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 outline-none",
-            "flex flex-col overflow-hidden",
+            "flex min-h-[272px] flex-col overflow-hidden",
             "rounded-[var(--p-radius-200)] bg-[var(--s-color-surface-default)]",
             "shadow-[var(--e-shadow-300)]",
             "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95",
@@ -108,7 +126,7 @@ function Modal({ open, onOpenChange, size = "medium", title, description, childr
         >
           <div
             className={cn(
-              "relative flex shrink-0 flex-col justify-center border-b border-[var(--s-color-line-default)] px-[var(--p-space-300)]",
+              "relative flex shrink-0 flex-col justify-center gap-[var(--p-space-050)] px-[var(--p-space-300)]",
               description ? "h-[72px]" : "h-14",
             )}
           >
@@ -122,7 +140,7 @@ function Modal({ open, onOpenChange, size = "medium", title, description, childr
               {title}
             </DialogPrimitive.Title>
             {description ? (
-              <p className="pr-8 text-sm leading-4 text-[var(--s-color-text-subtlest)]">
+              <p className="pr-8 text-[length:var(--t-font-label-small-size)] leading-[var(--t-font-label-small-line-height)] text-[var(--s-color-text-subtle)]">
                 {description}
               </p>
             ) : null}
@@ -230,7 +248,7 @@ function ModalConfirmation({
         <DialogPrimitive.Content
           data-slot="modal-confirmation"
           className={cn(
-            "fixed left-1/2 top-1/2 z-50 w-[500px] -translate-x-1/2 -translate-y-1/2 outline-none",
+            "fixed left-1/2 top-1/2 z-50 w-[500px] min-h-[184px] -translate-x-1/2 -translate-y-1/2 outline-none",
             "rounded-[var(--p-radius-200)] bg-[var(--s-color-surface-default)] p-[var(--p-space-400)]",
             "shadow-[var(--e-shadow-300)]",
             "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95",
