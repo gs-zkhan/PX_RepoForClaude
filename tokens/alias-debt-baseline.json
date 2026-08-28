@@ -1,0 +1,20 @@
+{
+  "$description": "Baseline of pre-existing Prism token alias debt, as of the token-pipeline-hardening guardrail work (2026-08-28). Fingerprints here are known, accepted debt and do NOT block scripts/validate-alias-debt.mjs. A fingerprint appearing in a future run that is NOT in this list is newly introduced debt and WILL fail the check. Removing a fingerprint from this list (because the underlying debt was fixed) is always safe.",
+  "fingerprints": [
+    "[light] \"icon.color.default\" -> Semantic (Light), Component (dormant — no bare reference relies on it)",
+    "[light] \"icon.color.hover\" -> Semantic (Light), Component (dormant — no bare reference relies on it)",
+    "[light] \"icon.color.selected\" -> Semantic (Light), Component (dormant — no bare reference relies on it)",
+    "[light] \"shadow.100\" -> Primitive (Light), Effects (dormant — no bare reference relies on it)",
+    "[light] \"shadow.200\" -> Primitive (Light), Effects (dormant — no bare reference relies on it)",
+    "[light] \"shadow.300\" -> Primitive (Light), Effects (dormant — no bare reference relies on it)",
+    "[light] \"shadow.400\" -> Primitive (Light), Effects (dormant — no bare reference relies on it)",
+    "[light] \"shadow.500\" -> Primitive (Light), Effects (dormant — no bare reference relies on it)",
+    "[light] \"shadow.focus\" -> Semantic (Light), Effects (dormant — no bare reference relies on it)",
+    "[light] \"shadow.selected\" -> Semantic (Light), Effects (dormant — no bare reference relies on it)",
+    "c:checkbox.focus.ring-color: Figma alias target \"color/focus/ring\" not found in Semantic (Light) — token remains literal (known gap)",
+    "c:datepicker.input.focus.ring.color: Figma alias target \"color/focus/ring\" not found in Semantic (Light) — token remains literal (known gap)",
+    "c:dropdown.focus.ring.color: Figma alias target \"color/focus/ring\" not found in Semantic (Light) — token remains literal (known gap)",
+    "c:radio.focus.ring-color: Figma alias target \"color/focus/ring\" not found in Semantic (Light) — token remains literal (known gap)",
+    "c:textfield.focus.ring.color: Figma alias target \"color/focus/ring\" not found in Semantic (Light) — token remains literal (known gap)"
+  ]
+}
