@@ -1,9 +1,13 @@
 import fs from "node:fs"
 import path from "node:path"
+import { pathToFileURL } from "node:url"
 
 const root = process.cwd()
 
-const sources = [
+// Light sources feed the :root block. Component/Typography/Effects have no
+// dark-mode variant — they stay defined once, and cascade through whichever
+// Primitive/Semantic values are active via the CSS variables they reference.
+const lightSourceDefs = [
   {
     prefix: "p",
     label: "Primitive tokens",
@@ -30,6 +34,28 @@ const sources = [
     file: "tokens/E_Effects.styles.json",
   },
 ]
+
+// Dark sources feed the .dark block. Same prefixes ("p", "s") as light, on
+// purpose — variable names must stay identical between :root and .dark so
+// the browser's cascade is what switches the theme, not a second naming
+// scheme. Only Primitive and Semantic have dark exports today.
+const darkSourceDefs = [
+  {
+    prefix: "p",
+    label: "Primitive tokens (Dark)",
+    file: "tokens/P_Dark.tokens.json",
+  },
+  {
+    prefix: "s",
+    label: "Semantic tokens (Dark)",
+    file: "tokens/S_Dark.tokens.json",
+  },
+]
+
+// Every prefix ever used as a qualified-reference qualifier, derived from
+// the actual source definitions rather than hardcoded, so it can never
+// silently drift out of sync with them.
+const RESERVED_PREFIXES = new Set([...lightSourceDefs, ...darkSourceDefs].map((source) => source.prefix))
 
 function flattenTokens(node, currentPath = [], output = {}) {
   if (!node || typeof node !== "object" || Array.isArray(node)) {
@@ -146,43 +172,155 @@ function shadowToCss(value) {
     .join(", ")
 }
 
-const loadedSources = sources.map((source) => {
-  const absolutePath = path.join(root, source.file)
+// A qualified reference always starts with a single-letter prefix followed
+// by a dot ("{s.color.surface.disabled}"). Every real token path segment
+// exported from Figma is a multi-character word (verified: no source has a
+// single-letter top-level group), so this pattern only ever matches an
+// intentional qualifier, never a bare path — letting an unknown prefix be
+// reported as its own distinct failure rather than a generic "not found".
+const qualifiedReferencePattern = /^([a-z])\.(.+)$/
 
-  if (!fs.existsSync(absolutePath)) {
-    throw new Error(`Missing token file: ${source.file}`)
+// Builds a self-contained resolution context (loaded/flattened sources, a
+// collision-aware flat path index for bare references, and a prefix index
+// for qualified references) from a list of source definitions. Used once
+// for the light sources and once for the dark sources — light and dark
+// never share a context, so a dark reference can never accidentally
+// resolve against a light source, or vice versa.
+function buildContext(sourceDefs, contextLabel, rootDir) {
+  const loadedSources = sourceDefs.map((source) => {
+    const absolutePath = path.join(rootDir, source.file)
+
+    if (!fs.existsSync(absolutePath)) {
+      throw new Error(`Missing token file: ${source.file}`)
+    }
+
+    const json = JSON.parse(fs.readFileSync(absolutePath, "utf8"))
+    const topLevelGroups = Object.keys(json).filter((key) => !key.startsWith("$"))
+
+    // Defense in depth: scripts/validate-prism-tokens.mjs is the primary
+    // guard for this (with a clearer, per-source error), but the generator
+    // can be run on its own. The reference grammar treats ANY single
+    // lowercase letter before a dot as a source qualifier ({z.foo}, not
+    // just {p.foo}), so a top-level group named any single letter — not
+    // only a currently configured prefix — must not be silently misparsed.
+    for (const group of topLevelGroups) {
+      if (/^[a-z]$/.test(group)) {
+        const configuredNote = RESERVED_PREFIXES.has(group)
+          ? ` It is also a currently configured source prefix (e.g. "{${group}.path}").`
+          : ""
+        throw new Error(
+          `${source.label} has a top-level group named "${group}", a single lowercase letter, which is ` +
+            `reserved for source-qualified reference syntax ("{${group}.path}"). Run npm run tokens:validate ` +
+            `for details, or rename this group in the Figma export.${configuredNote}`,
+        )
+      }
+    }
+
+    return {
+      ...source,
+      tokens: flattenTokens(json),
+    }
+  })
+
+  // Each token path maps to every source (within this context) that defines
+  // it. A path defined in more than one source is a collision: the bracket
+  // reference syntax used in $value ("{some.path}") carries no source/layer
+  // qualifier, so there is no safe way to guess which one a bare reference
+  // was meant to resolve to.
+  const tokenIndex = new Map()
+
+  for (const source of loadedSources) {
+    for (const tokenPath of Object.keys(source.tokens)) {
+      const candidate = { prefix: source.prefix, label: source.label, cssName: cssName(source.prefix, tokenPath) }
+
+      if (tokenIndex.has(tokenPath)) {
+        tokenIndex.get(tokenPath).push(candidate)
+      } else {
+        tokenIndex.set(tokenPath, [candidate])
+      }
+    }
   }
 
-  const json = JSON.parse(fs.readFileSync(absolutePath, "utf8"))
+  const collisions = [...tokenIndex.entries()].filter(([, candidates]) => candidates.length > 1)
 
-  return {
-    ...source,
-    tokens: flattenTokens(json),
+  if (collisions.length > 0) {
+    console.warn(
+      `Warning (${contextLabel}): ${collisions.length} token path(s) are defined in more than one source. ` +
+        `Any unqualified reference to these paths is ambiguous and will fail to resolve ` +
+        `until disambiguated (a qualified reference such as "{s.path}" is unaffected):`,
+    )
+
+    for (const [tokenPath, candidates] of collisions) {
+      console.warn(
+        `  "${tokenPath}" -> ${candidates.map((c) => `${c.label} (${c.cssName})`).join(", ")}`,
+      )
+    }
   }
-})
 
-const tokenIndex = new Map()
+  // Sources are also indexed by their prefix so a qualified reference
+  // ("{s.color.surface.disabled}") can resolve inside exactly one named
+  // source, bypassing cross-source ambiguity by construction rather than by
+  // guessing. Unqualified references ("{color.surface.disabled}") keep going
+  // through the flat, collision-checked tokenIndex above unchanged.
+  const sourcesByPrefix = new Map(loadedSources.map((source) => [source.prefix, source]))
 
-for (const source of loadedSources) {
-  for (const tokenPath of Object.keys(source.tokens)) {
-    tokenIndex.set(tokenPath, cssName(source.prefix, tokenPath))
-  }
+  return { loadedSources, tokenIndex, collisions, sourcesByPrefix }
 }
 
-function valueToCss(tokenPath, value) {
+function valueToCss(tokenPath, value, context) {
   if (typeof value === "string") {
     const reference = value.match(/^\{(.+)\}$/)
 
     if (reference) {
-      const referencedVariable = tokenIndex.get(reference[1])
+      const qualified = reference[1].match(qualifiedReferencePattern)
 
-      if (!referencedVariable) {
+      if (qualified) {
+        const [, sourcePrefix, remainder] = qualified
+        const source = context.sourcesByPrefix.get(sourcePrefix)
+
+        if (!source) {
+          throw new Error(
+            `Unknown source prefix "${sourcePrefix}" in qualified reference "${value}" ` +
+              `in token "${tokenPath}". Known prefixes: ` +
+              `${context.loadedSources.map((s) => `"${s.prefix}" (${s.label})`).join(", ")}.`,
+          )
+        }
+
+        const referencedToken = source.tokens[remainder]
+
+        if (!referencedToken) {
+          throw new Error(
+            `Unresolved qualified reference "${value}" in token "${tokenPath}": ` +
+              `"${remainder}" does not exist in ${source.label}`,
+          )
+        }
+
+        return `var(${cssName(source.prefix, remainder)})`
+      }
+
+      const candidates = context.tokenIndex.get(reference[1])
+
+      if (!candidates) {
         throw new Error(
           `Unresolved reference "${value}" in token "${tokenPath}"`,
         )
       }
 
-      return `var(${referencedVariable})`
+      if (candidates.length > 1) {
+        const qualifiedOptions = candidates
+          .map((c) => `"{${c.prefix}.${reference[1]}}" for ${c.label}`)
+          .join(", or ")
+
+        throw new Error(
+          `Ambiguous reference "${value}" in token "${tokenPath}": "${reference[1]}" ` +
+            `is defined in ${candidates.length} sources ` +
+            `(${candidates.map((c) => `${c.label} -> ${c.cssName}`).join(", ")}). ` +
+            `The reference syntax does not carry source/layer information, so this ` +
+            `cannot be resolved safely. Use a qualified reference instead: ${qualifiedOptions}.`,
+        )
+      }
+
+      return `var(${candidates[0].cssName})`
     }
 
     return value
@@ -201,18 +339,8 @@ function valueToCss(tokenPath, value) {
   return JSON.stringify(value)
 }
 
-const lines = [
-  "/*",
-  " * Generated from Prism token and style exports.",
-  " * Do not edit this file manually.",
-  " * Run: npm run tokens:generate",
-  " */",
-  "",
-  ":root {",
-]
-
-for (const source of loadedSources) {
-  lines.push(`  /* ${source.label} */`)
+function renderSourceTokens(source, context) {
+  const lines = [`  /* ${source.label} */`]
 
   const sortedEntries = Object.entries(source.tokens).sort(([a], [b]) =>
     a.localeCompare(b),
@@ -237,21 +365,73 @@ for (const source of loadedSources) {
     }
 
     const variableName = cssName(source.prefix, tokenPath)
-    const variableValue = valueToCss(tokenPath, token.$value)
+    const variableValue = valueToCss(tokenPath, token.$value, context)
 
     lines.push(`  ${variableName}: ${variableValue};`)
   }
 
   lines.push("")
+
+  return lines
 }
 
-lines.push("}", "")
+// Pure: builds the generated CSS content as a string and returns it,
+// without touching the filesystem. Exported so other scripts (the
+// generated-output staleness check, tests) can compute "what the
+// generator would produce right now" without writing to disk or shelling
+// out to a subprocess. The CLI path below (`generateAndWrite`) is the only
+// thing that actually writes `src/styles/prism-generated.css`.
+function buildGeneratedCss(rootDir) {
+  const lightContext = buildContext(lightSourceDefs, "light", rootDir)
+  const darkContext = buildContext(darkSourceDefs, "dark", rootDir)
 
-const outputPath = path.join(root, "src/styles/prism-generated.css")
+  const lines = [
+    "/*",
+    " * Generated from Prism token and style exports.",
+    " * Do not edit this file manually.",
+    " * Run: npm run tokens:generate",
+    " */",
+    "",
+    ":root {",
+  ]
 
-fs.mkdirSync(path.dirname(outputPath), { recursive: true })
-fs.writeFileSync(outputPath, lines.join("\n"), "utf8")
+  for (const source of lightContext.loadedSources) {
+    lines.push(...renderSourceTokens(source, lightContext))
+  }
 
-console.log(
-  `Generated ${path.relative(root, outputPath)} from ${loadedSources.length} token files.`,
-)
+  lines.push("}", "")
+  lines.push(".dark {")
+
+  for (const source of darkContext.loadedSources) {
+    lines.push(...renderSourceTokens(source, darkContext))
+  }
+
+  lines.push("}", "")
+
+  return { css: lines.join("\n"), lightSourceCount: lightContext.loadedSources.length, darkSourceCount: darkContext.loadedSources.length }
+}
+
+function generateAndWrite(rootDir) {
+  const { css, lightSourceCount, darkSourceCount } = buildGeneratedCss(rootDir)
+  const outputPath = path.join(rootDir, "src/styles/prism-generated.css")
+
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true })
+  fs.writeFileSync(outputPath, css, "utf8")
+
+  console.log(
+    `Generated ${path.relative(rootDir, outputPath)} from ` +
+      `${lightSourceCount + darkSourceCount} token files ` +
+      `(${lightSourceCount} light, ${darkSourceCount} dark).`,
+  )
+}
+
+export { buildGeneratedCss }
+
+// CLI entry point — only runs when this file is executed directly (`node
+// scripts/generate-prism-css.mjs`), not when imported by another module.
+// Compared via pathToFileURL (not a raw `file://${argv[1]}` string), since
+// a plain string join breaks the moment the repo path contains a space or
+// any other character `file://` URLs percent-encode.
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  generateAndWrite(root)
+}

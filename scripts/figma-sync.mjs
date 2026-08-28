@@ -1,0 +1,654 @@
+import fs from "node:fs"
+import path from "node:path"
+import { spawnSync } from "node:child_process"
+
+import { buildSyncReport, buildPrBody, resolveOrCreatePr, summarizeReport } from "./generate-sync-report.mjs"
+
+// Step 5A: orchestrates the ALREADY-PROVEN manual workflow end to end —
+//
+//   snapshot -> importer dry-run -> safety check -> create sync branch ->
+//   importer --apply -> verify changed files -> validate -> generate ->
+//   verify changed files -> validate again -> build -> convergence check ->
+//   commit -> push -> PR
+//
+// The sync branch is created (from a fixed base branch, see BASE_BRANCH)
+// BEFORE any file is touched — Step 5B found that creating it afterward
+// meant a second run, left sitting on the first run's sync branch, could
+// stack a new sync branch on top of the previous one instead of on the
+// real baseline. Branching first, from an explicit base ref, makes this
+// correct regardless of what was checked out when the script started.
+//
+// This script does not reimplement any comparison/validation/generation
+// logic. It calls scripts/figma-snapshot-import.mjs,
+// scripts/validate-prism-tokens.mjs, scripts/generate-prism-css.mjs, and
+// `npm run build` exactly as a human would from the command line, and
+// parses their output/exit codes to decide what to do next.
+//
+// Usage:
+//   node scripts/figma-sync.mjs --snapshot=<path> [--no-push]
+//
+// --no-push stops after committing locally (used for scratch-environment
+// testing) — it never touches origin and never creates a PR.
+
+const root = process.cwd()
+const args = process.argv.slice(2)
+const snapshotArg = args.find((a) => a.startsWith("--snapshot="))
+const noPush = args.includes("--no-push")
+
+const EXPECTED_FIGMA_FILE_NAME = "Prism V1 - ShadCN"
+const SUPPORTED_SCHEMA_VERSION = "1.0.0"
+
+// Every sync branch is created FROM this branch explicitly — never from
+// "whatever is currently checked out". A successful sync leaves the repo
+// on the new figma-sync/<timestamp> branch (by design, so it can be
+// pushed/reviewed); without this, a second sync run before switching back
+// would silently stack a new sync branch on top of the previous one
+// instead of on the real infrastructure baseline. Using an explicit start
+// point for `git checkout -b` makes this correct regardless of what's
+// currently checked out, with no network fetch required.
+const BASE_BRANCH = "poc/prism-figma-pipeline"
+
+// Every file the rest of this pipeline is allowed to touch. Anything else
+// appearing in `git diff --name-only` after apply/generate is treated as a
+// structural surprise and blocks the run before any commit.
+// tokens/protected-tokens.json is deliberately absent from this list. This
+// is the concrete, always-enforced (not just structural) guarantee behind
+// "this sync process never writes the policy file": checkChangedFilesAreAllowed()
+// below runs right after every mutation this script performs and calls
+// fail() on ANY file outside this set — including protected-tokens.json,
+// if it were ever touched by a future code change here or in
+// figma-snapshot-import.mjs. The Figma plugin and its local bridge
+// (figma-plugin/, scripts/figma-local-bridge.mjs) never write to any repo
+// path at all — the bridge only writes a snapshot to the OS temp
+// directory (see its own comment) before invoking this script.
+const ALLOWED_CHANGED_FILES = new Set([
+  "tokens/P_Light_Default.tokens.json",
+  "tokens/P_Dark.tokens.json",
+  "tokens/S_Light.tokens.json",
+  "tokens/S_Dark.tokens.json",
+  "tokens/C_Default.tokens.json",
+  "src/styles/prism-generated.css",
+])
+
+let stageIndex = 0
+const TOTAL_STAGES = 12
+
+function stage(label) {
+  stageIndex++
+  console.log(`\n[${stageIndex}/${TOTAL_STAGES}] ${label}`)
+}
+
+function fail(message) {
+  console.error(`\nFIGMA SYNC STOPPED: ${message}`)
+  process.exit(1)
+}
+
+function run(command, commandArgs, options = {}) {
+  const result = spawnSync(command, commandArgs, {
+    cwd: root,
+    encoding: "utf8",
+    ...options,
+  })
+  return result
+}
+
+function runNodeScript(scriptPath, scriptArgs = []) {
+  return run(process.execPath, [scriptPath, ...scriptArgs])
+}
+
+function gitOutput(gitArgs) {
+  const result = run("git", gitArgs)
+  return (result.stdout ?? "").trim()
+}
+
+// Step 5C: a single machine-readable line, printed at every terminal exit
+// point below, so a caller (the local bridge) can report status/branch/PR
+// details to the Figma UI without re-deriving anything or re-parsing the
+// full human-readable log. This does not replace the console output above
+// it — both are always printed; this line is just for a caller who wants
+// structured fields instead of scraping prose.
+const RESULT_MARKER = "__FIGMA_SYNC_RESULT__"
+
+function printSyncResult(result) {
+  console.log(`\n${RESULT_MARKER} ${JSON.stringify(result)}`)
+}
+
+// GH_BIN is an optional escape hatch for a machine where a plain `gh` on
+// PATH doesn't work (e.g. a managed Mac killing an unmanaged copy via
+// Gatekeeper/MDM policy — no longer this repo's situation now that `gh`
+// is installed through Homebrew, but the override costs nothing to keep).
+// Never a hardcoded path, username, or version. Returns null (not a
+// guess) if neither is usable; callers already treat a null/unavailable
+// gh as "PR creation unavailable".
+function resolveGhBinary() {
+  const envPath = process.env.GH_BIN
+  if (envPath) {
+    if (fs.existsSync(envPath)) return envPath
+    console.log(`  Note: GH_BIN="${envPath}" is set but no file exists there — falling back to PATH.`)
+  }
+
+  const pathLookup = run("gh", ["--version"])
+  if (pathLookup.error === undefined && pathLookup.status === 0) return "gh"
+
+  return null
+}
+
+// --- [1] Preconditions -------------------------------------------------------
+
+stage("Checking repository preconditions")
+
+if (!snapshotArg) {
+  fail(`Missing --snapshot=<path>. Usage: node scripts/figma-sync.mjs --snapshot=/path/to/prism-figma-snapshot.json`)
+}
+const snapshotPath = snapshotArg.slice("--snapshot=".length)
+
+const porcelain = gitOutput(["status", "--porcelain"])
+if (porcelain.length > 0) {
+  fail(
+    "Working tree is not clean. Refusing to proceed — nothing has been stashed, reset, or discarded.\n" +
+      "Commit, stash, or clean up your changes yourself, then re-run.\n\n" +
+      porcelain,
+  )
+}
+console.log("  Working tree is clean.")
+
+const baseBranchCheck = run("git", ["rev-parse", "--verify", "--quiet", BASE_BRANCH])
+if (baseBranchCheck.status !== 0) {
+  fail(
+    `Base branch "${BASE_BRANCH}" does not exist locally. Every sync branch is created from it explicitly — ` +
+      `fetch/checkout it once (e.g. "git fetch origin ${BASE_BRANCH} && git checkout ${BASE_BRANCH}") and re-run.`,
+  )
+}
+// Switch to BASE_BRANCH itself here, before the dry-run comparison runs —
+// not just before creating the sync branch. A leftover branch from a
+// previous sync (which the script deliberately leaves checked out on
+// success) has its own committed changes on disk; comparing the snapshot
+// against THAT content, rather than the true base, would report
+// misleading counts (verified empirically: doing this comparison before
+// switching branches made a later run report 2 changed literals when only
+// 1 was real — the stale count came from a leftover branch's already-
+// applied fix looking like a "difference" against the fresh snapshot).
+// Safe because the working tree was just confirmed clean above.
+const currentBranch = gitOutput(["branch", "--show-current"])
+if (currentBranch !== BASE_BRANCH) {
+  const switchToBase = run("git", ["checkout", BASE_BRANCH])
+  if (switchToBase.status !== 0) {
+    fail(`Failed to switch to base branch "${BASE_BRANCH}" from "${currentBranch}":\n${switchToBase.stderr}`)
+  }
+  console.log(`  Switched from "${currentBranch || "(detached HEAD)"}" to base branch "${BASE_BRANCH}".`)
+} else {
+  console.log(`  On base branch "${BASE_BRANCH}".`)
+}
+
+if (!fs.existsSync(snapshotPath)) {
+  fail(`Snapshot file not found: ${snapshotPath}`)
+}
+
+let snapshot
+try {
+  snapshot = JSON.parse(fs.readFileSync(snapshotPath, "utf8"))
+} catch (error) {
+  fail(`Snapshot is not valid JSON: ${error.message}`)
+}
+
+if (snapshot.schemaVersion !== SUPPORTED_SCHEMA_VERSION) {
+  fail(
+    `Snapshot schemaVersion "${snapshot.schemaVersion}" is not supported (expected "${SUPPORTED_SCHEMA_VERSION}"). ` +
+      `Refusing to guess how to interpret an unknown schema.`,
+  )
+}
+console.log(`  Snapshot schema version ${snapshot.schemaVersion} is supported.`)
+
+if (snapshot.figmaFileName !== EXPECTED_FIGMA_FILE_NAME) {
+  fail(
+    `Snapshot's figmaFileName is "${snapshot.figmaFileName}", expected "${EXPECTED_FIGMA_FILE_NAME}". ` +
+      `Refusing to sync tokens from an unexpected Figma file.`,
+  )
+}
+console.log(`  Snapshot is from the expected Figma file: "${snapshot.figmaFileName}".`)
+console.log(`  Snapshot exported at: ${snapshot.exportedAt}`)
+
+// --- [2] Import dry-run -------------------------------------------------------
+
+stage("Comparing Figma snapshot against repo tokens (dry run)")
+
+const importerScript = path.join(root, "scripts", "figma-snapshot-import.mjs")
+const dryRun = runNodeScript(importerScript, [`--snapshot=${snapshotPath}`])
+
+if (dryRun.status !== 0) {
+  fail(`Importer dry run exited with a genuine error (exit ${dryRun.status}):\n\n${dryRun.stdout}\n${dryRun.stderr}`)
+}
+
+function parseSummary(output) {
+  const patterns = {
+    matched: /Matched \(no change\):\s*(\d+)/,
+    changedLiteral: /Changed literal values:\s*(\d+)/,
+    changedAliasTarget: /Changed alias targets:\s*(\d+)/,
+    changedAliasStructure: /Changed literal<->alias:\s*(\d+)/,
+    unmatchedRepo: /Unmatched repo tokens:\s*(\d+)/,
+    unmatchedFigma: /Unmatched Figma variables:\s*(\d+)/,
+    ambiguous: /Ambiguous:\s*(\d+)/,
+    modeMismatch: /Mode mismatches:\s*(\d+)/,
+    repoNoIdentity: /Repo tokens with no id:\s*(\d+)/,
+    repoAliasUnresolvedLocally: /Repo alias unresolvable:\s*(\d+)/,
+  }
+  const summary = {}
+  for (const [key, pattern] of Object.entries(patterns)) {
+    const match = output.match(pattern)
+    if (!match) fail(`Could not parse "${key}" from importer output — importer output format may have changed.\n\n${output}`)
+    summary[key] = Number(match[1])
+  }
+  return summary
+}
+
+// Pulls the actual per-token old -> new values the importer already
+// printed for each changedLiteral record (see figma-snapshot-import.mjs's
+// printRecord) — never invented here, only parsed from what the importer
+// itself reported for this exact snapshot. Used only for the PR body.
+function parseChangedLiteralDetails(output) {
+  const section = output.match(/--- changedLiteral \(\d+\) ---\n([\s\S]*?)\n\n/)
+  if (!section) return []
+  const entries = []
+  let current = null
+  for (const line of section[1].split("\n")) {
+    const header = line.match(/^ {2}\[(\w+)\] (\S+) :: (\S+)$/)
+    if (header) {
+      if (current) entries.push(current)
+      current = { layer: header[1], file: header[2], tokenPath: header[3], oldValue: null, newValue: null }
+      continue
+    }
+    const valueLine = line.match(/^ {4}(.+) -> (.+)$/)
+    if (valueLine && current && current.oldValue === null) {
+      current.oldValue = valueLine[1]
+      current.newValue = valueLine[2]
+    }
+  }
+  if (current) entries.push(current)
+  return entries
+}
+
+const before = parseSummary(dryRun.stdout)
+const changedTokenDetails = parseChangedLiteralDetails(dryRun.stdout)
+console.log(`  Matched: ${before.matched}, changedLiteral: ${before.changedLiteral}, changedAliasTarget: ${before.changedAliasTarget}`)
+console.log(`  changedAliasStructure (known deferred debt): ${before.changedAliasStructure}`)
+console.log(`  unmatchedRepo: ${before.unmatchedRepo}, unmatchedFigma: ${before.unmatchedFigma}, ambiguous: ${before.ambiguous}, modeMismatch: ${before.modeMismatch}`)
+
+// --- [3] Structural safety gate -----------------------------------------------
+
+stage("Checking for structural problems")
+
+const structuralProblems = []
+if (before.ambiguous > 0) structuralProblems.push(`${before.ambiguous} ambiguous mapping(s)`)
+if (before.unmatchedFigma > 0) structuralProblems.push(`${before.unmatchedFigma} unmatched Figma variable(s)`)
+if (before.unmatchedRepo > 0) structuralProblems.push(`${before.unmatchedRepo} unmatched repo token(s)`)
+if (before.modeMismatch > 0) structuralProblems.push(`${before.modeMismatch} mode mismatch(es)`)
+if (before.repoNoIdentity > 0) structuralProblems.push(`${before.repoNoIdentity} repo token(s) with no Figma identity`)
+
+if (structuralProblems.length > 0) {
+  fail(
+    `Structural problems found, refusing to proceed:\n  - ${structuralProblems.join("\n  - ")}\n\n` +
+      `Full importer output:\n${dryRun.stdout}`,
+  )
+}
+console.log("  No ambiguous mappings, unmatched variables, or mode mismatches.")
+
+// changedAliasTarget: Step 4B never exercised a real alias-retarget with a
+// real Figma change, so this path is unproven. Default to requiring manual
+// review rather than trusting the importer's --apply to retarget aliases
+// automatically — and since --apply has no flag to apply changedLiteral
+// while skipping changedAliasTarget, ANY changedAliasTarget blocks the
+// whole automated run rather than silently letting an unproven retarget
+// through alongside safe literal changes.
+if (before.changedAliasTarget > 0) {
+  fail(
+    `${before.changedAliasTarget} changed alias target(s) detected. This category is not auto-applied by ` +
+      `design (real alias-retarget behavior was never exercised against a live Figma change as of Step 4B) ` +
+      `— it requires manual review. Re-run the importer manually with --apply only after reviewing these ` +
+      `specific changes, or extend this policy deliberately once retargeting has been proven safe.\n\n` +
+      `Full importer output:\n${dryRun.stdout}`,
+  )
+}
+console.log("  No unproven alias-retarget changes present.")
+
+if (before.changedAliasStructure > 0) {
+  console.log(
+    `  Note: ${before.changedAliasStructure} known deferred changedAliasStructure difference(s) present. ` +
+      `These are pre-existing baseline debt (see Step 4B/4C) and do NOT block this sync.`,
+  )
+}
+
+// --- [4] Determine whether there is anything safe to sync -------------------
+
+if (before.changedLiteral === 0) {
+  console.log("\nNo new safe Figma changes detected. Nothing to sync.")
+  printSyncResult({ status: "no-changes", branch: null, prUrl: null, compareUrl: null })
+  process.exit(0)
+}
+console.log(`  ${before.changedLiteral} deterministic literal change(s) found. Deterministic and unambiguous does NOT by itself mean safe to auto-apply — the next step checks that.`)
+
+// --- [4.5] Sync report + protected-token gate ----------------------------------
+//
+// Root cause of both the red royalBlue.700 and green neutral.800 incidents
+// (see ai/token-guardrails.md): every prior version of this script treated
+// "changedLiteral" (deterministic, unambiguous) as synonymous with "safe to
+// auto-apply, no human review needed". It is not — a literal change can be
+// perfectly deterministic and still be a value nobody actually approved.
+//
+// buildSyncReport() is built entirely from data already in hand —
+// changedTokenDetails (parsed from the dry run above; nothing has been
+// written to any file yet) and reads of tokens/protected-tokens.json /
+// tokens/alias-debt-baseline.json. It performs no filesystem writes, no
+// git operations, and never touches any token-source file. Its `blocked`
+// verdict covers protected-token mismatches AND the standing description/
+// generated-output/smoke/alias-debt checks together — a protected-token
+// mismatch blocks the ENTIRE sync here, before the branch is created,
+// before anything is applied, before any commit/push/PR, leaving the
+// working tree exactly as it was. There is no flag to force through only
+// part of it and no env-var bypass. The only way past a protected-token
+// block is a human deliberately editing tokens/protected-tokens.json's
+// "approvedValue" in its own, separate, prior commit — never something
+// this sync does for itself.
+//
+// The report is generated and surfaced HERE, before any mutation, for both
+// outcomes: a blocked sync prints it and relays it through printSyncResult
+// (read by the local bridge / Figma plugin) with nothing else having
+// happened; an allowed sync carries this same report forward into the PR
+// body built in stage [12].
+
+stage("Building sync report and checking protected tokens")
+
+const syncReport = buildSyncReport({ rootDir: root, changedTokenDetails })
+console.log("\n" + syncReport.markdown)
+
+// Logged regardless of the overall blocked verdict below — this is true
+// and useful context even if the sync ultimately stops for some other,
+// unrelated reason (e.g. a stale-generated-CSS finding on the current
+// repo state) — a reviewer should still see that the protected-token part
+// specifically was fine.
+if (syncReport.proposedProtectedCheck.preApproved.length > 0) {
+  console.log(`  ${syncReport.proposedProtectedCheck.preApproved.length} protected token change(s) are pre-approved — proceeding.`)
+}
+
+if (syncReport.blocked) {
+  printSyncResult({
+    status: "blocked",
+    branch: null,
+    prUrl: null,
+    compareUrl: null,
+    reportSummary: summarizeReport(syncReport),
+    report: syncReport.markdown,
+  })
+  fail(
+    `Sync blocked — see the report above. Nothing has been branched, applied, committed, or pushed. ` +
+      `tokens/protected-tokens.json has not been modified and will not be modified by this script.`,
+  )
+}
+console.log(`  Report generated, not blocked — proceeding.`)
+
+// --- [5] Create sync branch (before any mutation) ----------------------------
+//
+// Deliberately done BEFORE apply/generate, not after: every mutation this
+// run makes then happens on a clean checkout of the new branch (itself
+// created from BASE_BRANCH, not from whatever was previously checked
+// out), so there is never a "switch branches while carrying uncommitted
+// changes" step that could conflict with a leftover branch from an
+// earlier sync.
+
+stage(`Creating sync branch from ${BASE_BRANCH}`)
+
+function branchExists(branchName) {
+  const local = run("git", ["rev-parse", "--verify", "--quiet", branchName])
+  if (local.status === 0) return true
+  const remote = gitOutput(["ls-remote", "--heads", "origin", branchName])
+  return remote.length > 0
+}
+
+function timestampSlug() {
+  const now = new Date()
+  const pad = (n) => String(n).padStart(2, "0")
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}-${pad(now.getHours())}${pad(now.getMinutes())}`
+}
+
+let branchName = `figma-sync/${timestampSlug()}`
+let suffix = 2
+while (branchExists(branchName)) {
+  branchName = `figma-sync/${timestampSlug()}-${suffix}`
+  suffix++
+}
+
+const checkoutResult = run("git", ["checkout", "-b", branchName, BASE_BRANCH])
+if (checkoutResult.status !== 0) {
+  fail(`Failed to create branch "${branchName}" from "${BASE_BRANCH}":\n${checkoutResult.stderr}`)
+}
+console.log(`  Created branch: ${branchName} (from ${BASE_BRANCH})`)
+
+// --- [6] Apply -----------------------------------------------------------------
+
+stage("Applying safe changes")
+
+const applyRun = runNodeScript(importerScript, [`--snapshot=${snapshotPath}`, "--apply"])
+if (applyRun.status !== 0) {
+  fail(`Importer --apply exited with an error (exit ${applyRun.status}):\n\n${applyRun.stdout}\n${applyRun.stderr}`)
+}
+console.log(applyRun.stdout.split("\n").filter((l) => l.startsWith("Applied") || l.startsWith("Skipped")).join("\n"))
+
+function checkChangedFilesAreAllowed(stageName) {
+  const changed = gitOutput(["diff", "--name-only"]).split("\n").filter(Boolean)
+  const unexpected = changed.filter((f) => !ALLOWED_CHANGED_FILES.has(f))
+  if (unexpected.length > 0) {
+    fail(
+      `After ${stageName}, unexpected file(s) changed: ${unexpected.join(", ")}\n` +
+        `These files were modified and are left as-is for inspection — nothing has been committed or reverted.\n` +
+        `Only these files are ever expected to change: ${[...ALLOWED_CHANGED_FILES].join(", ")}`,
+    )
+  }
+  return changed
+}
+
+checkChangedFilesAreAllowed("apply")
+console.log("  Only expected token source files were modified.")
+
+// --- [7] Validate --------------------------------------------------------------
+
+stage("Validating tokens")
+
+const validateAfterApply = runNodeScript(path.join(root, "scripts", "validate-prism-tokens.mjs"))
+console.log(validateAfterApply.stdout.trim())
+if (validateAfterApply.status !== 0) {
+  fail(
+    "Token validation failed after applying Figma changes. The applied token file changes are left in place " +
+      "for inspection — nothing has been committed or reverted.",
+  )
+}
+
+// --- [8] Generate ---------------------------------------------------------------
+
+stage("Regenerating Prism CSS")
+
+const generateRun = runNodeScript(path.join(root, "scripts", "generate-prism-css.mjs"))
+console.log(generateRun.stdout.trim())
+if (generateRun.status !== 0) {
+  fail(
+    `CSS generation failed (exit ${generateRun.status}). Applied token changes are left in place for inspection.\n\n${generateRun.stderr}`,
+  )
+}
+
+const changedAfterGenerate = checkChangedFilesAreAllowed("generation")
+console.log(`  Changed files: ${changedAfterGenerate.join(", ")}`)
+
+// --- [9] Re-validate -------------------------------------------------------------
+
+stage("Re-validating tokens after generation")
+
+const validateAfterGenerate = runNodeScript(path.join(root, "scripts", "validate-prism-tokens.mjs"))
+if (validateAfterGenerate.status !== 0) {
+  fail(
+    "Token validation failed after regenerating CSS. Applied changes are left in place for inspection.\n\n" +
+      validateAfterGenerate.stdout,
+  )
+}
+console.log("  PASS")
+
+// --- [10] Build -------------------------------------------------------------------
+
+stage("Building")
+
+const buildRun = run("npm", ["run", "build"], { shell: true })
+if (buildRun.status !== 0) {
+  fail(
+    `Build failed after applying Figma changes. Applied changes are left in place for inspection.\n\n` +
+      `${buildRun.stdout}\n${buildRun.stderr}`,
+  )
+}
+console.log("  Build succeeded.")
+
+// --- [11] Convergence check -------------------------------------------------------
+
+stage("Confirming repo now matches Figma (convergence check)")
+
+const convergenceRun = runNodeScript(importerScript, [`--snapshot=${snapshotPath}`])
+if (convergenceRun.status !== 0) {
+  fail(`Convergence dry run exited with an error (exit ${convergenceRun.status}).`)
+}
+const after = parseSummary(convergenceRun.stdout)
+if (after.changedLiteral !== 0) {
+  fail(
+    `Convergence check failed: ${after.changedLiteral} literal difference(s) still remain after applying. ` +
+      `Applied changes are left in place for inspection — do not assume the sync completed correctly.\n\n` +
+      convergenceRun.stdout,
+  )
+}
+console.log(`  Converged: 0 changedLiteral remaining. (changedAliasStructure: ${after.changedAliasStructure}, unchanged deferred debt.)`)
+
+// --- [12] Commit, push, PR ----------------------------------------------------
+// (Branch already created in stage [5], before any file was touched.)
+
+stage("Committing and pushing")
+
+const addResult = run("git", ["add", ...changedAfterGenerate])
+if (addResult.status !== 0) {
+  fail(`Failed to stage changed files: ${addResult.stderr}`)
+}
+
+const changedTokensList = changedTokenDetails.map((d) => `  - ${d.tokenPath}: ${d.oldValue} → ${d.newValue}`).join("\n")
+
+const commitBody =
+  `Source: ${snapshot.figmaFileName}\n` +
+  `Snapshot exported: ${snapshot.exportedAt}\n` +
+  `Safe literal changes applied: ${before.changedLiteral}\n` +
+  `Changed files:\n${changedAfterGenerate.map((f) => `  - ${f}`).join("\n")}\n` +
+  `Deferred (not applied): ${before.changedAliasStructure} known changedAliasStructure difference(s)\n\n` +
+  `Verification: tokens:validate (pass), tokens:generate, convergence check (pass), build (pass).`
+
+const commitMessage = "chore: sync Prism tokens from Figma"
+const commitResult = run("git", ["commit", "-m", commitMessage, "-m", commitBody])
+if (commitResult.status !== 0) {
+  fail(`Failed to commit: ${commitResult.stderr}`)
+}
+console.log(`  Committed: "${commitMessage}"`)
+
+if (noPush) {
+  console.log("\n--no-push specified — stopping before push. Branch and commit were created locally only.")
+  printSyncResult({ status: "committed-not-pushed", branch: branchName, prUrl: null, compareUrl: null, reportSummary: summarizeReport(syncReport) })
+  process.exit(0)
+}
+
+const pushResult = run("git", ["push", "-u", "origin", branchName])
+if (pushResult.status !== 0) {
+  fail(
+    `Failed to push branch "${branchName}": ${pushResult.stderr}\n` +
+      `The branch and commit exist locally — nothing was force-pushed, and main was never touched.`,
+  )
+}
+console.log(`  Pushed branch: ${branchName}`)
+
+// --- PR ---------------------------------------------------------------------------
+// The branch and commit above are already valid and pushed by this point —
+// nothing below this line ever deletes the branch, resets the commit, or
+// force-pushes, no matter how PR creation goes. Worst case, this stage
+// just prints a compare URL for a human to open manually.
+
+const remoteUrl = gitOutput(["remote", "get-url", "origin"])
+const repoMatch = remoteUrl.match(/github\.com[:/]([^/]+)\/([^/.]+)/)
+const owner = repoMatch ? repoMatch[1] : null
+const repoName = repoMatch ? repoMatch[2] : null
+const compareUrl = owner && repoName ? `https://github.com/${owner}/${repoName}/compare/main...${branchName}?expand=1` : null
+
+const prTitle = "chore: sync Prism tokens from Figma"
+
+// syncReport was generated in stage [4.5], from the dry run's read-only
+// data, BEFORE the branch was created — this is the exact same report
+// that would have been surfaced (via printSyncResult) had this sync been
+// blocked instead of allowed. buildPrBody() truncates it against GitHub's
+// PR-body size limit (65536 characters; MAX_REPORT_LENGTH is well under
+// that) — see scripts/generate-sync-report.mjs.
+const prBody = buildPrBody({
+  figmaFileName: snapshot.figmaFileName,
+  exportedAt: snapshot.exportedAt,
+  changedLiteralCount: before.changedLiteral,
+  changedTokensList,
+  deferredCount: before.changedAliasStructure,
+  syncReport,
+})
+
+// gh's own auth, not git's HTTPS credential (osxkeychain) used for the
+// push above — these are two separate mechanisms. If "gh" isn't installed
+// or isn't authenticated, there is currently no other sanctioned way to
+// call the GitHub API here (no GITHUB_TOKEN/GH_TOKEN, and reading the
+// keychain credential git uses, or embedding a PAT, is deliberately out
+// of scope for this bridge/script) — the compare-URL fallback below is
+// the intended behavior in that case, not a bug to work around.
+const ghBinary = resolveGhBinary()
+if (ghBinary) console.log(`  Using gh binary: ${ghBinary}`)
+const ghAuthCheck = ghBinary ? run(ghBinary, ["auth", "status"]) : { error: new Error("gh not found"), status: null }
+const ghAvailable = ghBinary !== null && ghAuthCheck.error === undefined
+const ghAuthenticated = ghAvailable && ghAuthCheck.status === 0
+
+let prUrl = null
+
+if (ghAuthenticated) {
+  // Never create a second PR for the same branch — `gh pr list --head`
+  // matches by head branch across the whole repo, not just the current
+  // checkout, so this catches a PR created by an earlier run (or by a
+  // human) even if this process has no other memory of it. Decision logic
+  // lives in resolveOrCreatePr() (generate-sync-report.mjs) so it's
+  // directly testable with an injected fake `gh` runner.
+  const prDecision = resolveOrCreatePr({ branchName, prTitle, prBody, runGh: (args) => run(ghBinary, args) })
+  prUrl = prDecision.prUrl
+
+  if (prDecision.reused) {
+    console.log(`\n  An open PR for "${branchName}" already exists — reusing it instead of creating a duplicate:\n  ${prUrl}`)
+  } else if (prDecision.created) {
+    console.log(`\n  Pull request created:\n  ${prUrl}`)
+  } else {
+    console.log(`\n  "gh pr create" failed: ${prDecision.error}`)
+    console.log(`  Branch was pushed successfully. Create the PR manually — see below.`)
+  }
+} else {
+  console.log(
+    `\n  GitHub CLI ("gh") is not available/authenticated in this environment, so the PR was not created automatically.`,
+  )
+}
+
+if (!prUrl) {
+  console.log(`\nNext step — create the PR manually:`)
+  if (compareUrl) {
+    console.log(`  Compare/PR URL: ${compareUrl}`)
+  }
+  console.log(`  Or, once "gh" is installed and authenticated, run:`)
+  console.log(
+    `    gh pr create --title "${prTitle}" --base main --head ${branchName} --body "<see script output above>"`,
+  )
+}
+
+console.log(
+  `\nDone. Branch "${branchName}" is pushed. This PR still requires human review — nothing was auto-merged.`,
+)
+printSyncResult({
+  status: prUrl ? "pr-created" : "pushed-no-pr",
+  branch: branchName,
+  prUrl: prUrl ?? null,
+  compareUrl: compareUrl ?? null,
+  reportSummary: summarizeReport(syncReport),
+})
+process.exit(0)

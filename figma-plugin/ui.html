@@ -1,0 +1,327 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Prism Pipeline POC</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 12px;
+        margin: 0;
+        padding: 12px;
+        color: #181f26;
+      }
+      h1 {
+        font-size: 14px;
+        margin: 0 0 8px;
+      }
+      .stat-line {
+        margin: 2px 0;
+      }
+      .collection-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 2px 0;
+        border-bottom: 1px solid #e6e9ec;
+      }
+      button {
+        margin-top: 8px;
+        margin-right: 6px;
+        padding: 6px 10px;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      pre {
+        background: #f5f7f9;
+        padding: 8px;
+        overflow: auto;
+        max-height: 320px;
+        font-size: 11px;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      .section {
+        margin-top: 14px;
+      }
+      .hint {
+        color: #5f6c7a;
+        margin-top: 4px;
+      }
+      #sync-status {
+        white-space: pre-line;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Prism Pipeline POC</h1>
+    <div id="summary">Loading…</div>
+
+    <div class="section">
+      <button id="btn-inspect-primitive">Inspect test variable</button>
+      <button id="btn-inspect-component-alias">Inspect component alias example</button>
+      <div class="hint">
+        "Inspect test variable" looks for <code>color/royalBlue/700</code> — if it doesn't
+        exist in this file, real candidate Primitive color names are listed instead.
+      </div>
+    </div>
+
+    <div class="section">
+      <button id="btn-export-snapshot">Export Prism snapshot</button>
+      <div class="hint">
+        Re-reads every local collection/variable and downloads
+        <code>prism-figma-snapshot.json</code>. This is read-only export data — it is not
+        yet imported into Git automatically.
+      </div>
+      <div id="export-status" class="hint"></div>
+    </div>
+
+    <div class="section">
+      <div>
+        <input
+          id="bridge-token"
+          type="text"
+          placeholder="Bridge token (from `npm run figma:bridge` terminal output)"
+          style="width: 100%; box-sizing: border-box; padding: 4px; font-size: 11px; margin-bottom: 6px"
+        />
+      </div>
+      <button id="btn-sync-to-git">Sync to Git</button>
+      <div class="hint">
+        Requires <code>npm run figma:bridge</code> running locally. Re-reads every local
+        collection/variable live and sends it to the local bridge, which runs the same
+        validated <code>figma:sync</code> pipeline used for a manual snapshot. The token
+        above is never saved — paste it fresh each time you start the bridge.
+      </div>
+      <div id="sync-status" class="hint"></div>
+    </div>
+
+    <div class="section">
+      <pre id="output">No output yet.</pre>
+    </div>
+
+    <script>
+      function el(id) {
+        return document.getElementById(id)
+      }
+
+      function renderSummary(summary) {
+        const collectionsHtml = summary.collections
+          .map(
+            (c) =>
+              `<div class="collection-row"><span>${c.name}</span><span>${c.variableCount}</span></div>`,
+          )
+          .join("")
+
+        el("summary").innerHTML = `
+          <div class="stat-line"><strong>File:</strong> ${summary.fileName}</div>
+          <div class="stat-line"><strong>Collections:</strong> ${summary.totalCollections}</div>
+          <div class="stat-line"><strong>Variables:</strong> ${summary.totalVariables}</div>
+          <div class="section">${collectionsHtml}</div>
+        `
+      }
+
+      // Triggers a standard browser file download from inside the plugin's
+      // UI iframe. No Figma-specific API is needed for this — ui.html runs
+      // in a real sandboxed iframe with normal DOM/Blob support, unlike
+      // code.js's separate plugin-sandbox thread.
+      function downloadJson(filename, data) {
+        const json = JSON.stringify(data, null, 2)
+        const blob = new Blob([json], { type: "application/json" })
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement("a")
+        link.href = url
+        link.download = filename
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        URL.revokeObjectURL(url)
+      }
+
+      function setExportStatus(text) {
+        el("export-status").textContent = text
+      }
+
+      const BRIDGE_ORIGIN = "http://localhost:3847"
+
+      function setSyncStatus(text) {
+        el("sync-status").textContent = text
+      }
+
+      // A plain fetch() rejection ("Failed to fetch") means one of two
+      // very different things — nothing is listening on this port, or
+      // something IS listening but the browser's CORS policy blocked
+      // script access to the response — and the Fetch API deliberately
+      // reports both identically (this is intentional web-platform
+      // behavior, not a bug). A `mode: "no-cors"` request still resolves
+      // (with an opaque, unreadable response) as long as *some* server
+      // responds at all, even one with no CORS headers — so retrying the
+      // failed request that way is the only way from here to tell "not
+      // running" apart from "running, but blocked".
+      async function isBridgeReachable() {
+        try {
+          await fetch(`${BRIDGE_ORIGIN}/health`, { mode: "no-cors" })
+          return true
+        } catch {
+          return false
+        }
+      }
+
+      // Runs entirely in this iframe, not code.js — this is a normal web
+      // context with ordinary fetch/CORS semantics (unlike the plugin
+      // sandbox thread), and manifest.json's networkAccess whitelists
+      // exactly this one loopback origin.
+      async function syncSnapshotToGit(snapshot) {
+        const token = el("bridge-token").value.trim()
+
+        setSyncStatus("Checking local bridge…")
+        let health
+        try {
+          health = await fetch(`${BRIDGE_ORIGIN}/health`)
+        } catch (error) {
+          const reachable = await isBridgeReachable()
+          setSyncStatus(
+            reachable
+              ? "Local bridge is running but this browser request was blocked (CORS/network policy). Check the bridge's terminal output, and that manifest.json's networkAccess.devAllowedDomains matches the bridge's URL."
+              : "Local Prism bridge is not running. In Terminal, from the repo root, run: npm run figma:bridge",
+          )
+          return
+        }
+        if (!health.ok) {
+          setSyncStatus(`Local bridge responded unexpectedly (HTTP ${health.status}). Is the right process running on port 3847?`)
+          return
+        }
+
+        setSyncStatus("Sending snapshot…")
+        const runningTimer = setTimeout(() => {
+          setSyncStatus("Sync running… (validating, generating, building, then branch/commit/push — this can take a bit)")
+        }, 1000)
+
+        let response
+        try {
+          response = await fetch(`${BRIDGE_ORIGIN}/sync`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(snapshot),
+          })
+        } catch (error) {
+          clearTimeout(runningTimer)
+          const reachable = await isBridgeReachable()
+          setSyncStatus(
+            reachable
+              ? "Local bridge is running but this browser request was blocked (CORS/network policy) partway through syncing. Check the bridge's terminal output."
+              : "Lost connection to the local bridge while syncing. Check the bridge's terminal for details.",
+          )
+          return
+        }
+        clearTimeout(runningTimer)
+
+        let result
+        try {
+          result = await response.json()
+        } catch (error) {
+          setSyncStatus(`Bridge returned an unreadable response (HTTP ${response.status}).`)
+          return
+        }
+
+        if (response.status === 401) {
+          setSyncStatus("Bridge rejected the token. Copy the current token from the bridge's terminal output and paste it in again.")
+          return
+        }
+
+        if (!response.ok) {
+          setSyncStatus(`Bridge returned an HTTP error (status ${response.status}). See details below.`)
+          el("output").textContent = result.error || result.output || JSON.stringify(result, null, 2)
+          return
+        }
+
+        if (!result.success) {
+          // reportSummary/status come straight from figma-sync.mjs's sync
+          // report (relayed as-is by the bridge) — a blocked protected-token
+          // sync creates no branch/commit/PR, so there is nothing else to
+          // show here beyond the report itself (full text in "output" below).
+          const summary = result.status === "blocked" && result.reportSummary ? result.reportSummary : "Sync finished with a non-zero exit — see details below."
+          setSyncStatus(summary)
+          el("output").textContent = result.report || result.output || JSON.stringify(result, null, 2)
+          return
+        }
+
+        // branch/prUrl/compareUrl/reportSummary come straight from
+        // figma-sync.mjs's own result (relayed as-is by the bridge) — never
+        // recomputed here.
+        const reportLine = result.reportSummary ? `\n${result.reportSummary}` : ""
+        if (result.status === "no-changes") {
+          setSyncStatus("Sync complete. No new safe Figma changes detected — nothing to push.")
+        } else if (result.branch && result.prUrl) {
+          setSyncStatus(`Sync complete\nBranch: ${result.branch}\nPR: ${result.prUrl}${reportLine}`)
+        } else if (result.branch && result.compareUrl) {
+          setSyncStatus(`Sync complete\nBranch pushed: ${result.branch}\nPR creation unavailable\nOpen: ${result.compareUrl}${reportLine}`)
+        } else if (result.branch) {
+          setSyncStatus(`Sync complete\nBranch pushed: ${result.branch}\nPR creation unavailable — see details below for how to open one manually.${reportLine}`)
+        } else {
+          setSyncStatus("Sync complete.")
+        }
+        el("output").textContent = result.output || JSON.stringify(result, null, 2)
+      }
+
+      window.onmessage = (event) => {
+        const message = event.data.pluginMessage
+        if (!message) return
+
+        if (message.type === "summary") {
+          renderSummary(message.payload)
+        } else if (message.type === "sync-payload") {
+          syncSnapshotToGit(message.payload)
+        } else if (message.type === "snapshot-result") {
+          const snapshot = message.payload
+          downloadJson("prism-figma-snapshot.json", snapshot)
+          setExportStatus(
+            `${snapshot.totalVariables} variables exported — snapshot ready/downloaded`,
+          )
+          el("output").textContent = JSON.stringify(
+            {
+              schemaVersion: snapshot.schemaVersion,
+              exportedAt: snapshot.exportedAt,
+              figmaFileName: snapshot.figmaFileName,
+              totalCollections: snapshot.totalCollections,
+              totalVariables: snapshot.totalVariables,
+            },
+            null,
+            2,
+          )
+        } else if (message.type === "error") {
+          setExportStatus("")
+          el("output").textContent = "Error: " + message.message
+        } else {
+          const body = message.error ? { error: message.error } : message.payload
+          el("output").textContent = JSON.stringify(body, null, 2)
+        }
+      }
+
+      el("btn-inspect-primitive").onclick = () => {
+        parent.postMessage({ pluginMessage: { type: "find-primitive-color" } }, "*")
+      }
+
+      el("btn-inspect-component-alias").onclick = () => {
+        parent.postMessage({ pluginMessage: { type: "find-component-alias" } }, "*")
+      }
+
+      el("btn-export-snapshot").onclick = () => {
+        setExportStatus("Exporting…")
+        parent.postMessage({ pluginMessage: { type: "export-snapshot" } }, "*")
+      }
+
+      el("btn-sync-to-git").onclick = () => {
+        if (!el("bridge-token").value.trim()) {
+          setSyncStatus("Paste the bridge token first (printed when you run npm run figma:bridge).")
+          return
+        }
+        setSyncStatus("Building snapshot…")
+        parent.postMessage({ pluginMessage: { type: "sync-to-git" } }, "*")
+      }
+
+      parent.postMessage({ pluginMessage: { type: "get-summary" } }, "*")
+    </script>
+  </body>
+</html>
