@@ -1,0 +1,4435 @@
+{
+  "$schemaVersion": "1.0.0",
+  "generatedAt": "2026-08-28",
+  "figmaFileKey": "U3D8WMBVFl9LvAZyLHhm24",
+  "figmaFileName": "Prism V1 - ShadCN",
+  "forbiddenFigmaFileKeys": [
+    "Wh9XaMTl94yKMa0bYCQbrM",
+    "9ynHgauCIjtayjS92xHLrk"
+  ],
+  "scopeNote": "This registry was built without exhaustive Figma page discovery. The Figma MCP integration available in this session's `get_metadata` (no nodeId) call returns only one top-level page (\"Foundations\", node 20:2, itself empty) — repeated calls reproduced this identically. Already-known specific node IDs resolve fully via `get_metadata`. `search_design_system` searches across ALL of the user's Figma libraries, not scoped to this file, and returned results from other libraries (including the CLAUDE.md-forbidden \"Prism - AI Design System of PX\") for several lookups in this session — those results were never used as evidence. Entries below are built from three distinct evidence tiers, each recorded explicitly per node so they are never conflated: (1) \"mcp-verified\" — this session's assistant called `get_metadata` directly and read back real content; (2) \"browser-verified-mcp-confirmed\" — the user's authenticated Figma desktop/browser supplied the exact node reference in chat, and this session's assistant independently confirmed it with `get_metadata` before recording it; (3) \"repo-evidence\" — inherited from a prior implementation-phase artifact already in the codebase (component header comment, pattern README, ai/shell-registry.md) without independent live verification in any session. An entry-level `figmaMappingStatus` of \"Verified-MCP-this-session\" is only used when every node cited by that entry has actually been confirmed live this session (mixed-tier entries are corrected to `From-repo-evidence` at the entry level, or otherwise not overstated) — this was re-audited on 2026-08-28 after new node references were supplied and every previously-mixed entry (shell-px-list-shell) was completed by independently verifying its remaining repo-evidence-only nodes (1273:19, 20:36) live via get_metadata. Items that could not be located via any tier are marked \"Missing\" or \"Unmapped\" rather than guessed; none are ever treated as approved on the basis of a green Figma page marker, Validation Gallery presence, or a docs registry status of `stable`.",
+  "controlledValues": {
+    "category": [
+      "Foundation/token",
+      "Component",
+      "Pattern",
+      "Shell",
+      "Illustration",
+      "Out of scope",
+      "Reference"
+    ],
+    "status": [
+      "Missing",
+      "Implemented-unmapped",
+      "Mapped-review-pending",
+      "Approved",
+      "Approved-with-documented-exception",
+      "Legacy",
+      "Internal foundation",
+      "Out of scope",
+      "Figma correction required"
+    ],
+    "figmaMappingStatus": [
+      "Verified-MCP-this-session",
+      "From-repo-evidence",
+      "Unmapped",
+      "Not-applicable"
+    ],
+    "nodeVerificationTier": [
+      "mcp-verified",
+      "browser-verified-mcp-confirmed",
+      "repo-evidence",
+      "unverified"
+    ],
+    "fidelityReview": [
+      "Pending",
+      "Complete",
+      "Not applicable"
+    ],
+    "visualReview": [
+      "Pending",
+      "In review",
+      "Approved",
+      "Not applicable"
+    ]
+  },
+  "sharedNodeIds": [
+    {
+      "nodeId": "3792:8575",
+      "name": "Shell/MainContainer page",
+      "primaryOwner": "shell-px-main-container",
+      "sharedBy": [
+        "shell-px-list-shell",
+        "shell-px-main-container"
+      ],
+      "reason": "PxMainContainer is the primary owner (this is its defining page). PxListShell composes PxMainContainer as its rail+header+content-row foundation, so it legitimately cites the same source page for that composition relationship — this is intentional architectural reuse, not two unrelated features accidentally pointing at the same node."
+    },
+    {
+      "nodeId": "3187:10",
+      "name": "Shell/Create · Edit Form page",
+      "primaryOwner": "shell-px-create-edit-modal",
+      "sharedBy": [
+        "shell-px-create-edit-modal",
+        "shell-px-create-edit-accordion",
+        "shell-px-create-edit-wizard",
+        "component-textarea"
+      ],
+      "reason": "All three Create/Edit tiers are extracted from the same Figma page (each maps to a different child frame on it), and are Figma's own three documented tiers of one pattern family (per node 7128:873's tier-selection instructions) — this is intentional shared sourcing of one design decision split across three code components, not accidental duplication. Modal is designated primary owner as the first tier this page yields (≤6 fields, no branching) per the AI instructions' own tier-selection order. Textarea also cites this page because its in-context usage evidence (the Description/URL fields of the Modal example) lives here, in addition to Textarea's own dedicated Message Box page (1273:8)."
+    },
+    {
+      "nodeId": "20:10",
+      "name": "Button page",
+      "primaryOwner": "component-button",
+      "sharedBy": [
+        "component-button",
+        "component-button-bulk-variant",
+        "component-button-split-variant"
+      ],
+      "reason": "Button is the primary owner (this is its defining page, already implemented in the repo). The Bulk Action and Primary-Split variant gap entries cite the same page because they are documented variant families of this same Button component, not separate components — Figma defines them as symbols within the one Button Component frame (4044:708), so citing the shared page is the correct representation of \"two unimplemented variants of one component,\" not three components colliding on one ID."
+    },
+    {
+      "nodeId": "7403:2913",
+      "name": "_Icons Source page",
+      "primaryOwner": "reference-icons-source",
+      "sharedBy": [
+        "reference-icons-source",
+        "foundation-prism-icon"
+      ],
+      "reason": "reference-icons-source (primary owner) is the reference-page entry for this icon-symbol source page itself. foundation-prism-icon cites the same page because it is the (probable, page-level-confirmed but not icon-by-icon-audited) Figma source for the repo's PrismIcon renderer — one Figma asset library legitimately backing both the reference entry for the page and the product component that consumes it, not two unrelated extractions colliding."
+    },
+    {
+      "nodeId": "7128:873",
+      "name": "Create Edit Form AI Instructions",
+      "primaryOwner": "shell-px-create-edit-modal",
+      "sharedBy": [
+        "shell-px-create-edit-modal",
+        "shell-px-create-edit-accordion",
+        "shell-px-create-edit-wizard"
+      ],
+      "reason": "This single instructions node explicitly governs the tier-selection rule across all three tiers — it is authored once in Figma to apply to all three by design, not duplicated by mistake."
+    },
+    {
+      "nodeId": "7128:914",
+      "name": "Create Edit Form Dos and Don'ts",
+      "primaryOwner": "shell-px-create-edit-modal",
+      "sharedBy": [
+        "shell-px-create-edit-modal",
+        "shell-px-create-edit-accordion",
+        "shell-px-create-edit-wizard"
+      ],
+      "reason": "Same as 7128:873 — one Figma-authored guidance node deliberately scoped to all three tiers."
+    },
+    {
+      "nodeId": "3796:2504",
+      "name": "Create/Edit with Accordion example",
+      "primaryOwner": "shell-px-create-edit-accordion",
+      "sharedBy": [
+        "component-accordion",
+        "shell-px-create-edit-accordion"
+      ],
+      "reason": "PxCreateEditShellAccordion (primary owner) is the pattern extracted from this exact example frame. The Accordion ui/ component is cited here only because this same frame is the visual evidence for its 2026-08-28 design-review measurements (hover scope, subtitle gap) — it is not an independent Accordion-only extraction, so the shared reference reflects one review touching two artifacts, not two unrelated extractions colliding."
+    },
+    {
+      "nodeId": "3791:1498",
+      "name": "Modal instance (Create/Edit popup)",
+      "primaryOwner": "shell-px-create-edit-modal",
+      "sharedBy": [
+        "component-modal",
+        "component-textarea",
+        "shell-px-create-edit-modal"
+      ],
+      "reason": "PxCreateEditShellModal (primary owner) is the pattern extracted from this instance. It is cited by Modal (the instance demonstrates Modal's corrected header/spacing measurements) and by Textarea (the same instance's Description/URL fields are Textarea's in-context usage evidence) because one Figma instance legitimately documents three things at once — the shell composition, one of its child components, and another of its child components — not three separate teams independently guessing the same ID."
+    },
+    {
+      "nodeId": "3791:1499",
+      "name": "Modal Footer instance",
+      "primaryOwner": "shell-px-create-edit-modal",
+      "sharedBy": [
+        "component-modal",
+        "shell-px-create-edit-modal"
+      ],
+      "reason": "Same relationship as 3791:1498: PxCreateEditShellModal is the pattern extracted from this instance; Modal is cited because the instance is also the visual evidence for ModalFooter's corrected 2026-08-28 measurements."
+    },
+    {
+      "nodeId": "4964:6",
+      "name": "Chart page",
+      "primaryOwner": "component-bar-chart",
+      "sharedBy": [
+        "component-bar-chart",
+        "component-line-chart",
+        "component-donut-chart",
+        "component-gauge-chart",
+        "component-segmented-bar",
+        "component-metric-bar",
+        "component-heatmap",
+        "component-world-map"
+      ],
+      "reason": "The Chart page is a single parent page hosting all 8 chart-family components as sibling sections, not 8 separate pages — each repo component legitimately cites the one shared parent page it lives on. Bar Chart is primary owner as the first chart type documented on the page."
+    },
+    {
+      "nodeId": "1273:12",
+      "name": "Date · Time Picker page",
+      "primaryOwner": "component-date-picker",
+      "sharedBy": [
+        "component-date-picker",
+        "component-date-field",
+        "component-date-filter"
+      ],
+      "reason": "One Figma page hosts both the Date Picker (DP-col) and Date Filter (DF-col) anatomy as sibling columns of the same page — three repo components (the picker, its Form-Field-wrapped variant, and the range filter) all legitimately trace back to this one shared source page, not three independent extractions colliding on one ID."
+    },
+    {
+      "nodeId": "3421:5430",
+      "name": "Filter Chip, Bar, Dropdown Panel page",
+      "primaryOwner": "component-filter-bar",
+      "sharedBy": [
+        "component-filter-bar",
+        "component-filter-chip",
+        "component-filter-dropdown-panel"
+      ],
+      "reason": "Figma documents these three components together as one interdependent system on a single page (per the page AI Instructions: never use Filter Chip outside a Filter Bar) — three repo components legitimately share the one parent page, mirroring Figma's own grouping decision."
+    }
+  ],
+  "decisions": [
+    {
+      "id": "decision-canonical-page",
+      "statement": "src/pages/user-explorer.tsx is the canonical existing application reference for how a real PX screen composes shells, patterns, and approved components together. It is the only screen actually routed in src/App.tsx (for the \"audience\" nav key).",
+      "evidence": "CLAUDE.md \"Canonical application references\" section, verbatim, quotes this exact file. src/App.tsx imports and renders UserExplorer (not AudienceExplorer) for the audience nav key.",
+      "date": "2026-08-28"
+    },
+    {
+      "id": "decision-legacy-page",
+      "statement": "src/pages/audience-explorer.tsx (AudienceExplorer, 845 lines) is legacy/non-canonical. It duplicates the same product concept as user-explorer.tsx (both self-label as \"Audience Explorer\" in their own header comments) but is never imported or routed anywhere in the codebase — it is orphaned.",
+      "evidence": "Repo-side inventory agent grep of src/App.tsx and all src/ imports found zero references to AudienceExplorer outside its own file.",
+      "date": "2026-08-28"
+    },
+    {
+      "id": "decision-px-list-shell-approved",
+      "statement": "PxListShell is Approved/Yes.",
+      "evidence": "ai/shell-registry.md row + \"Design-owner approval history\" entry.",
+      "date": "2026-08-27"
+    },
+    {
+      "id": "decision-px-create-edit-shell-approved",
+      "statement": "PxCreateEditShell (Modal, Accordion, and Wizard tiers) is Approved/Yes for all three compositions.",
+      "evidence": "ai/shell-registry.md row + \"Design-owner approval history\" entry, and src/patterns/px-create-edit-shell/README.md \"Status\" line.",
+      "date": "2026-08-28"
+    },
+    {
+      "id": "decision-px-main-container-internal",
+      "statement": "PxMainContainer is an internal foundation, not an independently approved shell. It has no row of its own in ai/shell-registry.md; its approval is inherited from whichever consumer (PxListShell or PxCreateEditShell Accordion/Wizard) a given screen is reviewed through.",
+      "evidence": "ai/shell-registry.md note below its table; src/patterns/px-main-container/README.md \"Registry status\" section.",
+      "date": "2026-08-28"
+    },
+    {
+      "id": "decision-textarea-exception",
+      "statement": "Textarea (Figma \"Messagebox\") is implemented and approved, with an open, documented component-token-layer exception: Figma's Messagebox spec borrows TextField's placeholder token and defines no --c-textarea-*/--c-messagebox-* component tokens, so the component uses semantic/primitive tokens directly per this repo's token-ownership priority order, instead of borrowing another component's token.",
+      "evidence": "src/components/ui/textarea.tsx header comment; src/docs/docs/textarea.doc.ts.",
+      "date": "2026-08-28"
+    },
+    {
+      "id": "decision-protected-tokens-present",
+      "statement": "The approved protected tokens and token guardrails are present on main: tokens/protected-tokens.json plus scripts/validate-protected-tokens.mjs, scripts/validate-alias-debt.mjs, scripts/validate-no-self-approval.mjs, and their CI wiring in .github/workflows/prism-token-ci.yml.",
+      "evidence": "Read of .github/workflows/prism-token-ci.yml in the guardrails worktree; prior-phase verification of tokens/protected-tokens.json.",
+      "date": "2026-08-28"
+    },
+    {
+      "id": "decision-figma-corrections-open",
+      "statement": "Four known Figma corrections remain documented and unresolved in Figma (repo has already compensated for them in the implementation): (1) stale Wizard layer name — node 3802:3615 is named \"Accordion\" in Figma but its content/position is unambiguously the Wizard tier; (2) Wizard 240px written spec vs 156px example geometry — the Wizard AI instructions specify a 240px sidebar but the live example frame (node 3803:10203) measures 156px wide; (3) Accordion example (node 3796:2504) is missing a required sub-header/footer that the repo's PxCreateEditShellAccordion implements anyway per the AI instructions; (4) sticky-footer shadow-token naming mismatch between the Figma spec's token name and this repo's generated token name.",
+      "evidence": "ai/shell-registry.md \"Design-owner approval history\" entry; src/patterns/px-create-edit-shell/README.md Figma-sources table; direct get_metadata verification of node 3802:3615 and its children in this session.",
+      "date": "2026-08-28"
+    },
+    {
+      "id": "decision-reference-category-added",
+      "statement": "A new controlled category, \"Reference\", was added to this registry's schema to represent pages that are pure Figma-file authoring tooling (e.g. Template, _Icons Source) — none of the pre-existing categories (Foundation/token, Component, Pattern, Shell, Illustration, Out of scope) accurately describe a page whose entire purpose is to be reused as a documentation template or icon-symbol source by other pages. Reference-category entries are structurally barred by the validator from ever carrying an Approved-like status or designOwnerApproval.approved === true.",
+      "evidence": "ai/figma-page-inventory.json entries for nodes 1552:3384 (\"Template\") and 7403:2913 (\"_Icons Source\"); validator rule 7c in scripts/validate-figma-coverage.mjs.",
+      "date": "2026-08-28"
+    },
+    {
+      "id": "decision-illustration-category-populated",
+      "statement": "The Illustration category, previously present in the schema but unused (0 entries), now has 2 entries: \"Illustrations\" (node 1273:24) and \"Shell/Illustrations\" (node 7554:13835). Despite its \"Shell/\" name prefix, Shell/Illustrations was categorized Illustration, not Shell, based on its actual anatomy (a pure SVG illustration symbol library with AI Instructions, no nav/layout composition of any kind) — its relationship to the Illustrations page is documented on both entries.",
+      "evidence": "Live get_metadata verification of both nodes in this session; illustration-illustrations and illustration-shell-illustrations-library entries.",
+      "date": "2026-08-28"
+    }
+  ],
+  "figmaCorrectionsRequired": [
+    {
+      "id": "fc-1",
+      "nodeId": "3802:3615",
+      "description": "Figma layer name reads \"Accordion\" but the frame's content and position are unambiguously the Wizard tier (156px sidebar with 4 Wizard instances + a 336px Content frame with 4 named slots).",
+      "repoCompensation": "src/patterns/px-create-edit-shell/README.md documents the mismatch explicitly; PxCreateEditShellWizard was implemented from the actual content, not the layer name."
+    },
+    {
+      "id": "fc-2",
+      "nodeId": "3803:10203",
+      "description": "Wizard AI instructions (node 7128:873) specify a 240px sidebar; the live example frame measures 156px wide.",
+      "repoCompensation": "PxCreateEditShellWizard implements the 156px measured geometry, documented as a deviation from the written spec."
+    },
+    {
+      "id": "fc-3",
+      "nodeId": "3796:2504",
+      "description": "Accordion example frame is missing a required sub-header/footer that the AI instructions (node 7128:873) call for.",
+      "repoCompensation": "PxCreateEditShellAccordion implements the sub-header/footer per the written instructions rather than the incomplete example."
+    },
+    {
+      "id": "fc-4",
+      "nodeId": null,
+      "description": "Sticky-footer shadow token naming mismatch between the Figma spec's token name and this repo's generated token name.",
+      "repoCompensation": "Documented in ai/shell-registry.md design-owner approval history; no code change made to paper over the naming mismatch."
+    }
+  ],
+  "entries": [
+    {
+      "id": "foundation-token-pipeline",
+      "name": "Prism design tokens & generated CSS pipeline",
+      "category": "Foundation/token",
+      "figmaPages": [],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Not-applicable",
+      "repoPaths": [
+        "tokens/protected-tokens.json",
+        "tokens/",
+        "src/styles/prism-generated.css",
+        "scripts/validate-protected-tokens.mjs",
+        "scripts/validate-alias-debt.mjs",
+        "scripts/validate-no-self-approval.mjs"
+      ],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Approved",
+      "fidelityReview": "Complete",
+      "visualReview": "Approved",
+      "designOwnerApproval": {
+        "approved": true,
+        "date": "2026-08-27"
+      },
+      "knownDeviations": [],
+      "dependencies": [],
+      "recommendedOrder": null,
+      "notes": "Protected-token guardrails and CI wiring verified present on main. This is the foundation layer every component/pattern/shell entry below depends on."
+    },
+    {
+      "id": "component-accordion",
+      "name": "Accordion",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "1273:6",
+          "name": "Accordion",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "1273:6",
+          "name": "Accordion",
+          "role": "component"
+        },
+        {
+          "nodeId": "3796:2504",
+          "name": "Create/Edit with Accordion example",
+          "role": "example"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/accordion.tsx"
+      ],
+      "docPath": "src/docs/docs/accordion.doc.ts",
+      "gallerySection": "Accordion",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [
+        "Hover scope and 24px subtitle-to-content gap were corrected during the 2026-08-28 PxCreateEditShellAccordion design review, but that review approved the shell, not this component independently."
+      ],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Do not treat the 2026-08-28 shell design review as a standalone Accordion approval — it verified Accordion in service of approving the shell that composes it. Corrected in this pass: page 1273:6 (\"Accordion\") supplied by the user and independently confirmed live via get_metadata."
+    },
+    {
+      "id": "component-avatar",
+      "name": "Avatar",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:17",
+          "name": "Avatar",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/avatar.tsx"
+      ],
+      "docPath": "src/docs/docs/avatar.doc.ts",
+      "gallerySection": "Avatar",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "ai/component-manifests/EXTRACTION_REPORT.md still lists this component's Figma node ID as UNRESOLVED (avatar.json: figma_node_id null) — that report is stale/pre-dates current node-comment conventions and should not be read as current evidence. Corrected in this pass: page 20:17 (\"Avatar\") supplied by the user and independently confirmed live via get_metadata."
+    },
+    {
+      "id": "component-banner",
+      "name": "Banner",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "1273:9",
+          "name": "Banner · Alert",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "1273:9",
+          "name": "Banner · Alert",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/banner.tsx"
+      ],
+      "docPath": "src/docs/docs/banner.doc.ts",
+      "gallerySection": "Banner",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: page 1273:9 (\"Banner · Alert\") supplied by the user and independently confirmed live via get_metadata."
+    },
+    {
+      "id": "component-bar-chart",
+      "name": "Bar Chart",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "4964:6",
+          "name": "Chart",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "4981:196",
+          "name": "Charts page — Bar Chart",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "From-repo-evidence",
+      "repoPaths": [
+        "src/components/ui/bar-chart.tsx"
+      ],
+      "docPath": "src/docs/docs/bar-chart.doc.ts",
+      "gallerySection": "Bar Chart",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: confirmed live that this component's section lives on the parent \"Chart\" page (4964:6), which hosts all chart-family components as sibling sections (not separate top-level pages each)."
+    },
+    {
+      "id": "component-breadcrumb",
+      "name": "Breadcrumb",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:28",
+          "name": "Breadcrumb",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "20:28",
+          "name": "Breadcrumb",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/breadcrumb.tsx"
+      ],
+      "docPath": "src/docs/docs/breadcrumb.doc.ts",
+      "gallerySection": "Breadcrumb",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: page 20:28 (\"Breadcrumb\") supplied by the user and independently confirmed live via get_metadata."
+    },
+    {
+      "id": "component-button",
+      "name": "Button",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:10",
+          "name": "Button",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "4044:708",
+          "name": "Button Component (full variant matrix: Primary/Secondary/Tertiary/Bulk Action/Primary-Split × Large/Medium/Small × states)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "9139:5201",
+          "name": "Button AI Instructions",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "9139:5303",
+          "name": "Button Dos and Don'ts",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/button.tsx"
+      ],
+      "docPath": "src/docs/docs/button.doc.ts",
+      "gallerySection": "Button",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [
+        "Two variant families present in Figma (Bulk Action, Primary-Split) are not implemented in button.tsx — tracked separately, see component-button-bulk-variant and component-button-split-variant. This does NOT make Button itself missing: the page exists (20:10), the component frame is real and verified, and the repository implementation (button.tsx) is present and implements Primary/Secondary/Tertiary at Large/Medium/Small with icon-left/icon-right, matching the majority of the Figma variant matrix."
+      ],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: node 20:10 supplied by the user and independently confirmed live via get_metadata — Button moves from Implemented-unmapped to Mapped-review-pending (implemented AND now mapped; design-owner review still pending). User explicitly flagged \"Button variant coverage\" as incomplete validation — that incompleteness is real and is scoped precisely to the Bulk/Split variants below, not to Button as a whole."
+    },
+    {
+      "id": "component-button-bulk-variant",
+      "name": "Button — Bulk action variant",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:10",
+          "name": "Button",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "4044:23993",
+          "name": "Type=Bulk Action, Size=Large, State=Default, Icon=None (representative of 36 Bulk Action symbols: Large/Medium/Small × Default/Hover/Click/Disable × Icon=None/Left/Right)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Not implemented",
+      "status": "Missing",
+      "fidelityReview": "Not applicable",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "component-button"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: confirmed live in the Button page (20:10) — 36 \"Type=Bulk Action\" symbols exist (e.g. 4044:23993), Regular (not SemiBold) label weight, hug-content width, no fixed width. Generated CSS already defines --c-button-bulk-action-background-click/-default/-hover, -border-click/-default/-disabled/-hover, -content-default (src/styles/prism-generated.css:370-377), but button.tsx does not consume them — token AND component evidence both confirm this is a real, designed, unimplemented variant, not a fabricated gap."
+    },
+    {
+      "id": "component-button-split-variant",
+      "name": "Button — Split variant",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:10",
+          "name": "Button",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "4044:24089",
+          "name": "Type=Primary-Split, Size=Large, State=Default, Icon=None (representative of 12 Primary-Split symbols: Large/Medium/Small × Default/Hover/Click/Disable)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Not implemented",
+      "status": "Missing",
+      "fidelityReview": "Not applicable",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "component-button"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: confirmed live in the Button page (20:10) — 12 \"Type=Primary-Split\" symbols exist (e.g. 4044:24089): a primary action side (pl=16px) + divider (button/primarySplit/divider at 30% opacity) + chevron dropdown side (pr=8px, chevron flips down/up on click), height matches standard button/height/{size}. Generated CSS already defines --c-button-primary-split-background-click/-default, -content-click/-default/-hover, -divider and --c-button-gap-split (src/styles/prism-generated.css:393,405-410), but button.tsx does not implement it. Distinct from CanvasCard's unrelated mode=\"split\" layout-mode enum value, and distinct from the standalone \"SplitButton\" concept referenced only in the Button page's own \"Related\" annotations (Figma does not define a separate SplitButton component — this Primary-Split variant of Button is the actual design)."
+    },
+    {
+      "id": "component-calendar",
+      "name": "Calendar",
+      "category": "Component",
+      "figmaPages": [],
+      "figmaNodes": [
+        {
+          "nodeId": "4084:64672",
+          "name": "divider spacing reference",
+          "role": "indirect"
+        }
+      ],
+      "figmaMappingStatus": "From-repo-evidence",
+      "repoPaths": [
+        "src/components/ui/calendar.tsx"
+      ],
+      "docPath": "src/docs/docs/calendar.doc.ts",
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Implemented-unmapped",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Only node reference is an indirect divider-spacing token check, not the Calendar component itself — treat as effectively unmapped."
+    },
+    {
+      "id": "component-canvas-card",
+      "name": "Canvas Card",
+      "category": "Component",
+      "figmaPages": [],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Unmapped",
+      "repoPaths": [
+        "src/components/ui/canvas-card.tsx"
+      ],
+      "docPath": "src/docs/docs/canvas-card.doc.ts",
+      "gallerySection": "Canvas Card",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Implemented-unmapped",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Anatomy verified against Prism DS conventions per its own header comment, but no explicit node ID captured."
+    },
+    {
+      "id": "component-checkbox",
+      "name": "Checkbox",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:12",
+          "name": "Checkbox",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/checkbox.tsx"
+      ],
+      "docPath": "src/docs/docs/checkbox.doc.ts",
+      "gallerySection": "Checkbox",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: page 20:12 (\"Checkbox\") supplied by the user and independently confirmed live via get_metadata — moved from Unmapped/Implemented-unmapped to Mapped-review-pending."
+    },
+    {
+      "id": "component-chip",
+      "name": "Chip",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "778:6928",
+          "name": "Chip",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "4049:9748",
+          "name": "Chip Prism",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/chip.tsx"
+      ],
+      "docPath": null,
+      "gallerySection": "Chip",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [
+        "No .doc.ts file exists — not registered/navigable in the Design System Docs site despite being implemented and demonstrated in the Validation Gallery."
+      ],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Documentation-registry gap: implemented + gallery-demonstrated but undocumented. Corrected in this pass: page 778:6928 (\"Chip\") supplied by the user and independently confirmed live via get_metadata."
+    },
+    {
+      "id": "component-column-selector",
+      "name": "Column Selector",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "1572:8281",
+          "name": "Column Selector",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "1572:8281",
+          "name": "Column Selector",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/column-selector.tsx"
+      ],
+      "docPath": "src/docs/docs/column-selector.doc.ts",
+      "gallerySection": "Column Selector",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: page 1572:8281 (\"Column Selector\") supplied by the user and independently confirmed live via get_metadata."
+    },
+    {
+      "id": "component-config-row",
+      "name": "Config Row",
+      "category": "Component",
+      "figmaPages": [],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Unmapped",
+      "repoPaths": [
+        "src/components/ui/config-row.tsx"
+      ],
+      "docPath": "src/docs/docs/config-row.doc.ts",
+      "gallerySection": "Config Row",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Implemented-unmapped",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": ""
+    },
+    {
+      "id": "component-date-field",
+      "name": "Date Field",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "1273:12",
+          "name": "Date · Time Picker",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/date-field.tsx"
+      ],
+      "docPath": "src/docs/docs/date-field.doc.ts",
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "References Figma \"Date Picker\" by name only, no explicit node ID. Part of the DateField/DatePicker/DateFilter naming cluster — read each file's disambiguating header comment before mapping any Figma node to it. Corrected in this pass: mapped to the \"Date · Time Picker\" page (1273:12, confirmed live) — the 240×32px Date Picker trigger shell (textfield-shell anatomy) is the likely source for this Form-Field-wrapped component, distinct from the 320×32px Date Filter trigger. Flagged for design-owner confirmation of the exact trigger variant during fidelity review."
+    },
+    {
+      "id": "component-date-filter",
+      "name": "Date Filter",
+      "category": "Component",
+      "figmaPages": [],
+      "figmaNodes": [
+        {
+          "nodeId": "1273:12",
+          "name": "Date Filter page",
+          "role": "component"
+        },
+        {
+          "nodeId": "9093:53066",
+          "name": "variable-defs check",
+          "role": "indirect"
+        }
+      ],
+      "figmaMappingStatus": "From-repo-evidence",
+      "repoPaths": [
+        "src/components/ui/date-filter.tsx"
+      ],
+      "docPath": "src/docs/docs/date-filter.doc.ts",
+      "gallerySection": "Date Filter",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Part of the DateField/DatePicker/DateFilter naming cluster. Corrected in this pass: node 1273:12's canvas name is confirmed live to be \"Date · Time Picker\", not \"Date Filter\" as previously labeled — the page hosts both the Date Picker (DP-col) and Date Filter (DF-col) anatomy as sibling columns. Label corrected; the node ID was already right."
+    },
+    {
+      "id": "component-date-picker",
+      "name": "Date Picker",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "1273:12",
+          "name": "Date · Time Picker",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/date-picker.tsx"
+      ],
+      "docPath": "src/docs/docs/date-picker.doc.ts",
+      "gallerySection": "Date Picker",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Part of the DateField/DatePicker/DateFilter naming cluster. Corrected in this pass: mapped to the \"Date · Time Picker\" page (1273:12, confirmed live) — the DP-col (Date Picker trigger + Calendar Panel) sub-anatomy is this component's source, sharing the page with Date Filter's DF-col."
+    },
+    {
+      "id": "component-donut-chart",
+      "name": "Donut Chart",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "4964:6",
+          "name": "Chart",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "4983:160",
+          "name": "Charts page — Donut Chart",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "From-repo-evidence",
+      "repoPaths": [
+        "src/components/ui/donut-chart.tsx"
+      ],
+      "docPath": "src/docs/docs/donut-chart.doc.ts",
+      "gallerySection": "Donut Chart",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: confirmed live that this component's section lives on the parent \"Chart\" page (4964:6), which hosts all chart-family components as sibling sections (not separate top-level pages each)."
+    },
+    {
+      "id": "component-drag-handle",
+      "name": "Drag Handle",
+      "category": "Component",
+      "figmaPages": [],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Unmapped",
+      "repoPaths": [
+        "src/components/ui/drag-handle.tsx"
+      ],
+      "docPath": "src/docs/docs/drag-handle.doc.ts",
+      "gallerySection": "Drag Handle",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Implemented-unmapped",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": ""
+    },
+    {
+      "id": "component-dropdown-field",
+      "name": "Dropdown Field",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:13",
+          "name": "Dropdown · Select",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "20:13",
+          "name": "Dropdown · Select",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/dropdown-field.tsx"
+      ],
+      "docPath": "src/docs/docs/dropdown-field.doc.ts",
+      "gallerySection": "Select / Dropdown",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "User explicitly flagged \"Filter component mapping\" as incomplete validation — cross-reference against component-filter-dropdown-panel and component-dropdown-menu. Corrected in this pass: page 20:13 (\"Dropdown · Select\") supplied by the user and independently confirmed live via get_metadata."
+    },
+    {
+      "id": "component-dropdown-menu",
+      "name": "Dropdown Menu",
+      "category": "Component",
+      "figmaPages": [],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Unmapped",
+      "repoPaths": [
+        "src/components/ui/dropdown-menu.tsx"
+      ],
+      "docPath": "src/docs/docs/dropdown-menu.doc.ts",
+      "gallerySection": "Dropdown Menu",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Implemented-unmapped",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "ai/component-manifests/EXTRACTION_REPORT.md lists this node ID as UNRESOLVED (dropdown-menu.json: figma_node_id null); that report also lists its 'Radix package missing' blocker as stale — @radix-ui/react-dropdown-menu is now fully implemented, not a stub."
+    },
+    {
+      "id": "component-empty-state",
+      "name": "Empty State",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "3187:12",
+          "name": "Shell/Empty States",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "3323:14896",
+          "name": "Empty State",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "From-repo-evidence",
+      "repoPaths": [
+        "src/components/ui/empty-state.tsx",
+        "src/assets/illustrations/no-data-found.svg"
+      ],
+      "docPath": "src/docs/docs/empty-state.doc.ts",
+      "gallerySection": "Empty State",
+      "examplePaths": [
+        "src/docs/examples/empty-state/default.tsx",
+        "src/docs/examples/empty-state/sizes.tsx",
+        "src/docs/examples/empty-state/landscape.tsx",
+        "src/docs/examples/empty-state/no-illustration.tsx"
+      ],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline",
+        "component-button",
+        "illustration-illustrations"
+      ],
+      "recommendedOrder": null,
+      "notes": "The `illustration` prop is a caller-supplied slot, not a built-in asset loader (unlike PrismIcon for icons). Only 1 of the Illustration library's ~17-21 semantic states (\"No Data Found\") has been extracted as a repo asset (src/assets/illustrations/no-data-found.svg) — see illustration-illustrations for the full library reconciliation. The shipped SVG's own internal group id, literally `<g id=\"Illustration=No Data Found, Size=80\">`, confirms it was extracted from the 'Illustrations' page (1273:24) naming convention, not the separate 'Shell/Illustrations' page (7554:13835, see illustration-shell-illustrations-library) — both pages are Figma-documented as paired with Empty State (7554:13835's own cross-reference note: \"Pairs with: Empty States... always source the illustration from here\"). Corrected in this pass: confirmed live that this component's defining frame (3323:14896) is a direct child of the \"Shell/Empty States\" page (3187:12), not a standalone page of its own."
+    },
+    {
+      "id": "component-file-uploader",
+      "name": "File Uploader",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "1273:15",
+          "name": "Uploader",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "1273:15",
+          "name": "Uploader",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/file-uploader.tsx"
+      ],
+      "docPath": "src/docs/docs/file-uploader.doc.ts",
+      "gallerySection": "File Uploader",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: page 1273:15 (\"Uploader\") supplied by the user and independently confirmed live via get_metadata."
+    },
+    {
+      "id": "component-filter-bar",
+      "name": "Filter Bar",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "3421:5430",
+          "name": "Filter Chip, Bar, Dropdown Panel",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "4077:8079",
+          "name": "Filter Bar",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "From-repo-evidence",
+      "repoPaths": [
+        "src/components/ui/filter-bar.tsx"
+      ],
+      "docPath": "src/docs/docs/filter-bar.doc.ts",
+      "gallerySection": "Filter Bar",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline",
+        "component-filter-chip"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: confirmed live that this component's frame is a direct child of the parent \"Filter Chip, Bar, Dropdown Panel\" page (3421:5430)."
+    },
+    {
+      "id": "component-filter-chip",
+      "name": "Filter Chip",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "3421:5430",
+          "name": "Filter Chip, Bar, Dropdown Panel",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "4077:7991",
+          "name": "Filter Chip",
+          "role": "component"
+        },
+        {
+          "nodeId": "3421:8727",
+          "name": "Filter Chip alias",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "From-repo-evidence",
+      "repoPaths": [
+        "src/components/ui/filter-chip.tsx"
+      ],
+      "docPath": "src/docs/docs/filter-chip.doc.ts",
+      "gallerySection": "Filter Chip",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "ai/component-manifests/EXTRACTION_REPORT.md lists this node as UNRESOLVED (filter-chip.json: figma_node_id null) — superseded by the current file's own header comment, which is the more current source. Corrected in this pass: confirmed live that this component's frame is a direct child of the parent \"Filter Chip, Bar, Dropdown Panel\" page (3421:5430)."
+    },
+    {
+      "id": "component-filter-config-modal",
+      "name": "Filter Config Modal",
+      "category": "Component",
+      "figmaPages": [],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Unmapped",
+      "repoPaths": [
+        "src/components/ui/filter-config-modal.tsx"
+      ],
+      "docPath": "src/docs/docs/filter-config-modal.doc.ts",
+      "gallerySection": "Configure Filters modal",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Implemented-unmapped",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline",
+        "component-modal"
+      ],
+      "recommendedOrder": null,
+      "notes": "Named descriptively, no node ID. Its own header comment documents that it is a parallel surface to FilterDropdownPanel/PxFilterSlider, not a replacement."
+    },
+    {
+      "id": "component-filter-dropdown-panel",
+      "name": "Filter Dropdown Panel",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "3421:5430",
+          "name": "Filter Chip, Bar, Dropdown Panel",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "4077:8037",
+          "name": "Filter Dropdown Panel",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "From-repo-evidence",
+      "repoPaths": [
+        "src/components/ui/filter-dropdown-panel.tsx"
+      ],
+      "docPath": "src/docs/docs/filter-dropdown-panel.doc.ts",
+      "gallerySection": "Filter Dropdown Panel",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "User explicitly flagged \"Filter component mapping\" as incomplete validation. Corrected in this pass: confirmed live that this component's frame is a direct child of the parent \"Filter Chip, Bar, Dropdown Panel\" page (3421:5430)."
+    },
+    {
+      "id": "component-gauge-chart",
+      "name": "Gauge Chart",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "4964:6",
+          "name": "Chart",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "4983:185",
+          "name": "Charts page — Gauge Chart",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "From-repo-evidence",
+      "repoPaths": [
+        "src/components/ui/gauge-chart.tsx"
+      ],
+      "docPath": "src/docs/docs/gauge-chart.doc.ts",
+      "gallerySection": "Gauge Chart",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: confirmed live that this component's section lives on the parent \"Chart\" page (4964:6), which hosts all chart-family components as sibling sections (not separate top-level pages each)."
+    },
+    {
+      "id": "component-heatmap",
+      "name": "Heatmap",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "4964:6",
+          "name": "Chart",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/heatmap.tsx"
+      ],
+      "docPath": "src/docs/docs/heatmap.doc.ts",
+      "gallerySection": "Heatmap",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: confirmed live that this component's section lives on the parent \"Chart\" page (4964:6), which hosts all chart-family components as sibling sections (not separate top-level pages each)."
+    },
+    {
+      "id": "component-icon-button",
+      "name": "Icon Button",
+      "category": "Component",
+      "figmaPages": [],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Not-applicable",
+      "repoPaths": [
+        "src/components/ui/icon-button.tsx",
+        "src/components/ui/ICON_BUTTON.md"
+      ],
+      "docPath": "src/docs/docs/icon-button.doc.ts",
+      "gallerySection": "Icon Button",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Internal foundation",
+      "fidelityReview": "Not applicable",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline",
+        "component-button"
+      ],
+      "recommendedOrder": null,
+      "notes": "Explicitly documented as a PX code-system extension, not extracted from a Figma component — see ICON_BUTTON.md."
+    },
+    {
+      "id": "component-input-number",
+      "name": "Input Number",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "1047:6",
+          "name": "Input Number",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "1047:6",
+          "name": "Input Number",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/input-number.tsx"
+      ],
+      "docPath": "src/docs/docs/input-number.doc.ts",
+      "gallerySection": "Input Number",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Repo has a known pre-existing react-hooks lint failure here (set-state-in-effect), tracked separately from this registry per prism-token-ci.yml's lint-exclusion comment. Corrected in this pass: page 1047:6 (\"Input Number\") supplied by the user and independently confirmed live via get_metadata."
+    },
+    {
+      "id": "component-input",
+      "name": "Input",
+      "category": "Component",
+      "figmaPages": [],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Unmapped",
+      "repoPaths": [
+        "src/components/ui/input.tsx"
+      ],
+      "docPath": "src/docs/docs/input.doc.ts",
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Implemented-unmapped",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Internal composition primitive consumed by TextField/Textarea/SearchBar; unlike IconButton it is not explicitly declared non-Figma, just missing a captured node ID."
+    },
+    {
+      "id": "component-letter",
+      "name": "Letter",
+      "category": "Component",
+      "figmaPages": [],
+      "figmaNodes": [
+        {
+          "nodeId": "4049:1598",
+          "name": "Letter",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "From-repo-evidence",
+      "repoPaths": [
+        "src/components/ui/letter.tsx"
+      ],
+      "docPath": "src/docs/docs/letter.doc.ts",
+      "gallerySection": "Letter",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": ""
+    },
+    {
+      "id": "component-line-chart",
+      "name": "Line Chart",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "4964:6",
+          "name": "Chart",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "4980:249",
+          "name": "Charts page — Line Chart",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "From-repo-evidence",
+      "repoPaths": [
+        "src/components/ui/line-chart.tsx"
+      ],
+      "docPath": "src/docs/docs/line-chart.doc.ts",
+      "gallerySection": "Line Chart",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: confirmed live that this component's section lives on the parent \"Chart\" page (4964:6), which hosts all chart-family components as sibling sections (not separate top-level pages each)."
+    },
+    {
+      "id": "component-metric-bar",
+      "name": "Metric Bar",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "4964:6",
+          "name": "Chart",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "4978:300",
+          "name": "Charts page — Metric Bar",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "From-repo-evidence",
+      "repoPaths": [
+        "src/components/ui/metric-bar.tsx"
+      ],
+      "docPath": "src/docs/docs/metric-bar.doc.ts",
+      "gallerySection": "Metric Bar",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: confirmed live that this component's section lives on the parent \"Chart\" page (4964:6), which hosts all chart-family components as sibling sections (not separate top-level pages each)."
+    },
+    {
+      "id": "component-modal",
+      "name": "Modal",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:37",
+          "name": "Modal",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "2825:35377",
+          "name": "Modal Footer",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "3714:19875",
+          "name": "Modal Backdrop",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "20:37",
+          "name": "Modal",
+          "role": "component"
+        },
+        {
+          "nodeId": "2825:35377",
+          "name": "Modal Footer",
+          "role": "component"
+        },
+        {
+          "nodeId": "3714:19875",
+          "name": "Backdrop",
+          "role": "component"
+        },
+        {
+          "nodeId": "3791:1498",
+          "name": "Modal instance (Create/Edit popup)",
+          "role": "instance"
+        },
+        {
+          "nodeId": "3791:1499",
+          "name": "Modal Footer instance",
+          "role": "instance"
+        }
+      ],
+      "figmaMappingStatus": "From-repo-evidence",
+      "repoPaths": [
+        "src/components/ui/modal.tsx"
+      ],
+      "docPath": "src/docs/docs/modal.doc.ts",
+      "gallerySection": "Modal",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [
+        "Header separation (no border/shadow), 4px title-to-microcopy gap, microcopy typography/colour tokens, and 272px/184px minimum heights were corrected during the 2026-08-28 PxCreateEditShellModal design review — that review approved the shell, not this component independently.",
+        "Modal Backdrop (3714:19875) is a dedicated Figma component with its own color/surface/overlay token. modal.tsx implements Modal + ModalFooter explicitly, but whether it renders a backdrop using this exact token (vs. Radix Dialog's default overlay treatment) was not independently re-verified this pass — flagged as a fidelity-review item, not confirmed either way."
+      ],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Do not treat the 2026-08-28 shell design review as a standalone Modal approval. Corrected in this pass: confirmed live that \"Modal\" (20:37), \"Modal Footer\" (2825:35377), and \"Modal Backdrop\" (3714:19875) are three separate top-level pages. modal.tsx implements Modal and ModalFooter (per its own exports) — both covered by this one entry rather than split into three, since one file implements them together."
+    },
+    {
+      "id": "component-pagination",
+      "name": "Pagination",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:29",
+          "name": "Pagination",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/pagination.tsx"
+      ],
+      "docPath": "src/docs/docs/pagination.doc.ts",
+      "gallerySection": "Pagination",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: page 20:29 (\"Pagination\") supplied by the user and independently confirmed live via get_metadata — moved from Unmapped/Implemented-unmapped to Mapped-review-pending."
+    },
+    {
+      "id": "component-popover",
+      "name": "Popover",
+      "category": "Component",
+      "figmaPages": [],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Unmapped",
+      "repoPaths": [
+        "src/components/ui/popover.tsx"
+      ],
+      "docPath": "src/docs/docs/popover.doc.ts",
+      "gallerySection": "Popover",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Implemented-unmapped",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": ""
+    },
+    {
+      "id": "foundation-prism-icon",
+      "name": "Prism Icon set",
+      "category": "Foundation/token",
+      "figmaPages": [
+        {
+          "nodeId": "7403:2913",
+          "name": "_Icons Source",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "48:25177",
+          "name": "Icon",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/prism-icon.tsx"
+      ],
+      "docPath": "src/docs/docs/prism-icon.doc.ts",
+      "gallerySection": "Prism Icon",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [
+        "A literal icon-by-icon cross-check between this page's 280+ symbols and PrismIcon's actual rendered icon set was not performed — this entry records the page-level source mapping, not a complete per-icon audit."
+      ],
+      "dependencies": [
+        "reference-icons-source"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: node 7403:2913 (\"_Icons Source\") supplied by the user and independently confirmed live via get_metadata — this page holds 280+ icon symbols (icons/16/*, icons/24/*, icons/32/*, icons/48/*, icons/64/*, filled variants, PX-specific nav/module icons) and is almost certainly PrismIcon's underlying Figma source, evidenced by exact name matches already seen referenced in other verified pages' AI Instructions (e.g. \"icons/24/document\", \"icons/24/chevron-up\" used by the Analytics Secondary Navigation accordion headers). See reference-icons-source for the reference-page entry itself; this entry moves from Implemented-unmapped to Mapped-review-pending now that a real page-level mapping exists. Corrected in this pass: node 48:25177 (\"Icon\", the published/documented icon component page, distinct from the raw \"_Icons Source\" symbol library at 7403:2913) supplied by the user and independently confirmed live."
+    },
+    {
+      "id": "component-progress-bar",
+      "name": "Progress Bar",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:23",
+          "name": "Progress Bar",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "20:23",
+          "name": "Progress Bar",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/progress-bar.tsx"
+      ],
+      "docPath": "src/docs/docs/progress-bar.doc.ts",
+      "gallerySection": "Progress Bar",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: page 20:23 (\"Progress Bar\") supplied by the user and independently confirmed live via get_metadata."
+    },
+    {
+      "id": "component-radio-group",
+      "name": "Radio Group",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "1439:20811",
+          "name": "Radio",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/radio-group.tsx"
+      ],
+      "docPath": "src/docs/docs/radio-group.doc.ts",
+      "gallerySection": "Radio Group",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: page 1439:20811 (\"Radio\") supplied by the user and independently confirmed live via get_metadata — moved from Unmapped/Implemented-unmapped to Mapped-review-pending."
+    },
+    {
+      "id": "component-search-bar",
+      "name": "Search Bar",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:25",
+          "name": "Search Bar",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/search-bar.tsx"
+      ],
+      "docPath": "src/docs/docs/search-bar.doc.ts",
+      "gallerySection": "Search Bar",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline",
+        "component-input"
+      ],
+      "recommendedOrder": null,
+      "notes": "User explicitly flagged \"Search Bar mapping\" as incomplete validation. Only Figma size-name notes exist in the header comment, no node ID. ai/component-manifests/EXTRACTION_REPORT.md's 'Search Field' entry is also UNRESOLVED and refers to a differently-named component (search-field.json) than this file — reconcile naming before mapping. Corrected in this pass: page 20:25 (\"Search Bar\") supplied by the user and independently confirmed live via get_metadata — moved from Unmapped/Implemented-unmapped to Mapped-review-pending."
+    },
+    {
+      "id": "component-segmented-bar",
+      "name": "Segmented Bar",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "4964:6",
+          "name": "Chart",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "4979:159",
+          "name": "Charts page — Segmented Bar",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "From-repo-evidence",
+      "repoPaths": [
+        "src/components/ui/segmented-bar.tsx"
+      ],
+      "docPath": "src/docs/docs/segmented-bar.doc.ts",
+      "gallerySection": "Segmented Bar",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: confirmed live that this component's section lives on the parent \"Chart\" page (4964:6), which hosts all chart-family components as sibling sections (not separate top-level pages each)."
+    },
+    {
+      "id": "component-select",
+      "name": "Select",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "1273:10",
+          "name": "Dropdown List",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/select.tsx"
+      ],
+      "docPath": "src/docs/docs/select.doc.ts",
+      "gallerySection": "Select / Dropdown",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: mapped to the \"Dropdown List\" page (1273:10, confirmed live) — Radix Select's content panel (SelectContent/SelectItem) is the functional match for Figma's Dropdown List component (the options panel with search/multi-select/sections/status variants). This is a reasoned functional mapping, not a literal 1:1 layer match — flagged for design-owner confirmation during fidelity review."
+    },
+    {
+      "id": "component-skeleton",
+      "name": "Skeleton",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "2683:24440",
+          "name": "Skeleton Loader",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "2683:24440",
+          "name": "Skeleton",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/skeleton.tsx"
+      ],
+      "docPath": "src/docs/docs/skeleton.doc.ts",
+      "gallerySection": "Skeleton",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: page 2683:24440 (\"Skeleton Loader\") supplied by the user and independently confirmed live via get_metadata."
+    },
+    {
+      "id": "component-slider",
+      "name": "Slider",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "1273:13",
+          "name": "Slider",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "1273:13",
+          "name": "Slider",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/slider.tsx"
+      ],
+      "docPath": "src/docs/docs/slider.doc.ts",
+      "gallerySection": "Slider",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: page 1273:13 (\"Slider\") supplied by the user and independently confirmed live via get_metadata."
+    },
+    {
+      "id": "component-spinner",
+      "name": "Spinner",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:20",
+          "name": "Spinner Loader",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "20:20",
+          "name": "Spinner",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/spinner.tsx"
+      ],
+      "docPath": "src/docs/docs/spinner.doc.ts",
+      "gallerySection": "Spinner",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: page 20:20 (\"Spinner Loader\") supplied by the user and independently confirmed live via get_metadata."
+    },
+    {
+      "id": "component-status-label",
+      "name": "StatusLabel",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:22",
+          "name": "Status Label",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/status-label.tsx"
+      ],
+      "docPath": "src/docs/docs/status-label.doc.ts",
+      "gallerySection": "Status Label",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: page 20:22 (\"Status Label\") supplied by the user and independently confirmed live via get_metadata — moved from Unmapped/Implemented-unmapped to Mapped-review-pending."
+    },
+    {
+      "id": "component-status-select",
+      "name": "StatusSelect",
+      "category": "Component",
+      "figmaPages": [],
+      "figmaNodes": [
+        {
+          "nodeId": "767:222",
+          "name": "Status chip",
+          "role": "component"
+        },
+        {
+          "nodeId": "4084:37903",
+          "name": "dropdown",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "From-repo-evidence",
+      "repoPaths": [
+        "src/components/ui/status-select.tsx"
+      ],
+      "docPath": "src/docs/docs/status-select.doc.ts",
+      "gallerySection": "Status Select",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline",
+        "component-status-label"
+      ],
+      "recommendedOrder": null,
+      "notes": ""
+    },
+    {
+      "id": "component-summary-stat",
+      "name": "SummaryStat",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "1273:17",
+          "name": "Summary Stats",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "7078:2",
+          "name": "Shell/Summary Stats Row",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/summary-stat.tsx"
+      ],
+      "docPath": "src/docs/docs/summary-stat.doc.ts",
+      "gallerySection": "Summary Stat",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: this file's own StatsRow export (summary-stat.tsx:172,176) implements the \"Shell/Summary Stats Row\" layout pattern (7078:2, confirmed live) in addition to the individual SummaryStat card (Summary Stats page, 1273:17, confirmed live)."
+    },
+    {
+      "id": "component-table-customization-menu",
+      "name": "Table Customization Menu",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "3187:9",
+          "name": "Shell/Table Customisation",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "3761:18844",
+          "name": "Row Density menu",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/table-customization-menu.tsx"
+      ],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [
+        "No .doc.ts file exists — not registered/navigable in the Design System Docs site, and not demonstrated as its own Validation Gallery section."
+      ],
+      "dependencies": [
+        "foundation-token-pipeline",
+        "component-column-selector"
+      ],
+      "recommendedOrder": null,
+      "notes": "Documentation-registry gap. Composes ColumnSelector as one of its two menu panes (not a duplicate of it). Corrected in this pass: the page-level reference (3187:9) was previously stored in figmaNodes with role \"page\" — moved to figmaPages for schema consistency, and independently re-confirmed live via get_metadata this pass."
+    },
+    {
+      "id": "component-table",
+      "name": "Table",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:34",
+          "name": "Table",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/table.tsx"
+      ],
+      "docPath": "src/docs/docs/table.doc.ts",
+      "gallerySection": "Table",
+      "examplePaths": [
+        "src/pages/user-explorer.tsx",
+        "src/pages/engagements-list-example.tsx"
+      ],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "User explicitly flagged \"Table density/state/dark-context coverage\" as incomplete validation. No node ID anywhere despite being the most structurally complex primitive in the repo (sticky header, density, selection, sort). Corrected in this pass: page 20:34 (\"Table\") supplied by the user and independently confirmed live via get_metadata — moved from Unmapped/Implemented-unmapped to Mapped-review-pending."
+    },
+    {
+      "id": "component-tabs",
+      "name": "Tabs",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:32",
+          "name": "Tabs",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "1078:437",
+          "name": "Tabs",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/tabs.tsx"
+      ],
+      "docPath": "src/docs/docs/tabs.doc.ts",
+      "gallerySection": "Tabs",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: page 20:32 (\"Tabs\") supplied by the user and independently confirmed live via get_metadata."
+    },
+    {
+      "id": "component-text-field",
+      "name": "TextField",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:11",
+          "name": "Text Field",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "20:11",
+          "name": "Text Field",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/text-field.tsx"
+      ],
+      "docPath": "src/docs/docs/text-field.doc.ts",
+      "gallerySection": "Text Field",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline",
+        "component-input"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: page 20:11 (\"Text Field\") supplied by the user and independently confirmed live via get_metadata."
+    },
+    {
+      "id": "component-textarea",
+      "name": "Textarea",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "3187:10",
+          "name": "Shell/Create · Edit Form",
+          "verified": "mcp-verified"
+        },
+        {
+          "nodeId": "1273:8",
+          "name": "Message Box",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "3137:126",
+          "name": "Messagebox (component definition, on the Message Box page)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "3791:1498",
+          "name": "Modal instance containing Textarea fields (on the Create · Edit Form page)",
+          "role": "instance",
+          "verified": "mcp-verified"
+        },
+        {
+          "nodeId": "4142:876",
+          "name": "Message Box AI Instructions",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "4142:850",
+          "name": "Message Box Dos and Don'ts",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/textarea.tsx"
+      ],
+      "docPath": "src/docs/docs/textarea.doc.ts",
+      "gallerySection": null,
+      "examplePaths": [
+        "src/pages/create-edit-shell-example.tsx"
+      ],
+      "implementationStatus": "Implemented",
+      "status": "Approved-with-documented-exception",
+      "fidelityReview": "Complete",
+      "visualReview": "Approved",
+      "designOwnerApproval": {
+        "approved": true,
+        "date": "2026-08-28"
+      },
+      "knownDeviations": [
+        "Open component-token-layer exception: Figma's own Message Box AI Instructions (node 4142:876) confirm no dedicated component-token layer exists for this component — border/fill/text tokens are explicitly specified as borrowed from textfield/* (e.g. border error/success from textfield/border/error, textfield/border/success; placeholder from textfield/content/placeholder), not from any --c-textarea-*/--c-messagebox-* namespace, because none exists. This component therefore uses semantic/primitive tokens directly rather than silently adopting TextField's component tokens as a permanent shortcut, per this repo's token-ownership priority order. The gap is Figma's own, not an implementation shortcut."
+      ],
+      "dependencies": [
+        "foundation-token-pipeline",
+        "component-input"
+      ],
+      "recommendedOrder": null,
+      "notes": "See decision-textarea-exception. Relationship to \"Message Box\": Figma names this component \"Messagebox\" (symbol 3137:126) and gives it its own dedicated page, \"Message Box\" (canvas 1273:8) — verified live via get_metadata in this session, independent of the Create · Edit Form page (3187:10, also independently mcp-verified) where the same symbol appears in context as the Description/URL fields of the Modal example (node 3791:1498). This repo implements that Figma \"Messagebox\" as the Textarea component. The Message Box AI Instructions (4142:876) confirm the token-layer exception above and explicitly state Message Box is multi-line freeform text — When-NOT-to-use guidance there directs single-line input to Text Field and structured rich text to RTE Field (see component-rte-field), which matches this repo's existing TextField/Textarea split."
+    },
+    {
+      "id": "component-third-pane",
+      "name": "ThirdPane",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "1273:20",
+          "name": "Third Pane",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "1273:20",
+          "name": "Third Pane",
+          "role": "component"
+        },
+        {
+          "nodeId": "3420:3441",
+          "name": "InlinePanel variant (deferred)",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/third-pane.tsx"
+      ],
+      "docPath": "src/docs/docs/third-pane.doc.ts",
+      "gallerySection": "Third Pane",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [
+        "InlinePanel variant explicitly deferred, not yet implemented."
+      ],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: page 1273:20 (\"Third Pane\") supplied by the user and independently confirmed live via get_metadata."
+    },
+    {
+      "id": "component-toast",
+      "name": "Toast",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:38",
+          "name": "Toast Message",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "20:38",
+          "name": "Toast Message",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/toast.tsx"
+      ],
+      "docPath": "src/docs/docs/toast.doc.ts",
+      "gallerySection": "Toast",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: page 20:38 (\"Toast Message\") supplied by the user and independently confirmed live via get_metadata."
+    },
+    {
+      "id": "component-toggle",
+      "name": "Toggle",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:19",
+          "name": "Toggle · Switch",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/toggle.tsx"
+      ],
+      "docPath": "src/docs/docs/toggle.doc.ts",
+      "gallerySection": "Toggle",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: page 20:19 (\"Toggle · Switch\") supplied by the user and independently confirmed live via get_metadata — moved from Unmapped/Implemented-unmapped to Mapped-review-pending."
+    },
+    {
+      "id": "component-tooltip",
+      "name": "Tooltip",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:21",
+          "name": "Tooltip",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/tooltip.tsx"
+      ],
+      "docPath": "src/docs/docs/tooltip.doc.ts",
+      "gallerySection": "Tooltip",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "ai/component-manifests/EXTRACTION_REPORT.md lists this node as UNRESOLVED (tooltip.json: figma_node_id null); its 'Radix package missing' blocker is stale — @radix-ui/react-tooltip is fully implemented. Corrected in this pass: page 20:21 (\"Tooltip\") supplied by the user and independently confirmed live via get_metadata — moved from Unmapped/Implemented-unmapped to Mapped-review-pending."
+    },
+    {
+      "id": "component-tree",
+      "name": "Tree",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "1273:16",
+          "name": "Tree",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "1273:16",
+          "name": "Tree",
+          "role": "component"
+        },
+        {
+          "nodeId": "1640:845",
+          "name": "Tree item states",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/tree.tsx"
+      ],
+      "docPath": null,
+      "gallerySection": "Tree",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline",
+        "component-checkbox"
+      ],
+      "recommendedOrder": null,
+      "notes": "Has a Validation Gallery section but not a docs-registry .doc.ts entry — check whether this is intentional (registry.ts comment says composed patterns are out of scope, but Tree appears to be a component, not a pattern). Corrected in this pass: page 1273:16 (\"Tree\") supplied by the user and independently confirmed live via get_metadata."
+    },
+    {
+      "id": "component-view-selector",
+      "name": "View Selector",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "1273:21",
+          "name": "View Selector",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "1273:21",
+          "name": "View Selector",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/view-selector.tsx"
+      ],
+      "docPath": "src/docs/docs/view-selector.doc.ts",
+      "gallerySection": "View Selector",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Part of the ViewSelector/ViewSwitcher/Views naming cluster — read each file's disambiguating header comment before mapping any Figma node to it. Corrected in this pass: page 1273:21 (\"View Selector\") supplied by the user and independently confirmed live via get_metadata."
+    },
+    {
+      "id": "component-view-switcher",
+      "name": "View Switcher",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "2799:31827",
+          "name": "View Switcher",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "2799:31827",
+          "name": "View Switcher",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/view-switcher.tsx"
+      ],
+      "docPath": "src/docs/docs/view-switcher.doc.ts",
+      "gallerySection": "View Switcher",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Part of the ViewSelector/ViewSwitcher/Views naming cluster. Corrected in this pass: page 2799:31827 (\"View Switcher\") supplied by the user and independently confirmed live via get_metadata."
+    },
+    {
+      "id": "component-views",
+      "name": "Views",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "1273:22",
+          "name": "Views",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "1273:22",
+          "name": "Views",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/views.tsx"
+      ],
+      "docPath": "src/docs/docs/views.doc.ts",
+      "gallerySection": "Views",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Part of the ViewSelector/ViewSwitcher/Views naming cluster. Corrected in this pass: page 1273:22 (\"Views\") supplied by the user and independently confirmed live via get_metadata."
+    },
+    {
+      "id": "component-wizard",
+      "name": "Wizard",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "1273:23",
+          "name": "Wizard",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "1273:23",
+          "name": "Wizard",
+          "role": "component"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/wizard.tsx"
+      ],
+      "docPath": "src/docs/docs/wizard.doc.ts",
+      "gallerySection": "Wizard",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Do not confuse this ui/ component (progress-sidebar primitive) with the PxCreateEditShellWizard pattern tier, which composes it. Corrected in this pass: page 1273:23 (\"Wizard\") supplied by the user and independently confirmed live via get_metadata."
+    },
+    {
+      "id": "component-world-map",
+      "name": "World Map",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "4964:6",
+          "name": "Chart",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/world-map.tsx"
+      ],
+      "docPath": "src/docs/docs/world-map.doc.ts",
+      "gallerySection": "World Map",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: confirmed live that this component's section lives on the parent \"Chart\" page (4964:6), which hosts all chart-family components as sibling sections (not separate top-level pages each)."
+    },
+    {
+      "id": "component-link",
+      "name": "Link",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:15",
+          "name": "Link",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "4023:1624",
+          "name": "Link Component (32 variants: Size × State × Icon × External)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "4023:1438",
+          "name": "Size=Default, State=Default, Icon=None, External=false (default variant)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "9139:6328",
+          "name": "Link AI Instructions",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "9139:6381",
+          "name": "Link Dos and Don'ts",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Not implemented",
+      "status": "Missing",
+      "fidelityReview": "Not applicable",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: the user supplied the exact node (20:15) via the authenticated Figma browser and it has been independently confirmed live via get_metadata — no longer a Stop-and-Ask item, just a genuine repo-side implementation gap. Real anatomy: single inline text element, no container/background/border, hug-content width. 2 sizes (Default 14px / Small 12px) × 4 states (Default/Hover/Visited/Disabled) × Icon=None|Right × External=false|true = 32 variants. Tokens: text → color/action/primary/{state}, visited → color/link/visited, disabled → color/text/disabled, icon → icon/color/default (state-invariant), gap → space/050 (4px), fonts → link/default/font (14px) / link/small/font (12px). AI Instructions explicitly say: never use Link to trigger actions (use Button), never as a standalone block-level CTA (use Button Tertiary), and keyboard interaction/focus-ring/visited-tracking are explicitly \"PLANNED — not yet implemented\" even in Figma. search_design_system for \"Link\" against this file key still returns zero results scoped to it (every result comes from other libraries, including the forbidden \"Prism - AI Design System of PX\") — that tool remains unusable for this lookup, but the directly-supplied node ID resolves the gap."
+    },
+    {
+      "id": "component-divider",
+      "name": "Divider",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:18",
+          "name": "Divider",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "9127:18230",
+          "name": "Divider Component (4 variants: Orientation × Weight)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "9139:6494",
+          "name": "Divider AI Instructions",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "9139:6537",
+          "name": "Divider Dos and Don'ts",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Not implemented",
+      "status": "Missing",
+      "fidelityReview": "Not applicable",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: node 20:18 supplied by the user and independently confirmed live via get_metadata. Real anatomy: Orientation=Horizontal|Vertical × Weight=1px|2px = 4 variants, Solid only (Dashed/Dotted explicitly excluded per PX DS V2). Token: stroke → color/line/default for all 4 variants, no fill, StrokeAlign=center. Horizontal renders as <hr>; Vertical renders as a decorative <div role=\"separator\" aria-orientation=\"vertical\">. AI Instructions explicitly warn against ever using a raw 1px rectangle as a substitute (won't carry the theme-aware token)."
+    },
+    {
+      "id": "component-rte-field",
+      "name": "RTE Field (Rich Text Editor)",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "1273:14",
+          "name": "RTE Field",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "1755:6",
+          "name": "RTE Field component frame (19 variants: Type × State × ShowCTAs)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "4901:21861",
+          "name": "RTE Field AI Instructions",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "4901:21824",
+          "name": "RTE Field Dos and Don'ts",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Not implemented",
+      "status": "Missing",
+      "fidelityReview": "Not applicable",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline",
+        "component-textarea"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: node 1273:14 supplied by the user and independently confirmed live via get_metadata. Real anatomy: 3 Types — Default (boxed, standalone), Inline (borderless, integrated), Floating (toolbar-only overlay on text selection) — × up to 6 states (Default/Hover/Active/Filled/Hover-Elements/Disabled) × ShowCTAs=true|false = 19 total variants. Toolbar has 5 icon groups (Bold/Italic/Underline/FontSize/FontProperties · TextAlign · Bullet/Numbers · Indent · Link/Attachment/Clear-formatting). Explicit relationship to already-implemented components (per the AI Instructions' own \"When NOT to use\"): plain single-line text → Text Field; plain multi-line text with no formatting → Textarea/Message Box (component-textarea); search input → Search Bar. Keyboard shortcuts (Ctrl+B/I/Z/Y) are explicitly \"PLANNED — not yet implemented\" even in Figma."
+    },
+    {
+      "id": "component-color-picker",
+      "name": "Color Picker",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "1273:11",
+          "name": "Color Picker",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "2588:57",
+          "name": "Color Picker component frame (3 variants: Basic / Basic-Hover / Advanced)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "2587:2",
+          "name": "Variant=Basic",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "2588:2",
+          "name": "Variant=Advanced",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "4901:24640",
+          "name": "Color Picker AI Instructions",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "4901:24363",
+          "name": "Color Picker Dos and Don'ts",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Not implemented",
+      "status": "Missing",
+      "fidelityReview": "Not applicable",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: node 1273:11 supplied by the user and independently confirmed live via get_metadata — this directly corroborates the token-only evidence already on file. Real anatomy: Basic (7-family × 6-shade = 42-swatch grid, no selection state), Basic-Hover (same grid + 2px selection ring using colorpicker/swatch/selected), Advanced (240×353px fixed panel: HSL canvas + hue/opacity sliders + HEX/R/G/B/A inputs). Tokens exactly match the 12 --c-colorpicker-* generated-CSS tokens already recorded here (background/border/radius/padding/swatch-size/swatch-selected/input-*) — confirms those were not orphaned/speculative tokens. AI Instructions: use Basic for constrained brand-palette selection, Advanced for arbitrary colour (custom theming, drawing tools); never show the picker without an anchoring trigger."
+    },
+    {
+      "id": "component-notification",
+      "name": "Notification (Badge / Item / Panel)",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "1273:7",
+          "name": "Notification",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "3176:38",
+          "name": "Notification/Badge component set (4 variants: Small/Medium/Large/Large With Number)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "7196:426",
+          "name": "Notification/Item component set (16 variants: Type × Read × Hover)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "7197:157",
+          "name": "Notification/Panel component set (2 variants: State=Empty/Populated)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "7195:378",
+          "name": "Notification AI Instructions",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "7195:422",
+          "name": "Notification Dos and Don'ts",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Not implemented",
+      "status": "Missing",
+      "fidelityReview": "Not applicable",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline",
+        "component-toast",
+        "component-banner"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: node 1273:7 supplied by the user and independently confirmed live via get_metadata — confirms and supersedes the token-only evidence previously on file (the full --c-notification-* token set in prism-generated.css:766-792 now has matching component evidence, not just orphaned tokens). Three separate component sets, all same-file: Badge (overlays the Shell nav bell icon), Item (individual panel row: Type=Info/Success/Warning/Danger × Read=Unread/Read × Hover), Panel (popover container opened by the bell; Empty state shows \"You're all caught up!\"). Toast and Banner are explicitly distinct, already-implemented components, not substitutes (per the AI Instructions' own Pairs-With/When-NOT-to-use sections: Toast = transient feedback for an action just taken; Banner = persistent full-page/system alert; Notification/Item = async background events persisted in a panel). IMPORTANT NUANCE surfaced, not silently dropped: the Notification AI Instructions node (7195:378) itself states, under \"Purpose\": \"Out of scope for current release.\" This is a Figma-authored release-scope note, not a design rejection of the component — the anatomy, states, and tokens are fully specified and ready to implement. Kept under \"Missing\" per the explicit categorization in this correction request (grouped with the other missing-component page references, not with the six pages under \"(Out of scope)\" in their literal Figma page names) — flagging the nuance here rather than reclassifying unilaterally."
+    },
+    {
+      "id": "component-page-layout",
+      "name": "Page Layout (generic)",
+      "category": "Pattern",
+      "figmaPages": [
+        {
+          "nodeId": "3187:6",
+          "name": "Page Layout",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "3263:11",
+          "name": "Content — 4-state anatomy diagram (Default / With Third Pane / Full Width / Collapsed Nav)",
+          "role": "example",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "3264:11",
+          "name": "Content — annotated region diagram (Left Nav / Page Header / Content Area / Third Pane)",
+          "role": "example",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "4214:26368",
+          "name": "Page Layout AI Instructions",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "4214:26393",
+          "name": "Page Layout Dos and Don'ts",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Not implemented",
+      "status": "Missing",
+      "fidelityReview": "Not applicable",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "shell-px-main-container",
+        "shell-px-list-shell"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: node 3187:6 supplied by the user and independently confirmed live via get_metadata — the earlier \"likely just naming\" hypothesis is now CONFIRMED, not merely guessed. Page Layout AI Instructions (4214:26368) specify the exact same layout constants already implemented and previously extracted from the PX Shell AI Instructions on the MainContainer page (4191:21696): content start X 72px/width 1344px with nav collapsed, content start X 264px/width 1152px with nav expanded, content start Y 120px, page gutter 24px (space/300). It also documents 4 arrangement states — Default, With Third Pane, Full Width, Collapsed Nav — all of which map onto existing repo capability (PxMainContainer + PxListShell + ThirdPane), and explicitly states \"It is a pattern, not a single component.\" Kept as \"Missing\" per the explicit categorization in this correction request (listed under missing-component page references to revalidate), but the honest read of the evidence is that this is fully covered functionally by shell-px-main-container/shell-px-list-shell under different Figma naming, not a build gap — flagged here rather than unilaterally reclassified."
+    },
+    {
+      "id": "shell-px-list-shell",
+      "name": "PxListShell",
+      "category": "Shell",
+      "figmaPages": [
+        {
+          "nodeId": "3792:8575",
+          "name": "Shell/MainContainer",
+          "verified": "mcp-verified"
+        },
+        {
+          "nodeId": "1273:19",
+          "name": "Shell/Page Header & Title",
+          "verified": "mcp-verified"
+        },
+        {
+          "nodeId": "20:36",
+          "name": "Shell/Filter Panel",
+          "verified": "mcp-verified"
+        },
+        {
+          "nodeId": "3187:8",
+          "name": "Shell/List Page",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "7306:20074",
+          "name": "Shell/ListPage",
+          "role": "example",
+          "verified": "mcp-verified"
+        },
+        {
+          "nodeId": "4214:28076",
+          "name": "Page Header Title AI Instructions",
+          "role": "instructions",
+          "verified": "mcp-verified"
+        },
+        {
+          "nodeId": "4214:28101",
+          "name": "Page Header Title Dos and Don'ts",
+          "role": "instructions",
+          "verified": "mcp-verified"
+        },
+        {
+          "nodeId": "7126:10078",
+          "name": "Filter Panel AI Instructions",
+          "role": "instructions",
+          "verified": "mcp-verified"
+        },
+        {
+          "nodeId": "7127:8619",
+          "name": "Filter Panel Dos and Don'ts",
+          "role": "instructions",
+          "verified": "mcp-verified"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/patterns/px-list-shell/PxListShell.tsx",
+        "src/patterns/px-list-shell/PxHeader.tsx",
+        "src/patterns/px-list-shell/PxFilterSlider.tsx"
+      ],
+      "docPath": null,
+      "gallerySection": "Shells & Patterns",
+      "examplePaths": [
+        "src/pages/engagements-list-example.tsx",
+        "src/pages/user-explorer.tsx"
+      ],
+      "implementationStatus": "Implemented",
+      "status": "Approved",
+      "fidelityReview": "Complete",
+      "visualReview": "Approved",
+      "designOwnerApproval": {
+        "approved": true,
+        "date": "2026-08-27"
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "shell-px-main-container",
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "All three source pages are now genuinely mcp-verified: 3792:8575 and 7306:20074 were verified live in an earlier phase of this session; 1273:19 (\"Shell/Page Header & Title\") and 20:36 (\"Shell/Filter Panel\") were previously only From-repo-evidence (carried from ai/shell-registry.md's links, never independently checked) and have now been verified live via get_metadata during this correction pass — this entry no longer mixes verification tiers. src/patterns/px-list-shell/README.md still reads \"pending visual review\" and has not been updated to reflect this 2026-08-27 approval recorded in ai/shell-registry.md — flagged as repository-only debt, not a real approval gap. Corrected in this pass: \"Shell/List Page\" (3187:8, confirmed live) is the standalone page defining the reusable \"List Page / Content Area\" pattern (View=Table/Card × State=WithData/Empty) that PxListShell's children slot renders — distinct from \"Shell/ListPage\" (7306:20074, already cited), which is the fully-assembled MainContainer + content example. Both are legitimate, different evidence for this shell."
+    },
+    {
+      "id": "shell-px-create-edit-modal",
+      "name": "PxCreateEditShellModal",
+      "category": "Shell",
+      "figmaPages": [
+        {
+          "nodeId": "3187:10",
+          "name": "Shell/Create · Edit Form"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "3796:2503",
+          "name": "Create/Edit on a Popup example",
+          "role": "example"
+        },
+        {
+          "nodeId": "3791:1498",
+          "name": "Modal instance",
+          "role": "instance"
+        },
+        {
+          "nodeId": "3791:1499",
+          "name": "Modal Footer instance",
+          "role": "instance"
+        },
+        {
+          "nodeId": "7128:873",
+          "name": "Create Edit Form AI Instructions",
+          "role": "instructions"
+        },
+        {
+          "nodeId": "7128:914",
+          "name": "Create Edit Form Dos and Don'ts",
+          "role": "instructions"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/patterns/px-create-edit-shell/PxCreateEditShellModal.tsx",
+        "src/patterns/px-create-edit-shell/PxCreateEditFooter.tsx"
+      ],
+      "docPath": null,
+      "gallerySection": "Create · Edit Shell (PxCreateEditShell)",
+      "examplePaths": [
+        "src/pages/create-edit-shell-example.tsx"
+      ],
+      "implementationStatus": "Implemented",
+      "status": "Approved",
+      "fidelityReview": "Complete",
+      "visualReview": "Approved",
+      "designOwnerApproval": {
+        "approved": true,
+        "date": "2026-08-28"
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline",
+        "component-modal",
+        "component-textarea"
+      ],
+      "recommendedOrder": null,
+      "notes": "3187:10, its child 3796:2503, and both AI-instruction nodes were re-verified live via get_metadata in this session."
+    },
+    {
+      "id": "shell-px-create-edit-accordion",
+      "name": "PxCreateEditShellAccordion",
+      "category": "Shell",
+      "figmaPages": [
+        {
+          "nodeId": "3187:10",
+          "name": "Shell/Create · Edit Form"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "3796:2504",
+          "name": "Create/Edit with Accordion example",
+          "role": "example"
+        },
+        {
+          "nodeId": "7128:873",
+          "name": "Create Edit Form AI Instructions",
+          "role": "instructions"
+        },
+        {
+          "nodeId": "7128:914",
+          "name": "Create Edit Form Dos and Don'ts",
+          "role": "instructions"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/patterns/px-create-edit-shell/PxCreateEditShellAccordion.tsx"
+      ],
+      "docPath": null,
+      "gallerySection": "Create · Edit Shell (PxCreateEditShell)",
+      "examplePaths": [
+        "src/pages/create-edit-shell-example.tsx"
+      ],
+      "implementationStatus": "Implemented",
+      "status": "Approved",
+      "fidelityReview": "Complete",
+      "visualReview": "Approved",
+      "designOwnerApproval": {
+        "approved": true,
+        "date": "2026-08-28"
+      },
+      "knownDeviations": [
+        "See figmaCorrectionsRequired fc-3: the Figma example (3796:2504) is missing a required sub-header/footer that this implementation includes per the written AI instructions."
+      ],
+      "dependencies": [
+        "shell-px-main-container",
+        "foundation-token-pipeline",
+        "component-accordion"
+      ],
+      "recommendedOrder": null,
+      "notes": "3796:2504 re-verified live via get_metadata in this session, confirming 4 child Accordion instances (3796:2703, 3796:3586, 3796:3596, 3796:3606)."
+    },
+    {
+      "id": "shell-px-create-edit-wizard",
+      "name": "PxCreateEditShellWizard",
+      "category": "Shell",
+      "figmaPages": [
+        {
+          "nodeId": "3187:10",
+          "name": "Shell/Create · Edit Form"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "3802:3615",
+          "name": "Wizard example (Figma layer mislabeled \"Accordion\")",
+          "role": "example"
+        },
+        {
+          "nodeId": "3803:10203",
+          "name": "Wizard sidebar frame (156px measured)",
+          "role": "example"
+        },
+        {
+          "nodeId": "7128:873",
+          "name": "Create Edit Form AI Instructions",
+          "role": "instructions"
+        },
+        {
+          "nodeId": "7128:914",
+          "name": "Create Edit Form Dos and Don'ts",
+          "role": "instructions"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/patterns/px-create-edit-shell/PxCreateEditShellWizard.tsx"
+      ],
+      "docPath": null,
+      "gallerySection": "Create · Edit Shell (PxCreateEditShell)",
+      "examplePaths": [
+        "src/pages/create-edit-shell-example.tsx"
+      ],
+      "implementationStatus": "Implemented",
+      "status": "Approved",
+      "fidelityReview": "Complete",
+      "visualReview": "Approved",
+      "designOwnerApproval": {
+        "approved": true,
+        "date": "2026-08-28"
+      },
+      "knownDeviations": [
+        "See figmaCorrectionsRequired fc-1 and fc-2: Figma layer name says \"Accordion\" but content is Wizard; written 240px spec vs 156px measured example geometry."
+      ],
+      "dependencies": [
+        "shell-px-main-container",
+        "foundation-token-pipeline",
+        "component-wizard"
+      ],
+      "recommendedOrder": null,
+      "notes": "3802:3615 and its child 3803:10203 (4 Wizard instances 3803:10204-10207 + 336px Content instance 3803:10208 with 4 named slots) re-verified live via get_metadata in this session."
+    },
+    {
+      "id": "shell-px-main-container",
+      "name": "PxMainContainer",
+      "category": "Shell",
+      "figmaPages": [
+        {
+          "nodeId": "3792:8575",
+          "name": "Shell/MainContainer"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "3796:2273",
+          "name": "Shell/Nav+PrimaryHeader",
+          "role": "symbol"
+        },
+        {
+          "nodeId": "4191:21696",
+          "name": "PX Shell AI Instructions",
+          "role": "instructions"
+        },
+        {
+          "nodeId": "4191:21721",
+          "name": "PX Shell Dos and Don'ts",
+          "role": "instructions"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/patterns/px-main-container/PxMainContainer.tsx"
+      ],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Internal foundation",
+      "fidelityReview": "Pending",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Deliberately not given its own row in ai/shell-registry.md — see decision-px-main-container-internal. Composes PxShellRail + PxHeader (the latter imported from px-list-shell, a documented cross-pattern dependency). Full symbol list of page 3792:8575 verified live this session: Shell/NavOnly (4191:13466), Shell/NavExpanded (4191:13804), Shell/NavAdmin (4191:14215), Shell/Nav+PrimaryHeader (3796:2273), Shell/Nav+CompleteHeader (4191:15440), Shell/Nav+Tabs (4191:17353), Shell/Nav+SecNav (4191:21173), Shell/Modal (4537:52515), Shell/ListPage (7306:20074), Shell/ListPage + 3rd Pane (7306:22438). Corrected in this pass: \"Shell/Analytics/Secondary-Left Navigation\" is not a symbol on THIS page and was never expected to be — it lives on its own dedicated page (3351:3925, see shell-analytics-secondary-nav), verified via user-supplied node references confirmed live via get_metadata. Shell/Nav+SecNav (4191:21173) on THIS page directly instances that dedicated component (instance 4191:17800) inside the generic rail+header+content-row composition — it is not a separate or generic secondary-nav design, it is this MainContainer's demonstration of the Analytics nav in situ. A prior pass in this registry described Shell/Nav+SecNav as merely \"the closest analog\" to the (then-unlocated) Analytics nav — that undersold the relationship; it is a direct composition, now confirmed."
+    },
+    {
+      "id": "shell-analytics-secondary-nav",
+      "name": "Secondary Left Navigation - Analytics (Shell/Analytics/Secondary-Left Navigation)",
+      "category": "Shell",
+      "figmaPages": [
+        {
+          "nodeId": "3351:3925",
+          "name": "Shell/Analytics/Secondary-Left Navigation",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "3351:4914",
+          "name": "Content/Component (frame containing the defining symbol)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "3397:2451",
+          "name": "Secondary Left Navigation - Analytics (the defining symbol, 312×608)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "3351:4898",
+          "name": "Content/Sticker (Light/Dark mode example instances)",
+          "role": "example",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "4214:33403",
+          "name": "Analytics Left Navigation AI Instructions",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "4214:33428",
+          "name": "Analytics Left Navigation Dos and Don'ts",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "4191:21173",
+          "name": "Shell/Nav+SecNav (MainContainer variant that embeds this component — see notes for the anatomy distinction)",
+          "role": "related-shell-variant",
+          "verified": "mcp-verified"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Not implemented",
+      "status": "Missing",
+      "fidelityReview": "Not applicable",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "shell-px-main-container",
+        "component-accordion",
+        "component-tree"
+      ],
+      "recommendedOrder": null,
+      "notes": "Corrected in this pass: the exact node was supplied by the user via the authenticated Figma browser and independently confirmed live via get_metadata for every ID (page 3351:3925, component frame 3351:4914, defining symbol 3397:2451, sticker/example 3351:4898, AI Instructions 4214:33403, Dos and Don'ts 4214:33428) — this is no longer a Stop-and-Ask item. Anatomy (from 4214:33403): a fixed vertical stack of exactly 4 On-Material Accordion sections in a fixed order (Reports → Audience → Features → Engagement, per product workflow, \"do not reorder without product sign-off\"), each an Accordion header (24px module icon + label + chevron) with a content slot of Tree/Item Level=2 sub-page rows (48px left indent, Type=No Icon, Checkbox=False). Fixed width 312px. All sections start State=Open. Exactly one Tree/Item can be State=Active at a time, using color/action/primary/default fill. This is a product-specific navigation module, not a generic reusable pattern. Distinction from Shell/Nav+SecNav (4191:21173) — VERIFIED, NOT assumed identical: Shell/Nav+SecNav is a Shell/MainContainer composition (Left Navigation rail + PX Header + \"LeftNav+ Content\" row) whose content row directly instances this exact same component (instance 4191:17800, same underlying symbol) beside a separate 1078px-wide generic \"Content\" slot reserved for whatever page content is being browsed. In other words Shell/Nav+SecNav is not a different, generic secondary-nav shell — it is the demonstration of THIS Analytics component placed inside the full page shell. A prior pass in this registry incorrectly described Shell/Nav+SecNav as \"a generic secondary-nav shell variant, not specifically Analytics\" — that characterization is now confirmed wrong and is superseded by this entry. No evidence of any other, more generic secondary-nav component was found on the MainContainer page."
+    },
+    {
+      "id": "page-audience-explorer-legacy",
+      "name": "audience-explorer.tsx (AudienceExplorer)",
+      "category": "Pattern",
+      "figmaPages": [],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Not-applicable",
+      "repoPaths": [
+        "src/pages/audience-explorer.tsx"
+      ],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Legacy",
+      "fidelityReview": "Not applicable",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "shell-px-list-shell"
+      ],
+      "recommendedOrder": null,
+      "notes": "See decision-legacy-page. Orphaned/unrouted 845-line duplicate of the same product screen as user-explorer.tsx. Repository-only debt — reconcile or remove."
+    },
+    {
+      "id": "page-user-explorer-canonical",
+      "name": "user-explorer.tsx (UserExplorer)",
+      "category": "Pattern",
+      "figmaPages": [],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Not-applicable",
+      "repoPaths": [
+        "src/pages/user-explorer.tsx"
+      ],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Internal foundation",
+      "fidelityReview": "Not applicable",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "shell-px-list-shell"
+      ],
+      "recommendedOrder": null,
+      "notes": "See decision-canonical-page. Not itself a distinct Figma-mapped item — it is the canonical, routed, composed-from-approved-pieces reference application screen."
+    },
+    {
+      "id": "outofscope-detail-drilldown-page",
+      "name": "Detail · Drilldown Page",
+      "category": "Out of scope",
+      "figmaPages": [
+        {
+          "nodeId": "3187:11",
+          "name": "Detail · Drilldown Page (Out of scope)",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Not implemented",
+      "status": "Out of scope",
+      "fidelityReview": "Not applicable",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [],
+      "recommendedOrder": null,
+      "notes": "Confirmed live via get_metadata: the canvas's own Figma name is literally \"Detail · Drilldown Page (Out of scope)\" — an empty canvas (0×0, no children), consistent with a scope marker rather than a page with content to extract. The \"(Out of scope)\" suffix is the Figma team's own scope designation, recorded here as a fact about scope, not as any form of design-owner approval — per this registry's explicit rule, a scope marker (like a green page marker) is never treated as approval evidence."
+    },
+    {
+      "id": "outofscope-loading-skeleton-states",
+      "name": "Loading · Skeleton States",
+      "category": "Out of scope",
+      "figmaPages": [
+        {
+          "nodeId": "3187:13",
+          "name": "Loading · Skeleton States (Out of scope)",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Not implemented",
+      "status": "Out of scope",
+      "fidelityReview": "Not applicable",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [],
+      "recommendedOrder": null,
+      "notes": "Confirmed live via get_metadata: canvas name is literally \"Loading · Skeleton States (Out of scope)\", empty (0×0, no children). Note this is independent of component-skeleton (the already-implemented, Mapped-review-pending Skeleton ui/ component sourced from node 2683:24440 on a different page) — this out-of-scope page concerns a broader page-level loading-state pattern, not the Skeleton primitive itself."
+    },
+    {
+      "id": "outofscope-administration-page",
+      "name": "Administration Page",
+      "category": "Out of scope",
+      "figmaPages": [
+        {
+          "nodeId": "20:40",
+          "name": "Administration Page (Out of scope)",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Not implemented",
+      "status": "Out of scope",
+      "fidelityReview": "Not applicable",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [],
+      "recommendedOrder": null,
+      "notes": "Confirmed live via get_metadata: canvas name is literally \"Administration Page (Out of scope)\", empty (0×0, no children)."
+    },
+    {
+      "id": "outofscope-ai-insight-surface",
+      "name": "AI Insight Surface",
+      "category": "Out of scope",
+      "figmaPages": [
+        {
+          "nodeId": "3187:14",
+          "name": "AI Insight Surface (Out of scope)",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Not implemented",
+      "status": "Out of scope",
+      "fidelityReview": "Not applicable",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [],
+      "recommendedOrder": null,
+      "notes": "Confirmed live via get_metadata: canvas name is literally \"AI Insight Surface (Out of scope)\", empty (0×0, no children)."
+    },
+    {
+      "id": "outofscope-ai-prompt-input",
+      "name": "AI Prompt & Input",
+      "category": "Out of scope",
+      "figmaPages": [
+        {
+          "nodeId": "3187:15",
+          "name": "AI Prompt & Input (Out of scope)",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Not implemented",
+      "status": "Out of scope",
+      "fidelityReview": "Not applicable",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [],
+      "recommendedOrder": null,
+      "notes": "Confirmed live via get_metadata: canvas name is literally \"AI Prompt & Input (Out of scope)\", empty (0×0, no children)."
+    },
+    {
+      "id": "outofscope-motion-tokens",
+      "name": "Motion Tokens",
+      "category": "Out of scope",
+      "figmaPages": [
+        {
+          "nodeId": "4279:2",
+          "name": "Motion Tokens (Out of Scope)",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Not implemented",
+      "status": "Out of scope",
+      "fidelityReview": "Not applicable",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [],
+      "recommendedOrder": null,
+      "notes": "Confirmed live via get_metadata: canvas name is literally \"Motion Tokens (Out of Scope)\" (capital-S \"Scope\", unlike the other five which use lowercase — recorded verbatim, not normalized), empty (0×0, no children). This is a token-category page (animation/easing/duration primitives), explicitly out of scope for this Foundation/token pipeline's current implementation."
+    },
+    {
+      "id": "illustration-illustrations",
+      "name": "Illustrations",
+      "category": "Illustration",
+      "figmaPages": [
+        {
+          "nodeId": "1273:24",
+          "name": "Illustrations",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "3323:18610",
+          "name": "Illustration=No Data Found, Size=80 (the one type extracted into the repo)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "3323:19635",
+          "name": "Illustration=Placeholder, Size=144",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "3344:194",
+          "name": "Illustration=Not Purchased, Size=80 (legacy state, absent from Shell/Illustrations)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "3344:209",
+          "name": "Illustration=Not Found, Size=80 (legacy state, absent from Shell/Illustrations)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "3344:226",
+          "name": "Illustration=Not Located, Size=80 (legacy state, absent from Shell/Illustrations)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "3344:241",
+          "name": "Illustration=Not Tracking, Size=80 (legacy state, absent from Shell/Illustrations)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/assets/illustrations/no-data-found.svg"
+      ],
+      "docPath": "src/docs/docs/empty-state.doc.ts",
+      "gallerySection": "Empty State",
+      "examplePaths": [
+        "src/docs/examples/empty-state/default.tsx",
+        "src/docs/examples/empty-state/sizes.tsx"
+      ],
+      "implementationStatus": "Partial",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [
+        "Only 1 of this page's ~21 illustration symbol families (No Data Found) has been extracted as a repo asset. The remaining ~20 (Not Configured, Select Source, Drag and Drop, Run Report, Import, Export, No Saved Drafts, Create, Failed to Load, No Results Found, No Filter Results, Access Not Granted, Permission Needed, Placeholder, New, Get Started, Not Purchased, Not Tracking, Not Found, Not Located) remain unextracted — tracked in project_pending_exceptions.md per empty-state.tsx's own header comment."
+      ],
+      "dependencies": [
+        "component-empty-state"
+      ],
+      "recommendedOrder": null,
+      "notes": "Node 1273:24 supplied by the user and independently confirmed live via get_metadata. Uses the \"Illustration=<Name>, Size=<N>\" symbol-naming convention (frame 3346:288, ~21 semantic states × up to 6 sizes). This is confirmed, not assumed, to be the actual repo source for the one shipped asset: src/assets/illustrations/no-data-found.svg contains a literal `<g id=\"Illustration=No Data Found, Size=80\">`, matching this page's naming exactly — the separate Shell/Illustrations page (7554:13835, see illustration-shell-illustrations-library) uses a different \"Property 1=<size>, Property 2=<slug>\" convention instead, so the shipped asset did not come from there. This page additionally defines 4 legacy-only states (Not Purchased, Not Tracking, Not Found, Not Located, each only at 80px) that do not exist on Shell/Illustrations, and lacks any AI Instructions/Dos-and-Don'ts of its own (unlike Shell/Illustrations, which has dedicated ones) — treat Shell/Illustrations as the current canonical specification (per its own cross-reference note) and this page as a secondary/historical reference that happens to be the actual source of the one asset already shipped."
+    },
+    {
+      "id": "illustration-shell-illustrations-library",
+      "name": "Shell/Illustrations",
+      "category": "Illustration",
+      "figmaPages": [
+        {
+          "nodeId": "7554:13835",
+          "name": "Shell/Illustrations",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "7554:13838",
+          "name": "illustrations/NoData (5 sizes: 48/64/80/104/120)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "7554:14892",
+          "name": "illustrations/PlaceHolder (includes the only 144px \"empty\" variant)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "7554:15026",
+          "name": "illustrations/144/new",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "7554:15042",
+          "name": "illustrations/144/get-started",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "7554:15136",
+          "name": "illustrations AI Instructions",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "7554:15169",
+          "name": "illustrations Dos and Dont's",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "7556:46333",
+          "name": "Cross-reference — Empty States annotation",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Not implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [
+        "Despite being fully documented (AI Instructions + Dos and Don'ts, 16 states × 5 sizes + separate 144px new/get-started), zero of THIS page's own 7554:* symbol keys have been individually re-extracted as repo assets. The repo's one shipped illustration asset was sourced from the sibling 'Illustrations' page's naming convention (1273:24, see illustration-illustrations) instead, so this specific page's evidence has not itself produced a repo artifact yet."
+      ],
+      "dependencies": [
+        "illustration-illustrations",
+        "component-empty-state"
+      ],
+      "recommendedOrder": null,
+      "notes": "Node 7554:13835 supplied by the user and independently confirmed live via get_metadata. Despite the \"Shell/\" name prefix (shared with nav/layout composition pages elsewhere in this file, e.g. Shell/MainContainer, Shell/Nav+SecNav), this page's actual anatomy is a pure illustration asset library — 16 named semantic states (NoData, NotConfigured, Select, DragDrop, RunReport, Import, Export, NoSavedDrafts, Create, FailedToLoad, NoResultFound, NoFilterResult, NoAccess, PermissingNeeded [sic, Figma's own typo], PlaceHolder) each at 5 sizes (48/64/80/104/120px), plus two standalone 144px onboarding symbols (illustrations/144/new, illustrations/144/get-started) — with no nav rail, header, or layout-composition elements anywhere on the page. Categorized \"Illustration\" (not \"Shell\") based on this anatomy, per this correction request's explicit instruction to categorize by actual anatomy and purpose rather than by name prefix. Its own cross-reference annotation (7556:46333) states: \"Illustrations on this page are the visual source for all empty states in PX. When building an empty state, always source the illustration from here — do not recreate inline. See the Empty States page for layout and copy patterns.\" — making this the Figma-designated canonical/current illustration source, superseding illustration-illustrations for anything not already shipped. Relationship to illustration-illustrations documented on both entries."
+    },
+    {
+      "id": "reference-template",
+      "name": "Template",
+      "category": "Reference",
+      "figmaPages": [
+        {
+          "nodeId": "1552:3384",
+          "name": "Template",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "3968:14337",
+          "name": "Template/Title",
+          "role": "template",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "3968:14338",
+          "name": "Template/Stickers",
+          "role": "template",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "4128:2357",
+          "name": "Template/MinStickers",
+          "role": "template",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "3968:14339",
+          "name": "Template/Components",
+          "role": "template",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "3968:14393",
+          "name": "Template/AI instructions",
+          "role": "template",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "3968:14416",
+          "name": "Template/Dos and Don'ts",
+          "role": "template",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "7556:46337",
+          "name": "\"Components with AI Instructions\" index frame",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Not applicable",
+      "status": "Internal foundation",
+      "fidelityReview": "Not applicable",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [],
+      "recommendedOrder": null,
+      "notes": "Node 1552:3384 supplied by the user and independently confirmed live via get_metadata. This page holds only master template symbols (Template/Title, Template/Stickers, Template/MinStickers, Template/Components, Template/AI instructions, Template/Dos and Don't's) and a self-referential index frame (7556:46337) listing which components use them (currently: Summary Stats Row, Illustrations — i.e. illustration-shell-illustrations-library). These exact template symbols are instanced-and-renamed across dozens of other pages already verified in this registry (RTE Field, Color Picker, Notification, Page Layout, Page Header & Title, Filter Panel, Shell/Illustrations, and more all contain a \"Template/AI instructions\"/\"Template/Dos and Don't's\" instance). This is pure Figma-file authoring tooling, not a product component — per explicit instruction, never approve it as one. No 'Reference' category existed before this pass; it was added specifically because 'Foundation/token', 'Component', 'Pattern', 'Shell', 'Illustration', and 'Out of scope' all fail to describe a page whose entire purpose is to be reused as a documentation-authoring template by other pages."
+    },
+    {
+      "id": "reference-icons-source",
+      "name": "_Icons Source",
+      "category": "Reference",
+      "figmaPages": [
+        {
+          "nodeId": "7403:2913",
+          "name": "_Icons Source",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "484:546",
+          "name": "icons/24/search (representative of 280+ icon symbols on this page)",
+          "role": "template",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "491:103",
+          "name": "icons/24/ai/primary",
+          "role": "template",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "7539:10509",
+          "name": "icons/PXNavLogo",
+          "role": "template",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Not applicable",
+      "status": "Internal foundation",
+      "fidelityReview": "Not applicable",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [
+        "A literal icon-by-icon cross-check against the repo's actual PrismIcon icon set was not performed in this pass — only page-level confirmation and a handful of representative name matches."
+      ],
+      "dependencies": [],
+      "recommendedOrder": null,
+      "notes": "Node 7403:2913 supplied by the user and independently confirmed live via get_metadata. Master icon symbol source: 280+ symbols spanning icons/16/*, icons/24/*, icons/32/*, icons/48/*, icons/64/*, filled variants, and PX-specific nav/module icons (PXLogo, PXEngagements, PXAccount Explorer, PXAnalytics, PXSegments, App Switcher, etc.) — several names (e.g. icons/24/document, icons/24/chevron-up) match icons already cited by name in other verified pages' AI Instructions (e.g. the Analytics Secondary Navigation accordion headers). Almost certainly the underlying Figma source for this repo's PrismIcon component — see foundation-prism-icon, which now cites this page. Pure design-system asset tooling, not a product component itself — never approve it as one."
+    },
+    {
+      "id": "foundation-color-tokens",
+      "name": "Color",
+      "category": "Foundation/token",
+      "figmaPages": [
+        {
+          "nodeId": "20:3",
+          "name": "Color",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "tokens/protected-tokens.json",
+        "src/styles/prism-generated.css"
+      ],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Approved",
+      "fidelityReview": "Complete",
+      "visualReview": "Approved",
+      "designOwnerApproval": {
+        "approved": true,
+        "date": "2026-08-27"
+      },
+      "knownDeviations": [],
+      "dependencies": [],
+      "recommendedOrder": null,
+      "notes": "Node 20:3 (\"Color\") supplied by the user and confirmed live — the primitive/semantic/component 3-layer colour system documented on this page (including royalBlue.700, neutral.800/900) is the same system already protected by tokens/protected-tokens.json and the token guardrails on main. Approval inherited from the existing protected-token approval record, not a new independent review."
+    },
+    {
+      "id": "foundation-typography-tokens",
+      "name": "Typography",
+      "category": "Foundation/token",
+      "figmaPages": [
+        {
+          "nodeId": "20:4",
+          "name": "Typography",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/styles/prism-generated.css"
+      ],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Node 20:4 (\"Typography\") supplied by the user and confirmed live — Noto Sans (UI) / IBM Plex Mono (code) composite type-scale tokens. No independent design-owner review of the generated typography tokens against this page has been recorded."
+    },
+    {
+      "id": "foundation-spacing-radius-border-tokens",
+      "name": "Spacing · Radius · Border",
+      "category": "Foundation/token",
+      "figmaPages": [
+        {
+          "nodeId": "20:5",
+          "name": "Spacing · Radius · Border",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/styles/prism-generated.css"
+      ],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Node 20:5 supplied by the user and confirmed live — 4px base grid spacing scale (space.025–space.700, negative variants), radius scale (radius.025–radius.full), and border-width tokens. No independent design-owner review against this page has been recorded."
+    },
+    {
+      "id": "foundation-elevation-shadow-tokens",
+      "name": "Elevation · Shadow",
+      "category": "Foundation/token",
+      "figmaPages": [
+        {
+          "nodeId": "20:6",
+          "name": "Elevation · Shadow",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/styles/prism-generated.css"
+      ],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Node 20:6 supplied by the user and confirmed live — 5 primitive shadow levels, component/semantic shadow tokens, directional (upward) shadow primitives, and colour-tinted semantic shadows. No independent design-owner review against this page has been recorded."
+    },
+    {
+      "id": "foundation-grid-layout-tokens",
+      "name": "Grid · Layout",
+      "category": "Foundation/token",
+      "figmaPages": [
+        {
+          "nodeId": "48:25178",
+          "name": "Grid · Layout",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/styles/prism-generated.css"
+      ],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Node 48:25178 supplied by the user and confirmed live — navbar/header/panel/modal-width and breakpoint tokens, including the same content-start-X/width constants (72px/1344px collapsed, 264px/1152px expanded) already implemented in PxMainContainer/PxListShell via the PX Shell AI Instructions. Corroborates, does not duplicate, that existing evidence."
+    },
+    {
+      "id": "component-card",
+      "name": "Card (generic selectable)",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "7611:395",
+          "name": "Card",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "7623:3891",
+          "name": "Size=Large, State=Default, With Tags=True (representative of 8 variants)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Not implemented",
+      "status": "Missing",
+      "fidelityReview": "Not applicable",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline"
+      ],
+      "recommendedOrder": null,
+      "notes": "Node 7611:395 (\"Card\") supplied by the user and confirmed live — a generic selectable list-item card (Size=Large/Small × State=Default/Selected/SelectedMin/Empty × With Tags=true/false, 8 variants). Confirmed distinct from src/components/ui/canvas-card.tsx (CanvasCard), which is an unrelated two-pane editor-style shell — no repo implementation of this generic selectable Card exists. Genuine repository-side gap, not a naming collision."
+    },
+    {
+      "id": "component-dashboard-widget-card",
+      "name": "Dashboard Widget Card",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:27",
+          "name": "Dashboard Widget Card",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "4432:50636",
+          "name": "Dashboard Widget Card component frame (Size=1*1/1*2/1*3)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Not implemented",
+      "status": "Missing",
+      "fidelityReview": "Not applicable",
+      "visualReview": "Not applicable",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline",
+        "component-dropdown-field"
+      ],
+      "recommendedOrder": null,
+      "notes": "Node 20:27 supplied by the user and confirmed live — the header bar of an analytics dashboard widget tile (title + data-source label + chart-type switcher + filter/share/overflow icons, optional filter-dropdown row). Distinct from SummaryStat (a KPI number tile) and from CanvasCard. No repo implementation found under any name."
+    },
+    {
+      "id": "component-pec-dropdown",
+      "name": "PECDropdown (Shell/PEC Dropdown)",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "1747:29175",
+          "name": "Shell/PEC Dropdown",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "3099:14614",
+          "name": "PEC Trigger component set",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "3100:13458",
+          "name": "PEC Panel",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "3103:15334",
+          "name": "PEC Dropdown (assembled)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/px-pec-dropdown.tsx"
+      ],
+      "docPath": null,
+      "gallerySection": "PEC Dropdown",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline",
+        "component-popover",
+        "component-search-bar",
+        "component-checkbox",
+        "component-button"
+      ],
+      "recommendedOrder": null,
+      "notes": "Node 1747:29175 supplied by the user and confirmed live — matches src/components/px-pec-dropdown.tsx's own header comment, which already cited this exact node ID (\"Figma 'Shell/PEC Dropdown', node 1747:29175\") from a prior implementation-phase extraction, now independently re-confirmed. Global Product–Environment–Channel context switcher, always centred in the Page Header Primary bar. Demonstrated in the Validation Gallery's \"PEC Dropdown\" section."
+    },
+    {
+      "id": "component-px-shell-rail",
+      "name": "PxShellRail (Shell/Left Navigation)",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "3187:7",
+          "name": "Shell/Left Navigation",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "3238:2167",
+          "name": "Left Navigation component frame (Collapsed/Expanded/Admin-Expanded)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/px-shell-rail.tsx"
+      ],
+      "docPath": null,
+      "gallerySection": "Left Navigation (PxShellRail)",
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [],
+      "dependencies": [
+        "foundation-token-pipeline",
+        "component-tooltip",
+        "foundation-prism-icon"
+      ],
+      "recommendedOrder": null,
+      "notes": "Node 3187:7 (\"Shell/Left Navigation\") supplied by the user and confirmed live — src/components/px-shell-rail.tsx exports PxShellRail (Collapsed/Expanded modes, admin sections). Always-dark nav rail (color/neutral/800, does not flip in dark mode). This is the nav-rail primitive composed by PxMainContainer, not an independently approved top-level shell — see decision-px-main-container-internal for the analogous relationship."
+    }
+  ]
+}
