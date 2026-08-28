@@ -1,10 +1,27 @@
 name: Prism Token CI
 
-# Gates the Prism token pipeline on every pull request into main:
-# validates the token source files, regenerates the CSS from them, and
-# fails if regeneration produces any change that isn't already committed
-# (i.e. the committed src/styles/prism-generated.css has drifted from the
-# token sources that are supposed to produce it).
+# Gates the Prism token pipeline on every pull request, regardless of base
+# branch: validates the token source files, regenerates the CSS from them,
+# and fails if regeneration produces any change that isn't already
+# committed (i.e. the committed src/styles/prism-generated.css has drifted
+# from the token sources that are supposed to produce it).
+#
+# Deliberately has no `branches:` filter — this pipeline is built on a
+# stacked-PR structure (poc/prism-figma-pipeline -> main, with feature
+# branches stacked on poc/prism-figma-pipeline rather than main), so a
+# `branches: [main]` restriction would silently skip every stacked PR,
+# including the one that introduced this exact CI workflow. Restricting to
+# a single named branch (e.g. `poc/prism-figma-pipeline`) would just move
+# the same problem to the next stacked branch created after this one —
+# validating on every PR, whatever its base, is what actually holds.
+#
+# Also deliberately has no `paths:` filter. This job's own last step is a
+# full `npm run build` — a change to package.json, tsconfig, vite.config,
+# or any src/ file the app imports can break it just as surely as a change
+# under tokens/ or scripts/ can, and a paths filter would silently skip
+# validating this workflow file's own future edits too. A missed build
+# break is worse than an occasional redundant run, so this stays
+# unfiltered by path.
 #
 # Also runs the protected-token/value-integrity guardrails and the
 # alias-regression detector (see ai/token-guardrails.md) — these are what
@@ -35,8 +52,6 @@ name: Prism Token CI
 
 "on":
   pull_request:
-    branches:
-      - main
 
 # Cancel any in-progress run for the same PR when a new commit is pushed,
 # so only the latest push's result matters.
