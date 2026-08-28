@@ -1,0 +1,38 @@
+{
+  "$description": "Human/design-owner-approved baseline for brand-critical tokens. This file is the SOLE source of truth for what value a protected token is allowed to hold. Approving a change means a human deliberately editing this file's 'approvedValue' for that entry, in its own commit, BEFORE the corresponding token-source change is synced or committed — not in the same automated run that proposes the change. scripts/figma-sync.mjs, scripts/figma-snapshot-import.mjs and figma-plugin/ (the plugin and its local bridge) must never create or write to this file — enforced structurally (this file is not part of any script's writable file list) and re-checked at runtime after every apply (see scripts/figma-sync.mjs's post-apply assertion) and in CI (scripts/validate-no-self-approval.mjs rejects any figma-sync/* branch that modifies this file). There is no environment-variable or command-line bypass. See ai/token-guardrails.md for the full policy writeup, the mutation-order guarantee, and root-cause history.",
+  "protected": [
+    {
+      "path": "color.royalBlue.700",
+      "files": ["tokens/P_Light_Default.tokens.json", "tokens/P_Dark.tokens.json"],
+      "reason": "Primary brand blue. Default state for primary actions, links and focus rings — drives --s-color-action-primary-default and every button/link/focus-ring surface that inherits it.",
+      "visibleSurfaces": ["Primary buttons (default state)", "Links", "Focus rings", "Active nav indicator"],
+      "approvedValue": { "hex": "#0369E9" },
+      "approvedBy": "design-owner",
+      "approvedAt": "2026-08-28",
+      "figmaReference": { "variableId": "VariableID:184:9", "name": "color/royalBlue/700" },
+      "note": "Restored after a controlled-test value (#E90303, red) was auto-applied by an early, unguarded snapshot-import run (commit 2dcb46f) and left uncorrected on poc/prism-figma-pipeline. See ai/token-guardrails.md for the full root-cause trace."
+    },
+    {
+      "path": "color.neutral.800",
+      "files": ["tokens/P_Light_Default.tokens.json", "tokens/P_Dark.tokens.json"],
+      "reason": "Primary dark surface. Drives --c-nav-background (a live var() reference, not a baked literal) — the PX left-navigation rail's background colour.",
+      "visibleSurfaces": ["Left navigation rail background"],
+      "approvedValue": { "hex": "#25313B" },
+      "approvedBy": "design-owner",
+      "approvedAt": "2026-08-28",
+      "figmaReference": { "variableId": "VariableID:184:47", "name": "color/neutral/800" },
+      "note": "A later fully-automated sync run (commit 4e82f66) auto-applied a controlled-test value (#34A73A, green) the same way. Already correct as of this baseline; protected going forward."
+    },
+    {
+      "path": "color.neutral.900",
+      "files": ["tokens/P_Light_Default.tokens.json", "tokens/P_Dark.tokens.json"],
+      "reason": "Darkest neutral. Drives --s-color-text-default (light mode) — the default body/UI text colour on light backgrounds.",
+      "visibleSurfaces": ["Default body/UI text colour on light-mode surfaces"],
+      "approvedValue": { "hex": "#181F26" },
+      "approvedBy": "design-owner",
+      "approvedAt": "2026-08-28",
+      "figmaReference": { "variableId": "VariableID:184:48", "name": "color/neutral/900" },
+      "note": "Not found corrupted in any commit reviewed so far; protected preemptively since it shares the same brand-critical class as the other two."
+    }
+  ]
+}

@@ -2,6 +2,8 @@ import fs from "node:fs"
 import path from "node:path"
 import { spawnSync } from "node:child_process"
 
+import { buildSyncReport, buildPrBody, resolveOrCreatePr, summarizeReport } from "./generate-sync-report.mjs"
+
 // Step 5A: orchestrates the ALREADY-PROVEN manual workflow end to end —
 //
 //   snapshot -> importer dry-run -> safety check -> create sync branch ->
@@ -49,6 +51,16 @@ const BASE_BRANCH = "poc/prism-figma-pipeline"
 // Every file the rest of this pipeline is allowed to touch. Anything else
 // appearing in `git diff --name-only` after apply/generate is treated as a
 // structural surprise and blocks the run before any commit.
+// tokens/protected-tokens.json is deliberately absent from this list. This
+// is the concrete, always-enforced (not just structural) guarantee behind
+// "this sync process never writes the policy file": checkChangedFilesAreAllowed()
+// below runs right after every mutation this script performs and calls
+// fail() on ANY file outside this set — including protected-tokens.json,
+// if it were ever touched by a future code change here or in
+// figma-snapshot-import.mjs. The Figma plugin and its local bridge
+// (figma-plugin/, scripts/figma-local-bridge.mjs) never write to any repo
+// path at all — the bridge only writes a snapshot to the OS temp
+// directory (see its own comment) before invoking this script.
 const ALLOWED_CHANGED_FILES = new Set([
   "tokens/P_Light_Default.tokens.json",
   "tokens/P_Dark.tokens.json",
@@ -59,7 +71,7 @@ const ALLOWED_CHANGED_FILES = new Set([
 ])
 
 let stageIndex = 0
-const TOTAL_STAGES = 11
+const TOTAL_STAGES = 12
 
 function stage(label) {
   stageIndex++
@@ -312,7 +324,66 @@ if (before.changedLiteral === 0) {
   printSyncResult({ status: "no-changes", branch: null, prUrl: null, compareUrl: null })
   process.exit(0)
 }
-console.log(`  ${before.changedLiteral} safe deterministic literal change(s) will be applied.`)
+console.log(`  ${before.changedLiteral} deterministic literal change(s) found. Deterministic and unambiguous does NOT by itself mean safe to auto-apply — the next step checks that.`)
+
+// --- [4.5] Sync report + protected-token gate ----------------------------------
+//
+// Root cause of both the red royalBlue.700 and green neutral.800 incidents
+// (see ai/token-guardrails.md): every prior version of this script treated
+// "changedLiteral" (deterministic, unambiguous) as synonymous with "safe to
+// auto-apply, no human review needed". It is not — a literal change can be
+// perfectly deterministic and still be a value nobody actually approved.
+//
+// buildSyncReport() is built entirely from data already in hand —
+// changedTokenDetails (parsed from the dry run above; nothing has been
+// written to any file yet) and reads of tokens/protected-tokens.json /
+// tokens/alias-debt-baseline.json. It performs no filesystem writes, no
+// git operations, and never touches any token-source file. Its `blocked`
+// verdict covers protected-token mismatches AND the standing description/
+// generated-output/smoke/alias-debt checks together — a protected-token
+// mismatch blocks the ENTIRE sync here, before the branch is created,
+// before anything is applied, before any commit/push/PR, leaving the
+// working tree exactly as it was. There is no flag to force through only
+// part of it and no env-var bypass. The only way past a protected-token
+// block is a human deliberately editing tokens/protected-tokens.json's
+// "approvedValue" in its own, separate, prior commit — never something
+// this sync does for itself.
+//
+// The report is generated and surfaced HERE, before any mutation, for both
+// outcomes: a blocked sync prints it and relays it through printSyncResult
+// (read by the local bridge / Figma plugin) with nothing else having
+// happened; an allowed sync carries this same report forward into the PR
+// body built in stage [12].
+
+stage("Building sync report and checking protected tokens")
+
+const syncReport = buildSyncReport({ rootDir: root, changedTokenDetails })
+console.log("\n" + syncReport.markdown)
+
+// Logged regardless of the overall blocked verdict below — this is true
+// and useful context even if the sync ultimately stops for some other,
+// unrelated reason (e.g. a stale-generated-CSS finding on the current
+// repo state) — a reviewer should still see that the protected-token part
+// specifically was fine.
+if (syncReport.proposedProtectedCheck.preApproved.length > 0) {
+  console.log(`  ${syncReport.proposedProtectedCheck.preApproved.length} protected token change(s) are pre-approved — proceeding.`)
+}
+
+if (syncReport.blocked) {
+  printSyncResult({
+    status: "blocked",
+    branch: null,
+    prUrl: null,
+    compareUrl: null,
+    reportSummary: summarizeReport(syncReport),
+    report: syncReport.markdown,
+  })
+  fail(
+    `Sync blocked — see the report above. Nothing has been branched, applied, committed, or pushed. ` +
+      `tokens/protected-tokens.json has not been modified and will not be modified by this script.`,
+  )
+}
+console.log(`  Report generated, not blocked — proceeding.`)
 
 // --- [5] Create sync branch (before any mutation) ----------------------------
 //
@@ -478,7 +549,7 @@ console.log(`  Committed: "${commitMessage}"`)
 
 if (noPush) {
   console.log("\n--no-push specified — stopping before push. Branch and commit were created locally only.")
-  printSyncResult({ status: "committed-not-pushed", branch: branchName, prUrl: null, compareUrl: null })
+  printSyncResult({ status: "committed-not-pushed", branch: branchName, prUrl: null, compareUrl: null, reportSummary: summarizeReport(syncReport) })
   process.exit(0)
 }
 
@@ -504,15 +575,21 @@ const repoName = repoMatch ? repoMatch[2] : null
 const compareUrl = owner && repoName ? `https://github.com/${owner}/${repoName}/compare/main...${branchName}?expand=1` : null
 
 const prTitle = "chore: sync Prism tokens from Figma"
-const prBody =
-  `Prism Figma Sync\n\n` +
-  `Source:\n${snapshot.figmaFileName}\n\n` +
-  `Snapshot:\n${snapshot.exportedAt}\n\n` +
-  `Applied:\n${before.changedLiteral} safe literal token change(s)\n\n` +
-  (changedTokensList.length > 0 ? `Changed tokens:\n${changedTokensList}\n\n` : "") +
-  `Deferred:\n${before.changedAliasStructure} known alias-structure difference(s) requiring separate cleanup\n\n` +
-  `Verification:\n✓ token validation\n✓ token generation\n✓ convergence check\n✓ build\n\n` +
-  `No auto-merge — this PR requires human review.`
+
+// syncReport was generated in stage [4.5], from the dry run's read-only
+// data, BEFORE the branch was created — this is the exact same report
+// that would have been surfaced (via printSyncResult) had this sync been
+// blocked instead of allowed. buildPrBody() truncates it against GitHub's
+// PR-body size limit (65536 characters; MAX_REPORT_LENGTH is well under
+// that) — see scripts/generate-sync-report.mjs.
+const prBody = buildPrBody({
+  figmaFileName: snapshot.figmaFileName,
+  exportedAt: snapshot.exportedAt,
+  changedLiteralCount: before.changedLiteral,
+  changedTokensList,
+  deferredCount: before.changedAliasStructure,
+  syncReport,
+})
 
 // gh's own auth, not git's HTTPS credential (osxkeychain) used for the
 // push above — these are two separate mechanisms. If "gh" isn't installed
@@ -533,30 +610,19 @@ if (ghAuthenticated) {
   // Never create a second PR for the same branch — `gh pr list --head`
   // matches by head branch across the whole repo, not just the current
   // checkout, so this catches a PR created by an earlier run (or by a
-  // human) even if this process has no other memory of it.
-  const existingPrCheck = run(ghBinary, ["pr", "list", "--head", branchName, "--state", "open", "--json", "url"])
-  let existingPrUrl = null
-  if (existingPrCheck.status === 0) {
-    try {
-      const existing = JSON.parse(existingPrCheck.stdout || "[]")
-      if (existing.length > 0) existingPrUrl = existing[0].url
-    } catch {
-      // Unparseable gh output — fall through and attempt creation as normal.
-    }
-  }
+  // human) even if this process has no other memory of it. Decision logic
+  // lives in resolveOrCreatePr() (generate-sync-report.mjs) so it's
+  // directly testable with an injected fake `gh` runner.
+  const prDecision = resolveOrCreatePr({ branchName, prTitle, prBody, runGh: (args) => run(ghBinary, args) })
+  prUrl = prDecision.prUrl
 
-  if (existingPrUrl) {
-    prUrl = existingPrUrl
+  if (prDecision.reused) {
     console.log(`\n  An open PR for "${branchName}" already exists — reusing it instead of creating a duplicate:\n  ${prUrl}`)
+  } else if (prDecision.created) {
+    console.log(`\n  Pull request created:\n  ${prUrl}`)
   } else {
-    const prResult = run(ghBinary, ["pr", "create", "--title", prTitle, "--body", prBody, "--base", "main", "--head", branchName])
-    if (prResult.status === 0) {
-      prUrl = prResult.stdout.trim()
-      console.log(`\n  Pull request created:\n  ${prUrl}`)
-    } else {
-      console.log(`\n  "gh pr create" failed (exit ${prResult.status}): ${prResult.stderr.trim()}`)
-      console.log(`  Branch was pushed successfully. Create the PR manually — see below.`)
-    }
+    console.log(`\n  "gh pr create" failed: ${prDecision.error}`)
+    console.log(`  Branch was pushed successfully. Create the PR manually — see below.`)
   }
 } else {
   console.log(
@@ -583,5 +649,6 @@ printSyncResult({
   branch: branchName,
   prUrl: prUrl ?? null,
   compareUrl: compareUrl ?? null,
+  reportSummary: summarizeReport(syncReport),
 })
 process.exit(0)

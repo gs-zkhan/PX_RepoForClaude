@@ -1,10 +1,45 @@
 name: Prism Token CI
 
-# Gates the Prism token pipeline on every pull request into main:
-# validates the token source files, regenerates the CSS from them, and
-# fails if regeneration produces any change that isn't already committed
-# (i.e. the committed src/styles/prism-generated.css has drifted from the
-# token sources that are supposed to produce it).
+# Gates the Prism token pipeline on every pull request, regardless of base
+# branch: validates the token source files, regenerates the CSS from them,
+# and fails if regeneration produces any change that isn't already
+# committed (i.e. the committed src/styles/prism-generated.css has drifted
+# from the token sources that are supposed to produce it).
+#
+# Deliberately has no `branches:` filter — this pipeline is built on a
+# stacked-PR structure (poc/prism-figma-pipeline -> main, with feature
+# branches stacked on poc/prism-figma-pipeline rather than main), so a
+# `branches: [main]` restriction would silently skip every stacked PR,
+# including the one that introduced this exact CI workflow. Restricting to
+# a single named branch (e.g. `poc/prism-figma-pipeline`) would just move
+# the same problem to the next stacked branch created after this one —
+# validating on every PR, whatever its base, is what actually holds.
+#
+# Also deliberately has no `paths:` filter. This job's own last step is a
+# full `npm run build` — a change to package.json, tsconfig, vite.config,
+# or any src/ file the app imports can break it just as surely as a change
+# under tokens/ or scripts/ can, and a paths filter would silently skip
+# validating this workflow file's own future edits too. A missed build
+# break is worse than an occasional redundant run, so this stays
+# unfiltered by path.
+#
+# Also runs the protected-token/value-integrity guardrails and the
+# alias-regression detector (see ai/token-guardrails.md) — these are what
+# actually catch a corrupted brand-critical value (e.g. the red
+# royalBlue.700 / green neutral.800 incidents); "tokens:validate" and the
+# regeneration-drift check above only prove the token set is *structurally*
+# valid, not that any individual value is the one that was approved.
+#
+# Also runs a self-approval guard: an automated figma-sync/* branch is
+# never allowed to modify tokens/protected-tokens.json in the same PR that
+# proposes a token-source change — that file is a human, design-owner
+# approval record, and a process cannot be trusted to police its own
+# self-approval. This is deliberately a repo-review recommendation too, not
+# only a CI check: branch-protection / required-reviewer rules on
+# tokens/protected-tokens.json (via a CODEOWNERS entry, where the GitHub
+# account/plan structure supports required reviews on specific paths)
+# should require the design owner's review for any change to that file,
+# independent of this CI gate.
 #
 # Lint is intentionally NOT run here. The repo currently has 4 known,
 # pre-existing, unrelated lint failures (react-refresh export-shape rules
@@ -17,8 +52,6 @@ name: Prism Token CI
 
 "on":
   pull_request:
-    branches:
-      - main
 
 # Cancel any in-progress run for the same PR when a new commit is pushed,
 # so only the latest push's result matters.
@@ -39,6 +72,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Full history needed so the self-approval guard below can diff
+          # this PR's head against its actual base ref.
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -51,6 +88,21 @@ jobs:
 
       - name: Validate Prism tokens
         run: npm run tokens:validate
+
+      - name: Protected-token & value-integrity guardrails
+        run: npm run tokens:guard
+
+      - name: Alias-regression detection
+        run: npm run tokens:alias-debt
+
+      - name: Guard against sync branches self-approving protected tokens
+        run: npm run tokens:no-self-approval
+        env:
+          GITHUB_HEAD_REF: ${{ github.head_ref }}
+          GITHUB_BASE_REF: ${{ github.base_ref }}
+
+      - name: Token-guardrail tests
+        run: npm run test:token-guardrails
 
       - name: Regenerate Prism tokens
         run: npm run tokens:generate
