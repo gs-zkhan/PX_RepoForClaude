@@ -16,6 +16,8 @@
     "tokens:sync-report": "node scripts/generate-sync-report.mjs",
     "tokens:no-self-approval": "node scripts/validate-no-self-approval.mjs",
     "test:token-guardrails": "node --test \"tests/token-guardrails/*.test.mjs\"",
+    "figma-coverage:validate": "node scripts/validate-figma-coverage.mjs",
+    "test:figma-coverage": "node --test \"tests/figma-coverage/*.test.mjs\"",
     "figma:sync": "node scripts/figma-sync.mjs",
     "figma:bridge": "node scripts/figma-local-bridge.mjs",
     "icons:import": "node scripts/import-prism-icons.mjs",
