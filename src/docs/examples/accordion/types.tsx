@@ -1,7 +1,8 @@
 import { Accordion, AccordionItem } from "@/components/ui/accordion"
 
-// "on-material" requires a distinct parent surface — shown here on a sunken
-// wrapper so the bottom hairline is visible against something.
+// "on-material" has no background of its own — it sits directly on the
+// normal inherited page/surface background, not inside an extra wrapper
+// card (design-owner correction, 2026-08-27).
 export default function AccordionTypes() {
   return (
     <div className="flex flex-col gap-[var(--p-space-200)]">
@@ -15,13 +16,11 @@ export default function AccordionTypes() {
           shadow/400, no border. For floating cards.
         </AccordionItem>
       </Accordion>
-      <div className="bg-[var(--s-color-surface-sunken)] p-[var(--p-space-200)]">
-        <Accordion type="on-material" defaultValue="c">
-          <AccordionItem value="c" title="On-material">
-            Bottom hairline only — needs a coloured parent surface to read correctly.
-          </AccordionItem>
-        </Accordion>
-      </div>
+      <Accordion type="on-material" defaultValue="c">
+        <AccordionItem value="c" title="On-material">
+          Bottom hairline only — no container, inherits the page background as-is.
+        </AccordionItem>
+      </Accordion>
     </div>
   )
 }

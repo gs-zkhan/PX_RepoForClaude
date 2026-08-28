@@ -17,14 +17,26 @@ import type { PrismIconName } from "@/components/ui/prism-icon"
 //   off-material  — 1px border, radius/150, no shadow. For standalone cards
 //                   on the page surface.
 //   off-material-shadow — shadow/400, no border. For floating cards.
-//   on-material   — bottom hairline only, no fill, no radius. Requires a
-//                   distinct parent surface (Figma's own "Don't use without
-//                   a coloured parent" rule).
+//   on-material   — bottom hairline only, no fill, no radius, no special
+//                   background of its own — sits directly on the normal
+//                   inherited page/surface background, not inside an extra
+//                   wrapper card (design-owner correction, 2026-08-27; see
+//                   "Material presentation" note below).
 //
 // State selectors: aria-expanded on the header button drives chevron
-// rotation and (for off-material types) hover background. Content panel
-// uses conditional rendering rather than aria-hidden so screen readers
-// don't see stale content when closed.
+// rotation. Hover feedback (design-owner correction, 2026-08-27):
+//   - Collapsed row: full-width header hover background (as before).
+//   - Expanded row: the full-width hover is removed — hover feedback is
+//     confined to a small chip behind the chevron only (an absolutely
+//     positioned, non-layout-affecting span using group-hover off the
+//     header <button>). The whole header row remains the single click/
+//     keyboard toggle target — this is a pure visual scope change, not a
+//     second interactive element (no nested buttons).
+// Content panel uses conditional rendering rather than aria-hidden so
+// screen readers don't see stale content when closed. When an item has a
+// `subtitle`, the panel gets exactly 24px of top padding above the panel
+// content (design-owner correction, 2026-08-27) — space/300. Items without
+// a subtitle are unaffected.
 //
 // AccordionItem has two distinct, non-overloaded leading-visual props:
 //   - `icon?: PrismIconName` — unchanged, renders the shared 24px icon.
@@ -36,6 +48,17 @@ import type { PrismIconName } from "@/components/ui/prism-icon"
 //     ReactNode`, so nothing has to branch on `typeof icon === "string"` at
 //     runtime to figure out which one was passed — each prop has exactly
 //     one shape, and `leading` takes precedence if both happen to be set.
+//
+// Material presentation (design-owner correction, 2026-08-27): on-material
+// has no background of its own at any state — it is a bottom hairline only,
+// intended to sit directly on whatever page/surface background it already
+// inherits. It must NOT be placed inside an extra wrapper card/container
+// (background, border, radius or elevation) to "give it a surface to read
+// against". This corrects an earlier, incorrect assumption (previously
+// documented here and in this component's docs/examples) that on-material
+// "requires a distinct coloured parent surface" — that assumption is
+// superseded by this correction; see the component's docs and Validation
+// Gallery entry for the corrected on-material demonstration.
 // -----------------------------------------------------------------------------
 
 type AccordionSize = 48 | 56 | 64
@@ -154,11 +177,13 @@ function AccordionItem({ value, title, subtitle, icon, leading, children, classN
         aria-controls={panelId}
         onClick={() => setOpenValue(isOpen ? undefined : value)}
         className={cn(
-          "flex w-full items-center gap-[var(--p-space-200)] px-[var(--p-space-200)]",
+          "group flex w-full items-center gap-[var(--p-space-200)] px-[var(--p-space-200)]",
           SIZE_HEIGHT[size],
           SIZE_PADDING_Y[size],
           "text-left outline-none transition-colors",
-          type !== "on-material" && "hover:bg-[var(--c-accordion-background-hover)]",
+          // Full-width hover only while collapsed — an expanded row's hover
+          // feedback is confined to the chevron chip below instead.
+          type !== "on-material" && !isOpen && "hover:bg-[var(--c-accordion-background-hover)]",
           type === "off-material" && "rounded-[var(--p-radius-150)]",
           type === "off-material-shadow" && "rounded-[var(--p-radius-150)]",
         )}
@@ -182,12 +207,20 @@ function AccordionItem({ value, title, subtitle, icon, leading, children, classN
             </span>
           ) : null}
         </div>
-        <PrismIcon
-          name={isOpen ? "chevron-up" : "chevron-down"}
-          size={24}
-          decorative
-          className="shrink-0 text-[var(--s-icon-color-default)]"
-        />
+        <span className="relative flex shrink-0 items-center justify-center">
+          {type !== "on-material" && isOpen ? (
+            <span
+              aria-hidden="true"
+              className="absolute inset-[calc(var(--p-space-050)*-1)] rounded-[var(--p-radius-full)] group-hover:bg-[var(--c-accordion-background-hover)]"
+            />
+          ) : null}
+          <PrismIcon
+            name={isOpen ? "chevron-up" : "chevron-down"}
+            size={24}
+            decorative
+            className="relative shrink-0 text-[var(--s-icon-color-default)]"
+          />
+        </span>
       </button>
       {isOpen ? (
         <div
@@ -196,6 +229,7 @@ function AccordionItem({ value, title, subtitle, icon, leading, children, classN
           aria-labelledby={headerId}
           className={cn(
             "px-[var(--p-space-200)] pb-[var(--p-space-200)]",
+            subtitle && "pt-[var(--p-space-300)]",
             "text-[length:var(--t-font-body-medium-size)] leading-[var(--t-font-body-medium-line-height)] text-[var(--s-color-text-default)]",
           )}
         >

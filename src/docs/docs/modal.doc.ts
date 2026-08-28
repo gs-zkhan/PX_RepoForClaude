@@ -18,7 +18,7 @@ export const modalDoc: ComponentDoc = {
       id: "default",
       title: "Default",
       body:
-        "Modal is built on @radix-ui/react-dialog: it locks focus, sets role=\"dialog\" and aria-modal=\"true\", and ESC dismisses. Width is fixed per size (Large 904px / Medium 712px / Small 424px, default Medium) while height always grows with content — Figma explicitly forbids internal scrolling. The header is 56px tall with no description, 72px with one. Compose ModalFooter as a sibling inside Modal's children, matching Figma's own two-separate-components structure — Modal renders only its overlay, header and close icon.",
+        "Modal is built on @radix-ui/react-dialog: it locks focus, sets role=\"dialog\" and aria-modal=\"true\", and ESC dismisses. Width is fixed per size (Large 904px / Medium 712px / Small 424px, default Medium) while height always grows with content — Figma explicitly forbids internal scrolling, and the modal has a 272px minimum height (content-heavy modals still grow past it). The header is 56px tall with no description, 72px with one, with no bottom border or shadow separating it from the body. Title and microcopy are 4px apart; microcopy uses font.label.small and the semantic subtle text colour, not hard-coded values (design-owner correction, 2026-08-27). Compose ModalFooter as a sibling inside Modal's children, matching Figma's own two-separate-components structure — Modal renders only its overlay, header and close icon.",
       exampleId: "modal/default",
     },
     {
@@ -39,7 +39,7 @@ export const modalDoc: ComponentDoc = {
       id: "confirmation",
       title: "Confirmation variant",
       body:
-        "ModalConfirmation is a structurally distinct component, not a branch of Modal — it has no header bar, no separate footer component and no close icon, and per Figma's own rule must be dismissed via its action buttons only. It shows a 64px circular icon (success or danger), a title, a description, and an inline button row.",
+        "ModalConfirmation is a structurally distinct component, not a branch of Modal — it has no header bar, no separate footer component and no close icon, and per Figma's own rule must be dismissed via its action buttons only. It shows a 64px circular icon (success or danger), a title, a description, and an inline button row, with a 184px minimum height (content-heavy instances still grow past it).",
       exampleId: "modal/confirmation",
     },
   ],
@@ -72,7 +72,7 @@ export const modalDoc: ComponentDoc = {
     {
       name: "Modal: description",
       type: "string",
-      description: "When present, grows the header to 72px and renders below the title.",
+      description: "When present, grows the header to 72px and renders 4px below the title, in font.label.small / semantic subtle text colour.",
     },
     {
       name: "Modal: children",
@@ -166,16 +166,19 @@ export const modalDoc: ComponentDoc = {
     "--e-shadow-inverse",
     "--p-radius-200",
     "--p-radius-full",
+    "--p-space-050",
     "--p-space-200",
     "--p-space-300",
     "--p-space-400",
-    "--s-color-line-default",
     "--s-color-overlay-backdrop",
     "--s-color-status-danger-subtlest",
     "--s-color-status-success-subtlest",
     "--s-color-surface-default",
     "--s-color-text-default",
+    "--s-color-text-subtle",
     "--s-color-text-subtlest",
+    "--t-font-label-small-line-height",
+    "--t-font-label-small-size",
   ],
 
   guidelines: {
@@ -183,12 +186,13 @@ export const modalDoc: ComponentDoc = {
       "Compose ModalFooter as a sibling inside Modal's children, matching Figma's own two-component structure.",
       "Pass the same `size` to Modal and ModalFooter so button sizing and footer height stay in sync.",
       "Use ModalConfirmation only for a terminal success/danger message dismissed by its own buttons — never add a close icon to it.",
-      "Let content height grow naturally; Modal never scrolls internally per Figma's own rule.",
+      "Let content height grow naturally; Modal never scrolls internally per Figma's own rule, and content-heavy modals may exceed the 272px (Modal) / 184px (ModalConfirmation) minimums.",
     ],
     donts: [
       "Don't add a scrollable body inside Modal — resize content or split into steps instead.",
       "Don't build a bespoke confirmation dialog from Modal + manual icon/button layout — use ModalConfirmation.",
-      "Don't add a top border to ModalFooter; separation from the body comes only from the upward inverse shadow.",
+      "Don't add a bottom border or shadow to the Modal header, or a top border to ModalFooter — separation from the body comes only from ModalFooter's own upward inverse shadow.",
+      "Don't hard-code the header microcopy's font size/line-height or use a colour other than the semantic subtle text token.",
       "Don't restyle Button instances inside ModalFooter or ModalConfirmation via className — pass `disabled` or change the action instead.",
     ],
   },

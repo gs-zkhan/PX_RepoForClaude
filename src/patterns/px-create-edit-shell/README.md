@@ -1,6 +1,6 @@
 # PxCreateEditShell
 
-**Status:** extracted, implemented, pending visual review
+**Status:** extracted, implemented, **approved (design owner, 2026-08-28)** — all three tiers (Modal, Accordion, Wizard) visually reviewed and approved. The design review also corrected the shared `Accordion`/`Modal` components themselves (expanded-row hover scope, 24px subtitle-to-content gap, on-material's lack of a special background/container, Modal header separation/spacing/typography, and Modal/ModalConfirmation minimum heights) — see [`ai/shell-registry.md`](../../../ai/shell-registry.md#design-owner-approval-history) for the full correction list and verified measurements.
 
 ## Purpose
 
@@ -168,7 +168,7 @@ Effect: `--e-shadow-inverse`.
 - `PxMainContainer` (rail + header + content row), `PxHeader` (via `PxMainContainer`'s `header` prop) — `src/patterns/px-main-container`, `src/patterns/px-list-shell`
 - `Modal`, `ModalFooter` — `src/components/ui/modal.tsx`
 - `Accordion`, `AccordionItem` — `src/components/ui/accordion.tsx`
-- `Letter` — `src/components/ui/letter.tsx` (numbered Accordion section badges, via `AccordionItem`'s `icon` prop)
+- `Letter` — `src/components/ui/letter.tsx` (numbered Accordion section badges, via `AccordionItem`'s `leading` prop)
 - `Wizard` — `src/components/ui/wizard.tsx`
 - `Button` — `src/components/ui/button.tsx` (used by the pattern-owned `PxCreateEditFooter`)
 - Field components used by the example screen only (not by the shell itself): `TextField`, `Textarea` (new), `DropdownField`, `DateField`, `RadioGroup`/`RadioGroupItem`
@@ -182,7 +182,7 @@ Effect: `--e-shadow-inverse`.
   - `Textarea` (`src/components/ui/textarea.tsx`) — a genuine gap: no multiline-input component existed anywhere in `src/components/ui`. Matches Figma's "Messagebox" (node `3137:126`) anatomy and the same label/required/info-icon/helper-text/state/a11y API shape as `TextField`. Explicitly approved before building.
   - `PxMainContainer` (pattern, `src/patterns/px-main-container`) — the rail+header+content anatomy factored out of `PxListShell` so it doesn't carry list-specific semantics.
   - `PxCreateEditShellModal`, `PxCreateEditShellAccordion`, `PxCreateEditShellWizard` (pattern) and `PxCreateEditFooter` (pattern-owned composition helper) — the shell itself.
-- **API extension (not a local workaround):** `AccordionItem.icon` widened from `PrismIconName` to `PrismIconName | ReactNode`, so a standalone `<Letter>` can be passed as a numbered section badge (Figma's own Accordion example numbers its 4 sections). This is the "propose an improvement to the approved component API instead of solving with local styling" path — `AccordionItem` itself now supports this, rather than a wrapper reproducing its header row locally.
+- **API extension (not a local workaround):** `AccordionItem` gained a new, separate `leading?: ReactNode` prop (kept distinct from the existing `icon?: PrismIconName` rather than widening `icon` into a union, so nothing has to branch on `typeof icon === "string"` at runtime), so a standalone `<Letter>` can be passed as a numbered section badge (Figma's own Accordion example numbers its 4 sections). This is the "propose an improvement to the approved component API instead of solving with local styling" path — `AccordionItem` itself now supports this, rather than a wrapper reproducing its header row locally.
 - **Native interactive elements introduced:** the `<textarea>` element inside the new `Textarea` component — a native element is intentionally required here (there is no Radix multiline-input primitive to build on, matching how `TextField` itself wraps a native `<input>` via `Input`).
 - **`className` overrides on approved components:** none applied to `Modal`, `ModalFooter`, `Accordion`, `AccordionItem`, `Letter`, `Wizard`, or `Button`. `PxMainContainer`'s `header` prop is configured (not overridden) with data this shell computes.
 - **Cross-component token references:** none — see "Token gap" above for the one place a component-token layer is genuinely missing (resolved with semantic/primitive tokens instead of borrowing another component's token).

@@ -2296,9 +2296,9 @@ function ValidationGallery() {
               </Accordion>
             </div>
           </Row>
-          <Row label="off-material-shadow / 64px with subtitle">
+          <Row label="off-material-shadow / 64px with subtitle, expanded (24px gap to content)">
             <div className="w-[480px]">
-              <Accordion type="off-material-shadow" size={64}>
+              <Accordion type="off-material-shadow" size={64} defaultValue="a">
                 <AccordionItem value="a" title="Account" subtitle="Profile, credentials, sessions">
                   Account settings body.
                 </AccordionItem>
@@ -2308,8 +2308,8 @@ function ValidationGallery() {
               </Accordion>
             </div>
           </Row>
-          <Row label="on-material / 48px (compact)">
-            <div className="w-[480px] rounded border border-[var(--s-color-line-default)] bg-[var(--s-color-surface-page)] p-[var(--p-space-200)]">
+          <Row label="on-material / 48px (compact) — no container, inherits page background">
+            <div className="w-[480px]">
               <Accordion type="on-material" size={48}>
                 <AccordionItem value="q1" title="How do I invite teammates?">Body copy.</AccordionItem>
                 <AccordionItem value="q2" title="Can I export data?">Body copy.</AccordionItem>
