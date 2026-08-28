@@ -4,6 +4,7 @@ import fs from "node:fs"
 import os from "node:os"
 import path from "node:path"
 import { spawnSync } from "node:child_process"
+import { pathToFileURL } from "node:url"
 
 // Step 5B: a minimal local HTTP bridge that lets the Figma plugin trigger
 // the already-proven `figma:sync` pipeline with one click, instead of the
@@ -229,37 +230,50 @@ const requestHandler = async (req, res) => {
 const HOST_V4 = "127.0.0.1"
 const HOST_V6 = "::1"
 
-const serverV4 = http.createServer(requestHandler)
-const serverV6 = http.createServer(requestHandler)
+// requestHandler is exported so tests can exercise it against an
+// OS-assigned ephemeral port (`http.createServer(requestHandler).listen(0, ...)`)
+// instead of this bridge's fixed, security-motivated port 3847 — avoiding
+// any conflict with a real bridge instance, without making the real port
+// configurable (it stays hardcoded for the real CLI path below, matching
+// figma-plugin/manifest.json's networkAccess allowlist exactly).
+export { requestHandler, sessionToken, PORT }
 
-serverV4.on("error", (error) => {
-  if (error.code === "EADDRINUSE") {
-    console.error(`\nPort ${PORT} is already in use on ${HOST_V4}.`)
-    console.error(`Either another "npm run figma:bridge" is already running, or something else is using this port.`)
+// CLI entry point — only runs when this file is executed directly (`node
+// scripts/figma-local-bridge.mjs`), not when its requestHandler is
+// imported by a test.
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  const serverV4 = http.createServer(requestHandler)
+  const serverV6 = http.createServer(requestHandler)
+
+  serverV4.on("error", (error) => {
+    if (error.code === "EADDRINUSE") {
+      console.error(`\nPort ${PORT} is already in use on ${HOST_V4}.`)
+      console.error(`Either another "npm run figma:bridge" is already running, or something else is using this port.`)
+      process.exit(1)
+    }
+    console.error(`\nBridge server error (${HOST_V4}): ${error.message}`)
     process.exit(1)
-  }
-  console.error(`\nBridge server error (${HOST_V4}): ${error.message}`)
-  process.exit(1)
-})
+  })
 
-// Non-fatal: some environments have IPv6 disabled entirely. The IPv4
-// loopback listener above is the one the bridge actually depends on; this
-// one only exists to make "localhost" resolve on the first try.
-serverV6.on("error", (error) => {
-  console.error(`\nNote: could not also listen on ${HOST_V6}:${PORT} (${error.message}).`)
-  console.error(`The bridge is still reachable via 127.0.0.1 and via localhost (with an IPv6-then-IPv4 fallback, if your HTTP client supports it).`)
-})
+  // Non-fatal: some environments have IPv6 disabled entirely. The IPv4
+  // loopback listener above is the one the bridge actually depends on; this
+  // one only exists to make "localhost" resolve on the first try.
+  serverV6.on("error", (error) => {
+    console.error(`\nNote: could not also listen on ${HOST_V6}:${PORT} (${error.message}).`)
+    console.error(`The bridge is still reachable via 127.0.0.1 and via localhost (with an IPv6-then-IPv4 fallback, if your HTTP client supports it).`)
+  })
 
-serverV4.listen(PORT, HOST_V4, () => {
-  console.log(`Prism Figma local bridge listening on http://${HOST_V4}:${PORT} (and http://${HOST_V6}:${PORT})`)
-  console.log(`  Health check: GET  http://localhost:${PORT}/health`)
-  console.log(`  Sync:         POST http://localhost:${PORT}/sync`)
-  console.log("")
-  console.log(`Session token (paste into the plugin's "Sync to Git" token field):`)
-  console.log(`  ${sessionToken}`)
-  console.log("")
-  console.log("This token is only valid for this bridge session — it is never written to disk.")
-  console.log("Press Ctrl+C to stop.")
-})
+  serverV4.listen(PORT, HOST_V4, () => {
+    console.log(`Prism Figma local bridge listening on http://${HOST_V4}:${PORT} (and http://${HOST_V6}:${PORT})`)
+    console.log(`  Health check: GET  http://localhost:${PORT}/health`)
+    console.log(`  Sync:         POST http://localhost:${PORT}/sync`)
+    console.log("")
+    console.log(`Session token (paste into the plugin's "Sync to Git" token field):`)
+    console.log(`  ${sessionToken}`)
+    console.log("")
+    console.log("This token is only valid for this bridge session — it is never written to disk.")
+    console.log("Press Ctrl+C to stop.")
+  })
 
-serverV6.listen(PORT, HOST_V6)
+  serverV6.listen(PORT, HOST_V6)
+}
