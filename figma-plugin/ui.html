@@ -237,21 +237,28 @@
         }
 
         if (!result.success) {
-          setSyncStatus("Sync finished with a non-zero exit — see details below.")
-          el("output").textContent = result.output || JSON.stringify(result, null, 2)
+          // reportSummary/status come straight from figma-sync.mjs's sync
+          // report (relayed as-is by the bridge) — a blocked protected-token
+          // sync creates no branch/commit/PR, so there is nothing else to
+          // show here beyond the report itself (full text in "output" below).
+          const summary = result.status === "blocked" && result.reportSummary ? result.reportSummary : "Sync finished with a non-zero exit — see details below."
+          setSyncStatus(summary)
+          el("output").textContent = result.report || result.output || JSON.stringify(result, null, 2)
           return
         }
 
-        // branch/prUrl/compareUrl come straight from figma-sync.mjs's own
-        // result (relayed as-is by the bridge) — never recomputed here.
+        // branch/prUrl/compareUrl/reportSummary come straight from
+        // figma-sync.mjs's own result (relayed as-is by the bridge) — never
+        // recomputed here.
+        const reportLine = result.reportSummary ? `\n${result.reportSummary}` : ""
         if (result.status === "no-changes") {
           setSyncStatus("Sync complete. No new safe Figma changes detected — nothing to push.")
         } else if (result.branch && result.prUrl) {
-          setSyncStatus(`Sync complete\nBranch: ${result.branch}\nPR: ${result.prUrl}`)
+          setSyncStatus(`Sync complete\nBranch: ${result.branch}\nPR: ${result.prUrl}${reportLine}`)
         } else if (result.branch && result.compareUrl) {
-          setSyncStatus(`Sync complete\nBranch pushed: ${result.branch}\nPR creation unavailable\nOpen: ${result.compareUrl}`)
+          setSyncStatus(`Sync complete\nBranch pushed: ${result.branch}\nPR creation unavailable\nOpen: ${result.compareUrl}${reportLine}`)
         } else if (result.branch) {
-          setSyncStatus(`Sync complete\nBranch pushed: ${result.branch}\nPR creation unavailable — see details below for how to open one manually.`)
+          setSyncStatus(`Sync complete\nBranch pushed: ${result.branch}\nPR creation unavailable — see details below for how to open one manually.${reportLine}`)
         } else {
           setSyncStatus("Sync complete.")
         }
