@@ -41,6 +41,15 @@ name: Prism Token CI
 # should require the design owner's review for any change to that file,
 # independent of this CI gate.
 #
+# Also validates ai/figma-coverage.json (the Figma-to-repository coverage
+# registry — see ai/figma-coverage.md) deterministically against the
+# checked-in repo state: no network or Figma access, so this step cannot
+# flake on Figma availability or rot silently as files move. It is
+# additive and independent of every token-guardrail step above — it never
+# touches tokens/, prism-generated.css, or protected-tokens.json, so it
+# cannot weaken those guardrails; a failure here blocks merges on registry
+# staleness alone.
+#
 # Lint is intentionally NOT run here. The repo currently has 4 known,
 # pre-existing, unrelated lint failures (react-refresh export-shape rules
 # in button.tsx/chip.tsx/table.tsx, and a react-hooks set-state-in-effect
@@ -103,6 +112,12 @@ jobs:
 
       - name: Token-guardrail tests
         run: npm run test:token-guardrails
+
+      - name: Validate Figma coverage registry
+        run: npm run figma-coverage:validate
+
+      - name: Figma coverage registry tests
+        run: npm run test:figma-coverage
 
       - name: Regenerate Prism tokens
         run: npm run tokens:generate
