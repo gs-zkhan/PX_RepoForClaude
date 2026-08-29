@@ -3501,11 +3501,21 @@
     {
       "id": "shell-analytics-secondary-nav",
       "name": "Secondary Left Navigation - Analytics (Shell/Analytics/Secondary-Left Navigation)",
-      "category": "Shell",
+      "category": "Pattern",
       "figmaPages": [
         {
           "nodeId": "3351:3925",
           "name": "Shell/Analytics/Secondary-Left Navigation",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "9576:15005",
+          "name": "Secondary Left Navigation - Analytics (frame with Property 1=Expanded/Collapsed variants)",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "9576:17226",
+          "name": "Collapsed Menu Hover behaviour (collapsed-rail hover flyout)",
           "verified": "browser-verified-mcp-confirmed"
         }
       ],
@@ -3545,29 +3555,55 @@
           "name": "Shell/Nav+SecNav (MainContainer variant that embeds this component — see notes for the anatomy distinction)",
           "role": "related-shell-variant",
           "verified": "mcp-verified"
+        },
+        {
+          "nodeId": "9576:16362",
+          "name": "Secondary Left Navigation - Analytics/CollapsedMenu (56x56-cell collapsed-rail anatomy, superseding the simpler Property 1=Collapsed reading)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "9576:17185",
+          "name": "FlyOut (collapsed-rail hover flyout content)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
         }
       ],
       "figmaMappingStatus": "Verified-MCP-this-session",
-      "repoPaths": [],
-      "docPath": null,
-      "gallerySection": null,
-      "examplePaths": [],
-      "implementationStatus": "Not implemented",
-      "status": "Missing",
-      "fidelityReview": "Not applicable",
-      "visualReview": "Not applicable",
+      "repoPaths": [
+        "src/patterns/px-analytics-secondary-nav/PxAnalyticsSecondaryNav.tsx",
+        "src/patterns/px-analytics-secondary-nav/types.ts",
+        "src/patterns/px-analytics-secondary-nav/index.ts"
+      ],
+      "docPath": "src/docs/docs/px-analytics-secondary-nav.doc.ts",
+      "gallerySection": "Analytics Secondary Navigation (PxAnalyticsSecondaryNav)",
+      "examplePaths": [
+        "src/pages/analytics-example.tsx"
+      ],
+      "implementationStatus": "Implemented",
+      "status": "Approved",
+      "fidelityReview": "Complete",
+      "visualReview": "Approved",
       "designOwnerApproval": {
-        "approved": false,
-        "date": null
+        "approved": true,
+        "date": "2026-08-29"
       },
-      "knownDeviations": [],
+      "knownDeviations": [
+        "Width rationale only (not the 312px value itself): AI-instructions text says the width matches the EXPANDED (240px) Left Navigation inner content width; the real Shell/Nav+SecNav instance (4191:21173) places this beside a COLLAPSED (48px) rail. Geometry trusted over prose. Not a defect, no approval needed.",
+        "ACCEPTED BY DESIGN OWNER: active-item colour. Confirmed token-driven (--c-tree-branch-selected, the shared Tree components own selected-background token), not hard-coded. Design owner reviewed and confirmed this light tint is visually correct and explicitly declined the primary blue action colour (--s-color-action-primary-default) named in the AI-instructions prose. Kept unchanged.",
+        "RESOLVED: on-material Accordion header horizontal padding now binds the existing --c-accordion-padding-on-material token (8px), scoped to type=on-material only. Verified the real, approved PxCreateEditShellAccordion example uses the default off-material type, so this change does not alter that approved composition.",
+        "RESOLVED BY DESIGN-OWNER DECISION: scrolling ownership. This panel no longer scrolls independently (overflow-hidden replaces the earlier overflow-y-auto) — only the right-hand content area scrolls. Verified PxMainContainer, PxListShell, PxCreateEditShell and user-explorer.tsx have zero lines changed.",
+        "RESOLVED: Features section icon. Confirmed via exact vector-path comparison that src/assets/icons/product/feature-px.svg IS the correct Figma FeaturePX asset. Wired into the sized icon system at src/assets/icons/24/feature-px.svg.",
+        "RESOLVED: ARIA/semantic pattern. Rows render as real <a href> (when supplied) or <button>, both with aria-current=page — matching Figmas own spec (role=menuitem/link) instead of the previously-used Tree role=tree/treeitem. tree.tsx remains fully reverted to its original state.",
+        "RESOLVED, matched exactly against an authoritative Figma update: collapse/expand icon and placement. The design owner updated frame 9576:15005 directly to show both variants (Property 1=Expanded, symbol 3397:2451; Property 1=Collapsed, symbol 9576:15105) including a Title row (9576:16007, All Reports + collapse button) and a full collapsed icon rail (expand button + one icon per section, not a lone button). An earlier pass guessed both the icon (plain chevron + custom button colour instead of the actual permanently-filled chevron-leftmenu-collapse/expand-filled asset, node 491:83/491:82) and the placement (inside the first accordions header via a new AccordionItem trailing prop, now fully reverted, instead of the dedicated Title row) — both corrected against this authoritative frame. Added title: string prop for the Title rows text. IconButton extended with iconStyle (line/filled) instead of the reverted variant prop.",
+        "RESOLVED, new design-owner extension implemented directly against the supplied Figma frame: collapsed-rail hover flyout. Frame 9576:17226 (\"Collapsed Menu Hover behaviour\") shows each collapsed-rail section icon as a 56x56 cell (symbol 9576:16362, superseding the simpler 24px-icon-plus-gaps reading of the base Property 1=Collapsed symbol) that opens a FlyOut (9576:17185) on hover. Implemented by reusing the existing, already-approved DropdownMenu/DropdownMenuTrigger/DropdownMenuContent/DropdownMenuItem (src/components/ui/dropdown-menu.tsx, unmodified) rather than a bespoke overlay — its --c-dropdown-menu-*/--e-shadow-500 tokens are an exact match for the FlyOut's own dropdown/menu/* tokens. A real bug was found and fixed during live verification: Radix returns focus to the trigger on every close path (Escape, outside click, item select, hover/blur-away), and without a guard that refocus immediately reopened the flyout on every path, not just one — fixed with a `suppressReopenRef` driven by an effect watching the `open` prop transition (not gated per-close-handler), verified live for hover-close, Escape, Tab-away, and Enter-select."
+      ],
       "dependencies": [
         "shell-px-main-container",
-        "component-accordion",
-        "component-tree"
+        "component-accordion"
       ],
       "recommendedOrder": null,
-      "notes": "Corrected in this pass: the exact node was supplied by the user via the authenticated Figma browser and independently confirmed live via get_metadata for every ID (page 3351:3925, component frame 3351:4914, defining symbol 3397:2451, sticker/example 3351:4898, AI Instructions 4214:33403, Dos and Don'ts 4214:33428) — this is no longer a Stop-and-Ask item. Anatomy (from 4214:33403): a fixed vertical stack of exactly 4 On-Material Accordion sections in a fixed order (Reports → Audience → Features → Engagement, per product workflow, \"do not reorder without product sign-off\"), each an Accordion header (24px module icon + label + chevron) with a content slot of Tree/Item Level=2 sub-page rows (48px left indent, Type=No Icon, Checkbox=False). Fixed width 312px. All sections start State=Open. Exactly one Tree/Item can be State=Active at a time, using color/action/primary/default fill. This is a product-specific navigation module, not a generic reusable pattern. Distinction from Shell/Nav+SecNav (4191:21173) — VERIFIED, NOT assumed identical: Shell/Nav+SecNav is a Shell/MainContainer composition (Left Navigation rail + PX Header + \"LeftNav+ Content\" row) whose content row directly instances this exact same component (instance 4191:17800, same underlying symbol) beside a separate 1078px-wide generic \"Content\" slot reserved for whatever page content is being browsed. In other words Shell/Nav+SecNav is not a different, generic secondary-nav shell — it is the demonstration of THIS Analytics component placed inside the full page shell. A prior pass in this registry incorrectly described Shell/Nav+SecNav as \"a generic secondary-nav shell variant, not specifically Analytics\" — that characterization is now confirmed wrong and is superseded by this entry. No evidence of any other, more generic secondary-nav component was found on the MainContainer page."
+      "notes": "Corrected in this pass: the exact node was supplied by the user via the authenticated Figma browser and independently confirmed live via get_metadata for every ID (page 3351:3925, component frame 3351:4914, defining symbol 3397:2451, sticker/example 3351:4898, AI Instructions 4214:33403, Dos and Don'ts 4214:33428) — this is no longer a Stop-and-Ask item. Anatomy (from 4214:33403): a fixed vertical stack of exactly 4 On-Material Accordion sections in a fixed order (Reports → Audience → Features → Engagement, per product workflow, \"do not reorder without product sign-off\"), each an Accordion header (24px module icon + label + chevron) with a content slot of Tree/Item Level=2 sub-page rows (48px left indent, Type=No Icon, Checkbox=False). Fixed width 312px. All sections start State=Open. Exactly one Tree/Item can be State=Active at a time, using color/action/primary/default fill. This is a product-specific navigation module, not a generic reusable pattern. Distinction from Shell/Nav+SecNav (4191:21173) — VERIFIED, NOT assumed identical: Shell/Nav+SecNav is a Shell/MainContainer composition (Left Navigation rail + PX Header + \"LeftNav+ Content\" row) whose content row directly instances this exact same component (instance 4191:17800, same underlying symbol) beside a separate 1078px-wide generic \"Content\" slot reserved for whatever page content is being browsed. In other words Shell/Nav+SecNav is not a different, generic secondary-nav shell — it is the demonstration of THIS Analytics component placed inside the full page shell. A prior pass in this registry incorrectly described Shell/Nav+SecNav as \"a generic secondary-nav shell variant, not specifically Analytics\" — that characterization is now confirmed wrong and is superseded by this entry. No evidence of any other, more generic secondary-nav component was found on the MainContainer page. Implemented this pass (2026-08-29) as the PxAnalyticsSecondaryNav PATTERN (category corrected from Shell to Pattern — kept the existing id string for stability since it is already referenced in shell-px-main-container Notes prose) under src/patterns/px-analytics-secondary-nav/, composed entirely from the existing Accordion/AccordionItem/Tree/TreeItem components (one independent <Accordion> wrapper per section, matching Figma real anatomy of 4 sibling accordion instances rather than one exclusive group). Added one additive, non-breaking prop to the shared AccordionItem (contentPadding, default true) to support Figma edge-to-edge on-material content — every existing consumer (including the already-approved PxCreateEditShellAccordion) is unaffected. Wired into the existing analytics rail key in App.tsx (previously WorkInProgress) and the Validation Gallery. Implemented, mapped, and MCP-verified — still visual review pending, NOT design-owner approved. See src/patterns/px-analytics-secondary-nav/README.md for all 6 known deviations. CORRECTION PASS (2026-08-29): rows no longer reuse Tree/TreeItem (dependency on component-tree removed) — they render as real <a>/<button> navigation elements per Figmas own accessibility spec (see README Semantic decision). tree.tsx fully reverted to original, no global change to the shared Tree component. Added a full Design System Docs entry (src/docs/docs/px-analytics-secondary-nav.doc.ts, Navigation group) with 2 examples, as an explicit exception to that registrys general Px*-pattern exclusion. Features icon resolved (feature-px wired into the sized icon system, confirmed via exact vector-path match). On-material Accordion header padding corrected (scoped to type=on-material, verified no effect on the approved PxCreateEditShellAccordion composition, which uses off-material). One deviation remains genuinely unresolved and requires design-owner input: the active-item colour token. Still Mapped-review-pending, still NOT design-owner approved. CORRECTION PASS 2 (2026-08-29): applied 5 explicit design-owner decisions — accepted the selected-row token as-is (no change); corrected scroll ownership (overflow-hidden, only content scrolls, verified zero regression in PxMainContainer/PxListShell/PxCreateEditShell/user-explorer); added a new collapse/expand feature (IconButton variant=\"primary\", AccordionItem trailing slot, both additive/backward-compatible) explicitly documented as a post-hoc extension not present in the original Analytics Figma frame; one placement ambiguity flagged for confirmation. Still Mapped-review-pending, still NOT design-owner approved. CORRECTION PASS 3 (2026-08-29): the design owner updated the actual Figma frame (9576:15005) to show collapse/expand directly, correcting an earlier passs guessed icon and placement. Re-verified via live get_metadata/get_design_context against the updated frame. Reverted the earlier AccordionItem trailing prop and IconButtons variant prop (no longer needed); added IconButtons iconStyle passthrough and a required title prop on PxAnalyticsSecondaryNav. Deviation ledger item 7 now fully resolved against authoritative Figma evidence — 0 open items remain. CORRECTION PASS 4 (2026-08-29): implemented the collapsed-rail hover flyout per user-supplied frame 9576:17226 — hovering or focusing a collapsed-rail section icon opens a DropdownMenu flyout of that section's items; selecting one calls the same onSelectItem callback without expanding the panel. Reused DropdownMenu/DropdownMenuItem directly (unmodified) rather than a new overlay component, per an exact token match confirmed via get_design_context. Superseded the base collapsed-cell reading with the more detailed 56x56-cell anatomy in symbol 9576:16362. Found and fixed a real keyboard-accessibility bug during live verification: every close path (Escape, outside click, item select, hover/blur-away) was being immediately undone by Radix's own focus-return-to-trigger behavior reopening the flyout — fixed by watching the open prop transition in an effect (300ms suppression window, sized to outlast Radix's ~150ms exit animation) rather than gating inside individual close handlers, which had only caught some paths. Verified live: hover open/close with delay, Tab-focus open, Escape close + focus return, mutual exclusion between sections, ArrowDown/Enter selection and close. New docs example added (px-analytics-secondary-nav/collapsed-hover-flyout). Deviation ledger item 8 added, resolved. Still Mapped-review-pending, still NOT design-owner approved."
     },
     {
       "id": "page-audience-explorer-legacy",

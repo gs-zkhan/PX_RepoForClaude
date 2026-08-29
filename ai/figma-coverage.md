@@ -15,6 +15,10 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 
 **Revision note (2026-08-29, separator-page correction):** the inventory previously recorded only 1 category-divider page (`20:2`) via an ad hoc, single-case exclusion. The Figma file actually contains 12 such divider pages, one per category section. All 12 were MCP-verified live (each a 0×0, zero-child `<canvas>` node) and added to `ai/figma-page-inventory.json` with an explicit `"kind": "separator"` field, replacing the old `exclusionReason` heuristic with a deterministic rule: a page is a separator only if its inventory entry declares `kind: "separator"` and its name matches the controlled convention `^──.*──+$` — never by inference from position or by resemblance. The validator now enforces: (a) content + separator page counts match `expectedContentPageCount`/`expectedSeparatorPageCount`/`expectedTotalPageCount` (75 + 12 = 87); (b) no duplicate node IDs across all 87 pages; (c) separator pages can never be cited as an owning page by any registry entry; (d) every non-separator page must have valid `kind: "content"` and an owning registry entry. No registry coverage decisions (statuses, categories, mappings) were changed in this pass.
 
+**Revision note (2026-08-29, Analytics Secondary Navigation implemented):** `shell-analytics-secondary-nav` moves from `Missing` to `Mapped-review-pending` — implemented as the `PxAnalyticsSecondaryNav` pattern (`category` corrected from `Shell` to `Pattern`; the `id` string is kept as-is for stability). Total entry count is unchanged at 99. See `src/patterns/px-analytics-secondary-nav/README.md` for the full anatomy, API, and 6 documented known deviations from Figma's AI-instructions prose. Still **not** design-owner approved — visual review pending.
+
+**Revision note (2026-08-29, Analytics Secondary Navigation approved):** `shell-analytics-secondary-nav` moves from `Mapped-review-pending` to `Approved` (`fidelityReview: Complete`, `visualReview: Approved`, `designOwnerApproval: { approved: true, date: "2026-08-29" }`). The design owner visually verified the expanded navigation, the selected-row tint, the collapsed variant, the collapse/expand control, and the collapsed-rail hover/focus flyout (including item selection from it). Total entry count is unchanged at 99; counts-by-status below updated (`Approved` 6→7, `Mapped-review-pending` 62→61). This approval covers `PxAnalyticsSecondaryNav` only — it does not change the status of `component-dropdown-menu`, `component-accordion`, or any other shared component this pattern composes.
+
 ---
 
 ## Precise summary language (per explicit correction request)
@@ -22,7 +26,7 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 - **All 75 supplied content-page nodes are MCP-verified.** Every one was checked live via `get_metadata` in this session before being recorded — none were inferred from name or from a prior-session claim.
 - **8 mappings remain intentionally unresolved** (status `Implemented-unmapped` — implemented in the repo, no Figma node ID captured for any of them, and none of the 75 supplied pages resolved them): Calendar, Canvas Card, Config Row, Drag Handle, Dropdown Menu, Filter Config Modal, Input, Popover.
 - **61 mapped entries still require fidelity review** (status `Mapped-review-pending` — a real Figma node exists and repo implementation exists, but no recorded design-owner sign-off): see the full breakdown below.
-- **11 entries are `Missing`** (Figma evidence exists, no repo implementation): Link, Divider, RTE Field, Color Picker, Notification, Button — Bulk variant, Button — Split variant, Page Layout, Analytics Secondary Navigation, Card (generic selectable), Dashboard Widget Card.
+- **10 entries are `Missing`** (Figma evidence exists, no repo implementation): Link, Divider, RTE Field, Color Picker, Notification, Button — Bulk variant, Button — Split variant, Page Layout, Card (generic selectable), Dashboard Widget Card.
 - Do not say there are no remaining unresolved mappings while any entry carries `Implemented-unmapped` or `Missing` — both are real, named, enumerated gaps, not silently dropped.
 
 ---
@@ -45,11 +49,11 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 
 | Status | Count |
 | --- | --- |
-| `Approved` | 6 |
+| `Approved` | 7 |
 | `Approved-with-documented-exception` | 1 |
 | `Mapped-review-pending` | 61 |
 | `Implemented-unmapped` | 8 |
-| `Missing` | 11 |
+| `Missing` | 10 |
 | `Internal foundation` | 5 |
 | `Legacy` | 1 |
 | `Figma correction required` | 0 |
@@ -60,8 +64,8 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 | Category | Count |
 | --- | --- |
 | `Component` | 73 |
-| `Shell` | 6 |
-| `Pattern` | 3 |
+| `Shell` | 5 |
+| `Pattern` | 4 |
 | `Foundation/token` | 7 |
 | `Illustration` | 2 |
 | `Reference` | 2 |
@@ -96,19 +100,21 @@ None of these were resolved by any of the 75 supplied pages. No candidate Figma 
 | `component-input` | `src/components/ui/input.tsx` | Internal composition primitive; likely never an independent Figma page. | Confirm with the user whether Figma models this as a standalone page before searching further. |
 | `component-popover` | `src/components/ui/popover.tsx` | No node ID ever captured; none of the 75 supplied pages named "Popover". | Ask the user for the exact page/node. |
 
-## Mapped but pending fidelity/design review — full list (61 — `Mapped-review-pending`)
+## Mapped but pending fidelity/design review — full list (62 — `Mapped-review-pending`)
 
 A real Figma node/page mapping is established for every entry below; fidelity review and design-owner sign-off remain outstanding — not the mapping itself.
 
 **Component (54):** Accordion, Avatar, Banner, Bar Chart, Breadcrumb, Button, Checkbox, Chip, Column Selector, Date Field, Date Filter, Date Picker, Donut Chart, Dropdown Field, Empty State, File Uploader, Filter Bar, Filter Chip, Filter Dropdown Panel, Gauge Chart, Heatmap, Input Number, Letter, Line Chart, Metric Bar, Modal, Pagination, Progress Bar, Radio Group, Search Bar, Segmented Bar, Select, Skeleton, Slider, Spinner, StatusLabel, StatusSelect, SummaryStat, Table Customization Menu, **Table**, Tabs, TextField, ThirdPane, Toast, Toggle, Tooltip, Tree, View Selector, View Switcher, Views, Wizard, World Map, PECDropdown, PxShellRail.
 
+**Pattern (1):** **PxAnalyticsSecondaryNav** — new this pass (see below).
+
 **Foundation/token (5):** Prism Icon set, Typography, Spacing · Radius · Border, Elevation · Shadow, Grid · Layout.
 
 **Illustration (2):** Illustrations, Shell/Illustrations.
 
-Newly moved into this bucket this pass (previously `Unmapped`/`Implemented-unmapped`): Checkbox, Radio Group, Toggle, Search Bar, Status Label, Tooltip, Pagination, **Table**, Heatmap, World Map.
+Newly moved into this bucket this pass (previously `Unmapped`/`Implemented-unmapped`): Checkbox, Radio Group, Toggle, Search Bar, Status Label, Tooltip, Pagination, **Table**, Heatmap, World Map. Newly moved this pass (previously `Missing`): **PxAnalyticsSecondaryNav** (`shell-analytics-secondary-nav`, category corrected `Shell` → `Pattern`) — implemented under `src/patterns/px-analytics-secondary-nav/`, composed entirely from the existing `Accordion`/`Tree` components; see its README for 6 documented known deviations from Figma's AI-instructions prose. Still not design-owner approved.
 
-## Missing components and patterns (11)
+## Missing components and patterns (10)
 
 | Entry | Figma evidence | Notes |
 | --- | --- | --- |
@@ -120,7 +126,6 @@ Newly moved into this bucket this pass (previously `Unmapped`/`Implemented-unmap
 | Button — Bulk action variant | `20:10` (shared) | Unchanged. |
 | Button — Split variant | `20:10` (shared) | Unchanged. |
 | Page Layout (generic) | `3187:6`, verified | Unchanged — functionally covered by PxMainContainer/PxListShell under different naming. |
-| Analytics Secondary Navigation | `3351:3925`, verified | Unchanged — see prior readiness assessment. |
 | **Card** (generic selectable) | `7611:395`, verified — new this pass | 8 variants (Size × State × With Tags). Confirmed distinct from `CanvasCard`. |
 | **Dashboard Widget Card** | `20:27`, verified — new this pass | Analytics dashboard tile header (title + source label + chart-switcher + filter/share/overflow). No repo implementation under any name. |
 
@@ -199,8 +204,8 @@ Calendar, Canvas Card, Config Row, Drag Handle, Dropdown Menu, Filter Config Mod
 
 ## Recommended implementation order for the next batch
 
-1. Build **Analytics Secondary Navigation** and the 2 new missing components (**Card**, **Dashboard Widget Card**) — all three now have full Figma evidence and no blockers.
-2. Close fidelity-review debt on **Table** (`20:34`) first — it is the single highest-leverage newly-mapped component given how many screens depend on it, followed by Modal, Accordion, Button.
+1. Build the 2 remaining missing components (**Card**, **Dashboard Widget Card**) — both now have full Figma evidence and no blockers. **Analytics Secondary Navigation is done** (see the Pattern entry above) — get design-owner visual review on it next, not implementation.
+2. Close fidelity-review debt on **Table** (`20:34`) first — it is the single highest-leverage newly-mapped component given how many screens depend on it, followed by Modal, Accordion, Button, and now **PxAnalyticsSecondaryNav**.
 3. Ask the user for exact pages for the 8 remaining `Implemented-unmapped` components — none were resolved by this pass's 75-page inventory, so they are genuinely outside its scope, not overlooked.
 4. Reconcile `audience-explorer.tsx` vs `user-explorer.tsx` — repository-only debt, unblocked by nothing Figma-side.
 5. Decide on Bulk/Split button variants, Color Picker, Notification, RTE Field, Link, Divider — all fully evidenced, implementation is the only remaining step.
