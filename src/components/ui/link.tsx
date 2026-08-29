@@ -10,10 +10,12 @@ import { PrismIcon } from "@/components/ui/prism-icon"
 //
 // Anatomy (per Link AI Instructions, node 9139:6328): a single inline text
 // element, no container/background/border, hug-content width. Always
-// renders as a real <a> — Link is navigation only, never an action
-// substitute (see "When NOT to use": don't use Link to submit forms, delete
-// records, open modals, or as a standalone block-level CTA — use Button
-// instead for all of those).
+// renders as a real <a> — an intentionally disabled Link (see below) is the
+// one case that renders an <a> without an href, since removing the element
+// entirely would drop its text from the reading flow. Link is navigation
+// only, never an action substitute (see "When NOT to use": don't use Link to
+// submit forms, delete records, open modals, or as a standalone block-level
+// CTA — use Button instead for all of those).
 //
 // States:
 //   - Default: text → --c-link-color-default, no underline.
@@ -58,7 +60,15 @@ import { PrismIcon } from "@/components/ui/prism-icon"
 
 type LinkSize = "default" | "small"
 
-type LinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+// `target`/`rel`/`tabIndex`/`aria-disabled` are excluded at the type level —
+// they are invariants this component owns (disabled state, external-link
+// security relationship), not caller-configurable passthrough. This is
+// enforced again at render time below, since a non-TS caller could still
+// spread an object containing these keys.
+type LinkProps = Omit<
+  React.AnchorHTMLAttributes<HTMLAnchorElement>,
+  "target" | "rel" | "tabIndex" | "aria-disabled"
+> & {
   size?: LinkSize
   /** Appends icons/24/link after the label. Intended for `size="default"` only. */
   icon?: boolean
@@ -87,6 +97,7 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(
 
   return (
     <a
+      {...props}
       ref={ref}
       data-slot="link"
       href={disabled ? undefined : href}
@@ -110,7 +121,6 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(
         "focus-visible:shadow-[var(--e-shadow-focus)]",
         className,
       )}
-      {...props}
     >
       {children}
       {icon && <PrismIcon name="link" size={iconSize} decorative />}
