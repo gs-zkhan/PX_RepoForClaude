@@ -59,6 +59,19 @@ import type { PrismIconName } from "@/components/ui/prism-icon"
 // "requires a distinct coloured parent surface" — that assumption is
 // superseded by this correction; see the component's docs and Validation
 // Gallery entry for the corrected on-material demonstration.
+//
+// Header horizontal padding (correction, 2026-08-29): on-material binds its
+// own token, --c-accordion-padding-on-material (8px) — already generated,
+// previously unused. This header used to apply 16px (space/200) to every
+// type unconditionally. Verified before applying: the real, currently-
+// shipped, design-owner-approved PxCreateEditShellAccordion example
+// (src/pages/create-edit-shell-example.tsx) uses the DEFAULT type
+// (off-material), never on-material — so this on-material-scoped change
+// does not alter that approved composition. Off-material/off-material-
+// shadow padding is unchanged. The only on-material renders affected are
+// this component's own docs/gallery illustrations and
+// PxAnalyticsSecondaryNav (src/patterns/px-analytics-secondary-nav), both
+// already pending/not-approved.
 // -----------------------------------------------------------------------------
 
 type AccordionSize = 48 | 56 | 64
@@ -148,11 +161,20 @@ type AccordionItemProps = {
    * named icon can't express. Takes precedence over `icon` if both are set.
    */
   leading?: React.ReactNode
+  /**
+   * Set false for edge-to-edge content (e.g. a full-width Tree/list) that
+   * must not inherit the panel's default 16px horizontal/bottom padding —
+   * needed by on-material sections whose content slot is meant to span the
+   * full item width (see Analytics Secondary Navigation, Figma node
+   * 3397:2451: its Tree/Item rows are flush at 312px, no panel padding).
+   * Defaults to true, so every existing consumer is unaffected.
+   */
+  contentPadding?: boolean
   children: React.ReactNode
   className?: string
 }
 
-function AccordionItem({ value, title, subtitle, icon, leading, children, className }: AccordionItemProps) {
+function AccordionItem({ value, title, subtitle, icon, leading, contentPadding = true, children, className }: AccordionItemProps) {
   const ctx = React.useContext(AccordionContext)
   if (!ctx) throw new Error("<AccordionItem> must be used inside <Accordion>.")
 
@@ -168,68 +190,81 @@ function AccordionItem({ value, title, subtitle, icon, leading, children, classN
     className,
   )
 
-  return (
-    <div className={shellClass}>
-      <button
-        id={headerId}
-        type="button"
-        aria-expanded={isOpen}
-        aria-controls={panelId}
-        onClick={() => setOpenValue(isOpen ? undefined : value)}
-        className={cn(
-          "group flex w-full items-center gap-[var(--p-space-200)] px-[var(--p-space-200)]",
-          SIZE_HEIGHT[size],
-          SIZE_PADDING_Y[size],
-          "text-left outline-none transition-colors",
-          // Full-width hover only while collapsed — an expanded row's hover
-          // feedback is confined to the chevron chip below instead.
-          type !== "on-material" && !isOpen && "hover:bg-[var(--c-accordion-background-hover)]",
-          type === "off-material" && "rounded-[var(--p-radius-150)]",
-          type === "off-material-shadow" && "rounded-[var(--p-radius-150)]",
-        )}
-      >
-        {leading ??
-          (icon ? (
-            <PrismIcon
-              name={icon}
-              size={24}
-              decorative
-              className="shrink-0 text-[var(--s-icon-color-default)]"
-            />
-          ) : null)}
-        <div className="flex min-w-0 flex-1 flex-col">
-          <span className="truncate text-[length:var(--t-font-heading-xsmall-size)] font-[number:var(--t-font-heading-xsmall-weight)] leading-[var(--t-font-heading-xsmall-line-height)] text-[var(--c-accordion-label)]">
-            {title}
-          </span>
-          {subtitle ? (
-            <span className="truncate text-[length:var(--t-font-label-small-size)] leading-[var(--t-font-label-small-line-height)] text-[var(--s-color-text-subtle)]">
-              {subtitle}
-            </span>
-          ) : null}
-        </div>
-        <span className="relative flex shrink-0 items-center justify-center">
-          {type !== "on-material" && isOpen ? (
-            <span
-              aria-hidden="true"
-              className="absolute inset-[calc(var(--p-space-050)*-1)] rounded-[var(--p-radius-full)] group-hover:bg-[var(--c-accordion-background-hover)]"
-            />
-          ) : null}
+  const headerButton = (
+    <button
+      id={headerId}
+      type="button"
+      aria-expanded={isOpen}
+      aria-controls={panelId}
+      onClick={() => setOpenValue(isOpen ? undefined : value)}
+      className={cn(
+        "group flex w-full items-center gap-[var(--p-space-200)]",
+        // On-material binds its own horizontal-padding token
+        // (--c-accordion-padding-on-material, 8px) — verified against the
+        // real Figma instance (Analytics Secondary Navigation, node
+        // 3397:2451). Off-material/off-material-shadow are unchanged
+        // (space/200, 16px). Scoped to `type` so this only affects
+        // on-material headers — no approved off-material composition is
+        // touched (PxCreateEditShellAccordion's real, signed-off example
+        // uses the default off-material type).
+        type === "on-material" ? "px-[var(--c-accordion-padding-on-material)]" : "px-[var(--p-space-200)]",
+        SIZE_HEIGHT[size],
+        SIZE_PADDING_Y[size],
+        "text-left outline-none transition-colors",
+        // Full-width hover only while collapsed — an expanded row's hover
+        // feedback is confined to the chevron chip below instead.
+        type !== "on-material" && !isOpen && "hover:bg-[var(--c-accordion-background-hover)]",
+        type === "off-material" && "rounded-[var(--p-radius-150)]",
+        type === "off-material-shadow" && "rounded-[var(--p-radius-150)]",
+      )}
+    >
+      {leading ??
+        (icon ? (
           <PrismIcon
-            name={isOpen ? "chevron-up" : "chevron-down"}
+            name={icon}
             size={24}
             decorative
-            className="relative shrink-0 text-[var(--s-icon-color-default)]"
+            className="shrink-0 text-[var(--s-icon-color-default)]"
           />
+        ) : null)}
+      <div className="flex min-w-0 flex-1 flex-col">
+        <span className="truncate text-[length:var(--t-font-heading-xsmall-size)] font-[number:var(--t-font-heading-xsmall-weight)] leading-[var(--t-font-heading-xsmall-line-height)] text-[var(--c-accordion-label)]">
+          {title}
         </span>
-      </button>
+        {subtitle ? (
+          <span className="truncate text-[length:var(--t-font-label-small-size)] leading-[var(--t-font-label-small-line-height)] text-[var(--s-color-text-subtle)]">
+            {subtitle}
+          </span>
+        ) : null}
+      </div>
+      <span className="relative flex shrink-0 items-center justify-center">
+        {type !== "on-material" && isOpen ? (
+          <span
+            aria-hidden="true"
+            className="absolute inset-[calc(var(--p-space-050)*-1)] rounded-[var(--p-radius-full)] group-hover:bg-[var(--c-accordion-background-hover)]"
+          />
+        ) : null}
+        <PrismIcon
+          name={isOpen ? "chevron-up" : "chevron-down"}
+          size={24}
+          decorative
+          className="relative shrink-0 text-[var(--s-icon-color-default)]"
+        />
+      </span>
+    </button>
+  )
+
+  return (
+    <div className={shellClass}>
+      {headerButton}
       {isOpen ? (
         <div
           id={panelId}
           role="region"
           aria-labelledby={headerId}
           className={cn(
-            "px-[var(--p-space-200)] pb-[var(--p-space-200)]",
-            subtitle && "pt-[var(--p-space-300)]",
+            contentPadding && "px-[var(--p-space-200)] pb-[var(--p-space-200)]",
+            contentPadding && subtitle && "pt-[var(--p-space-300)]",
             "text-[length:var(--t-font-body-medium-size)] leading-[var(--t-font-body-medium-line-height)] text-[var(--s-color-text-default)]",
           )}
         >

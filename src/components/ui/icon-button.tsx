@@ -15,11 +15,15 @@
 // semantic --s-icon-color-*/--s-color-surface-* tier per the token-ownership
 // priority order (component -> semantic -> primitive) where no component
 // token exists (disabled content color; all background states; radius).
+//
+// forwardRef added (2026-08-29) so PxAnalyticsSecondaryNav's collapse/expand
+// control can move DOM focus to the counterpart button on toggle — purely
+// additive, no existing consumer passes a ref today.
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
 import { PrismIcon } from "@/components/ui/prism-icon"
-import type { PrismIconName } from "@/components/ui/prism-icon"
+import type { PrismIconName, PrismIconStyle } from "@/components/ui/prism-icon"
 
 type IconButtonProps = {
   icon: PrismIconName
@@ -32,11 +36,26 @@ type IconButtonProps = {
    * 24px button box is unchanged — only the glyph scales.
    */
   iconSize?: 16 | 24
+  /**
+   * "line" (default, unchanged) or "filled" — passed straight through to
+   * PrismIcon. Needed for icons that are only published in the filled set,
+   * e.g. PxAnalyticsSecondaryNav's collapse/expand chevrons
+   * (icons/filled/chevron-leftmenu-collapse-filled / -expand-filled, Figma
+   * node 491:83), which bake in their own fixed colour (matching this
+   * repo's existing filled-icon precedent — success/warning/danger/
+   * information-filled all do the same). Every existing consumer omits
+   * this and is unaffected.
+   */
+  iconStyle?: PrismIconStyle
 } & Omit<React.ComponentProps<"button">, "children" | "aria-label">
 
-function IconButton({ icon, label, disabled, iconSize = 24, className, ...props }: IconButtonProps) {
+const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(function IconButton(
+  { icon, label, disabled, iconSize = 24, iconStyle = "line", className, ...props },
+  ref,
+) {
   return (
     <button
+      ref={ref}
       type="button"
       aria-label={label}
       disabled={disabled}
@@ -58,10 +77,10 @@ function IconButton({ icon, label, disabled, iconSize = 24, className, ...props 
       )}
       {...props}
     >
-      <PrismIcon name={icon} size={iconSize} sourceSize={24} decorative />
+      <PrismIcon name={icon} size={iconSize} sourceSize={24} iconStyle={iconStyle} decorative />
     </button>
   )
-}
+})
 
 export { IconButton }
 export type { IconButtonProps }

@@ -108,6 +108,8 @@ import { PxFilterSlider } from "@/patterns/px-list-shell/PxFilterSlider"
 import { PxCreateEditShellModal } from "@/patterns/px-create-edit-shell"
 import { Textarea } from "@/components/ui/textarea"
 import { CreateEditShellExample } from "@/pages/create-edit-shell-example"
+import { PxAnalyticsSecondaryNav } from "@/patterns/px-analytics-secondary-nav"
+import { AnalyticsExample, ANALYTICS_SECTIONS } from "@/pages/analytics-example"
 
 // ---------------------------------------------------------------------------
 // Section wrapper
@@ -222,6 +224,13 @@ function ValidationGallery() {
   const [createEditNavKey, setCreateEditNavKey] = React.useState<PxShellNavKey>("engagements")
   const [createEditNavMode, setCreateEditNavMode] = React.useState<PxShellRailMode>("collapsed")
   const [createEditModalOpen, setCreateEditModalOpen] = React.useState(false)
+  const [analyticsNavKey, setAnalyticsNavKey] = React.useState<PxShellNavKey>("analytics")
+  const [analyticsNavMode, setAnalyticsNavMode] = React.useState<PxShellRailMode>("collapsed")
+  const [analyticsActiveItemId, setAnalyticsActiveItemId] = React.useState("retention-analysis")
+  const [analyticsOpenSectionIds, setAnalyticsOpenSectionIds] = React.useState(
+    ANALYTICS_SECTIONS.map((s) => s.id),
+  )
+  const [analyticsCollapsed, setAnalyticsCollapsed] = React.useState(false)
   const [pec, setPec] = React.useState({ product: "px", environment: "production", channels: ["web-app"] })
   const [filterTab, setFilterTab] = React.useState<"filter" | "global-context">("filter")
   const [filterBarOpenChip, setFilterBarOpenChip] = React.useState<string | undefined>(undefined)
@@ -1016,6 +1025,96 @@ function ValidationGallery() {
             <code>src/patterns/px-create-edit-shell/README.md</code> for the full anatomy, Figma node
             traceability, and known Figma inconsistencies. Full worked example:{" "}
             <code>src/pages/create-edit-shell-example.tsx</code>.
+          </p>
+        </Section>
+
+        {/* ------------------------------------------------------------------ */}
+        {/* Analytics Secondary Navigation (PxAnalyticsSecondaryNav)            */}
+        {/* ------------------------------------------------------------------ */}
+        <Section title="Analytics Secondary Navigation (PxAnalyticsSecondaryNav)">
+          <Row label="Live example">
+            <div className="h-[700px] w-full overflow-hidden rounded border border-[var(--s-color-line-default)]">
+              <AnalyticsExample
+                activeKey={analyticsNavKey}
+                onNavigate={setAnalyticsNavKey}
+                mode={analyticsNavMode}
+                onModeChange={setAnalyticsNavMode}
+              />
+            </div>
+          </Row>
+          <Row label="Standalone — all sections open">
+            <div className="h-[500px] overflow-hidden rounded border border-[var(--s-color-line-default)]">
+              <PxAnalyticsSecondaryNav
+                title="All Reports"
+                sections={ANALYTICS_SECTIONS}
+                activeItemId={analyticsActiveItemId}
+                onSelectItem={setAnalyticsActiveItemId}
+              />
+            </div>
+          </Row>
+          <Row label="Standalone — controlled section-open state">
+            <div className="h-[500px] overflow-hidden rounded border border-[var(--s-color-line-default)]">
+              <PxAnalyticsSecondaryNav
+                title="All Reports"
+                sections={ANALYTICS_SECTIONS}
+                activeItemId={analyticsActiveItemId}
+                onSelectItem={setAnalyticsActiveItemId}
+                openSectionIds={analyticsOpenSectionIds}
+                onOpenSectionIdsChange={setAnalyticsOpenSectionIds}
+              />
+            </div>
+          </Row>
+          <Row label="Collapse / expand (controlled) — chevron in the title row, beside &quot;All Reports&quot;">
+            <div className="flex flex-col gap-[var(--p-space-100)]">
+              <button
+                type="button"
+                className="self-start text-xs text-[var(--s-color-link-default)] underline"
+                onMouseDown={(event) => event.preventDefault()}
+                onClick={() => setAnalyticsCollapsed((value) => !value)}
+              >
+                {analyticsCollapsed ? "Expand" : "Collapse"} (external control)
+              </button>
+              <div className="h-[500px] overflow-hidden rounded border border-[var(--s-color-line-default)]">
+                <PxAnalyticsSecondaryNav
+                  title="All Reports"
+                  sections={ANALYTICS_SECTIONS}
+                  activeItemId={analyticsActiveItemId}
+                  onSelectItem={setAnalyticsActiveItemId}
+                  collapsed={analyticsCollapsed}
+                  onCollapsedChange={setAnalyticsCollapsed}
+                />
+              </div>
+            </div>
+          </Row>
+          <Row label="Scroll ownership — only right content scrolls, nav stays fixed">
+            <div className="flex h-[400px] w-full overflow-hidden rounded border border-[var(--s-color-line-default)]">
+              <PxAnalyticsSecondaryNav
+                title="All Reports"
+                sections={ANALYTICS_SECTIONS}
+                activeItemId={analyticsActiveItemId}
+                onSelectItem={setAnalyticsActiveItemId}
+              />
+              <div className="flex-1 overflow-auto p-[var(--p-space-300)]">
+                <div className="flex flex-col gap-[var(--p-space-200)]">
+                  {Array.from({ length: 15 }, (_, i) => (
+                    <div
+                      key={i}
+                      className="rounded border border-[var(--s-color-line-default)] p-[var(--p-space-200)] text-xs text-[var(--s-color-text-subtle)]"
+                    >
+                      Scroll-test row {i + 1}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Row>
+          <p className="text-xs text-[var(--s-color-text-subtlest)]">
+            Figma: Shell/Analytics/Secondary-Left Navigation 🟢 (page 3351:3925, symbol 3397:2451). Collapse/expand
+            chevron: icons/filled/chevron-leftmenu-{"{"}collapse,expand{"}"}-filled (node 491:83) — a design-owner
+            extension added after the original Analytics frame, not part of it. See{" "}
+            <code>src/patterns/px-analytics-secondary-nav/README.md</code> for the full anatomy, Figma node
+            traceability, and known deviations. Full worked example:{" "}
+            <code>src/pages/analytics-example.tsx</code>.
           </p>
         </Section>
 
