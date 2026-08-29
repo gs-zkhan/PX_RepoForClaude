@@ -19,6 +19,10 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 
 **Revision note (2026-08-29, Analytics Secondary Navigation approved):** `shell-analytics-secondary-nav` moves from `Mapped-review-pending` to `Approved` (`fidelityReview: Complete`, `visualReview: Approved`, `designOwnerApproval: { approved: true, date: "2026-08-29" }`). The design owner visually verified the expanded navigation, the selected-row tint, the collapsed variant, the collapse/expand control, and the collapsed-rail hover/focus flyout (including item selection from it). Total entry count is unchanged at 99; counts-by-status below updated (`Approved` 6→7, `Mapped-review-pending` 62→61). This approval covers `PxAnalyticsSecondaryNav` only — it does not change the status of `component-dropdown-menu`, `component-accordion`, or any other shared component this pattern composes.
 
+**Revision note (2026-08-29, Link / Divider / Button Bulk Action / Button Split implemented):** four entries move from `Missing` to `Mapped-review-pending` — `component-link` (new `Link` component, `src/components/ui/link.tsx`), `component-divider` (new `Divider` component, `src/components/ui/divider.tsx`), `component-button-bulk-variant` (`variant="bulkAction"` added to the existing `Button`, purely additive), and `component-button-split-variant` (new `SplitButton` component, `src/components/ui/split-button.tsx`, composing `Button` + the existing `DropdownMenu` rather than a Button variant — see that entry's notes for why). `component-button`'s own `knownDeviations` updated to point at the now-implemented Bulk/Split entries instead of describing them as unimplemented. None of the four are design-owner approved — all `Mapped-review-pending`, `visualReview: Pending`. Total entry count unchanged at 99; counts-by-status below updated (`Mapped-review-pending` 61→65, `Missing` 10→6).
+
+**Revision note (2026-08-29, Link / Divider / Button Bulk Action / Button Split approved):** the same four entries — `component-link`, `component-divider`, `component-button-bulk-variant`, `component-button-split-variant` — move from `Mapped-review-pending` to `Approved` (`fidelityReview: Complete`, `visualReview: Approved`, `designOwnerApproval: { approved: true, date: "2026-08-29" }`), after design-owner visual verification of this 4-item review batch. Total entry count unchanged at 99; counts-by-status below updated (`Approved` 7→11, `Mapped-review-pending` 65→61). These approvals are scoped to these four entries only — they do not change the status of `component-button` itself (still `Mapped-review-pending`, since Destructive-Split and the Figma-marked-PLANNED keyboard/focus-ring behaviour remain unreviewed), `component-dropdown-menu`, or any other shared component these items compose.
+
 ---
 
 ## Precise summary language (per explicit correction request)
@@ -26,7 +30,7 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 - **All 75 supplied content-page nodes are MCP-verified.** Every one was checked live via `get_metadata` in this session before being recorded — none were inferred from name or from a prior-session claim.
 - **8 mappings remain intentionally unresolved** (status `Implemented-unmapped` — implemented in the repo, no Figma node ID captured for any of them, and none of the 75 supplied pages resolved them): Calendar, Canvas Card, Config Row, Drag Handle, Dropdown Menu, Filter Config Modal, Input, Popover.
 - **61 mapped entries still require fidelity review** (status `Mapped-review-pending` — a real Figma node exists and repo implementation exists, but no recorded design-owner sign-off): see the full breakdown below.
-- **10 entries are `Missing`** (Figma evidence exists, no repo implementation): Link, Divider, RTE Field, Color Picker, Notification, Button — Bulk variant, Button — Split variant, Page Layout, Card (generic selectable), Dashboard Widget Card.
+- **6 entries are `Missing`** (Figma evidence exists, no repo implementation): RTE Field, Color Picker, Notification, Page Layout, Card (generic selectable), Dashboard Widget Card.
 - Do not say there are no remaining unresolved mappings while any entry carries `Implemented-unmapped` or `Missing` — both are real, named, enumerated gaps, not silently dropped.
 
 ---
@@ -49,11 +53,11 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 
 | Status | Count |
 | --- | --- |
-| `Approved` | 7 |
+| `Approved` | 11 |
 | `Approved-with-documented-exception` | 1 |
 | `Mapped-review-pending` | 61 |
 | `Implemented-unmapped` | 8 |
-| `Missing` | 10 |
+| `Missing` | 6 |
 | `Internal foundation` | 5 |
 | `Legacy` | 1 |
 | `Figma correction required` | 0 |

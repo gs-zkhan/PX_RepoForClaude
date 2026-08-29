@@ -62,6 +62,9 @@ import {
   TooltipContent,
 } from "@/components/ui/tooltip"
 import { Button } from "@/components/ui/button"
+import { SplitButton } from "@/components/ui/split-button"
+import { Link } from "@/components/ui/link"
+import { Divider } from "@/components/ui/divider"
 import { IconButton } from "@/components/ui/icon-button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
@@ -356,6 +359,94 @@ function ValidationGallery() {
           <Row label="disabled">
             <Button variant="primary" disabled>Save changes</Button>
             <Button variant="secondary" disabled>Cancel</Button>
+          </Row>
+          <Row label="bulk action (Visual Review: Approved — Approved for AI use: Yes (2026-08-29))">
+            <Button variant="bulkAction" size="large">Bulk</Button>
+            <Button variant="bulkAction" size="medium">Bulk</Button>
+            <Button variant="bulkAction" size="small">Bulk</Button>
+            <Button variant="bulkAction" size="large" disabled>Bulk</Button>
+          </Row>
+          <Row label="split (Visual Review: Approved — Approved for AI use: Yes (2026-08-29))">
+            <SplitButton
+              size="large"
+              onAction={() => console.log("split primary action")}
+              menuLabel="More save options"
+              menuContent={
+                <>
+                  <DropdownMenuItem>Save as draft</DropdownMenuItem>
+                  <DropdownMenuItem>Save and duplicate</DropdownMenuItem>
+                </>
+              }
+            >
+              Save
+            </SplitButton>
+            <SplitButton
+              size="medium"
+              onAction={() => console.log("split primary action")}
+              menuLabel="More save options"
+              menuContent={
+                <>
+                  <DropdownMenuItem>Save as draft</DropdownMenuItem>
+                  <DropdownMenuItem>Save and duplicate</DropdownMenuItem>
+                </>
+              }
+            >
+              Save
+            </SplitButton>
+            <SplitButton
+              size="large"
+              disabled
+              onAction={() => console.log("split primary action")}
+              menuLabel="More save options"
+              menuContent={<DropdownMenuItem>Save as draft</DropdownMenuItem>}
+            >
+              Save
+            </SplitButton>
+          </Row>
+        </Section>
+
+        {/* ------------------------------------------------------------------ */}
+        {/* Link                                                                 */}
+        {/* ------------------------------------------------------------------ */}
+        <Section title="Link (Visual Review: Approved — Approved for AI use: Yes (2026-08-29))">
+          <Row label="default / small">
+            <Link href="#">Default link</Link>
+            <Link href="#" size="small">Small link</Link>
+          </Row>
+          <Row label="with icon / external">
+            <Link href="#" icon>View invoice</Link>
+            <Link href="#" external aria-label="Read the guide (opens in a new tab)">
+              Read the guide
+            </Link>
+            <Link href="#" icon external aria-label="View source (opens in a new tab)">
+              View source
+            </Link>
+          </Row>
+          <Row label="disabled">
+            <Link disabled title="Unavailable until the invoice is finalized">
+              Download invoice
+            </Link>
+          </Row>
+        </Section>
+
+        {/* ------------------------------------------------------------------ */}
+        {/* Divider                                                              */}
+        {/* ------------------------------------------------------------------ */}
+        <Section title="Divider (Visual Review: Approved — Approved for AI use: Yes (2026-08-29))">
+          <Row label="horizontal — 1px / 2px">
+            <div className="flex w-[320px] flex-col gap-4">
+              <Divider />
+              <Divider weight={2} />
+            </div>
+          </Row>
+          <Row label="vertical — 1px / 2px">
+            <div className="flex h-12 items-stretch gap-4">
+              <span className="text-sm text-[var(--s-color-text-default)]">Left</span>
+              <Divider orientation="vertical" />
+              <span className="text-sm text-[var(--s-color-text-default)]">Middle</span>
+              <Divider orientation="vertical" weight={2} />
+              <span className="text-sm text-[var(--s-color-text-default)]">Right</span>
+            </div>
           </Row>
         </Section>
 
