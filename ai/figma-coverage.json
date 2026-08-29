@@ -557,7 +557,7 @@
         "date": null
       },
       "knownDeviations": [
-        "Two variant families present in Figma (Bulk Action, Primary-Split) are not implemented in button.tsx — tracked separately, see component-button-bulk-variant and component-button-split-variant. This does NOT make Button itself missing: the page exists (20:10), the component frame is real and verified, and the repository implementation (button.tsx) is present and implements Primary/Secondary/Tertiary at Large/Medium/Small with icon-left/icon-right, matching the majority of the Figma variant matrix."
+        "Two variant families present in Figma (Bulk Action, Primary-Split) are now implemented - see component-button-bulk-variant (variant=\"bulkAction\" on Button itself) and component-button-split-variant (new SplitButton component). Both remain Mapped-review-pending, NOT design-owner approved. This does NOT make Button itself missing: the page exists (20:10), the component frame is real and verified, and the repository implementation (button.tsx) is present and implements Primary/Secondary/Tertiary/Bulk Action at Large/Medium/Small with icon-left/icon-right, matching the full Figma variant matrix except Destructive-Split (not evidenced) and keyboard/focus-ring behaviour Figma itself marks PLANNED - not yet implemented."
       ],
       "dependencies": [
         "foundation-token-pipeline"
@@ -585,24 +585,28 @@
         }
       ],
       "figmaMappingStatus": "Verified-MCP-this-session",
-      "repoPaths": [],
-      "docPath": null,
-      "gallerySection": null,
-      "examplePaths": [],
-      "implementationStatus": "Not implemented",
-      "status": "Missing",
-      "fidelityReview": "Not applicable",
-      "visualReview": "Not applicable",
+      "repoPaths": [
+        "src/components/ui/button.tsx"
+      ],
+      "docPath": "src/docs/docs/button.doc.ts",
+      "gallerySection": "Button",
+      "examplePaths": [
+        "src/docs/examples/button/bulk-action.tsx"
+      ],
+      "implementationStatus": "Implemented",
+      "status": "Approved",
+      "fidelityReview": "Complete",
+      "visualReview": "Approved",
       "designOwnerApproval": {
-        "approved": false,
-        "date": null
+        "approved": true,
+        "date": "2026-08-29"
       },
       "knownDeviations": [],
       "dependencies": [
         "component-button"
       ],
       "recommendedOrder": null,
-      "notes": "Corrected in this pass: confirmed live in the Button page (20:10) — 36 \"Type=Bulk Action\" symbols exist (e.g. 4044:23993), Regular (not SemiBold) label weight, hug-content width, no fixed width. Generated CSS already defines --c-button-bulk-action-background-click/-default/-hover, -border-click/-default/-disabled/-hover, -content-default (src/styles/prism-generated.css:370-377), but button.tsx does not consume them — token AND component evidence both confirm this is a real, designed, unimplemented variant, not a fabricated gap."
+      "notes": "Corrected in this pass: confirmed live in the Button page (20:10) — 36 \"Type=Bulk Action\" symbols exist (e.g. 4044:23993), Regular (not SemiBold) label weight, hug-content width, no fixed width. Generated CSS already defines --c-button-bulk-action-background-click/-default/-hover, -border-click/-default/-disabled/-hover, -content-default (src/styles/prism-generated.css:370-377), but button.tsx does not consume them — token AND component evidence both confirm this is a real, designed, unimplemented variant, not a fabricated gap. IMPLEMENTED (2026-08-29): added variant=\"bulkAction\" to buttonVariants in button.tsx, consuming the already-generated tokens directly (no new tokens needed) - purely additive, every existing variant/consumer unchanged. No multi-select/toggle behaviour implemented - Figma evidence describes only visual/typographic differences, confirmed via AI Instructions text, not inferred from the name. DESIGN-OWNER APPROVED (2026-08-29): the design owner visually verified this item as part of a 4-item review batch (Link, Divider, Button Bulk Action, Button Primary-Split). status: Approved, fidelityReview: Complete, visualReview: Approved, designOwnerApproval: { approved: true, date: \"2026-08-29\" }. This approval is scoped to this entry only."
     },
     {
       "id": "component-button-split-variant",
@@ -624,24 +628,29 @@
         }
       ],
       "figmaMappingStatus": "Verified-MCP-this-session",
-      "repoPaths": [],
-      "docPath": null,
-      "gallerySection": null,
-      "examplePaths": [],
-      "implementationStatus": "Not implemented",
-      "status": "Missing",
-      "fidelityReview": "Not applicable",
-      "visualReview": "Not applicable",
+      "repoPaths": [
+        "src/components/ui/split-button.tsx",
+        "src/components/ui/button.tsx"
+      ],
+      "docPath": "src/docs/docs/button.doc.ts",
+      "gallerySection": "Button",
+      "examplePaths": [
+        "src/docs/examples/button/split.tsx"
+      ],
+      "implementationStatus": "Implemented",
+      "status": "Approved",
+      "fidelityReview": "Complete",
+      "visualReview": "Approved",
       "designOwnerApproval": {
-        "approved": false,
-        "date": null
+        "approved": true,
+        "date": "2026-08-29"
       },
       "knownDeviations": [],
       "dependencies": [
         "component-button"
       ],
       "recommendedOrder": null,
-      "notes": "Corrected in this pass: confirmed live in the Button page (20:10) — 12 \"Type=Primary-Split\" symbols exist (e.g. 4044:24089): a primary action side (pl=16px) + divider (button/primarySplit/divider at 30% opacity) + chevron dropdown side (pr=8px, chevron flips down/up on click), height matches standard button/height/{size}. Generated CSS already defines --c-button-primary-split-background-click/-default, -content-click/-default/-hover, -divider and --c-button-gap-split (src/styles/prism-generated.css:393,405-410), but button.tsx does not implement it. Distinct from CanvasCard's unrelated mode=\"split\" layout-mode enum value, and distinct from the standalone \"SplitButton\" concept referenced only in the Button page's own \"Related\" annotations (Figma does not define a separate SplitButton component — this Primary-Split variant of Button is the actual design)."
+      "notes": "Corrected in this pass: confirmed live in the Button page (20:10) — 12 \"Type=Primary-Split\" symbols exist (e.g. 4044:24089): a primary action side (pl=16px) + divider (button/primarySplit/divider at 30% opacity) + chevron dropdown side (pr=8px, chevron flips down/up on click), height matches standard button/height/{size}. Generated CSS already defines --c-button-primary-split-background-click/-default, -content-click/-default/-hover, -divider and --c-button-gap-split (src/styles/prism-generated.css:393,405-410), but button.tsx does not implement it. Distinct from CanvasCard's unrelated mode=\"split\" layout-mode enum value, and distinct from the standalone \"SplitButton\" concept referenced only in the Button page's own \"Related\" annotations (Figma does not define a separate SplitButton component — this Primary-Split variant of Button is the actual design). IMPLEMENTED (2026-08-29), CORRECTING this entry's own prior conclusion: this pass's live accessibility requirement (two independently keyboard-operable, independently labelled segments) cannot be satisfied by a single <button>, regardless of Figma modelling this as one Button variant symbol. Implemented as a new component, SplitButton (src/components/ui/split-button.tsx), composing two real Button instances (via the new additive radiusEdge prop, not a className override) plus the existing, unmodified DropdownMenu primitive for the secondary-options popover - not a Button variant value. button.tsx itself gained only the additive radiusEdge prop (default \"all\", every existing consumer unaffected). DESIGN-OWNER APPROVED (2026-08-29): the design owner visually verified this item as part of a 4-item review batch (Link, Divider, Button Bulk Action, Button Primary-Split). status: Approved, fidelityReview: Complete, visualReview: Approved, designOwnerApproval: { approved: true, date: \"2026-08-29\" }. This approval is scoped to this entry only."
     },
     {
       "id": "component-calendar",
@@ -2876,24 +2885,32 @@
         }
       ],
       "figmaMappingStatus": "Verified-MCP-this-session",
-      "repoPaths": [],
-      "docPath": null,
-      "gallerySection": null,
-      "examplePaths": [],
-      "implementationStatus": "Not implemented",
-      "status": "Missing",
-      "fidelityReview": "Not applicable",
-      "visualReview": "Not applicable",
+      "repoPaths": [
+        "src/components/ui/link.tsx"
+      ],
+      "docPath": "src/docs/docs/link.doc.ts",
+      "gallerySection": "Link",
+      "examplePaths": [
+        "src/docs/examples/link/sizes.tsx",
+        "src/docs/examples/link/states.tsx",
+        "src/docs/examples/link/icon-external.tsx"
+      ],
+      "implementationStatus": "Implemented",
+      "status": "Approved",
+      "fidelityReview": "Complete",
+      "visualReview": "Approved",
       "designOwnerApproval": {
-        "approved": false,
-        "date": null
+        "approved": true,
+        "date": "2026-08-29"
       },
-      "knownDeviations": [],
+      "knownDeviations": [
+        "External-indicator asset (icons/16/arrow-right rotated 180deg) renders as a plain left-pointing arrow, not a conventional up-right \"opens externally\" glyph, when implemented exactly as the AI Instructions specify. Flagged for design-owner confirmation this is the intended visual — not silently substituted with a different icon."
+      ],
       "dependencies": [
         "foundation-token-pipeline"
       ],
       "recommendedOrder": null,
-      "notes": "Corrected in this pass: the user supplied the exact node (20:15) via the authenticated Figma browser and it has been independently confirmed live via get_metadata — no longer a Stop-and-Ask item, just a genuine repo-side implementation gap. Real anatomy: single inline text element, no container/background/border, hug-content width. 2 sizes (Default 14px / Small 12px) × 4 states (Default/Hover/Visited/Disabled) × Icon=None|Right × External=false|true = 32 variants. Tokens: text → color/action/primary/{state}, visited → color/link/visited, disabled → color/text/disabled, icon → icon/color/default (state-invariant), gap → space/050 (4px), fonts → link/default/font (14px) / link/small/font (12px). AI Instructions explicitly say: never use Link to trigger actions (use Button), never as a standalone block-level CTA (use Button Tertiary), and keyboard interaction/focus-ring/visited-tracking are explicitly \"PLANNED — not yet implemented\" even in Figma. search_design_system for \"Link\" against this file key still returns zero results scoped to it (every result comes from other libraries, including the forbidden \"Prism - AI Design System of PX\") — that tool remains unusable for this lookup, but the directly-supplied node ID resolves the gap."
+      "notes": "Corrected in this pass: the user supplied the exact node (20:15) via the authenticated Figma browser and it has been independently confirmed live via get_metadata — no longer a Stop-and-Ask item, just a genuine repo-side implementation gap. Real anatomy: single inline text element, no container/background/border, hug-content width. 2 sizes (Default 14px / Small 12px) × 4 states (Default/Hover/Visited/Disabled) × Icon=None|Right × External=false|true = 32 variants. Tokens: text → color/action/primary/{state}, visited → color/link/visited, disabled → color/text/disabled, icon → icon/color/default (state-invariant), gap → space/050 (4px), fonts → link/default/font (14px) / link/small/font (12px). AI Instructions explicitly say: never use Link to trigger actions (use Button), never as a standalone block-level CTA (use Button Tertiary), and keyboard interaction/focus-ring/visited-tracking are explicitly \"PLANNED — not yet implemented\" even in Figma. search_design_system for \"Link\" against this file key still returns zero results scoped to it (every result comes from other libraries, including the forbidden \"Prism - AI Design System of PX\") — that tool remains unusable for this lookup, but the directly-supplied node ID resolves the gap. DESIGN-OWNER APPROVED (2026-08-29): the design owner visually verified this item as part of a 4-item review batch (Link, Divider, Button Bulk Action, Button Primary-Split). status: Approved, fidelityReview: Complete, visualReview: Approved, designOwnerApproval: { approved: true, date: \"2026-08-29\" }. This approval is scoped to this entry only."
     },
     {
       "id": "component-divider",
@@ -2927,24 +2944,29 @@
         }
       ],
       "figmaMappingStatus": "Verified-MCP-this-session",
-      "repoPaths": [],
-      "docPath": null,
-      "gallerySection": null,
-      "examplePaths": [],
-      "implementationStatus": "Not implemented",
-      "status": "Missing",
-      "fidelityReview": "Not applicable",
-      "visualReview": "Not applicable",
+      "repoPaths": [
+        "src/components/ui/divider.tsx"
+      ],
+      "docPath": "src/docs/docs/divider.doc.ts",
+      "gallerySection": "Divider",
+      "examplePaths": [
+        "src/docs/examples/divider/orientation.tsx",
+        "src/docs/examples/divider/weight.tsx"
+      ],
+      "implementationStatus": "Implemented",
+      "status": "Approved",
+      "fidelityReview": "Complete",
+      "visualReview": "Approved",
       "designOwnerApproval": {
-        "approved": false,
-        "date": null
+        "approved": true,
+        "date": "2026-08-29"
       },
       "knownDeviations": [],
       "dependencies": [
         "foundation-token-pipeline"
       ],
       "recommendedOrder": null,
-      "notes": "Corrected in this pass: node 20:18 supplied by the user and independently confirmed live via get_metadata. Real anatomy: Orientation=Horizontal|Vertical × Weight=1px|2px = 4 variants, Solid only (Dashed/Dotted explicitly excluded per PX DS V2). Token: stroke → color/line/default for all 4 variants, no fill, StrokeAlign=center. Horizontal renders as <hr>; Vertical renders as a decorative <div role=\"separator\" aria-orientation=\"vertical\">. AI Instructions explicitly warn against ever using a raw 1px rectangle as a substitute (won't carry the theme-aware token)."
+      "notes": "Corrected in this pass: node 20:18 supplied by the user and independently confirmed live via get_metadata. Real anatomy: Orientation=Horizontal|Vertical × Weight=1px|2px = 4 variants, Solid only (Dashed/Dotted explicitly excluded per PX DS V2). Token: stroke → color/line/default for all 4 variants, no fill, StrokeAlign=center. Horizontal renders as <hr>; Vertical renders as a decorative <div role=\"separator\" aria-orientation=\"vertical\">. AI Instructions explicitly warn against ever using a raw 1px rectangle as a substitute (won't carry the theme-aware token). DESIGN-OWNER APPROVED (2026-08-29): the design owner visually verified this item as part of a 4-item review batch (Link, Divider, Button Bulk Action, Button Primary-Split). status: Approved, fidelityReview: Complete, visualReview: Approved, designOwnerApproval: { approved: true, date: \"2026-08-29\" }. This approval is scoped to this entry only."
     },
     {
       "id": "component-rte-field",

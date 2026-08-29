@@ -56,14 +56,36 @@ export const buttonDoc: ComponentDoc = {
         "`asChild` applies Button's styling to the child element instead of rendering a <button>. Reach for it when the action navigates: an anchor preserves link semantics and the browser affordances users expect, while still looking like a button.",
       exampleId: "button/as-child",
     },
+    {
+      id: "bulk-action",
+      title: "Bulk action variant — Visual Review: Approved, Approved for AI use: Yes (2026-08-29)",
+      body:
+        "`variant=\"bulkAction\"` (Figma \"Type=Bulk Action\", Button page node 20:10, representative symbol 4044:23993). Regular font weight (not SemiBold), neutral background, grey border — visually distinct from every other variant, but with the exact same click/keyboard/disabled semantics as Primary/Secondary/Tertiary. Figma's own AI Instructions describe only a typographic and colour difference; there is no multi-select, toggle, or conditional-visibility behaviour evidenced anywhere in the Figma source, so none is implemented — do not infer bulk-selection behaviour from the name. Implemented against real, already-generated tokens (src/styles/prism-generated.css:370-377). Design-owner visually verified this variant's anatomy, typography, sizing, and states on 2026-08-29 — see ai/figma-coverage.json (id component-button-bulk-variant).",
+      exampleId: "button/bulk-action",
+    },
+    {
+      id: "split",
+      title: "Split — Visual Review: Approved, Approved for AI use: Yes (2026-08-29)",
+      body:
+        "Figma's \"Type=Primary-Split\" variant (Button page node 20:10, representative symbol 4044:24089) is modelled in Figma as one visual symbol, but its own AI Instructions describe two functionally distinct zones — a primary action and a separate dropdown trigger, joined by a divider. A single <button> element cannot expose two independently keyboard-operable, independently labelled regions, so this is implemented as a new component, `SplitButton` (src/components/ui/split-button.tsx), composing two real Button instances (reusing the additive `radiusEdge` prop to square off the adjoining edge instead of a className override) plus the existing DropdownMenu primitive for the actual secondary-options popover — not a `variant` value on Button itself. The chevron flips (chevron-down → chevron-up) exactly per Figma when the menu opens. Design-owner visually verified the distinct action/trigger segments, divider, and chevron states on 2026-08-29 — see ai/figma-coverage.json (id component-button-split-variant).",
+      exampleId: "button/split",
+    },
   ],
 
   props: [
     {
       name: "variant",
-      type: '"primary" | "secondary" | "tertiary" | "destructive"',
+      type: '"primary" | "secondary" | "tertiary" | "destructive" | "bulkAction"',
       defaultValue: '"primary"',
-      description: "Visual emphasis. See Appearance for when to use each.",
+      description:
+        "Visual emphasis. See Appearance for the four original variants. `bulkAction` is new, Figma-evidenced, and NOT design-owner reviewed — see \"Bulk action variant\" below.",
+    },
+    {
+      name: "radiusEdge",
+      type: '"all" | "start" | "end"',
+      defaultValue: '"all"',
+      description:
+        "Which corners get the pill radius. New, additive — every existing consumer omits this and is byte-for-byte unchanged (\"all\", the prior unconditional behaviour). Added so SplitButton can compose two adjoining Button instances that read as one pill without overriding Button's radius via className.",
     },
     {
       name: "size",
@@ -141,6 +163,22 @@ export const buttonDoc: ComponentDoc = {
     "--c-button-disabled-content",
     "--e-shadow-focus",
     "--e-shadow-button-hover",
+    "--c-button-bulk-action-background-default",
+    "--c-button-bulk-action-background-hover",
+    "--c-button-bulk-action-background-click",
+    "--c-button-bulk-action-border-default",
+    "--c-button-bulk-action-border-hover",
+    "--c-button-bulk-action-border-click",
+    "--c-button-bulk-action-border-disabled",
+    "--c-button-bulk-action-content-default",
+    "--c-button-primary-split-background-default",
+    "--c-button-primary-split-background-click",
+    "--c-button-primary-split-content-default",
+    "--c-button-primary-split-content-hover",
+    "--c-button-primary-split-content-click",
+    "--c-button-primary-split-divider",
+    "--c-button-gap-split",
+    "--c-button-padding-icon",
   ],
 
   guidelines: {

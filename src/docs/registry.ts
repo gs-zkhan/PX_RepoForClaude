@@ -15,6 +15,7 @@ import { configRowDoc } from "@/docs/docs/config-row.doc"
 import { dateFieldDoc } from "@/docs/docs/date-field.doc"
 import { dateFilterDoc } from "@/docs/docs/date-filter.doc"
 import { datePickerDoc } from "@/docs/docs/date-picker.doc"
+import { dividerDoc } from "@/docs/docs/divider.doc"
 import { donutChartDoc } from "@/docs/docs/donut-chart.doc"
 import { dragHandleDoc } from "@/docs/docs/drag-handle.doc"
 import { dropdownFieldDoc } from "@/docs/docs/dropdown-field.doc"
@@ -32,6 +33,7 @@ import { inputDoc } from "@/docs/docs/input.doc"
 import { inputNumberDoc } from "@/docs/docs/input-number.doc"
 import { letterDoc } from "@/docs/docs/letter.doc"
 import { lineChartDoc } from "@/docs/docs/line-chart.doc"
+import { linkDoc } from "@/docs/docs/link.doc"
 import { metricBarDoc } from "@/docs/docs/metric-bar.doc"
 import { modalDoc } from "@/docs/docs/modal.doc"
 import { paginationDoc } from "@/docs/docs/pagination.doc"
@@ -122,6 +124,7 @@ const allDocs: ComponentDoc[] = [
   dateFieldDoc,
   dateFilterDoc,
   datePickerDoc,
+  dividerDoc,
   donutChartDoc,
   dragHandleDoc,
   dropdownFieldDoc,
@@ -139,6 +142,7 @@ const allDocs: ComponentDoc[] = [
   inputNumberDoc,
   letterDoc,
   lineChartDoc,
+  linkDoc,
   metricBarDoc,
   modalDoc,
   paginationDoc,
@@ -239,6 +243,7 @@ export const navGroups: DocNavGroup[] = [
       viewSwitcherDoc,
       viewsDoc,
       pxAnalyticsSecondaryNavDoc,
+      linkDoc,
     ].map(navItem),
   },
   {
@@ -281,7 +286,7 @@ export const navGroups: DocNavGroup[] = [
   },
   {
     title: "Foundations",
-    items: [prismIconDoc, accordionDoc].map(navItem),
+    items: [prismIconDoc, accordionDoc, dividerDoc].map(navItem),
   },
 ]
 
