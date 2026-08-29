@@ -37,6 +37,7 @@ import { modalDoc } from "@/docs/docs/modal.doc"
 import { paginationDoc } from "@/docs/docs/pagination.doc"
 import { popoverDoc } from "@/docs/docs/popover.doc"
 import { prismIconDoc } from "@/docs/docs/prism-icon.doc"
+import { pxAnalyticsSecondaryNavDoc } from "@/docs/docs/px-analytics-secondary-nav.doc"
 import { progressBarDoc } from "@/docs/docs/progress-bar.doc"
 import { radioGroupDoc } from "@/docs/docs/radio-group.doc"
 import { searchBarDoc } from "@/docs/docs/search-bar.doc"
@@ -143,6 +144,7 @@ const allDocs: ComponentDoc[] = [
   paginationDoc,
   popoverDoc,
   prismIconDoc,
+  pxAnalyticsSecondaryNavDoc,
   progressBarDoc,
   radioGroupDoc,
   searchBarDoc,
@@ -182,9 +184,15 @@ function navItem(doc: ComponentDoc) {
 /**
  * Left-nav structure. Groups are functional groupings of the ui/ catalogue,
  * not the ShadCN/Prism/pattern layering in CLAUDE.md — every doc here is a
- * typed Prism component, composed patterns (Px*) are out of scope for this
- * pass. Components without a doc yet are intentionally absent rather than
- * linked to an empty page.
+ * typed Prism component; composed Px* patterns are generally out of scope
+ * for this docs system (README + shell-registry.md + Validation Gallery
+ * cover them instead). PxAnalyticsSecondaryNav is a deliberate, explicitly-
+ * requested exception in the "Navigation" group below — its Figma evidence,
+ * API and accessibility model are substantial enough to warrant a full doc
+ * page. This is a one-off exception, not a blanket policy change: other
+ * patterns (PxListShell, PxCreateEditShell, PxMainContainer) remain
+ * README-only. Components without a doc yet are intentionally absent rather
+ * than linked to an empty page.
  */
 export const navGroups: DocNavGroup[] = [
   {
@@ -230,6 +238,7 @@ export const navGroups: DocNavGroup[] = [
       viewSelectorDoc,
       viewSwitcherDoc,
       viewsDoc,
+      pxAnalyticsSecondaryNavDoc,
     ].map(navItem),
   },
   {

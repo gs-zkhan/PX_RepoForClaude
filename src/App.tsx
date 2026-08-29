@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { EngagementsListExample } from "@/pages/engagements-list-example"
+import { AnalyticsExample } from "@/pages/analytics-example"
 import { UserExplorer } from "@/pages/user-explorer"
 import { WorkInProgress } from "@/pages/work-in-progress"
 import { ValidationGallery } from "@/ValidationGallery"
@@ -22,6 +23,17 @@ function App() {
   if (activeKey === "engagements") {
     return (
       <EngagementsListExample
+        activeKey={activeKey}
+        onNavigate={setActiveKey}
+        mode={navMode}
+        onModeChange={setNavMode}
+      />
+    )
+  }
+
+  if (activeKey === "analytics") {
+    return (
+      <AnalyticsExample
         activeKey={activeKey}
         onNavigate={setActiveKey}
         mode={navMode}
