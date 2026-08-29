@@ -3507,22 +3507,24 @@
           "nodeId": "3351:3925",
           "name": "Shell/Analytics/Secondary-Left Navigation",
           "verified": "browser-verified-mcp-confirmed"
-        },
-        {
-          "nodeId": "9576:15005",
-          "name": "Secondary Left Navigation - Analytics (frame with Property 1=Expanded/Collapsed variants)",
-          "verified": "browser-verified-mcp-confirmed"
-        },
-        {
-          "nodeId": "9576:17226",
-          "name": "Collapsed Menu Hover behaviour (collapsed-rail hover flyout)",
-          "verified": "browser-verified-mcp-confirmed"
         }
       ],
       "figmaNodes": [
         {
           "nodeId": "3351:4914",
           "name": "Content/Component (frame containing the defining symbol)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "9576:15005",
+          "name": "Secondary Left Navigation - Analytics (frame with Property 1=Expanded/Collapsed variants) — a frame on page 3351:3925, not a separate top-level Figma page",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "9576:17226",
+          "name": "Collapsed Menu Hover behaviour (collapsed-rail hover flyout) — a frame on page 3351:3925, not a separate top-level Figma page",
           "role": "component",
           "verified": "browser-verified-mcp-confirmed"
         },
