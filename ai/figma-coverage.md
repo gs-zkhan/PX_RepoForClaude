@@ -23,14 +23,16 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 
 **Revision note (2026-08-29, Link / Divider / Button Bulk Action / Button Split approved):** the same four entries — `component-link`, `component-divider`, `component-button-bulk-variant`, `component-button-split-variant` — move from `Mapped-review-pending` to `Approved` (`fidelityReview: Complete`, `visualReview: Approved`, `designOwnerApproval: { approved: true, date: "2026-08-29" }`), after design-owner visual verification of this 4-item review batch. Total entry count unchanged at 99; counts-by-status below updated (`Approved` 7→11, `Mapped-review-pending` 65→61). These approvals are scoped to these four entries only — they do not change the status of `component-button` itself (still `Mapped-review-pending`, since Destructive-Split and the Figma-marked-PLANNED keyboard/focus-ring behaviour remain unreviewed), `component-dropdown-menu`, or any other shared component these items compose.
 
+**Revision note (2026-08-29, Page Layout registry correction — independent of Card work):** `component-page-layout` moves from `Missing` to `Mapped-review-pending`. Independently re-verified live via `get_metadata` against page `3187:6` and AI Instructions `4214:26368` in a fresh session: all 4 documented arrangements (Default, With Third Pane, Full Width, Collapsed Nav) are functionally achievable via the existing `PxMainContainer` + `PxShellRail` + `PxHeader` + `ThirdPane` composed primitives — not a build gap. `fidelityReview`/`visualReview` remain `Pending` (this is a functional-coverage correction, not a design-owner approval) — `designOwnerApproval.approved` stays `false`. Three non-blocking, pre-existing geometry/role deviations recorded (rail collapsed width 48px vs. Figma's 64px; Third Pane width/role following its own dedicated component page rather than Page Layout's generic prose) — see the entry's `knownDeviations`. This correction is logically separate from, and precedes, any Card-component work in this branch. Total entry count unchanged at 99; counts-by-status below updated (`Mapped-review-pending` 61→62, `Missing` 6→5).
+
 ---
 
 ## Precise summary language (per explicit correction request)
 
 - **All 75 supplied content-page nodes are MCP-verified.** Every one was checked live via `get_metadata` in this session before being recorded — none were inferred from name or from a prior-session claim.
 - **8 mappings remain intentionally unresolved** (status `Implemented-unmapped` — implemented in the repo, no Figma node ID captured for any of them, and none of the 75 supplied pages resolved them): Calendar, Canvas Card, Config Row, Drag Handle, Dropdown Menu, Filter Config Modal, Input, Popover.
-- **61 mapped entries still require fidelity review** (status `Mapped-review-pending` — a real Figma node exists and repo implementation exists, but no recorded design-owner sign-off): see the full breakdown below.
-- **6 entries are `Missing`** (Figma evidence exists, no repo implementation): RTE Field, Color Picker, Notification, Page Layout, Card (generic selectable), Dashboard Widget Card.
+- **62 mapped entries still require fidelity review** (status `Mapped-review-pending` — a real Figma node exists and repo implementation exists, but no recorded design-owner sign-off): see the full breakdown below.
+- **5 entries are `Missing`** (Figma evidence exists, no repo implementation): RTE Field, Color Picker, Notification, Card (generic selectable), Dashboard Widget Card.
 - Do not say there are no remaining unresolved mappings while any entry carries `Implemented-unmapped` or `Missing` — both are real, named, enumerated gaps, not silently dropped.
 
 ---
@@ -55,9 +57,9 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 | --- | --- |
 | `Approved` | 11 |
 | `Approved-with-documented-exception` | 1 |
-| `Mapped-review-pending` | 61 |
+| `Mapped-review-pending` | 62 |
 | `Implemented-unmapped` | 8 |
-| `Missing` | 6 |
+| `Missing` | 5 |
 | `Internal foundation` | 5 |
 | `Legacy` | 1 |
 | `Figma correction required` | 0 |

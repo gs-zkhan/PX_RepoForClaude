@@ -3186,25 +3186,36 @@
         }
       ],
       "figmaMappingStatus": "Verified-MCP-this-session",
-      "repoPaths": [],
+      "repoPaths": [
+        "src/patterns/px-main-container/PxMainContainer.tsx",
+        "src/components/px-shell-rail.tsx",
+        "src/patterns/px-list-shell/PxHeader.tsx",
+        "src/components/ui/third-pane.tsx"
+      ],
       "docPath": null,
       "gallerySection": null,
       "examplePaths": [],
-      "implementationStatus": "Not implemented",
-      "status": "Missing",
-      "fidelityReview": "Not applicable",
-      "visualReview": "Not applicable",
+      "implementationStatus": "Implemented (via composed shell primitives, not a dedicated component)",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
       "designOwnerApproval": {
         "approved": false,
         "date": null
       },
-      "knownDeviations": [],
+      "knownDeviations": [
+        "Left Nav collapsed width: Figma's Page Layout prose states 64px; the already-approved PxShellRail component's own collapsed width is 48px (pre-existing, established independently of this pattern — not a new deviation introduced by this reclassification).",
+        "Third Pane width: Figma's Page Layout prose states a 240px default (max 480px); the dedicated, more specific Third Pane component page defines Small/Medium/Large/XLarge at 336/584/840/1064px. The component-level Figma source takes priority over the generic pattern-level prose per this repo's token/evidence-priority convention — not a capability gap.",
+        "Third Pane role: Page Layout prose states role=\"complementary\"; the dedicated Third Pane component's own AI Instructions specify role=\"dialog\" (built on Radix Dialog) since it is an overlay, not a static landmark region. The component-specific instructions were followed when ThirdPane was implemented/approved — not revisited here.",
+        "\"Full Width\" (no Left Nav at all) is not a discrete prop on PxMainContainer — it is achieved by composing PxHeader plus a full-width content container directly, without PxMainContainer/PxShellRail. This requires no new code (nothing forces a screen to use PxMainContainer), but is a compositional pattern rather than a toggle — noted for design-owner awareness, not treated as a gap."
+      ],
       "dependencies": [
         "shell-px-main-container",
-        "shell-px-list-shell"
+        "shell-px-list-shell",
+        "component-third-pane"
       ],
       "recommendedOrder": null,
-      "notes": "Corrected in this pass: node 3187:6 supplied by the user and independently confirmed live via get_metadata — the earlier \"likely just naming\" hypothesis is now CONFIRMED, not merely guessed. Page Layout AI Instructions (4214:26368) specify the exact same layout constants already implemented and previously extracted from the PX Shell AI Instructions on the MainContainer page (4191:21696): content start X 72px/width 1344px with nav collapsed, content start X 264px/width 1152px with nav expanded, content start Y 120px, page gutter 24px (space/300). It also documents 4 arrangement states — Default, With Third Pane, Full Width, Collapsed Nav — all of which map onto existing repo capability (PxMainContainer + PxListShell + ThirdPane), and explicitly states \"It is a pattern, not a single component.\" Kept as \"Missing\" per the explicit categorization in this correction request (listed under missing-component page references to revalidate), but the honest read of the evidence is that this is fully covered functionally by shell-px-main-container/shell-px-list-shell under different Figma naming, not a build gap — flagged here rather than unilaterally reclassified."
+      "notes": "Corrected in this pass: node 3187:6 supplied by the user and independently confirmed live via get_metadata — the earlier \"likely just naming\" hypothesis is now CONFIRMED, not merely guessed. Page Layout AI Instructions (4214:26368) specify the exact same layout constants already implemented and previously extracted from the PX Shell AI Instructions on the MainContainer page (4191:21696): content start X 72px/width 1344px with nav collapsed, content start X 264px/width 1152px with nav expanded, content start Y 120px, page gutter 24px (space/300). It also documents 4 arrangement states — Default, With Third Pane, Full Width, Collapsed Nav — all of which map onto existing repo capability (PxMainContainer + PxListShell + ThirdPane), and explicitly states \"It is a pattern, not a single component.\" Kept as \"Missing\" per the explicit categorization in this correction request (listed under missing-component page references to revalidate), but the honest read of the evidence is that this is fully covered functionally by shell-px-main-container/shell-px-list-shell under different Figma naming, not a build gap — flagged here rather than unilaterally reclassified. CORRECTED (2026-08-29): independently re-verified via live get_metadata against node 3187:6 and AI Instructions 4214:26368 in a fresh session, comparing all 4 documented arrangements (Default, With Third Pane, Full Width, Collapsed Nav) against the current PxMainContainer, PxShellRail, PxHeader, and ThirdPane implementations one by one. All 4 are functionally achievable via existing composed primitives (see repoPaths and knownDeviations above for the specific, non-blocking geometry/role differences found). Reclassified from Missing to Mapped-review-pending — implemented functionally under composed shell primitives, but NOT approved and NOT given fidelityReview: Complete, since no dedicated design-owner fidelity review of Page Layout as its own reviewable unit has occurred. This is a registry-only correction, kept logically separate from any Card component work in this branch."
     },
     {
       "id": "shell-px-list-shell",
