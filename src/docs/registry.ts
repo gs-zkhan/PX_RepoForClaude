@@ -9,6 +9,7 @@ import { breadcrumbDoc } from "@/docs/docs/breadcrumb.doc"
 import { buttonDoc } from "@/docs/docs/button.doc"
 import { calendarDoc } from "@/docs/docs/calendar.doc"
 import { canvasCardDoc } from "@/docs/docs/canvas-card.doc"
+import { cardDoc } from "@/docs/docs/card.doc"
 import { checkboxDoc } from "@/docs/docs/checkbox.doc"
 import { columnSelectorDoc } from "@/docs/docs/column-selector.doc"
 import { configRowDoc } from "@/docs/docs/config-row.doc"
@@ -118,6 +119,7 @@ const allDocs: ComponentDoc[] = [
   buttonDoc,
   calendarDoc,
   canvasCardDoc,
+  cardDoc,
   checkboxDoc,
   columnSelectorDoc,
   configRowDoc,
@@ -276,6 +278,7 @@ export const navGroups: DocNavGroup[] = [
       segmentedBarDoc,
       calendarDoc,
       canvasCardDoc,
+      cardDoc,
     ].map(navItem),
   },
   {

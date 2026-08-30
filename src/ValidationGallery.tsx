@@ -29,6 +29,7 @@ import { Toggle } from "@/components/ui/toggle"
 import { Breadcrumb } from "@/components/ui/breadcrumb"
 import { SummaryStat, StatsRow } from "@/components/ui/summary-stat"
 import { CanvasCard } from "@/components/ui/canvas-card"
+import { Card } from "@/components/ui/card"
 import { ConfigRow } from "@/components/ui/config-row"
 import { Wizard, type WizardStep } from "@/components/ui/wizard"
 import { InputNumber } from "@/components/ui/input-number"
@@ -446,6 +447,173 @@ function ValidationGallery() {
               <span className="text-sm text-[var(--s-color-text-default)]">Middle</span>
               <Divider orientation="vertical" weight={2} />
               <span className="text-sm text-[var(--s-color-text-default)]">Right</span>
+            </div>
+          </Row>
+        </Section>
+
+        {/* ------------------------------------------------------------------ */}
+        {/* Card                                                                 */}
+        {/* ------------------------------------------------------------------ */}
+        <Section title="Card (Visual Review: Approved 2026-08-30 — Approved for AI use: Yes) — 8/8 legal Figma variants">
+          <Row label="1. large / default / with tags — 7623:3891">
+            <div className="w-[420px]">
+              <Card
+                size="large"
+                icon={
+                  <span className="flex size-10 items-center justify-center rounded-[var(--p-radius-100)] bg-[var(--s-color-surface-selected)]">
+                    <PrismIcon name="feature-px" size={24} decorative />
+                  </span>
+                }
+                title="Card Title"
+                description="Card description text"
+                tags={
+                  <>
+                    <Chip color="gray">Getting Started</Chip>
+                    <Chip color="gray">Recommended</Chip>
+                    <Chip color="gray">Learn</Chip>
+                  </>
+                }
+                onSelect={() => console.log("card selected")}
+              />
+            </div>
+          </Row>
+          <Row label="2. large / selected / with tags — 7623:3906">
+            <div className="w-[420px]">
+              <Card
+                size="large"
+                state="selected"
+                icon={
+                  <span className="flex size-10 items-center justify-center rounded-[var(--p-radius-100)] bg-[var(--s-color-surface-selected)]">
+                    <PrismIcon name="feature-px" size={24} decorative />
+                  </span>
+                }
+                title="Card Title"
+                description="Card description text"
+                tags={
+                  <>
+                    <Chip color="gray">Getting Started</Chip>
+                    <Chip color="gray">Recommended</Chip>
+                    <Chip color="gray">Learn</Chip>
+                  </>
+                }
+                onSelect={() => console.log("card selected")}
+              />
+            </div>
+          </Row>
+          <Row label="3. large / default / without tags — 7623:3921">
+            <div className="w-[420px]">
+              <Card
+                size="large"
+                icon={
+                  <span className="flex size-10 items-center justify-center rounded-[var(--p-radius-100)] bg-[var(--s-color-surface-selected)]">
+                    <PrismIcon name="feature-px" size={24} decorative />
+                  </span>
+                }
+                title="Card Title"
+                description="Card description text"
+                onSelect={() => console.log("card selected")}
+              />
+            </div>
+          </Row>
+          <Row label="4. large / selected / without tags — 7623:3929">
+            <div className="w-[420px]">
+              <Card
+                size="large"
+                state="selected"
+                icon={
+                  <span className="flex size-10 items-center justify-center rounded-[var(--p-radius-100)] bg-[var(--s-color-surface-selected)]">
+                    <PrismIcon name="feature-px" size={24} decorative />
+                  </span>
+                }
+                title="Card Title"
+                description="Card description text"
+                onSelect={() => console.log("card selected")}
+              />
+            </div>
+          </Row>
+          <Row label="5. small / default — 7614:231">
+            <div className="w-[420px]">
+              <Card
+                size="small"
+                icon={
+                  <span className="flex size-8 items-center justify-center rounded-[var(--p-radius-100)] bg-[var(--s-color-surface-selected)]">
+                    <PrismIcon name="feature-px" size={16} sourceSize={24} decorative />
+                  </span>
+                }
+                title="Card Title"
+                description="Card description text"
+                reorderHandle={<PrismIcon name="drag-and-drop" size={16} decorative />}
+                trailing={
+                  <>
+                    <Chip color="yellow">Setup Pending</Chip>
+                    <IconButton icon="delete" label="Delete" />
+                    <PrismIcon name="chevron-right" size={16} decorative />
+                  </>
+                }
+                onSelect={() => console.log("card selected")}
+              />
+            </div>
+          </Row>
+          <Row label="6. small / selected — 7614:284">
+            <div className="w-[420px]">
+              <Card
+                size="small"
+                state="selected"
+                icon={
+                  <span className="flex size-8 items-center justify-center rounded-[var(--p-radius-100)] bg-[var(--s-color-surface-selected)]">
+                    <PrismIcon name="feature-px" size={16} sourceSize={24} decorative />
+                  </span>
+                }
+                title="Card Title"
+                description="Card description text"
+                trailing={
+                  <>
+                    <Chip color="yellow">Setup Pending</Chip>
+                    <IconButton icon="delete" label="Delete" />
+                    <PrismIcon name="chevron-right" size={16} decorative />
+                  </>
+                }
+                onSelect={() => console.log("card selected")}
+              />
+            </div>
+          </Row>
+          <Row label="7. small / compact, mapped from Figma SelectedMin — 7621:3622">
+            <div className="w-[420px]">
+              <Card
+                size="small"
+                state="compact"
+                icon={
+                  <span className="flex size-8 items-center justify-center rounded-[var(--p-radius-100)] bg-[var(--s-color-surface-selected)]">
+                    <PrismIcon name="feature-px" size={16} sourceSize={24} decorative />
+                  </span>
+                }
+                title="Card Title"
+                reorderHandle={<PrismIcon name="drag-and-drop" size={16} decorative />}
+                trailing={
+                  <>
+                    <Chip color="yellow">Setup Pending</Chip>
+                    <IconButton icon="delete" label="Delete" />
+                    <PrismIcon name="chevron-right" size={16} decorative />
+                  </>
+                }
+                onSelect={() => console.log("card selected")}
+              />
+            </div>
+          </Row>
+          <Row label="8. small / empty — 7620:315">
+            <div className="w-[420px]">
+              <Card
+                size="small"
+                state="empty"
+                icon={
+                  <span className="flex size-8 items-center justify-center rounded-[var(--p-radius-100)] bg-[var(--s-color-surface-muted)]">
+                    <PrismIcon name="feature-px" size={16} sourceSize={24} decorative />
+                  </span>
+                }
+                title="Card Title"
+                description="Card description text"
+                trailing={<Link href="#">Add</Link>}
+              />
             </div>
           </Row>
         </Section>
