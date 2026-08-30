@@ -13,6 +13,7 @@ import { cardDoc } from "@/docs/docs/card.doc"
 import { checkboxDoc } from "@/docs/docs/checkbox.doc"
 import { columnSelectorDoc } from "@/docs/docs/column-selector.doc"
 import { configRowDoc } from "@/docs/docs/config-row.doc"
+import { dashboardWidgetCardDoc } from "@/docs/docs/dashboard-widget-card.doc"
 import { dateFieldDoc } from "@/docs/docs/date-field.doc"
 import { dateFilterDoc } from "@/docs/docs/date-filter.doc"
 import { datePickerDoc } from "@/docs/docs/date-picker.doc"
@@ -123,6 +124,7 @@ const allDocs: ComponentDoc[] = [
   checkboxDoc,
   columnSelectorDoc,
   configRowDoc,
+  dashboardWidgetCardDoc,
   dateFieldDoc,
   dateFilterDoc,
   datePickerDoc,
@@ -279,6 +281,7 @@ export const navGroups: DocNavGroup[] = [
       calendarDoc,
       canvasCardDoc,
       cardDoc,
+      dashboardWidgetCardDoc,
     ].map(navItem),
   },
   {
