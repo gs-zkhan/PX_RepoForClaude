@@ -37,6 +37,9 @@ import { Wizard, type WizardStep } from "@/components/ui/wizard"
 import { InputNumber } from "@/components/ui/input-number"
 import { Accordion, AccordionItem } from "@/components/ui/accordion"
 import { Slider } from "@/components/ui/slider"
+import { ColorPicker } from "@/components/ui/color-picker"
+import { ColorPickerBasic } from "@/components/ui/color-picker-basic"
+import { ColorPickerAdvanced } from "@/components/ui/color-picker-advanced"
 import { ColumnSelector, type ColumnSelectorView } from "@/components/ui/column-selector"
 import { FileUploader, FileUploaderRow } from "@/components/ui/file-uploader"
 import { MetricBar } from "@/components/ui/metric-bar"
@@ -295,6 +298,17 @@ function ValidationGallery() {
   const [inputNumberPrice, setInputNumberPrice] = React.useState(19.99)
   const [sliderValue, setSliderValue] = React.useState<number[]>([40])
   const [sliderRange, setSliderRange] = React.useState<number[]>([25, 75])
+  const [basicColor, setBasicColor] = React.useState<{ family: "tartRed" | "honeyAmber" | "freshGreen" | "royalBlue" | "pacificBlue" | "purple" | "neutral"; shade: 300 | 400 | 500 | 600 | 700 | 800; token: string; cssVar: string } | null>({
+    family: "royalBlue",
+    shade: 600,
+    token: "color/royalBlue/600",
+    cssVar: "var(--p-color-royal-blue-600)",
+  })
+  const [advancedColor, setAdvancedColor] = React.useState({ hex: "#DC3626", alpha: 100 })
+  const [triggerBasicColor, setTriggerBasicColor] = React.useState<{ family: "tartRed" | "honeyAmber" | "freshGreen" | "royalBlue" | "pacificBlue" | "purple" | "neutral"; shade: 300 | 400 | 500 | 600 | 700 | 800; token: string; cssVar: string } | null>(null)
+  const [triggerAdvancedColor, setTriggerAdvancedColor] = React.useState({ hex: "#0369E9", alpha: 100 })
+  const [multiInstanceColorA, setMultiInstanceColorA] = React.useState({ hex: "#8F54D4", alpha: 100 })
+  const [multiInstanceColorB, setMultiInstanceColorB] = React.useState({ hex: "#13AD68", alpha: 100 })
   const [columnSelectorView, setColumnSelectorView] = React.useState<ColumnSelectorView>("selection")
   const [columnSelectorSelected, setColumnSelectorSelected] = React.useState<string[]>([
     "name",
@@ -2788,6 +2802,63 @@ function ValidationGallery() {
           <Row label="disabled">
             <div className="w-[320px]">
               <Slider defaultValue={40} min={0} max={100} disabled />
+            </div>
+          </Row>
+        </Section>
+
+        {/* ------------------------------------------------------------------ */}
+        {/* Color Picker                                                         */}
+        {/* ------------------------------------------------------------------ */}
+        <Section title="Color Picker (Visual Review: Approved — Approved for AI use: Yes (2026-08-31))">
+          <p className="mb-2 w-full text-xs text-[var(--s-color-text-subtlest)]">
+            `ColorPicker` (anchored trigger + popover) is the recommended, consumer-facing component. It has two
+            modes — <strong>Basic</strong> opens the constrained, approved 42-colour PX palette; <strong>Advanced</strong>{" "}
+            opens arbitrary colour and opacity controls (canvas, hue/opacity sliders, HEX/RGBA fields). These are two
+            alternative configurations of the SAME `ColorPicker` API (`mode="basic"` vs `mode="advanced"`), not two
+            controls that belong together — a real product screen picks whichever ONE mode fits that field (e.g.
+            label colours are usually Basic-only; a free-form brand colour picker is usually Advanced-only) and does
+            not show both triggers side by side unless the product genuinely needs both a constrained and an
+            arbitrary colour input in the same place. Both examples are kept here, side by side, purely so reviewers
+            can compare the two modes — not as a suggested pairing. `ColorPickerBasic`/`ColorPickerAdvanced` are
+            internal/compositional modules, rendered inline further down purely for review anatomy inspection — not
+            an example of recommended standalone usage.
+          </p>
+          <Row label="Example A — Basic mode: constrained 42-colour PX palette (closes popover on selection)">
+            <ColorPicker
+              mode="basic"
+              value={triggerBasicColor}
+              onValueChange={setTriggerBasicColor}
+              triggerLabel="Label colour"
+            />
+          </Row>
+          <Row label="Example B — Advanced mode: arbitrary colour + opacity (stays open for continuous adjustment)">
+            <ColorPicker
+              mode="advanced"
+              value={triggerAdvancedColor}
+              onValueChange={setTriggerAdvancedColor}
+              triggerLabel="Custom colour"
+            />
+          </Row>
+          <Row label="REVIEW ANATOMY ONLY — Basic module, not standalone production usage">
+            <ColorPickerBasic value={basicColor} onValueChange={setBasicColor} />
+          </Row>
+          <Row label="REVIEW ANATOMY ONLY — Advanced module, not standalone production usage">
+            <ColorPickerAdvanced
+              value={advancedColor}
+              onValueChange={setAdvancedColor}
+              presets={[
+                { hex: "#0369E9", label: "Royal Blue 700" },
+                { hex: "#13AD68", label: "Fresh Green 700" },
+                { hex: "#DC3626", label: "Tart Red 700" },
+                { hex: "#8F54D4", label: "Purple 600" },
+                { hex: "#181F26", label: "Neutral 800" },
+              ]}
+            />
+          </Row>
+          <Row label="multiple Advanced instances — unique field IDs check">
+            <div className="flex gap-6">
+              <ColorPickerAdvanced value={multiInstanceColorA} onValueChange={setMultiInstanceColorA} />
+              <ColorPickerAdvanced value={multiInstanceColorB} onValueChange={setMultiInstanceColorB} />
             </div>
           </Row>
         </Section>

@@ -41,14 +41,22 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 
 **Revision note (2026-08-30, design-owner approval — Card and Dashboard Widget Card):** the design owner completed visual review and approved both components. `component-card` moves from `Mapped-review-pending` to **`Approved`** (`fidelityReview: Complete`, `visualReview: Approved`, `designOwnerApproval: { approved: true, date: "2026-08-30" }`) — no outstanding exceptions; all 8 legal Figma variants, the `compact` rename, and the typed Empty-state restrictions were confirmed at time of approval. `component-dashboard-widget-card` moves from `Mapped-review-pending` to **`Approved-with-documented-exception`** (same fidelity/visual/date fields) — one accepted, documented exception: the 4th chart-type option uses the existing Prism `icons/24/formula-number.svg` asset as the design-owner-accepted approximation, because the repository has no dedicated matching `#`/hash asset; it is visually approved but must not be described as an exact Figma icon match. No other entry's status changed — `component-view-switcher`, `component-radio-group`, `component-canvas-card`, `component-summary-stat`, and `component-page-layout` all remain exactly as they were (`Mapped-review-pending` / `Implemented-unmapped`, per their own prior entries), confirmed unchanged. Total entry count unchanged at 99; counts-by-status updated (`Approved` 11→12, `Approved-with-documented-exception` 1→2, `Mapped-review-pending` 64→62).
 
+**Revision note (2026-08-31, Color Picker implemented):** `component-color-picker` moves from `Missing` to `Mapped-review-pending`. Evidence-first audit of page `1273:11` (AI Instructions `4901:24640`, Dos/Don'ts `4901:24363`, defining symbols `2587:2`/`2587:95`/`2588:2`) confirmed the anatomy already on file and surfaced 7 evidence-vs-prose reconciliations (8px column gap vs. prose's claimed 0px; "Basic-Hover" being Figma's name for the Selected state, not a hover preview; the "HSL canvas" actually being a standard HSV saturation/value square; slider track dimensions; etc. — see the entry's `knownDeviations` for the full list). Implemented as 3 primitives (`ColorPickerBasic`, `ColorPickerAdvanced`, `ColorPicker`) plus `src/lib/color.ts` for HSV/RGB/hex conversion (no new dependency). All 42 Basic swatch fills verified to exactly match this repo's existing `--p-color-<family>-<shade>` primitive tokens — no new tokens required. Hue/opacity sliders and the compact HEX/R/G/B/A fields are new, purpose-built primitives (not the approved `Slider`/`InputNumber`/`TextField`, which don't match the required visual recipe or anatomy — see `knownDeviations`). Not design-owner approved — `fidelityReview`/`visualReview` remain `Pending`. Total entry count unchanged at 99; counts-by-status updated (`Mapped-review-pending` 62→63, `Missing` 3→2).
+
+**Revision note (2026-08-31, Color Picker corrected — three targeted passes, no status change):** `component-color-picker` remained `Mapped-review-pending`, unapproved, through three correction passes prompted by direct review: (1) removed an invented `hover:scale-110` swatch transform, fixed a real Basic keyboard-boundary bug (Right/Left/Up/Down could land in the wrong row/column at grid edges), added controlled external-value hue-sync for Advanced, generated unique field IDs per instance, replaced silent invalid-to-zero R/G/B/A coercion with explicit validation, gave the current-colour preview a real `role="img"`, and corrected documentation that had implied `ColorPickerBasic`/`ColorPickerAdvanced` were usable standalone; (2) wired `test:color` into CI, humanized the Basic trigger's accessible name (family key → human label), added stale-validation-error clearing across canvas/slider/preset/external-value paths, extracted whole-number R/G/B/A parsing into a shared, independently-tested helper (rejecting decimals instead of rounding them), and replaced a raw `border-2` with the `--p-border-width-200` primitive; (3) fixed an uncaught `NotFoundError` from an unguarded `setPointerCapture` call on the Advanced canvas with a proper tracked-pointer lifecycle. Total entry count and counts-by-status unchanged.
+
+**Revision note (2026-08-31, Color Picker visual corrections — no status change):** `component-color-picker` remained `Mapped-review-pending`, unapproved. Three design-owner-flagged visual defects fixed: (1) the Gallery/docs' two anchored-trigger examples were relabelled from reading like a required pair to two alternative `mode` configurations of the same API, with explicit guidance that a real screen picks one mode per field; (2) the Advanced popover's double nested rounded surface (a cross-component token borrow from `--c-datepicker-panel-*`, plus a canvas that punched square corners through its own container's rounded top edge) was corrected to a single surface using the Color Picker's own tokens, with `overflow-hidden` added to the one element that owns the rounded surface; (3) the anchored trigger's small inner colour dot inside a neutral ring (a radio-button look) was replaced with a full 24×24 circular colour fill, with the focus ring kept outside the colour layer and a shared `checkerBackground` helper (moved to `src/lib/color.ts`) reused for the alpha preview. Total entry count and counts-by-status unchanged.
+
+**Revision note (2026-08-31, Color Picker approved):** the design owner completed visual review and approved Color Picker. `component-color-picker` moves from `Mapped-review-pending` to **`Approved`** (`fidelityReview: Complete`, `visualReview: Approved`, `designOwnerApproval: { approved: true, date: "2026-08-31" }`). Approval covers the final, corrected state: all 42 Basic swatches in the verified 7×6 order with 24px hit-targets/16px dots and the `--p-border-width-200` + `--c-colorpicker-swatch-selected` ring, boundary-aware arrow navigation, Enter/Space selection, humanized accessible names, and close-on-select-and-update-trigger for Basic; the single-surface rounded Advanced popover, full HSV canvas with hue/opacity controls, unique field IDs, controlled hue sync, accessible HEX/R/G/B/A validation with whole-number parsing/clamping, the `role="img"` preview, the robust pointer lifecycle, and open-until-dismissed/Escape-with-focus-return behaviour for Advanced; and the full-circle trigger fill (no radio-button look), working alpha checkerboard, non-implying-grey empty Basic state, and outside-and-visible focus ring for the anchored trigger. No exceptions recorded. This approval covers `component-color-picker` only — it does not change the status of any other entry (RTE Field remains `Missing`; Notification is unchanged; Page Layout remains `Mapped-review-pending`). Total entry count unchanged at 99; counts-by-status updated (`Approved` 12→13, `Mapped-review-pending` 63→62).
+
 ---
 
 ## Precise summary language (per explicit correction request)
 
 - **All 75 supplied content-page nodes are MCP-verified.** Every one was checked live via `get_metadata` in this session before being recorded — none were inferred from name or from a prior-session claim.
 - **8 mappings remain intentionally unresolved** (status `Implemented-unmapped` — implemented in the repo, no Figma node ID captured for any of them, and none of the 75 supplied pages resolved them): Calendar, Canvas Card, Config Row, Drag Handle, Dropdown Menu, Filter Config Modal, Input, Popover.
-- **62 mapped entries still require fidelity review** (status `Mapped-review-pending` — a real Figma node exists and repo implementation exists, but no recorded design-owner sign-off): see the full breakdown below.
-- **3 entries are `Missing`** (Figma evidence exists, no repo implementation): RTE Field, Color Picker, Notification.
+- **63 mapped entries still require fidelity review** (status `Mapped-review-pending` — a real Figma node exists and repo implementation exists, but no recorded design-owner sign-off): see the full breakdown below.
+- **2 entries are `Missing`** (Figma evidence exists, no repo implementation): RTE Field, Notification.
 - Do not say there are no remaining unresolved mappings while any entry carries `Implemented-unmapped` or `Missing` — both are real, named, enumerated gaps, not silently dropped.
 
 ---
@@ -71,11 +79,11 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 
 | Status | Count |
 | --- | --- |
-| `Approved` | 12 |
+| `Approved` | 13 |
 | `Approved-with-documented-exception` | 2 |
 | `Mapped-review-pending` | 62 |
 | `Implemented-unmapped` | 8 |
-| `Missing` | 3 |
+| `Missing` | 2 |
 | `Internal foundation` | 5 |
 | `Legacy` | 1 |
 | `Figma correction required` | 0 |
@@ -95,7 +103,7 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 
 ---
 
-## Already solved and approved (9)
+## Already solved and approved (10)
 
 | Entry | Approved | Notes |
 | --- | --- | --- |
@@ -108,6 +116,7 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 | `foundation-color-tokens` (Color) | 2026-08-27 | New this pass — approval inherited from the existing protected-token approval record (royalBlue.700, neutral.800/900), not a new independent review of this specific page. |
 | `component-card` (Card) | 2026-08-30 | All 8 legal Figma variants, the `compact` rename (mapped from Figma's `State=SelectedMin`), and the typed Empty-state restrictions were in place at approval. No exceptions. |
 | `component-dashboard-widget-card` (Dashboard Widget Card) | 2026-08-30 | `Approved-with-documented-exception` — the 4th chart-type option uses `icons/24/formula-number.svg` as a design-owner-accepted approximation for a "#"/hash glyph this repo does not have; must not be described as an exact Figma icon match. |
+| `component-color-picker` (Color Picker) | 2026-08-31 | No exceptions. Covers both Basic (42-swatch palette) and Advanced (HSV canvas + hue/opacity + HEX/RGBA) as alternative modes of the anchored `ColorPicker`; `ColorPickerBasic`/`ColorPickerAdvanced` remain internal/anatomy-only modules, not standalone-approved components. |
 
 ## Implemented but needing mapping — full list (8 — `Implemented-unmapped`)
 
@@ -124,7 +133,7 @@ None of these were resolved by any of the 75 supplied pages. No candidate Figma 
 | `component-input` | `src/components/ui/input.tsx` | Internal composition primitive; likely never an independent Figma page. | Confirm with the user whether Figma models this as a standalone page before searching further. |
 | `component-popover` | `src/components/ui/popover.tsx` | No node ID ever captured; none of the 75 supplied pages named "Popover". | Ask the user for the exact page/node. |
 
-## Mapped but pending fidelity/design review — full list (60 — `Mapped-review-pending`)
+## Mapped but pending fidelity/design review — full list (61 — `Mapped-review-pending`)
 
 A real Figma node/page mapping is established for every entry below; fidelity review and design-owner sign-off remain outstanding — not the mapping itself.
 
@@ -138,14 +147,13 @@ A real Figma node/page mapping is established for every entry below; fidelity re
 
 Newly moved into this bucket this pass (previously `Unmapped`/`Implemented-unmapped`): Checkbox, Radio Group, Toggle, Search Bar, Status Label, Tooltip, Pagination, **Table**, Heatmap, World Map. Newly moved this pass (previously `Missing`): **PxAnalyticsSecondaryNav** (`shell-analytics-secondary-nav`, category corrected `Shell` → `Pattern`) — implemented under `src/patterns/px-analytics-secondary-nav/`, composed entirely from the existing `Accordion`/`Tree` components; see its README for 6 documented known deviations from Figma's AI-instructions prose. Still not design-owner approved.
 
-## Missing components and patterns (10)
+## Missing components and patterns (9)
 
 | Entry | Figma evidence | Notes |
 | --- | --- | --- |
 | Link | `20:15`, verified | Unchanged from prior pass. |
 | Divider | `20:18`, verified | Unchanged. |
 | RTE Field | `1273:14`, verified | Unchanged. |
-| Color Picker | `1273:11`, verified | Unchanged. |
 | Notification | `1273:7`, verified | Unchanged; Figma's own AI Instructions still note "Out of scope for current release" as a nuance, not a reclassification. |
 | Button — Bulk action variant | `20:10` (shared) | Unchanged. |
 | Button — Split variant | `20:10` (shared) | Unchanged. |
