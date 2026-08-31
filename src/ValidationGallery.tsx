@@ -8,6 +8,9 @@ import * as React from "react"
 import { SearchBar } from "@/components/ui/search-bar"
 import { FilterChip } from "@/components/ui/filter-chip"
 import { Chip } from "@/components/ui/chip"
+import { Card } from "@/components/ui/card"
+import { DashboardWidgetCard } from "@/components/ui/dashboard-widget-card"
+import { DashboardWidgetChartTypeSwitcher } from "@/components/ui/dashboard-widget-chart-type-switcher"
 import { FilterBar, type FilterBarChip } from "@/components/ui/filter-bar"
 import { FilterDropdownPanel, type NumberOperator } from "@/components/ui/filter-dropdown-panel"
 import { DateFilter, type DateFilterValue } from "@/components/ui/date-filter"
@@ -70,6 +73,10 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { TextField } from "@/components/ui/text-field"
 import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
   SelectItem,
   SelectGroup,
   SelectLabel,
@@ -281,6 +288,7 @@ function ValidationGallery() {
   const [viewsOpen, setViewsOpen] = React.useState(false)
   const [viewSelectorOpen, setViewSelectorOpen] = React.useState(false)
   const [viewSwitcherValue, setViewSwitcherValue] = React.useState("table")
+  const [chartTypeValue, setChartTypeValue] = React.useState("line")
   const [toggleOn, setToggleOn] = React.useState(true)
   const [summaryStatSelected, setSummaryStatSelected] = React.useState<"all" | "healthy" | "warning">("all")
   const [inputNumberValue, setInputNumberValue] = React.useState(5)
@@ -446,6 +454,260 @@ function ValidationGallery() {
               <span className="text-sm text-[var(--s-color-text-default)]">Middle</span>
               <Divider orientation="vertical" weight={2} />
               <span className="text-sm text-[var(--s-color-text-default)]">Right</span>
+            </div>
+          </Row>
+        </Section>
+
+        {/* ------------------------------------------------------------------ */}
+        {/* Card                                                                 */}
+        {/* ------------------------------------------------------------------ */}
+        <Section title="Card (Visual Review: Approved 2026-08-30 — Approved for AI use: Yes) — 8/8 legal Figma variants">
+          <Row label="1. large / default / with tags — 7623:3891">
+            <div className="w-[420px]">
+              <Card
+                size="large"
+                icon={
+                  <span className="flex size-10 items-center justify-center rounded-[var(--p-radius-100)] bg-[var(--s-color-surface-selected)]">
+                    <PrismIcon name="feature-px" size={24} decorative />
+                  </span>
+                }
+                title="Card Title"
+                description="Card description text"
+                tags={
+                  <>
+                    <Chip color="gray">Getting Started</Chip>
+                    <Chip color="gray">Recommended</Chip>
+                    <Chip color="gray">Learn</Chip>
+                  </>
+                }
+                onSelect={() => console.log("card selected")}
+              />
+            </div>
+          </Row>
+          <Row label="2. large / selected / with tags — 7623:3906">
+            <div className="w-[420px]">
+              <Card
+                size="large"
+                state="selected"
+                icon={
+                  <span className="flex size-10 items-center justify-center rounded-[var(--p-radius-100)] bg-[var(--s-color-surface-selected)]">
+                    <PrismIcon name="feature-px" size={24} decorative />
+                  </span>
+                }
+                title="Card Title"
+                description="Card description text"
+                tags={
+                  <>
+                    <Chip color="gray">Getting Started</Chip>
+                    <Chip color="gray">Recommended</Chip>
+                    <Chip color="gray">Learn</Chip>
+                  </>
+                }
+                onSelect={() => console.log("card selected")}
+              />
+            </div>
+          </Row>
+          <Row label="3. large / default / without tags — 7623:3921">
+            <div className="w-[420px]">
+              <Card
+                size="large"
+                icon={
+                  <span className="flex size-10 items-center justify-center rounded-[var(--p-radius-100)] bg-[var(--s-color-surface-selected)]">
+                    <PrismIcon name="feature-px" size={24} decorative />
+                  </span>
+                }
+                title="Card Title"
+                description="Card description text"
+                onSelect={() => console.log("card selected")}
+              />
+            </div>
+          </Row>
+          <Row label="4. large / selected / without tags — 7623:3929">
+            <div className="w-[420px]">
+              <Card
+                size="large"
+                state="selected"
+                icon={
+                  <span className="flex size-10 items-center justify-center rounded-[var(--p-radius-100)] bg-[var(--s-color-surface-selected)]">
+                    <PrismIcon name="feature-px" size={24} decorative />
+                  </span>
+                }
+                title="Card Title"
+                description="Card description text"
+                onSelect={() => console.log("card selected")}
+              />
+            </div>
+          </Row>
+          <Row label="5. small / default — 7614:231">
+            <div className="w-[420px]">
+              <Card
+                size="small"
+                icon={
+                  <span className="flex size-8 items-center justify-center rounded-[var(--p-radius-100)] bg-[var(--s-color-surface-selected)]">
+                    <PrismIcon name="feature-px" size={16} sourceSize={24} decorative />
+                  </span>
+                }
+                title="Card Title"
+                description="Card description text"
+                reorderHandle={<PrismIcon name="drag-and-drop" size={16} decorative />}
+                trailing={
+                  <>
+                    <Chip color="yellow">Setup Pending</Chip>
+                    <IconButton icon="delete" label="Delete" />
+                    <PrismIcon name="chevron-right" size={16} decorative />
+                  </>
+                }
+                onSelect={() => console.log("card selected")}
+              />
+            </div>
+          </Row>
+          <Row label="6. small / selected — 7614:284">
+            <div className="w-[420px]">
+              <Card
+                size="small"
+                state="selected"
+                icon={
+                  <span className="flex size-8 items-center justify-center rounded-[var(--p-radius-100)] bg-[var(--s-color-surface-selected)]">
+                    <PrismIcon name="feature-px" size={16} sourceSize={24} decorative />
+                  </span>
+                }
+                title="Card Title"
+                description="Card description text"
+                trailing={
+                  <>
+                    <Chip color="yellow">Setup Pending</Chip>
+                    <IconButton icon="delete" label="Delete" />
+                    <PrismIcon name="chevron-right" size={16} decorative />
+                  </>
+                }
+                onSelect={() => console.log("card selected")}
+              />
+            </div>
+          </Row>
+          <Row label="7. small / compact, mapped from Figma SelectedMin — 7621:3622">
+            <div className="w-[420px]">
+              <Card
+                size="small"
+                state="compact"
+                icon={
+                  <span className="flex size-8 items-center justify-center rounded-[var(--p-radius-100)] bg-[var(--s-color-surface-selected)]">
+                    <PrismIcon name="feature-px" size={16} sourceSize={24} decorative />
+                  </span>
+                }
+                title="Card Title"
+                reorderHandle={<PrismIcon name="drag-and-drop" size={16} decorative />}
+                trailing={
+                  <>
+                    <Chip color="yellow">Setup Pending</Chip>
+                    <IconButton icon="delete" label="Delete" />
+                    <PrismIcon name="chevron-right" size={16} decorative />
+                  </>
+                }
+                onSelect={() => console.log("card selected")}
+              />
+            </div>
+          </Row>
+          <Row label="8. small / empty — 7620:315">
+            <div className="w-[420px]">
+              <Card
+                size="small"
+                state="empty"
+                icon={
+                  <span className="flex size-8 items-center justify-center rounded-[var(--p-radius-100)] bg-[var(--s-color-surface-muted)]">
+                    <PrismIcon name="feature-px" size={16} sourceSize={24} decorative />
+                  </span>
+                }
+                title="Card Title"
+                description="Card description text"
+                trailing={<Link href="#">Add</Link>}
+              />
+            </div>
+          </Row>
+        </Section>
+
+        {/* ------------------------------------------------------------------ */}
+        {/* Dashboard Widget Card                                                */}
+        {/* ------------------------------------------------------------------ */}
+        <Section title="Dashboard Widget Card (Visual Review: Approved with documented exception 2026-08-30 — Approved for AI use: Yes)">
+          <Row label="with footer dropdowns (2 left + 1 right, per 4419:50511) + chart-type popover switcher (per user-supplied reference screenshots, not Figma static frames)">
+            <div className="w-[448px]">
+              <DashboardWidgetCard
+                title="Account Health Score"
+                sourceLabel="GAINSIGHT CS - PROD"
+                chartTypeSwitcher={
+                  <DashboardWidgetChartTypeSwitcher
+                    aria-label="Chart type"
+                    options={[
+                      { value: "scatter", label: "Scatter chart", icon: "scatter" },
+                      { value: "bar", label: "Bar chart", icon: "bar" },
+                      { value: "line", label: "Line chart", icon: "line" },
+                      { value: "number", label: "Number", icon: "formula-number" },
+                    ]}
+                    value={chartTypeValue}
+                    onValueChange={setChartTypeValue}
+                  />
+                }
+                filterAction={{ label: "Filter widget", onClick: () => console.log("filter") }}
+                shareAction={{ label: "Share widget", onClick: () => console.log("share") }}
+                overflowMenu={
+                  <>
+                    <DropdownMenuItem>Rename</DropdownMenuItem>
+                    <DropdownMenuItem>Duplicate</DropdownMenuItem>
+                    <DropdownMenuItem destructive>Remove widget</DropdownMenuItem>
+                  </>
+                }
+                filterRow={
+                  <>
+                    <div className="flex items-center gap-[var(--p-space-100)]">
+                      <Select defaultValue="daily">
+                        <SelectTrigger inline size="small" className="w-auto">
+                          <SelectValue placeholder="Granularity" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="daily">Daily</SelectItem>
+                          <SelectItem value="weekly">Weekly</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <Select defaultValue="30d">
+                        <SelectTrigger inline size="small" className="w-auto">
+                          <SelectValue placeholder="Date range" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="7d">Last 7 days</SelectItem>
+                          <SelectItem value="30d">Last 30 days</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <Select defaultValue="all">
+                      <SelectTrigger inline size="small" className="w-auto">
+                        <PrismIcon name="filter" size={16} decorative />
+                        <SelectValue placeholder="Segment" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All users</SelectItem>
+                        <SelectItem value="trial">Trial users</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </>
+                }
+              >
+                <div className="flex h-40 items-center justify-center text-xs text-[var(--s-color-text-subtlest)]">
+                  Chart body (caller-supplied)
+                </div>
+              </DashboardWidgetCard>
+            </div>
+          </Row>
+          <Row label="no filters, no chart-type switcher">
+            <div className="w-[448px]">
+              <DashboardWidgetCard
+                title="Active Users"
+                sourceLabel="GAINSIGHT CS - PROD"
+                overflowMenu={<DropdownMenuItem>Remove widget</DropdownMenuItem>}
+              >
+                <div className="flex h-24 items-center justify-center text-xs text-[var(--s-color-text-subtlest)]">
+                  Static KPI content (caller-supplied)
+                </div>
+              </DashboardWidgetCard>
             </div>
           </Row>
         </Section>

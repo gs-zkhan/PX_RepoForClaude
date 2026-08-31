@@ -3186,25 +3186,36 @@
         }
       ],
       "figmaMappingStatus": "Verified-MCP-this-session",
-      "repoPaths": [],
+      "repoPaths": [
+        "src/patterns/px-main-container/PxMainContainer.tsx",
+        "src/components/px-shell-rail.tsx",
+        "src/patterns/px-list-shell/PxHeader.tsx",
+        "src/components/ui/third-pane.tsx"
+      ],
       "docPath": null,
       "gallerySection": null,
       "examplePaths": [],
-      "implementationStatus": "Not implemented",
-      "status": "Missing",
-      "fidelityReview": "Not applicable",
-      "visualReview": "Not applicable",
+      "implementationStatus": "Implemented (via composed shell primitives, not a dedicated component)",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
       "designOwnerApproval": {
         "approved": false,
         "date": null
       },
-      "knownDeviations": [],
+      "knownDeviations": [
+        "Left Nav collapsed width: Figma's Page Layout prose states 64px; the already-approved PxShellRail component's own collapsed width is 48px (pre-existing, established independently of this pattern — not a new deviation introduced by this reclassification).",
+        "Third Pane width: Figma's Page Layout prose states a 240px default (max 480px); the dedicated, more specific Third Pane component page defines Small/Medium/Large/XLarge at 336/584/840/1064px. The component-level Figma source takes priority over the generic pattern-level prose per this repo's token/evidence-priority convention — not a capability gap.",
+        "Third Pane role: Page Layout prose states role=\"complementary\"; the dedicated Third Pane component's own AI Instructions specify role=\"dialog\" (built on Radix Dialog) since it is an overlay, not a static landmark region. The component-specific instructions were followed when ThirdPane was implemented/approved — not revisited here.",
+        "\"Full Width\" (no Left Nav at all) is not a discrete prop on PxMainContainer — it is achieved by composing PxHeader plus a full-width content container directly, without PxMainContainer/PxShellRail. This requires no new code (nothing forces a screen to use PxMainContainer), but is a compositional pattern rather than a toggle — noted for design-owner awareness, not treated as a gap."
+      ],
       "dependencies": [
         "shell-px-main-container",
-        "shell-px-list-shell"
+        "shell-px-list-shell",
+        "component-third-pane"
       ],
       "recommendedOrder": null,
-      "notes": "Corrected in this pass: node 3187:6 supplied by the user and independently confirmed live via get_metadata — the earlier \"likely just naming\" hypothesis is now CONFIRMED, not merely guessed. Page Layout AI Instructions (4214:26368) specify the exact same layout constants already implemented and previously extracted from the PX Shell AI Instructions on the MainContainer page (4191:21696): content start X 72px/width 1344px with nav collapsed, content start X 264px/width 1152px with nav expanded, content start Y 120px, page gutter 24px (space/300). It also documents 4 arrangement states — Default, With Third Pane, Full Width, Collapsed Nav — all of which map onto existing repo capability (PxMainContainer + PxListShell + ThirdPane), and explicitly states \"It is a pattern, not a single component.\" Kept as \"Missing\" per the explicit categorization in this correction request (listed under missing-component page references to revalidate), but the honest read of the evidence is that this is fully covered functionally by shell-px-main-container/shell-px-list-shell under different Figma naming, not a build gap — flagged here rather than unilaterally reclassified."
+      "notes": "Corrected in this pass: node 3187:6 supplied by the user and independently confirmed live via get_metadata — the earlier \"likely just naming\" hypothesis is now CONFIRMED, not merely guessed. Page Layout AI Instructions (4214:26368) specify the exact same layout constants already implemented and previously extracted from the PX Shell AI Instructions on the MainContainer page (4191:21696): content start X 72px/width 1344px with nav collapsed, content start X 264px/width 1152px with nav expanded, content start Y 120px, page gutter 24px (space/300). It also documents 4 arrangement states — Default, With Third Pane, Full Width, Collapsed Nav — all of which map onto existing repo capability (PxMainContainer + PxListShell + ThirdPane), and explicitly states \"It is a pattern, not a single component.\" Kept as \"Missing\" per the explicit categorization in this correction request (listed under missing-component page references to revalidate), but the honest read of the evidence is that this is fully covered functionally by shell-px-main-container/shell-px-list-shell under different Figma naming, not a build gap — flagged here rather than unilaterally reclassified. CORRECTED (2026-08-29): independently re-verified via live get_metadata against node 3187:6 and AI Instructions 4214:26368 in a fresh session, comparing all 4 documented arrangements (Default, With Third Pane, Full Width, Collapsed Nav) against the current PxMainContainer, PxShellRail, PxHeader, and ThirdPane implementations one by one. All 4 are functionally achievable via existing composed primitives (see repoPaths and knownDeviations above for the specific, non-blocking geometry/role differences found). Reclassified from Missing to Mapped-review-pending — implemented functionally under composed shell primitives, but NOT approved and NOT given fidelityReview: Complete, since no dedicated design-owner fidelity review of Page Layout as its own reviewable unit has occurred. This is a registry-only correction, kept logically separate from any Card component work in this branch."
     },
     {
       "id": "shell-px-list-shell",
@@ -4332,24 +4343,35 @@
         }
       ],
       "figmaMappingStatus": "Verified-MCP-this-session",
-      "repoPaths": [],
-      "docPath": null,
-      "gallerySection": null,
-      "examplePaths": [],
-      "implementationStatus": "Not implemented",
-      "status": "Missing",
-      "fidelityReview": "Not applicable",
-      "visualReview": "Not applicable",
+      "repoPaths": [
+        "src/components/ui/card.tsx"
+      ],
+      "docPath": "src/docs/docs/card.doc.ts",
+      "gallerySection": "Card",
+      "examplePaths": [
+        "src/docs/examples/card/sizes-states.tsx",
+        "src/docs/examples/card/small-row.tsx"
+      ],
+      "implementationStatus": "Implemented",
+      "status": "Approved",
+      "fidelityReview": "Complete",
+      "visualReview": "Approved",
       "designOwnerApproval": {
-        "approved": false,
-        "date": null
+        "approved": true,
+        "date": "2026-08-30"
       },
-      "knownDeviations": [],
+      "knownDeviations": [
+        "This Figma page (7611:395) carries no AI Instructions or Dos/Don'ts frames in the approved file, unlike Link/Divider/Button — confirmed via get_metadata, not assumed. Anatomy derived entirely from the 8 symbols' own visual layout (screenshot-verified) plus this repo's generated tokens. A cross-library search_design_system lookup surfaced a same-named 'Card' component, but only from the explicitly forbidden library 'Prism - AI Design System of PX' — discarded, not used as evidence.",
+        "RESOLVED (2026-08-30): the reorder affordance is a caller-supplied `reorderHandle` slot (component does not implement drag-and-drop physics or supply a default icon).",
+        "RESOLVED (2026-08-30, evidence-based, not screenshot inference): `get_variable_defs` confirms Selected (7614:284) is bound to `color/line/brand` while Figma's `State=SelectedMin` symbol (7621:3622) is bound to `color/line/default` — it is NOT a selected-state render despite its name; `aria-pressed` is driven strictly by `state === \"selected\"`.",
+        "RESOLVED (2026-08-30): `state=\"empty\"` is now its own typed branch (not a boolean) — requires `trailing` and rejects `onSelect` at the type level, since Figma has no Empty+Selected symbol and Empty's anatomy (a single Add affordance) is not an existing selectable row.",
+        "RENAMED (2026-08-30, third pass, per direct request — no deprecated alias retained since nothing is committed/published yet): the public Card API calls Figma's `State=SelectedMin` symbol (7621:3622) `state=\"compact\"` instead, since the evidence shows it is a condensed/minimized row, not a selected one. `state=\"selected\"` remains the only value that means selected. Figma mapping: `State=SelectedMin` -> public `state=\"compact\"`, symbol `7621:3622`."
+      ],
       "dependencies": [
         "foundation-token-pipeline"
       ],
       "recommendedOrder": null,
-      "notes": "Node 7611:395 (\"Card\") supplied by the user and confirmed live — a generic selectable list-item card (Size=Large/Small × State=Default/Selected/SelectedMin/Empty × With Tags=true/false, 8 variants). Confirmed distinct from src/components/ui/canvas-card.tsx (CanvasCard), which is an unrelated two-pane editor-style shell — no repo implementation of this generic selectable Card exists. Genuine repository-side gap, not a naming collision."
+      "notes": "Node 7611:395 (\"Card\") supplied by the user and confirmed live — a generic selectable list-item card (Size=Large/Small × State=Default/Selected/SelectedMin/Empty × With Tags=true/false, 8 variants). Confirmed distinct from src/components/ui/canvas-card.tsx (CanvasCard), which is an unrelated two-pane editor-style shell — no repo implementation of this generic selectable Card exists. Genuine repository-side gap, not a naming collision. IMPLEMENTED (2026-08-29): new Card component (src/components/ui/card.tsx). Confirmed distinct from CanvasCard (unrelated two-pane editor shell), SummaryStat (KPI value+label, no icon/title/description/tags anatomy), and ConfigRow (closest anatomical relative — icon+title/subtitle+trailing+chevron — but no Selected state, no tags row, no reorder grip; not extended, ConfigRow itself unmodified). Selection region is a real <button> with aria-pressed; trailing actions (delete/chevron/Add link) are siblings, never nested inside the selection button. Still Mapped-review-pending — NOT design-owner approved. CORRECTED (2026-08-30): re-enumerated frame 7613:57 directly via get_metadata — the 8 symbols are NOT a full Size×State×WithTags Cartesian product (Large never has SelectedMin/Empty; Small never has WithTags=true). Replaced the independent selected/minimized/empty/reorderable booleans with a discriminated union on `size` (\"large\" | \"small\"), each branch exposing only its own legal `state` enum and slots — Large: state \"default\"|\"selected\", tags slot, no trailing/reorderHandle; Small: state \"default\"|\"selected\"|\"selectedMin\"|\"empty\", trailing + reorderHandle slots, no tags. Screenshot-verified that \"SelectedMin\" (7621:3622) renders the default 1px border, NOT the blue Selected border, despite its name — corrected the height/border mapping accordingly. Removed the invented `disabled` prop entirely: no Disabled variant exists among the 8 audited symbols, and the prior pointer-events-none implementation did not actually block keyboard focus/activation of freeform trailing content, which was an unsafe half-implemented contract. Removed the no-op `empty` boolean (previously only executed `void empty`) — \"empty\" is now a real, meaningful branch of the small `state` enum with identical anatomy to \"default\" (icon/title/description all still render), differing only in caller-chosen trailing content. CORRECTED (2026-08-30, second pass): upgraded the SelectedMin evidence from screenshot inference to Figma variable bindings (get_variable_defs) — see knownDeviations. Refined the Small union: `state=\"empty\"` now requires `trailing` and rejects `onSelect` at the type level (previously state=\"empty\" was type-compatible with onSelect and an omitted trailing, which didn't match Figma's anatomy). RENAMED (2026-08-30, third pass): public API `state=\"selectedMin\"` renamed to `state=\"compact\"` (no deprecated alias retained) — see knownDeviations for the Figma mapping. Also added the 2 previously-missing Large-without-tags examples to the Validation Gallery and Design System Docs example, so all 8 legal Figma variants (7623:3891, 7623:3906, 7623:3921, 7623:3929, 7614:231, 7614:284, 7621:3622, 7620:315) are now visible on a review surface. APPROVED (2026-08-30): design owner completed visual review and approved this component as implemented — all 8 legal Figma variants, the `compact` rename (mapped from Figma's `State=SelectedMin`), the typed Empty-state restrictions, and the corrected SelectedMin evidence were all in place at time of approval. No outstanding exceptions."
     },
     {
       "id": "component-dashboard-widget-card",
@@ -4364,32 +4386,63 @@
       ],
       "figmaNodes": [
         {
-          "nodeId": "4432:50636",
-          "name": "Dashboard Widget Card component frame (Size=1*1/1*2/1*3)",
-          "role": "component",
+          "nodeId": "4407:49309",
+          "name": "Dashboard Widget Card AI Instructions",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "4407:49334",
+          "name": "Dashboard Widget Card Dos and Don'ts",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "4445:51016",
+          "name": "Dashboard Widget Card (light mode instance, representative of Size=1*1/1*2/1*3)",
+          "role": "example",
           "verified": "browser-verified-mcp-confirmed"
         }
       ],
       "figmaMappingStatus": "Verified-MCP-this-session",
-      "repoPaths": [],
-      "docPath": null,
-      "gallerySection": null,
-      "examplePaths": [],
-      "implementationStatus": "Not implemented",
-      "status": "Missing",
-      "fidelityReview": "Not applicable",
-      "visualReview": "Not applicable",
+      "repoPaths": [
+        "src/components/ui/dashboard-widget-card.tsx",
+        "src/components/ui/dashboard-widget-chart-type-switcher.tsx"
+      ],
+      "docPath": "src/docs/docs/dashboard-widget-card.doc.ts",
+      "gallerySection": "Dashboard Widget Card",
+      "examplePaths": [
+        "src/docs/examples/dashboard-widget-card/default.tsx",
+        "src/docs/examples/dashboard-widget-card/no-filters.tsx"
+      ],
+      "implementationStatus": "Implemented",
+      "status": "Approved-with-documented-exception",
+      "fidelityReview": "Complete",
+      "visualReview": "Approved",
       "designOwnerApproval": {
-        "approved": false,
-        "date": null
+        "approved": true,
+        "date": "2026-08-30"
       },
-      "knownDeviations": [],
+      "knownDeviations": [
+        "Filter row dropdowns (granularity/date range/segmentation) are not built-in — exposed as a `filterRow` slot per Figma's own instruction that these use \"standard Dropdown - Select\" components, keeping this component decoupled from any specific filter implementation.",
+        "No dedicated --c-card-widget-* tokens exist in generated CSS (verified via grep) — composes directly from semantic tokens per the AI Instructions' own token list, consistent with this repo's existing convention (e.g. Divider) for components with no dedicated component-tier tokens.",
+        "RESOLVED (2026-08-30, second pass): the chart-type switcher no longer references any `--c-view-switcher-*` token. Re-checked Figma: no dedicated chart-type-switcher instance or component-token set exists anywhere in the file (the only example instance, 4445:51016, renders this slot as a single static icon placeholder); the AI Instructions' own Tokens list documents only `card-widget/icon -> color/text/subtlest` and `card-widget/icon/hover -> color/text/default`. DashboardWidgetChartTypeSwitcher now uses only `--s-color-action-primary-default` (active glyph, matching the AI Instructions' \"active icon reflects the current chart type selected\" and reusing the same token this component already uses for its own source-label) and `--s-color-text-subtlest` (inactive glyph, the documented card-widget/icon token) — semantic tier only, no component tokens invented or added to generated CSS.",
+        "CORRECTED (2026-08-30, second pass): a prior note/comment implied ViewSwitcher was 'approved' — false. ViewSwitcher remains `Mapped-review-pending` with `visualReview: Pending` in its own registry entry; it is not modified or reclassified by any decision in this component. It is not reused here solely because its ARIA pattern (role=\"tablist\") differs from what Figma's AI Instructions require for this control (role=\"radiogroup\").",
+        "CORRECTED (2026-08-30, fourth pass, per direct design-owner request): title/subtitle typography and colour were re-verified via get_variable_defs on the actual title (4419:50529) and subtitle (4432:50619) text nodes individually — they do NOT match the AI Instructions' summarized prose (\"Widget title: SemiBold 14px\", \"source-label -> color/action/primary/default\"). Real bindings: title = font.heading.small (SemiBold 16px/24, color/text/default); subtitle = font.label.small (Regular 12px/16, letter-spacing 0, color/text/subtle). Implementation corrected to the full `--t-font-heading-small-*` / `--t-font-label-small-*` token sets and `--s-color-text-subtle`, with a 4px (`--p-space-050`) gap between them. This is a real, documented conflict between AI-Instructions prose and the live component's bound variables.",
+        "UNRESOLVED EVIDENCE GAP (2026-08-30, fourth pass, reported per direct design-owner request, not silently resolved): audited `icon=\"share\"` end to end (IconButton -> PrismIcon -> src/assets/icons/24/share.svg, source size 24, rendered at 24). All 3 defining Dashboard Widget Card symbols (4432:50635, 4432:50637, 4445:50697) show exactly 3 RHS icon instances each (filter, PXAnalytics, more-vertical) — NONE contains a Share icon, despite the AI Instructions' prose listing \"share/export icon\" as one of the 4 fixed action types. `search_design_system` for \"share icon\" scoped to this file returned zero approved-library hits (all results were from other/forbidden libraries, discarded). No authoritative Share icon exists in the approved file to compare against — kept the existing, already-cataloged repo icon as-is, but this is unverified, not a resolved match; needs explicit design-owner confirmation or a decision to drop the action.",
+        "RESOLVED (2026-08-30, fourth pass): chart-type icons in DashboardWidgetChartTypeSwitcher now render at the full 24px (previously 16px inside a 24x24 box) — the 3 defining Figma symbols all show the chart-type placeholder icon (icons/24/PXAnalytics) at a full 24x24, matching its sibling filter/overflow icons exactly. Fixed locally in that one component; IconButton's own default sizing was not touched, so no unrelated IconButton consumer is affected.",
+        "RE-VERIFIED (2026-08-30, fourth pass, per direct design-owner request): keyboard Tab order re-tested via real Tab/Shift+Tab key presses from a neutral focus position (not only .focus()) — confirmed radiogroup (single Tab stop, lands on the checked option) -> Filter -> Share -> Overflow, and the reverse via Shift+Tab, both directions correct. No positive tabIndex or manual keydown handling exists in either file. Could not reproduce a reported \"Tab starts at Filter\" behaviour in this test; flagged as unresolved/unreproduced rather than assumed fixed or dismissed — a plausible cause is that it was observed before the chart-type icon visibility fix (item above) landed.",
+        "CORRECTED (2026-08-30, fifth pass, per direct design-owner correction — a real error, not a design ambiguity): the chart-type switcher's two-option (line/bar) example was NOT sourced from Figma. Re-inspected the RHS icons of all 3 defining symbols directly via get_metadata: each shows exactly ONE static icon instance, `icons/24/PXAnalytics` — no second icon, no line/bar pair, no visible toggle anywhere in the file. The two-option example was an assumption extrapolated from the AI Instructions' prose (radiogroup requirement implies multiple options exist somewhere) plus borrowing the line/bar icon pair from this repo's own ViewSwitcher gallery demo, presented too confidently as if it were observed Figma evidence. `chartTypeSwitcher` remains a generic, caller-supplied slot; the option count/icons are now documented everywhere as illustrative only, requiring explicit design-owner confirmation.",
+        "ADDED (2026-08-30, fifth pass, per direct design-owner correction: \"footer DD are missing in the implementation\"): the footer dropdown row was previously missing from every example (only plain placeholder text was ever shown) and was positioned incorrectly (directly below the header). Re-inspected the defining symbol's own footer frame (4419:50511, at y=220 of a 288px-tall card — the BOTTOM, not the top) directly via get_metadata: it holds exactly 3 \"Dropdown\" instances — 2 grouped left (bare trigger, no icon), 1 pinned right (leading `icons/24/placeholder` + trigger — the icon itself is literally named \"placeholder\" in Figma, unfinalized there too). Fixed `filterRow` to render after `children` (bottom of card) with a `justify-between` wrapper, and added real examples composing the already-approved Select/SelectTrigger/SelectValue/SelectContent in the 2-left/1-right layout, in both the Validation Gallery and the Design System Docs example.",
+        "CORRECTED (2026-08-30, sixth pass, per direct user correction with reference screenshots): the chart-type switcher's anatomy was wrong a second time — the fifth-pass fix still rendered every option as an always-visible icon button in the header, but the real control (per user-supplied screenshots) is a single trigger (active option's icon + chevron) that opens a small popover listing all options, with the active one highlighted. Rebuilt `DashboardWidgetChartTypeSwitcher` as a `Popover` (existing, unmodified primitive) wrapping the same `role=\"radiogroup\"` inside its content, so the AI Instructions' radiogroup requirement still applies to the option list, just revealed behind a disclosure trigger. Re-verified live: single Tab stop (trigger) -> Filter -> Share -> Overflow still holds; click-to-select closes the popover and updates the trigger icon. Example options (scatter/bar/line/number, from the screenshots) use `icons/24/formula-number.svg` as the closest existing Prism asset for the \"#\"-style glyph shown — no dedicated hash icon exists in this repo; flagged as an approximation.",
+        "DESIGN-OWNER-ACCEPTED EXCEPTION (2026-08-30): the fourth chart-type option uses the existing Prism `icons/24/formula-number.svg` asset as the design-owner-accepted approximation, because the repository has no dedicated matching `#`/hash asset. It is visually approved but must not be described as an exact Figma icon match."
+      ],
       "dependencies": [
         "foundation-token-pipeline",
         "component-dropdown-field"
       ],
       "recommendedOrder": null,
-      "notes": "Node 20:27 supplied by the user and confirmed live — the header bar of an analytics dashboard widget tile (title + data-source label + chart-type switcher + filter/share/overflow icons, optional filter-dropdown row). Distinct from SummaryStat (a KPI number tile) and from CanvasCard. No repo implementation found under any name."
+      "notes": "Node 20:27 supplied by the user and confirmed live — the header bar of an analytics dashboard widget tile (title + data-source label + chart-type switcher + filter/share/overflow icons, optional filter-dropdown row). Distinct from SummaryStat (a KPI number tile) and from CanvasCard. No repo implementation found under any name. IMPLEMENTED (2026-08-29): new DashboardWidgetCard component (src/components/ui/dashboard-widget-card.tsx). Confirmed distinct from SummaryStat (single KPI display, no header/action anatomy) and CanvasCard (unrelated two-pane editor shell). Not coupled to any chart library — body is a `children` slot. Reuses IconButton (filter/share), DropdownMenu (overflow menu, unmodified), and ViewSwitcher (chart-type switcher, see flagged role ambiguity above). Still Mapped-review-pending — NOT design-owner approved. CORRECTED (2026-08-30): replaced onFilter/onShare (which rendered IconButtons with hard-coded \"Filter\"/\"Share\" accessible labels, contradicting the doc's claim that labels were caller-supplied) with filterAction/shareAction: { label, onClick } objects — the API and documentation now agree, and the caller supplies the real accessible name. Chart-type switcher corrected — see knownDeviations; ViewSwitcher is no longer reused for this control. CORRECTED (2026-08-30, second pass): removed a false claim that ViewSwitcher is approved (it is Mapped-review-pending, unmodified) — see knownDeviations. Replaced DashboardWidgetChartTypeSwitcher's `--c-view-switcher-*` token usage with semantic tokens (`--s-color-action-primary-default` / `--s-color-text-subtlest`), since no dedicated Figma token set or component instance exists for this control — see knownDeviations for the exact evidence. CORRECTED (2026-08-30, fourth pass, design-owner review-prep): re-verified title/subtitle typography and colour against direct per-node Figma evidence (see knownDeviations) — corrected from AI-Instructions prose that did not match the real component. Audited Share icon provenance and found no authoritative Figma instance to compare against — documented as an open gap, not silently resolved. Fixed chart-type icon rendering to the correct 24px. Re-verified keyboard Tab order via real key presses; did not reproduce a reported skip-to-Filter issue. Still Mapped-review-pending — NOT design-owner approved. CORRECTED (2026-08-30, fifth pass, per direct design-owner correction): admitted and fixed the chart-type-switcher evidence overstatement (no 2-icon instance exists in Figma; see knownDeviations) and added the previously-missing footer dropdown row with the correct anatomy and bottom position (see knownDeviations). Still Mapped-review-pending — NOT design-owner approved. CORRECTED (2026-08-30, sixth pass, per direct user correction with reference screenshots): rebuilt the chart-type switcher as a single trigger + popover (previously rendered as always-visible icon buttons, which was also wrong) — see knownDeviations. Still Mapped-review-pending — NOT design-owner approved. APPROVED WITH DOCUMENTED EXCEPTION (2026-08-30): design owner completed visual review and approved this component, with one accepted exception — see knownDeviations for the formula-number icon approximation. Everything else (title/subtitle typography, footer dropdown row anatomy/position, chart-type trigger+popover anatomy, Share icon audit, 24px icon sizing, keyboard order) was confirmed at time of approval."
     },
     {
       "id": "component-pec-dropdown",
