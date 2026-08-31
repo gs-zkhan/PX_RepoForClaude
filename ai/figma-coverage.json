@@ -3045,6 +3045,12 @@
           "verified": "browser-verified-mcp-confirmed"
         },
         {
+          "nodeId": "2587:95",
+          "name": "Variant=Basic-Hover (Selected state — persistent 2px ring, not a transient hover preview)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
           "nodeId": "2588:2",
           "name": "Variant=Advanced",
           "role": "component",
