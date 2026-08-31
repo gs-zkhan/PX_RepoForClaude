@@ -11,6 +11,7 @@ import { calendarDoc } from "@/docs/docs/calendar.doc"
 import { canvasCardDoc } from "@/docs/docs/canvas-card.doc"
 import { cardDoc } from "@/docs/docs/card.doc"
 import { checkboxDoc } from "@/docs/docs/checkbox.doc"
+import { colorPickerDoc } from "@/docs/docs/color-picker.doc"
 import { columnSelectorDoc } from "@/docs/docs/column-selector.doc"
 import { configRowDoc } from "@/docs/docs/config-row.doc"
 import { dashboardWidgetCardDoc } from "@/docs/docs/dashboard-widget-card.doc"
@@ -122,6 +123,7 @@ const allDocs: ComponentDoc[] = [
   canvasCardDoc,
   cardDoc,
   checkboxDoc,
+  colorPickerDoc,
   columnSelectorDoc,
   configRowDoc,
   dashboardWidgetCardDoc,
@@ -222,6 +224,7 @@ export const navGroups: DocNavGroup[] = [
       radioGroupDoc,
       searchBarDoc,
       fileUploaderDoc,
+      colorPickerDoc,
     ].map(navItem),
   },
   {
