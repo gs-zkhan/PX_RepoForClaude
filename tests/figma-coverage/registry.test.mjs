@@ -113,9 +113,41 @@ describe("figma-coverage registry: validator catches injected defects", () => {
     assert.ok(errors.some((e) => e.includes(target.id) && e.includes("requires a designOwnerApproval.date")))
   })
 
+  // The checked-in registry currently has zero real `Missing` entries (both
+  // former `Missing` entries — Notification, RTE Field — were implemented
+  // and moved to `Mapped-review-pending` on 2026-08-31), so these two tests
+  // synthesize a minimal fixture entry rather than relying on `.find()`
+  // locating one in live data — the validator rule being tested applies to
+  // the `Missing` status generically, not to any specific real entry.
+  function withSyntheticMissingEntry(registry) {
+    const entry = {
+      id: "fixture-synthetic-missing-entry",
+      name: "Fixture Synthetic Missing Entry",
+      category: "Component",
+      figmaPages: [],
+      figmaNodes: [],
+      figmaMappingStatus: "Verified-MCP-this-session",
+      repoPaths: [],
+      docPath: null,
+      gallerySection: null,
+      examplePaths: [],
+      implementationStatus: "Not implemented",
+      status: "Missing",
+      fidelityReview: "Not applicable",
+      visualReview: "Not applicable",
+      designOwnerApproval: { approved: false, date: null },
+      knownDeviations: [],
+      dependencies: [],
+      recommendedOrder: null,
+      notes: "Synthetic fixture entry for validator unit tests only — not a real catalogue entry.",
+    }
+    registry.entries.push(entry)
+    return entry
+  }
+
   test("rejects a Missing entry that is simultaneously marked design-owner approved", () => {
     const registry = cloneRegistry()
-    const target = registry.entries.find((e) => e.status === "Missing")
+    const target = withSyntheticMissingEntry(registry)
     target.designOwnerApproval = { approved: true, date: "2026-08-28" }
     const { errors } = validateRegistry(registry, rootDir)
     assert.ok(errors.some((e) => e.includes(target.id) && e.includes('status "Missing" cannot have designOwnerApproval.approved')))
@@ -123,7 +155,7 @@ describe("figma-coverage registry: validator catches injected defects", () => {
 
   test("rejects a Missing entry that lists repoPaths as if it were implemented", () => {
     const registry = cloneRegistry()
-    const target = registry.entries.find((e) => e.status === "Missing")
+    const target = withSyntheticMissingEntry(registry)
     target.repoPaths = ["src/components/ui/button.tsx"]
     const { errors } = validateRegistry(registry, rootDir)
     assert.ok(errors.some((e) => e.includes(target.id) && e.includes("should not list repoPaths")))
