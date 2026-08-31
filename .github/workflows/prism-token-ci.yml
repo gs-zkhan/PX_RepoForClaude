@@ -119,6 +119,9 @@ jobs:
       - name: Figma coverage registry tests
         run: npm run test:figma-coverage
 
+      - name: Color utility tests
+        run: npm run test:color
+
       - name: Regenerate Prism tokens
         run: npm run tokens:generate
 
