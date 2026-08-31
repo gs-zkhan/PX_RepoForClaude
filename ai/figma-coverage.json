@@ -3000,25 +3000,40 @@
         }
       ],
       "figmaMappingStatus": "Verified-MCP-this-session",
-      "repoPaths": [],
-      "docPath": null,
-      "gallerySection": null,
-      "examplePaths": [],
-      "implementationStatus": "Not implemented",
-      "status": "Missing",
-      "fidelityReview": "Not applicable",
-      "visualReview": "Not applicable",
+      "repoPaths": [
+        "src/components/ui/rte-field.tsx"
+      ],
+      "docPath": "src/docs/docs/rte-field.doc.ts",
+      "gallerySection": "RTE Field",
+      "examplePaths": [
+        "src/docs/examples/rte-field/default.tsx",
+        "src/docs/examples/rte-field/inline.tsx",
+        "src/docs/examples/rte-field/floating.tsx",
+        "src/docs/examples/rte-field/validation-and-limit.tsx"
+      ],
+      "implementationStatus": "Implemented",
+      "status": "Approved-with-documented-exception",
+      "fidelityReview": "Complete",
+      "visualReview": "Approved",
       "designOwnerApproval": {
-        "approved": false,
-        "date": null
+        "approved": true,
+        "date": "2026-08-31"
       },
-      "knownDeviations": [],
+      "knownDeviations": [
+        "No RTE package dependency added, per explicit instruction to prefer a small repository-native implementation: uses native contentEditable + document.execCommand for Bold/Italic/Underline/lists/indent/link/clear-formatting — the only dependency-free way to get real (not simulated) formatting. execCommand is deprecated but remains universally supported in evergreen browsers for exactly these commands.",
+        "SUPERSEDED by the correction pass below: this line originally read 'Explicitly NOT claimed as functional: Font size, Font properties, Text alignment, Attachment' at first implementation (2026-08-31, before design-owner review). Text alignment and Attachment were corrected to be real and functional later the same day (see the DESIGN-OWNER CORRECTION PASS entry below) and must not be re-listed as exceptions. The only two controls that remain genuinely visual-only, disabled, and not wired to behaviour are Font size and Font properties — Figma's AI Instructions describe all four originally via a 'downward arrow' shorthand implying each opens a picker/menu/upload flow, but only Font size and Font properties lack a real, directly-executable browser command or existing repo pattern to implement for real; building two real dropdown UIs for those two remains out of scope. Documented in the component header comment, the Doc page, and the Gallery so this is never silently overclaimed.",
+        "Token gap (same situation as component-textarea/Message Box, see that entry's own knownDeviations): no --c-rte-*/--c-editor-*/--c-toolbar-* component tokens exist in prism-generated.css. Per this repo's token-ownership priority (component -> semantic -> primitive), this implementation uses the semantic tokens the AI Instructions' own 'Token Bindings' section names directly (--s-color-line-default, --s-color-action-primary-default, --s-color-surface-default/-disabled/-muted, --s-color-text-disabled/-default, --p-radius-100/-075, --p-space-100/-075/-050) rather than inventing new component tokens or borrowing another component's.",
+        "Floating type's toolbar is positioned via Range.getBoundingClientRect() relative to the editable container, not a reused Popover — Radix Popover's trigger-anchor model does not fit a toolbar that must track a live, continuously-changing text selection rather than a persistent DOM element.",
+        "No icon approximations needed: bold/italic/underline/bullet/numbers/indent-in/indent-out/link/attachment/font-size/font-properties/text-align-left/clear-text-formating all already exist in the repo's Prism icon set at the evidenced 24px size and evidenced filenames (including the pre-existing 'clear-text-formating' spelling, matched exactly to the Figma layer name rather than corrected).",
+        "DESIGN-OWNER CORRECTION PASS (2026-08-31): direct override of this entry's own prior 'Explicitly NOT claimed as functional' deviation for Text alignment and Attachment specifically — both must not remain disabled. Alignment is now real: a Popover + RadioGroupPrimitive.Root icon picker (the exact composition already established by DashboardWidgetChartTypeSwitcher in this repo, reused rather than inventing a second pattern) applies real document.execCommand('justifyLeft'|'justifyCenter'|'justifyRight'); only Left/Center/Right are offered because this repo's icon set has no distinct 'justify' icon in the text-align family (the only 'justify'-named asset belongs to an unrelated layout-alignment icon family). Attachment is now real: a hidden native <input type=\"file\"> triggered by the toolbar button calls a new onAttachmentSelected(files: FileList) callback, matching this repo's existing FileUploader.onFilesSelected naming convention exactly; the component never uploads, stores, or previews the file — that remains the consuming application's responsibility, documented explicitly, with no fake upload backend implemented and no binary test fixture added to the repo. Font size and Font properties remain visual-only and are NOT claimed as functional — only alignment and attachment were in scope for this correction.",
+        "DESIGN-OWNER APPROVAL (2026-08-31): following live visual review, the design owner approved RTE Field WITH documented exceptions. status -> Approved-with-documented-exception, visualReview -> Approved, designOwnerApproval.approved -> true, date 2026-08-31. Approved for AI use: Yes, with documented exceptions. The accepted exceptions, precisely: (1) Font Size remains visible in the toolbar but disabled/visual-only — not claimed as functional. (2) Font Properties remains visible in the toolbar but disabled/visual-only — not claimed as functional. Alignment and Attachment are NOT exceptions — both are real and functional (see the correction-pass entry above) and must not be listed alongside Font Size/Font Properties. The component's supported formatting scope is native contentEditable + document.execCommand for: bold, italic, underline, insertUnorderedList, insertOrderedList, indent, outdent, createLink, removeFormat, and justifyLeft/justifyCenter/justifyRight (via the Alignment picker) — plus real file selection (not upload) via a hidden <input type=\"file\"> for Attachment. execCommand is a deprecated API that remains universally supported by evergreen browsers for exactly this command set; no keyboard shortcuts (Ctrl+B/I/Z/Y) are implemented, matching Figma's own 'PLANNED — not yet implemented' note."
+      ],
       "dependencies": [
         "foundation-token-pipeline",
         "component-textarea"
       ],
       "recommendedOrder": null,
-      "notes": "Corrected in this pass: node 1273:14 supplied by the user and independently confirmed live via get_metadata. Real anatomy: 3 Types — Default (boxed, standalone), Inline (borderless, integrated), Floating (toolbar-only overlay on text selection) — × up to 6 states (Default/Hover/Active/Filled/Hover-Elements/Disabled) × ShowCTAs=true|false = 19 total variants. Toolbar has 5 icon groups (Bold/Italic/Underline/FontSize/FontProperties · TextAlign · Bullet/Numbers · Indent · Link/Attachment/Clear-formatting). Explicit relationship to already-implemented components (per the AI Instructions' own \"When NOT to use\"): plain single-line text → Text Field; plain multi-line text with no formatting → Textarea/Message Box (component-textarea); search input → Search Bar. Keyboard shortcuts (Ctrl+B/I/Z/Y) are explicitly \"PLANNED — not yet implemented\" even in Figma."
+      "notes": "Corrected in this pass: node 1273:14 supplied by the user and independently confirmed live via get_metadata. Real anatomy: 3 Types — Default (boxed, standalone), Inline (borderless, integrated), Floating (toolbar-only overlay on text selection) — × up to 6 states (Default/Hover/Active/Filled/Hover-Elements/Disabled) × ShowCTAs=true|false = 19 total variants. Toolbar has 5 icon groups (Bold/Italic/Underline/FontSize/FontProperties · TextAlign · Bullet/Numbers · Indent · Link/Attachment/Clear-formatting). Explicit relationship to already-implemented components (per the AI Instructions' own \"When NOT to use\"): plain single-line text → Text Field; plain multi-line text with no formatting → Textarea/Message Box (component-textarea); search input → Search Bar. Keyboard shortcuts (Ctrl+B/I/Z/Y) are explicitly \"PLANNED — not yet implemented\" even in Figma. IMPLEMENTED (2026-08-31): built as a single RteField component with 3 type modes (default/inline/floating) sharing one Toolbar. Real formatting commands vs. visual-only controls are explicitly separated per instruction not to overclaim capability — see knownDeviations. APPROVED-WITH-DOCUMENTED-EXCEPTION (2026-08-31) — Approved for AI use: Yes, with documented exceptions (Font size, Font properties remain visual-only; Alignment and Attachment are functional, not exceptions)."
     },
     {
       "id": "component-color-picker",
@@ -3163,26 +3178,42 @@
         }
       ],
       "figmaMappingStatus": "Verified-MCP-this-session",
-      "repoPaths": [],
-      "docPath": null,
-      "gallerySection": null,
-      "examplePaths": [],
-      "implementationStatus": "Not implemented",
-      "status": "Missing",
-      "fidelityReview": "Not applicable",
-      "visualReview": "Not applicable",
+      "repoPaths": [
+        "src/components/ui/notification.tsx"
+      ],
+      "docPath": "src/docs/docs/notification.doc.ts",
+      "gallerySection": "Notification",
+      "examplePaths": [
+        "src/docs/examples/notification/bell.tsx",
+        "src/docs/examples/notification/panel-populated.tsx",
+        "src/docs/examples/notification/panel-empty.tsx",
+        "src/docs/examples/notification/badge-sizes.tsx"
+      ],
+      "implementationStatus": "Implemented",
+      "status": "Approved",
+      "fidelityReview": "Complete",
+      "visualReview": "Approved",
       "designOwnerApproval": {
-        "approved": false,
-        "date": null
+        "approved": true,
+        "date": "2026-08-31"
       },
-      "knownDeviations": [],
+      "knownDeviations": [
+        "DESIGN-OWNER OVERRIDE (2026-08-31): implemented despite the Notification AI Instructions node (7195:378) stating under 'Purpose': 'Out of scope for current release.' That prose is preserved verbatim above (see notes) as historical evidence; it was not a mistake. The design owner explicitly requested implementation on 2026-08-31, overriding the release-scope note. At the time this override was recorded, it did NOT yet constitute design-owner visual approval on its own — the two are separate events (an authorization-to-build override, followed later the same day by an independent visual review and approval; see the final approval entry below).",
+        "RESOLVED evidence conflict (2026-08-31): Notification/Item's own component description says the Dismiss (x) icon 'appears on hover', but the Dos/Dont's explicitly says 'Always show the Dismiss (x) button on every Item... Never hide it'. The Dos/Dont's (the stronger, explicit rule) governs: Dismiss renders unconditionally, not hover-gated. Hover itself (Hover=True/False in the 16-variant grid) is implemented as a real CSS :hover pseudo-class, not a React prop, matching this repo's ColorPickerBasic precedent for focus-visible.",
+        "RESOLVED evidence conflict (2026-08-31): both the Panel description ('Mark-all-read action sits in the panel header') and the Dos/Dont's ('Mark all as read is a panel-level action on the header') assert a mark-all-read header control exists, but the actual extracted Populated-panel anatomy (get_design_context on 7197:157) renders only a bell icon, title, unread badge, and a single close (x) button — no second control. The x is the panel's own close action (matches the AI Instructions' 'Escape closes panel'), not mark-all-read. No button was fabricated to match the literal anatomy; since the prose is repeated in two independent places, NotificationPanel/NotificationBell expose an optional onMarkAllRead callback that renders a header button only when supplied.",
+        "No icon approximations needed: all required icons (notifications, cancel, information-filled, success-filled, warning-filled, danger-filled) already exist in the repo's Prism icon set at the evidenced 24px size, reused identically to Toast/Banner's existing filled-status-icon usage.",
+        "No new tokens invented: the full --c-notification-* component-token family (26 tokens) already existed in prism-generated.css before this component did (added during an earlier token-audit pass) — this implementation consumes them directly.",
+        "DESIGN-OWNER CORRECTION PASS (2026-08-31): (1) popover alignment was hardcoded to align=\"end\" — NotificationBell now exposes a real align?: \"start\" | \"end\" prop wired straight to Radix Popover's own align, with avoidCollisions left on, so positioning is genuinely location-aware rather than gallery-only styling. (2) the header bell icon (<PrismIcon name=\"notifications\" size={20}>) was missing sourceSize={24}, so it silently failed to resolve (no /src/assets/icons/20/ folder exists) and rendered nothing — this, not any header padding-token asymmetry, was the true cause of the reported left/right spacing complaint; the header's own padding tokens were confirmed symmetric via getComputedStyle before concluding this. (3) the trigger badge overlap was reduced from a 4px outward offset to a corner-centred placement (right-0 top-0, -translate-y-1/2 translate-x-1/2), because the prior offset let the Large-With-Number badge (26x20px, from Figma's own Badge component set 3176:38) cover most of the 24px bell glyph; no Figma frame composites Badge onto a real bell instance, so this corner-centring is a documented reasoned default, not a fabricated exact value. (4) unread rows' tinted background (--c-notification-item-bg-unread) was removed per direct design-owner instruction, overriding the raw Figma symbol's own render — the unread dot alone is now the signal. (5) \"View all notifications\" was re-checked against the already-captured Populated-panel anatomy (7197:157) and found present with only 4 items, so the prior items.length > 20 threshold (inferred from Dos/Don'ts prose alone) was removed; shouldShowViewAll now gates purely on whether a destination was supplied.",
+        "DESIGN-OWNER CORRECTION PASS 2 (2026-08-31): (1) a manually-supplied align prop (from correction pass 1) still required the consumer/gallery to choose the direction, which does not satisfy 'location-aware' — NotificationBell now measures the trigger's real getBoundingClientRect() every time the panel opens, and again on window resize while it stays open, via the new pure computeAutoAlign helper (src/lib/notification.ts): a bell near the left edge automatically gets 'start', a bell near the right edge automatically gets 'end', with no prop required; align remains available only as an explicit override that disables the automatic measurement. 5 new focused tests cover computeAutoAlign's left-edge, right-edge, tied/insufficient-space, and outright-fit branches (Notification suite: 7 -> 12 tests). The Gallery's two alignment demo rows were rewritten to omit the align prop and use position:fixed placement at the TRUE browser viewport edges (the previous fixed-640px dashed-box demo sat inside the page's own centred max-w-6xl column, which still had >440px of real room past the box's own edge, so the 'right-edge' case was actually resolving to 'start' by genuinely correct math against the wrong visual setup, not a bug in the decision logic). (2) Header spacing was re-measured using the correct elements per direct instruction: panel-left-edge-to-title's-own-left-edge, and close-button-right-edge-to-panel-right-edge. Figma's real anatomy (get_metadata on 7197:101) confirms a 20px bell icon at x=16 (relative to the 440px header), an 8px gap, then the title text at x=44 — i.e. the header genuinely has an icon before the title, so panel-left-to-title-left (measured live: 44px) is NOT expected to equal close-button-to-panel-right (measured live: 16px); forcing them equal would mean removing the evidenced icon. The correct like-for-like check is each side's first/last content element: icon-left-inset (16px, live-measured) matches close-button-right-inset (16px, live-measured) exactly, both equal to --c-notification-panel-padding-h (16px) — confirmed symmetric, matching Figma's own 16px insets on both sides precisely.",
+        "DESIGN-OWNER APPROVAL (2026-08-31): following live visual review of all corrections above, the design owner approved Notification. status -> Approved, visualReview -> Approved, designOwnerApproval.approved -> true, date 2026-08-31. Approved for AI use: Yes. This approval is a separate, later event from the same-day scope override recorded above — the override authorized implementation despite Figma's own release-scope note; this entry records the subsequent, independent visual sign-off. The override's historical evidence (Figma's verbatim 'Out of scope for current release' note) is preserved above and remains true regardless of this approval — approval does not retroactively rewrite what Figma originally said, it records that the design owner chose to proceed and then signed off on the result."
+      ],
       "dependencies": [
         "foundation-token-pipeline",
         "component-toast",
         "component-banner"
       ],
       "recommendedOrder": null,
-      "notes": "Corrected in this pass: node 1273:7 supplied by the user and independently confirmed live via get_metadata — confirms and supersedes the token-only evidence previously on file (the full --c-notification-* token set in prism-generated.css:766-792 now has matching component evidence, not just orphaned tokens). Three separate component sets, all same-file: Badge (overlays the Shell nav bell icon), Item (individual panel row: Type=Info/Success/Warning/Danger × Read=Unread/Read × Hover), Panel (popover container opened by the bell; Empty state shows \"You're all caught up!\"). Toast and Banner are explicitly distinct, already-implemented components, not substitutes (per the AI Instructions' own Pairs-With/When-NOT-to-use sections: Toast = transient feedback for an action just taken; Banner = persistent full-page/system alert; Notification/Item = async background events persisted in a panel). IMPORTANT NUANCE surfaced, not silently dropped: the Notification AI Instructions node (7195:378) itself states, under \"Purpose\": \"Out of scope for current release.\" This is a Figma-authored release-scope note, not a design rejection of the component — the anatomy, states, and tokens are fully specified and ready to implement. Kept under \"Missing\" per the explicit categorization in this correction request (grouped with the other missing-component page references, not with the six pages under \"(Out of scope)\" in their literal Figma page names) — flagging the nuance here rather than reclassifying unilaterally."
+      "notes": "Corrected in this pass: node 1273:7 supplied by the user and independently confirmed live via get_metadata — confirms and supersedes the token-only evidence previously on file (the full --c-notification-* token set in prism-generated.css:766-792 now has matching component evidence, not just orphaned tokens). Three separate component sets, all same-file: Badge (overlays the Shell nav bell icon), Item (individual panel row: Type=Info/Success/Warning/Danger × Read=Unread/Read × Hover), Panel (popover container opened by the bell; Empty state shows \"You're all caught up!\"). Toast and Banner are explicitly distinct, already-implemented components, not substitutes (per the AI Instructions' own Pairs-With/When-NOT-to-use sections: Toast = transient feedback for an action just taken; Banner = persistent full-page/system alert; Notification/Item = async background events persisted in a panel). IMPORTANT NUANCE surfaced, not silently dropped: the Notification AI Instructions node (7195:378) itself states, under \"Purpose\": \"Out of scope for current release.\" This is a Figma-authored release-scope note, not a design rejection of the component — the anatomy, states, and tokens are fully specified and ready to implement. This historical evidence, and the design owner's explicit 2026-08-31 override authorizing implementation despite it, are preserved verbatim in knownDeviations and must not be deleted now that the component is Approved — approval supersedes the scope-pending status, not the historical record of why it was built anyway. IMPLEMENTED (2026-08-31): built as 4 primitives — NotificationBadge, NotificationItem, NotificationPanel (internal/compositional anatomy modules, never used standalone) and NotificationBell (the anchored Popover-composition, the one recommended public component, mirroring the ColorPicker anchored-trigger precedent). See knownDeviations for the two resolved evidence conflicts (Dismiss-always-visible; mark-all-read as an opt-in callback), the design-owner scope override, two correction passes, and the final 2026-08-31 design-owner visual approval. APPROVED (2026-08-31) — Approved for AI use: Yes."
     },
     {
       "id": "component-page-layout",
