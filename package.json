@@ -22,6 +22,7 @@
     "test:notification": "node --experimental-strip-types --test \"tests/notification/*.test.mjs\"",
     "test:rte-field": "node --experimental-strip-types --test \"tests/rte-field/*.test.mjs\"",
     "test:radio-group": "node --test \"tests/radio-group/*.test.mjs\"",
+    "test:dropdown-field": "node --experimental-strip-types --test \"tests/dropdown-field/*.test.mjs\"",
     "figma:sync": "node scripts/figma-sync.mjs",
     "figma:bridge": "node scripts/figma-local-bridge.mjs",
     "icons:import": "node scripts/import-prism-icons.mjs",
