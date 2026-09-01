@@ -23,6 +23,9 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { ThirdPane } from "@/components/ui/third-pane"
 import { ToastProvider, ToastViewport, Toast } from "@/components/ui/toast"
 import type { ToastVariant } from "@/components/ui/toast"
+import { NotificationBell, NotificationPanel, NotificationItem, NotificationBadge } from "@/components/ui/notification"
+import type { NotificationItemData } from "@/components/ui/notification"
+import { RteField } from "@/components/ui/rte-field"
 import { Modal, ModalFooter, ModalConfirmation } from "@/components/ui/modal"
 import { Tree, TreeItem } from "@/components/ui/tree"
 import { Views } from "@/components/ui/views"
@@ -309,6 +312,24 @@ function ValidationGallery() {
   const [triggerAdvancedColor, setTriggerAdvancedColor] = React.useState({ hex: "#0369E9", alpha: 100 })
   const [multiInstanceColorA, setMultiInstanceColorA] = React.useState({ hex: "#8F54D4", alpha: 100 })
   const [multiInstanceColorB, setMultiInstanceColorB] = React.useState({ hex: "#13AD68", alpha: 100 })
+
+  const [notificationItems, setNotificationItems] = React.useState<NotificationItemData[]>([
+    { id: "1", type: "info", title: "Account health score dropped below 60%", body: "Acme Corp — Health Score: 72 → 58", timestamp: "2 min ago", read: false },
+    { id: "2", type: "warning", title: "Renewal date approaching in 14 days", body: "Acme Corp — Renewal: Mar 15, 2026", timestamp: "3 hours ago", read: false },
+    { id: "3", type: "danger", title: "CTA response rate dropped to 12%", body: "Acme Corp — Target: 35%, Current: 12%", timestamp: "5 min ago", read: false },
+    { id: "4", type: "success", title: "Onboarding completed for Acme Corp", body: "Acme Corp — 5 steps complete", timestamp: "1 hour ago", read: true },
+  ])
+  const [notificationAnatomyItems, setNotificationAnatomyItems] = React.useState<NotificationItemData[]>([
+    { id: "a1", type: "info", title: "Account health score dropped below 60%", body: "Acme Corp — Health Score: 72 → 58", timestamp: "2 min ago", read: false },
+  ])
+  const [notificationViewAllClicked, setNotificationViewAllClicked] = React.useState(false)
+
+  const [rteDefaultValue, setRteDefaultValue] = React.useState("")
+  const [rteFilledValue, setRteFilledValue] = React.useState("<b>Renewal notes:</b> confirmed for March 15.")
+  const [rteInlineValue, setRteInlineValue] = React.useState("")
+  const [rteFloatingValue, setRteFloatingValue] = React.useState("Select some of this text to see the floating toolbar appear.")
+  const [rteCharLimitedValue, setRteCharLimitedValue] = React.useState("")
+  const [rteAttachmentInfo, setRteAttachmentInfo] = React.useState<string | null>(null)
   const [columnSelectorView, setColumnSelectorView] = React.useState<ColumnSelectorView>("selection")
   const [columnSelectorSelected, setColumnSelectorSelected] = React.useState<string[]>([
     "name",
@@ -2860,6 +2881,158 @@ function ValidationGallery() {
               <ColorPickerAdvanced value={multiInstanceColorA} onValueChange={setMultiInstanceColorA} />
               <ColorPickerAdvanced value={multiInstanceColorB} onValueChange={setMultiInstanceColorB} />
             </div>
+          </Row>
+        </Section>
+
+        {/* ------------------------------------------------------------------ */}
+        {/* Notification                                                         */}
+        {/* ------------------------------------------------------------------ */}
+        <Section title="Notification (Visual Review: Approved — Approved for AI use: Yes (2026-08-31))">
+          <p className="mb-2 w-full text-xs text-[var(--s-color-text-subtlest)]">
+            `NotificationBell` (anchored bell trigger + popover panel) is the recommended, consumer-facing
+            composition — see the row below. `NotificationBadge`/`NotificationItem`/`NotificationPanel` are
+            internal/compositional modules, rendered inline further down purely for review anatomy inspection —
+            never use `NotificationItem` outside a `NotificationPanel`, and never render Badge/Panel standalone in
+            a product screen. Design-owner override on file (2026-08-31): Figma's own AI Instructions mark this
+            component &quot;Out of scope for current release&quot;; the design owner has explicitly requested
+            implementation anyway — see ai/figma-coverage.json for the full record. Dismiss (×) is always visible
+            per the Dos/Don&apos;ts (&quot;never hide it&quot;), not hover-gated, despite the component description's
+            own wording implying hover-only visibility — the Dos/Don&apos;ts is the stronger rule.
+          </p>
+          <Row label="anchored trigger — bell + badge + panel (recommended usage)">
+            <NotificationBell
+              items={notificationItems}
+              onDismissItem={(id) => setNotificationItems((prev) => prev.filter((item) => item.id !== id))}
+              onMarkAllRead={() => setNotificationItems((prev) => prev.map((item) => ({ ...item, read: true })))}
+              onViewAll={() => setNotificationViewAllClicked(true)}
+            />
+            {notificationViewAllClicked && (
+              <span className="text-xs text-[var(--s-color-text-subtlest)]">
+                &quot;View all notifications&quot; fired onViewAll — this component never navigates itself, the
+                consumer must handle the destination.
+              </span>
+            )}
+          </Row>
+          <Row label="automatic alignment — bell fixed at the real browser viewport's LEFT edge (no align prop)">
+            <div className="flex items-center gap-2">
+              <div className="fixed left-4 top-1/2 z-50 -translate-y-1/2 rounded border border-dashed border-[var(--s-color-line-default)] p-2">
+                <NotificationBell
+                  items={notificationItems}
+                  onDismissItem={(id) => setNotificationItems((prev) => prev.filter((item) => item.id !== id))}
+                />
+              </div>
+              <span className="text-xs text-[var(--s-color-text-subtlest)]">
+                fixed-positioned at the actual viewport edge (not just a gallery-local box) so the automatic
+                measurement is tested against the real window width.
+              </span>
+            </div>
+          </Row>
+          <Row label="automatic alignment — bell fixed at the real browser viewport's RIGHT edge (no align prop)">
+            <div className="flex items-center gap-2">
+              <div className="fixed right-4 top-1/2 z-50 -translate-y-1/2 rounded border border-dashed border-[var(--s-color-line-default)] p-2">
+                <NotificationBell
+                  items={notificationItems}
+                  onDismissItem={(id) => setNotificationItems((prev) => prev.filter((item) => item.id !== id))}
+                />
+              </div>
+              <span className="text-xs text-[var(--s-color-text-subtlest)]">
+                fixed-positioned at the actual viewport edge (not just a gallery-local box) so the automatic
+                measurement is tested against the real window width.
+              </span>
+            </div>
+          </Row>
+          <Row label="REVIEW ANATOMY ONLY — Badge sizes (small/medium/large/large-with-number)">
+            <div className="flex items-center gap-4">
+              <NotificationBadge size="small" />
+              <NotificationBadge size="medium" />
+              <NotificationBadge size="large" />
+              <NotificationBadge size="largeWithNumber" count={9} />
+            </div>
+          </Row>
+          <Row label="REVIEW ANATOMY ONLY — Item, not standalone production usage">
+            <div role="list" className="w-[388px] overflow-hidden rounded-[var(--c-notification-panel-radius)] border border-[var(--c-notification-panel-border)]">
+              <NotificationItem
+                item={notificationAnatomyItems[0]}
+                onDismiss={() => setNotificationAnatomyItems([])}
+              />
+            </div>
+          </Row>
+          <Row label="REVIEW ANATOMY ONLY — Panel, Populated state, not standalone production usage">
+            <NotificationPanel
+              items={notificationItems}
+              onDismissItem={(id) => setNotificationItems((prev) => prev.filter((item) => item.id !== id))}
+            />
+          </Row>
+          <Row label="REVIEW ANATOMY ONLY — Panel, Empty state">
+            <NotificationPanel items={[]} onDismissItem={() => {}} />
+          </Row>
+        </Section>
+
+        {/* ------------------------------------------------------------------ */}
+        {/* RTE Field                                                            */}
+        {/* ------------------------------------------------------------------ */}
+        <Section title="RTE Field (Visual Review: Approved with documented exception 2026-08-31 — Approved for AI use: Yes)">
+          <p className="mb-2 w-full text-xs text-[var(--s-color-text-subtlest)]">
+            Three alternative `type`s of the same `RteField` API — Default (boxed, standalone), Inline (borderless,
+            integrated), Floating (toolbar-only, appears on text selection). Real, implemented formatting: Bold,
+            Italic, Underline, Bulleted/Numbered list, Indent in/out, Link, Clear formatting, text alignment
+            (Left/Centre/Right — no Justify icon exists in this repo's set), and Attachment (surfaces the selected
+            file via an `onAttachmentSelected` callback — never uploads it itself; disabled when the callback is
+            omitted). Still visually present but NOT yet functional (disabled): Font size, Font properties — Figma's
+            own AI Instructions describe these as opening pickers not built in this pass; see the Doc page for the
+            full real-vs-visual-only breakdown. No RTE package dependency was added — this is a native
+            `contentEditable` + `document.execCommand` implementation.
+          </p>
+          <Row label="Default — empty, ShowCTAs=true, attachment + alignment wired">
+            <RteField
+              type="default"
+              label="Comment"
+              value={rteDefaultValue}
+              onValueChange={setRteDefaultValue}
+              showCtAs
+              onCancel={() => setRteDefaultValue("")}
+              onSave={() => {}}
+              onAttachmentSelected={(files) => setRteAttachmentInfo(`${files[0].name} (${files[0].size} bytes)`)}
+            />
+            {rteAttachmentInfo && (
+              <span className="text-xs text-[var(--s-color-text-subtlest)]">
+                Attachment selected: {rteAttachmentInfo} — the component only surfaces the FileList; this demo does
+                not upload it anywhere.
+              </span>
+            )}
+          </Row>
+          <Row label="Default — filled, ShowCTAs=true (Save enabled)">
+            <RteField
+              type="default"
+              label="Comment"
+              value={rteFilledValue}
+              onValueChange={setRteFilledValue}
+              showCtAs
+              onCancel={() => setRteFilledValue("")}
+              onSave={() => {}}
+            />
+          </Row>
+          <Row label="Default — ShowCTAs=false (parent owns actions)">
+            <RteField type="default" label="Description" value={rteCharLimitedValue} onValueChange={setRteCharLimitedValue} maxLength={280} />
+          </Row>
+          <Row label="Default — disabled">
+            <RteField type="default" label="Comment" value="This field is not editable." onValueChange={() => {}} disabled />
+          </Row>
+          <Row label="Default — error state">
+            <RteField
+              type="default"
+              label="Comment"
+              required
+              value=""
+              onValueChange={() => {}}
+              error="A comment is required."
+            />
+          </Row>
+          <Row label="Inline — integrated, no CTAs">
+            <RteField type="inline" label="Card note" value={rteInlineValue} onValueChange={setRteInlineValue} />
+          </Row>
+          <Row label="Floating — toolbar appears on text selection only">
+            <RteField type="floating" value={rteFloatingValue} onValueChange={setRteFloatingValue} />
           </Row>
         </Section>
 

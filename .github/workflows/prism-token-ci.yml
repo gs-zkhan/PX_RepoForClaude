@@ -122,6 +122,12 @@ jobs:
       - name: Color utility tests
         run: npm run test:color
 
+      - name: Notification utility tests
+        run: npm run test:notification
+
+      - name: RTE Field utility tests
+        run: npm run test:rte-field
+
       - name: Regenerate Prism tokens
         run: npm run tokens:generate
 

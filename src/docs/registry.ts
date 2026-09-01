@@ -39,12 +39,14 @@ import { lineChartDoc } from "@/docs/docs/line-chart.doc"
 import { linkDoc } from "@/docs/docs/link.doc"
 import { metricBarDoc } from "@/docs/docs/metric-bar.doc"
 import { modalDoc } from "@/docs/docs/modal.doc"
+import { notificationDoc } from "@/docs/docs/notification.doc"
 import { paginationDoc } from "@/docs/docs/pagination.doc"
 import { popoverDoc } from "@/docs/docs/popover.doc"
 import { prismIconDoc } from "@/docs/docs/prism-icon.doc"
 import { pxAnalyticsSecondaryNavDoc } from "@/docs/docs/px-analytics-secondary-nav.doc"
 import { progressBarDoc } from "@/docs/docs/progress-bar.doc"
 import { radioGroupDoc } from "@/docs/docs/radio-group.doc"
+import { rteFieldDoc } from "@/docs/docs/rte-field.doc"
 import { searchBarDoc } from "@/docs/docs/search-bar.doc"
 import { segmentedBarDoc } from "@/docs/docs/segmented-bar.doc"
 import { selectDoc } from "@/docs/docs/select.doc"
@@ -151,12 +153,14 @@ const allDocs: ComponentDoc[] = [
   linkDoc,
   metricBarDoc,
   modalDoc,
+  notificationDoc,
   paginationDoc,
   popoverDoc,
   prismIconDoc,
   pxAnalyticsSecondaryNavDoc,
   progressBarDoc,
   radioGroupDoc,
+  rteFieldDoc,
   searchBarDoc,
   segmentedBarDoc,
   selectDoc,
@@ -225,6 +229,7 @@ export const navGroups: DocNavGroup[] = [
       searchBarDoc,
       fileUploaderDoc,
       colorPickerDoc,
+      rteFieldDoc,
     ].map(navItem),
   },
   {
@@ -262,6 +267,7 @@ export const navGroups: DocNavGroup[] = [
       dropdownMenuDoc,
       toastDoc,
       bannerDoc,
+      notificationDoc,
       emptyStateDoc,
       spinnerDoc,
       skeletonDoc,
