@@ -4,6 +4,7 @@ import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
 import { cn } from "@/lib/utils"
 import { PrismIcon } from "@/components/ui/prism-icon"
 import { Button } from "@/components/ui/button"
+import { IconButton } from "@/components/ui/icon-button"
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
 import { exceedsMaxLength, hasRealContent, getAlignCommand, type TextAlignValue } from "@/lib/rte-field"
 
@@ -148,38 +149,16 @@ const TOOLBAR_LABEL: Record<ToolbarCommand, string> = {
   outdent: "Outdent",
 }
 
-function ToolbarButton({
-  active,
-  disabled,
-  label,
-  icon,
-  onClick,
-}: {
-  active?: boolean
-  disabled?: boolean
-  label: string
-  icon: string
-  onClick?: () => void
-}) {
-  return (
-    <button
-      type="button"
-      aria-label={label}
-      aria-pressed={active}
-      disabled={disabled}
-      onMouseDown={(e) => e.preventDefault()} // preserve the editor's text selection across the click
-      onClick={onClick}
-      className={cn(
-        "flex size-8 shrink-0 items-center justify-center rounded-[var(--p-radius-075)] outline-none",
-        "focus-visible:shadow-[var(--e-shadow-focus)]",
-        "disabled:opacity-40",
-        active ? "bg-[var(--s-color-surface-muted)]" : "hover:bg-[var(--s-color-surface-muted)]",
-      )}
-    >
-      <PrismIcon name={icon} size={24} decorative />
-    </button>
-  )
-}
+// CORRECTED (2026-08-31, design-owner-approved reconciliation): this file
+// previously defined its own private `ToolbarButton` — a hand-rolled
+// `<button>` duplicating the exact same 32x32/radius-075/pressed-state
+// visual recipe the shared `IconButton` now implements natively via its new
+// `appearance="toolbar"` (see src/components/ui/icon-button.tsx). Every
+// call site below was migrated to `<IconButton appearance="toolbar" .../>`
+// (`active` -> `pressed`, same real `aria-pressed`; `onMouseDown`
+// preventDefault preserved at each call site to keep the editor's text
+// selection intact across the click) and the local duplicate was deleted —
+// not kept alongside it "for safety."
 
 function ToolbarDivider() {
   return <div aria-hidden="true" className="h-[16px] w-px shrink-0 bg-[var(--s-color-line-default)]" />
@@ -227,20 +206,13 @@ function AlignmentPicker({
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <button
-          type="button"
+        <IconButton
+          appearance="toolbar"
+          icon={active.icon}
+          label={`Text alignment: ${active.label}`}
           disabled={disabled}
-          aria-label={`Text alignment: ${active.label}`}
           onMouseDown={(e) => e.preventDefault()}
-          className={cn(
-            "flex size-8 shrink-0 items-center justify-center rounded-[var(--p-radius-075)] outline-none",
-            "focus-visible:shadow-[var(--e-shadow-focus)]",
-            "disabled:opacity-40",
-            "hover:bg-[var(--s-color-surface-muted)]",
-          )}
-        >
-          <PrismIcon name={active.icon} size={24} decorative />
-        </button>
+        />
       </PopoverTrigger>
       <PopoverContent
         align="start"
@@ -302,10 +274,12 @@ function AttachmentButton({
 
   return (
     <>
-      <ToolbarButton
+      <IconButton
+        appearance="toolbar"
         icon="attachment"
         label="Add attachment"
         disabled={isDisabled}
+        onMouseDown={(e) => e.preventDefault()}
         onClick={() => inputRef.current?.click()}
       />
       <input
@@ -343,46 +317,54 @@ function Toolbar({
 }) {
   return (
     <div className="flex shrink-0 items-center gap-0" data-slot="rte-toolbar">
-      <ToolbarButton icon={TOOLBAR_ICON.bold} label={TOOLBAR_LABEL.bold} active={state.bold} disabled={disabled} onClick={() => onCommand("bold")} />
-      <ToolbarButton icon={TOOLBAR_ICON.italic} label={TOOLBAR_LABEL.italic} active={state.italic} disabled={disabled} onClick={() => onCommand("italic")} />
-      <ToolbarButton icon={TOOLBAR_ICON.underline} label={TOOLBAR_LABEL.underline} active={state.underline} disabled={disabled} onClick={() => onCommand("underline")} />
-      <ToolbarButton icon="font-size" label="Font size (visual only — not implemented)" disabled />
-      <ToolbarButton icon="font-properties" label="Font properties (visual only — not implemented)" disabled />
+      <IconButton appearance="toolbar" icon={TOOLBAR_ICON.bold} label={TOOLBAR_LABEL.bold} pressed={state.bold} disabled={disabled} onMouseDown={(e) => e.preventDefault()} onClick={() => onCommand("bold")} />
+      <IconButton appearance="toolbar" icon={TOOLBAR_ICON.italic} label={TOOLBAR_LABEL.italic} pressed={state.italic} disabled={disabled} onMouseDown={(e) => e.preventDefault()} onClick={() => onCommand("italic")} />
+      <IconButton appearance="toolbar" icon={TOOLBAR_ICON.underline} label={TOOLBAR_LABEL.underline} pressed={state.underline} disabled={disabled} onMouseDown={(e) => e.preventDefault()} onClick={() => onCommand("underline")} />
+      <IconButton appearance="toolbar" icon="font-size" label="Font size (visual only — not implemented)" disabled onMouseDown={(e) => e.preventDefault()} />
+      <IconButton appearance="toolbar" icon="font-properties" label="Font properties (visual only — not implemented)" disabled onMouseDown={(e) => e.preventDefault()} />
       <ToolbarDivider />
       <AlignmentPicker value={state.alignment} disabled={disabled} onChange={onAlignmentChange} />
       <ToolbarDivider />
-      <ToolbarButton
+      <IconButton
+        appearance="toolbar"
         icon={TOOLBAR_ICON.insertUnorderedList}
         label={TOOLBAR_LABEL.insertUnorderedList}
-        active={state.insertUnorderedList}
+        pressed={state.insertUnorderedList}
         disabled={disabled}
+        onMouseDown={(e) => e.preventDefault()}
         onClick={() => onCommand("insertUnorderedList")}
       />
-      <ToolbarButton
+      <IconButton
+        appearance="toolbar"
         icon={TOOLBAR_ICON.insertOrderedList}
         label={TOOLBAR_LABEL.insertOrderedList}
-        active={state.insertOrderedList}
+        pressed={state.insertOrderedList}
         disabled={disabled}
+        onMouseDown={(e) => e.preventDefault()}
         onClick={() => onCommand("insertOrderedList")}
       />
       <ToolbarDivider />
-      <ToolbarButton icon={TOOLBAR_ICON.indent} label={TOOLBAR_LABEL.indent} disabled={disabled} onClick={() => onCommand("indent")} />
-      <ToolbarButton icon={TOOLBAR_ICON.outdent} label={TOOLBAR_LABEL.outdent} disabled={disabled} onClick={() => onCommand("outdent")} />
+      <IconButton appearance="toolbar" icon={TOOLBAR_ICON.indent} label={TOOLBAR_LABEL.indent} disabled={disabled} onMouseDown={(e) => e.preventDefault()} onClick={() => onCommand("indent")} />
+      <IconButton appearance="toolbar" icon={TOOLBAR_ICON.outdent} label={TOOLBAR_LABEL.outdent} disabled={disabled} onMouseDown={(e) => e.preventDefault()} onClick={() => onCommand("outdent")} />
       <ToolbarDivider />
-      <ToolbarButton
+      <IconButton
+        appearance="toolbar"
         icon="link"
         label="Insert link"
         disabled={disabled}
+        onMouseDown={(e) => e.preventDefault()}
         onClick={() => {
           const url = window.prompt("Link URL")
           if (url) document.execCommand("createLink", false, url)
         }}
       />
       <AttachmentButton disabled={disabled} onAttachmentSelected={onAttachmentSelected} />
-      <ToolbarButton
+      <IconButton
+        appearance="toolbar"
         icon="clear-text-formating"
         label="Clear formatting"
         disabled={disabled}
+        onMouseDown={(e) => e.preventDefault()}
         onClick={() => document.execCommand("removeFormat")}
       />
     </div>
