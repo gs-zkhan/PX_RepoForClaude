@@ -210,7 +210,12 @@ function CreateEditShellExample({ activeKey, onNavigate, mode, onModeChange }: C
           <TextField label="Title" required value={weblinkTitle} onChange={(e) => setWeblinkTitle(e.target.value)} />
           <Textarea label="Description" />
           <Textarea label="URL" />
-          <RadioGroup value={linkTarget} onValueChange={setLinkTarget} className="flex flex-row items-center gap-[var(--p-space-200)]">
+          <RadioGroup
+            value={linkTarget}
+            onValueChange={setLinkTarget}
+            orientation="horizontal"
+            className="flex flex-row items-center gap-[var(--p-space-200)]"
+          >
             <label className="flex items-center gap-[var(--p-space-100)] text-[length:var(--p-font-size-small)] font-semibold">
               <RadioGroupItem value="new-tab" />
               New Tab

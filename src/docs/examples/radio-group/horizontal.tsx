@@ -3,9 +3,17 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 // RadioGroup's own default layout is a vertical grid (gap-2). className here
 // is layout-only — it changes direction/spacing, not any item's visual
 // recipe — which is within a pattern's allowed composition-level control.
+// `orientation="horizontal"` is required alongside it: Radix's roving
+// keyboard focus follows `orientation`, not className, so without it arrow
+// keys would still move on the vertical axis and "Grid" would be
+// unreachable by keyboard.
 export default function RadioGroupHorizontal() {
   return (
-    <RadioGroup defaultValue="grid" className="flex flex-row items-center gap-[var(--p-space-300)]">
+    <RadioGroup
+      defaultValue="grid"
+      orientation="horizontal"
+      className="flex flex-row items-center gap-[var(--p-space-300)]"
+    >
       <div className="flex items-center gap-[var(--p-space-100)]">
         <RadioGroupItem value="list" id="view-list" />
         <label htmlFor="view-list" className="text-sm text-[var(--s-color-text-default)]">
