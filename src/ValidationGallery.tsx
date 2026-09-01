@@ -783,7 +783,12 @@ function ValidationGallery() {
         {/* ------------------------------------------------------------------ */}
         <Section title="Radio Group">
           <Row label="default">
-            <RadioGroup value={radioValue} onValueChange={setRadioValue} className="flex flex-row gap-4">
+            <RadioGroup
+              value={radioValue}
+              onValueChange={setRadioValue}
+              orientation="horizontal"
+              className="flex flex-row gap-4"
+            >
               <label className="flex items-center gap-2 text-sm text-[var(--s-color-text-default)]">
                 <RadioGroupItem value="open" /> Open
               </label>
@@ -793,7 +798,7 @@ function ValidationGallery() {
             </RadioGroup>
           </Row>
           <Row label="disabled">
-            <RadioGroup value="open" className="flex flex-row gap-4">
+            <RadioGroup value="open" orientation="horizontal" className="flex flex-row gap-4">
               <label className="flex items-center gap-2 text-sm text-[var(--s-color-text-disabled)]">
                 <RadioGroupItem value="open" disabled /> Open
               </label>
