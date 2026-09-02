@@ -121,12 +121,13 @@ export const dropdownFieldDoc: ComponentDoc = {
     {
       name: "value",
       type: "string",
-      description: "The selected value (controlled).",
+      description:
+        "The selected value (controlled). Passing `value` makes DropdownField controlled for its lifetime — keep passing a string on every render, including before a selection is made (use `value=\"\"`, not `value={undefined}`). Switching between `undefined` and a string triggers React's uncontrolled-to-controlled warning. To render uncontrolled instead, use `defaultValue` and omit `value` entirely.",
     },
     {
       name: "defaultValue",
       type: "string",
-      description: "The selected value (uncontrolled initial value).",
+      description: "The selected value (uncontrolled initial value). Use this instead of `value` when DropdownField should manage its own selection state.",
     },
     {
       name: "onValueChange",
@@ -172,11 +173,13 @@ export const dropdownFieldDoc: ComponentDoc = {
       "Use DropdownField in forms; use Select directly for unlabelled or non-form pickers.",
       "Reserve `inline` for compact toolbar filters and side-panel rows, never a standalone form.",
       "Pair `state=\"error\"` with `helperText` explaining what's wrong.",
+      "When controlling `value`, keep it a string for the whole lifetime of the component — start with `value=\"\"`, not `value={undefined}`.",
     ],
     donts: [
       "Don't use the trigger's own 14px value/placeholder font token for the label row — the label uses font.label.small (12px) instead.",
       "Don't use `helperVisible` to hide an error or success helper; those always show once `state` leaves \"default\".",
       "Don't recreate the label/required/info-icon row locally on top of a bare Select — that anatomy already lives in DropdownField.",
+      "Don't switch `value` between `undefined` and a string across renders (e.g. `value={x || undefined}`) — that flips the component between uncontrolled and controlled and triggers a React warning. Use `value=\"\"` for an empty controlled state, or `defaultValue` for uncontrolled.",
     ],
   },
 }
