@@ -10,6 +10,19 @@ export const dropdownMenuDoc: ComponentDoc = {
   description: "A floating action/selection menu opened from a trigger, built on Radix's DropdownMenu primitive.",
   sourcePath: "src/components/ui/dropdown-menu.tsx",
 
+  // Registry status note: this component is Implemented-unmapped in
+  // ai/figma-coverage.json — it is NOT independently approved for arbitrary
+  // direct screen composition. It is, however, a confirmed dependency of
+  // three approved surfaces (component-button-split-variant,
+  // shell-analytics-secondary-nav, component-dashboard-widget-card), each of
+  // whose own approval covers this exact internal composition. Using it
+  // through one of those components' own documented public API — e.g.
+  // passing DropdownMenuItem content into SplitButton's `menuContent` prop —
+  // is covered by that component's approval. Importing DropdownMenu /
+  // DropdownMenuTrigger / DropdownMenuContent directly in new screen code is
+  // NOT covered by this and remains disallowed. See
+  // decision-dropdown-menu-scoped-composition in ai/figma-coverage.json.
+
   sections: [
     {
       id: "default",

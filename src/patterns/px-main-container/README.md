@@ -1,6 +1,6 @@
 # PxMainContainer
 
-**Status:** internal layout foundation, extracted and implemented, pending visual review — **not** an independently-approved page shell in its own right. Screens never reach for `PxMainContainer` directly; they use `PxListShell` or `PxCreateEditShell{Accordion,Wizard}`, both of which compose it. See "Relationship to Figma's Shell variants" and "Registry status" below.
+**Status:** internal layout foundation, extracted and implemented, pending visual review — **not** an independently-approved page shell in its own right, and never promoted to one regardless of how many approved consumers compose it. A screen may compose `PxMainContainer` directly only when a registered, approved shell/pattern explicitly documents that composition — today that's `PxListShell`, `PxCreateEditShell{Accordion,Wizard}`, and `PxAnalyticsSecondaryNav` (rendered as a sibling of `<main>` inside this component's content row — see its own README's "Composition rules"). A screen never reaches for `PxMainContainer` on its own authority. See "Relationship to Figma's Shell variants" and "Registry status" below.
 
 ## Purpose
 
@@ -26,7 +26,7 @@ Named `PxMainContainer`, not `PxAppShell`, to track Figma's own "MainContainer" 
 
 ## Registry status
 
-Not given its own row in [`ai/shell-registry.md`](../../../ai/shell-registry.md) — that registry is for shells a **screen** starts from directly ("Every new page-level layout must start from a shell listed there"), and no screen composes `PxMainContainer` on its own. It is consumed exclusively by `PxListShell` and `PxCreateEditShellAccordion`/`PxCreateEditShellWizard`, both of which **are** registered there. Its own approval status is inherited from whichever of those consumers a given screen is reviewed through, not tracked independently.
+Not given its own row in [`ai/shell-registry.md`](../../../ai/shell-registry.md) — that registry is for shells a **screen** starts from directly ("Every new page-level layout must start from a shell listed there"), and no screen composes `PxMainContainer` on its own. It is consumed by `PxListShell`, `PxCreateEditShellAccordion`/`PxCreateEditShellWizard`, and `PxAnalyticsSecondaryNav` (a sibling of `<main>` inside this component's content row, per [`px-analytics-secondary-nav/README.md`](../px-analytics-secondary-nav/README.md)'s Composition rules) — all three **are** registered there. Its own approval status is inherited from whichever of those consumers a given screen is reviewed through, not tracked independently. See `decision-px-main-container-internal` in `ai/figma-coverage.json` for the authoritative, current statement of this rule.
 
 ## Anatomy
 
@@ -37,7 +37,8 @@ PxMainContainer
     ├── PxHeader         — Primary Bar (mandatory) + Secondary Bar (auto-shows if configured)
     └── content row      — flex, min-h-0, full height, otherwise unstyled
         └── children     — entirely caller-defined; PxListShell puts a padded <main> + filterSlider
-                            here, PxCreateEditShellAccordion/Wizard put their own single content div
+                            here, PxCreateEditShellAccordion/Wizard put their own single content div,
+                            PxAnalyticsSecondaryNav renders as a sibling of <main> here
 ```
 
 ## Props

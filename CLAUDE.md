@@ -308,9 +308,12 @@ The authoritative registry of extracted PX shells lives at [`ai/shell-registry.m
 
 ## Shell reuse rules
 
-- **List-type pages** (Audience Explorer, Accounts, Engagements, Segments, Feature Adoption, and every other table-driven PX screen) MUST reuse `PxListShell` from `src/patterns/px-list-shell`. Do NOT rebuild the left rail, page header, or content padding — they are the shell's responsibility.
+Shell selection is **anatomy-based, never name-based** — a screen's product name (e.g. "Feature Adoption") never determines its shell; its actual anatomy does. Two screens can share a product name while requiring different shells if their anatomy differs.
+
+- **List-type pages** — any screen whose anatomy is a single tabular list, master surface, or filterable dataset (Audience Explorer, Accounts, Engagements, Segments, and every other table-driven PX screen, e.g. a table/list-shaped "Feature Adoption" view) MUST reuse `PxListShell` from `src/patterns/px-list-shell`. Do NOT rebuild the left rail, page header, or content padding — they are the shell's responsibility.
 - Screens supply feature content via `children`, filters via the `filterSlider` slot, and header composition via the typed `header` prop.
 - **Record create/edit forms** MUST reuse `PxCreateEditShell` from `src/patterns/px-create-edit-shell` — pick the tier per the Figma "Create · Edit Form" AI instructions (node `7128:873`): `PxCreateEditShellModal` for ≤6 fields with no branching, `PxCreateEditShellAccordion` for independent multi-section forms, `PxCreateEditShellWizard` only when a later step depends on an earlier one. Do NOT hand-roll a Modal + form fields, or a second sub-header/footer, for a create/edit screen — compose one of these three.
+- **Analytics pages** — any screen built around Analytics secondary navigation, KPIs, and charts (e.g. an analytics-dashboard-shaped "Feature Adoption" view) MUST reuse `PxAnalyticsSecondaryNav` from `src/patterns/px-analytics-secondary-nav`, composed directly inside `PxMainContainer` as a sibling of `<main>` — this is one of the few contexts where composing `PxMainContainer` directly is correct; see `src/patterns/px-main-container/README.md`'s "Registry status" section.
 - Do NOT re-add page padding, page background, or top-bar chrome inside `children` — the shell already applies `--p-space-300` on all four sides and `--s-color-surface-page` behind the content.
 - Do NOT render `<PxShellRail>` or a hand-rolled top bar next to `<PxListShell>`. The shell already includes both.
 - When Figma shows the two-bar header, pass any of `title`, `tabs`, `onBack`, `secondaryActions`, `titleChip`, `secondaryUtilities` — the Secondary Bar renders automatically. Pass `showSecondary={false}` to force a one-bar header.

@@ -78,7 +78,7 @@ export const buttonDoc: ComponentDoc = {
       type: '"primary" | "secondary" | "tertiary" | "destructive" | "bulkAction"',
       defaultValue: '"primary"',
       description:
-        "Visual emphasis. See Appearance for the four original variants. `bulkAction` is new, Figma-evidenced, and NOT design-owner reviewed — see \"Bulk action variant\" below.",
+        "Visual emphasis. See Appearance for the four original variants. `bulkAction` is Figma-evidenced and design-owner approved (2026-08-29) — see \"Bulk action variant\" below and ai/figma-coverage.json's component-button-bulk-variant entry.",
     },
     {
       name: "radiusEdge",
