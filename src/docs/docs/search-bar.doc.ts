@@ -100,7 +100,8 @@ export const searchBarDoc: ComponentDoc = {
     {
       name: "className",
       type: "string",
-      description: "Forwarded to the underlying Input.",
+      description:
+        "Forwarded directly onto the underlying Input's own visual-recipe class list — not onto SearchBar's outer wrapper. This is not the placement/sizing mechanism: to control SearchBar's width or position, wrap it in a sized container element instead (every real usage in this repo does this — see the Validation Gallery's \"small + inline\" row for the canonical pattern, `<div className=\"w-[240px] ...\"><SearchBar .../></div>`). Reserve `className` itself for the rare case where Input's own recipe genuinely needs a caller-supplied class.",
     },
   ],
 
@@ -121,12 +122,14 @@ export const searchBarDoc: ComponentDoc = {
       "Provide `onClear` whenever the field should let users clear a typed query.",
       "Reserve `inline` for table cells and dense list/panel search, never a standalone search bar.",
       "Let SearchBar own the trailing icon slot — don't add a second icon or button in that position.",
+      "Control SearchBar's width/placement by wrapping it in a sized container element — every real usage in this repo does this.",
     ],
     donts: [
       "Don't assume SearchBar's \"medium\" equals Figma's \"medium\" token — it maps to Figma's \"xlarge\" recipe.",
       "Don't show both the search icon and the clear button at once; the component already guarantees only one renders.",
       "Don't restyle Input's border/background from SearchBar — that recipe belongs to Input's own tokens.",
       "Don't use `inline` on a page-level or standalone search field; it's for dense, already-bordered contexts only.",
+      "Don't pass sizing/layout classes via SearchBar's `className` — it lands on Input's own recipe class list, not a placement-safe wrapper. Use an outer container instead.",
     ],
   },
 }
