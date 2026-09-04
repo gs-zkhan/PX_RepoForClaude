@@ -1,6 +1,6 @@
 # PxListShell
 
-**Status:** extracted, implemented, pending visual review
+**Status:** Approved (design owner, 2026-08-27) — see [`ai/shell-registry.md`](../../../ai/shell-registry.md) and `ai/figma-coverage.json`'s `shell-px-list-shell` entry for the authoritative approval record.
 
 ## Purpose
 
@@ -11,7 +11,7 @@
 - the main content region with 24 px page padding
 - an optional right-side 336 px filter panel
 
-Use it whenever a PX screen is dominated by a single tabular list, master surface, or filterable dataset — Audience Explorer, Engagements, Segments, Accounts, Feature Adoption, etc.
+Use it whenever a PX screen's actual anatomy is dominated by a single tabular list, master surface, or filterable dataset — Audience Explorer, Engagements, Segments, Accounts, and any other screen sharing that anatomy. **Selection is anatomy-based, never name-based**: a screen's product name alone (e.g. "Feature Adoption") does not determine its shell — a table/list/filterable-dataset screen with that name uses `PxListShell`, while an Analytics screen with that same name, built around Analytics secondary navigation, KPIs, and charts, instead uses `PxAnalyticsSecondaryNav` composed directly inside `PxMainContainer` (see `ai/shell-registry.md` and `decision-px-main-container-internal` in `ai/figma-coverage.json`).
 
 **Do not use** for modals, drawers, or full-canvas dashboards where the two-bar header is not present. For those cases keep the shell but pass `showSecondary={false}` on the header, or use a different pattern.
 
@@ -191,7 +191,7 @@ Effect: `--e-shadow-100`, `--e-shadow-focus`.
 
 ## Component Composition Audit
 
-- **Approved components reused:** `PxShellRail`, `Button`, `IconButton`, `PrismIcon`, `Avatar`, `TooltipProvider`, `Tabs`, `TabsList`, `TabsTrigger`, `StatusLabel`, `Table*`, `Pagination`, and `DropdownMenu*`.
+- **Approved components reused:** `PxShellRail`, `Button`, `IconButton`, `PrismIcon`, `Avatar`, `TooltipProvider`, `Tabs`, `TabsList`, `TabsTrigger`, `StatusLabel`, `Table*`, `Pagination`. Note: `DropdownMenu*` (listed here in a prior revision) is not imported by `PxListShell.tsx` itself and has been removed from this list — its own registry status is `Implemented-unmapped`, so it should only be named here if a future change genuinely makes it a direct dependency of this pattern's own source (see `decision-dropdown-menu-scoped-composition` in `ai/figma-coverage.json` for the narrower, verified set of surfaces that do compose it).
 - **New components created:** `PxListShell` (pattern), `PxHeader` (pattern-owned), `PxFilterSlider` (pattern-owned), and `TabsStrip` (pattern-owned composition helper around the shared Tabs API).
 - **Native interactive elements introduced:** none by the shell pattern. Tab semantics and keyboard behaviour come from the shared Radix-backed Tabs components.
 - **`className` overrides on approved components:** none applied to `Button`, `IconButton`, `Avatar`, `TabsList`, `TabsTrigger`, or `StatusLabel`. `PxFilterSlider` still passes a current-colour class to the empty-state `PrismIcon`; icon sizing uses the typed `size` and `sourceSize` props, but colour ownership remains an unresolved API/composition gap.

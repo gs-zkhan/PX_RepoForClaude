@@ -152,6 +152,53 @@ export function validateRegistry(registry, root = rootDir, pageInventoryOverride
     }
   }
 
+  // 7d. `dependencies` must reference real entry ids — otherwise a typo or a
+  //     stale id silently breaks the dependency graph an AI relies on to
+  //     understand what an approved surface actually composes internally.
+  for (const entry of entries) {
+    for (const depId of entry.dependencies ?? []) {
+      if (!seenIds.has(depId)) {
+        errors.push(`${entry.id}: dependencies references unknown entry id "${depId}"`)
+      }
+    }
+  }
+
+  // 7e. `ownedExports` is optional discoverability metadata for a named
+  //     export (component, helper, etc.) that lives inside a larger entry's
+  //     own repoPaths rather than getting its own registry row — e.g.
+  //     DashboardWidgetChartTypeSwitcher inside component-dashboard-widget-card.
+  //     It must be a non-empty array of non-empty strings, and an export name
+  //     must not collide with any entry's own id/name or another entry's
+  //     ownedExports — an AI searching by that exact name must resolve to
+  //     exactly one owner, never an ambiguous choice.
+  const exportOwners = new Map() // export name -> [entryId]
+  for (const entry of entries) {
+    if (entry.ownedExports === undefined) continue
+    if (!Array.isArray(entry.ownedExports) || entry.ownedExports.length === 0) {
+      errors.push(`${entry.id}: ownedExports must be a non-empty array when present`)
+      continue
+    }
+    for (const exportName of entry.ownedExports) {
+      if (typeof exportName !== "string" || exportName.trim().length === 0) {
+        errors.push(`${entry.id}: ownedExports must contain only non-empty strings`)
+        continue
+      }
+      if (!exportOwners.has(exportName)) exportOwners.set(exportName, [])
+      exportOwners.get(exportName).push(entry.id)
+    }
+  }
+  for (const [exportName, owners] of exportOwners) {
+    const uniqueOwners = [...new Set(owners)]
+    if (uniqueOwners.length > 1) {
+      errors.push(`ownedExports name "${exportName}" is claimed by more than one entry: [${uniqueOwners.join(", ")}]`)
+    }
+    for (const entry of entries) {
+      if (entry.id !== uniqueOwners[0] && (entry.id === exportName || entry.name === exportName)) {
+        errors.push(`ownedExports name "${exportName}" (owned by "${uniqueOwners[0]}") collides with entry "${entry.id}"'s own id/name`)
+      }
+    }
+  }
+
   // 7b. Category "Out of scope" and status "Out of scope" must agree — an
   //     item explicitly out of scope shouldn't be miscategorized as a normal
   //     Component/Shell/Pattern still pending work, and vice versa.
