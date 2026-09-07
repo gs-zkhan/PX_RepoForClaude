@@ -76,8 +76,23 @@ npm run test:rte-field
 
 See [`.github/workflows/prism-token-ci.yml`](./.github/workflows/prism-token-ci.yml) for the exact set CI enforces on every pull request.
 
-## v1 scope / limitations
+## PX AI-Ready Design System v1
 
-- Not all 99 `ai/figma-coverage.json` entries are individually design-owner `Approved` — most are `Mapped-review-pending` (implemented and mapped to real Figma evidence, but not yet visually signed off). These may be used only under the documented provisional policy in `CLAUDE.md`, never treated as `Approved`.
-- Some capabilities remain future work: dual-axis chart support, and a formalized `Shell/Modal` (destructive-confirmation-over-a-mounted-shell) pattern doc/registry entry.
-- Cold-generation test screens (evaluation benchmarks proving the repository's AI-readiness) are experimental evaluation evidence preserved in separate, unmerged worktrees/branches — they are not production screens and are not part of this repository's shipped code.
+**Proven supported archetypes:**
+
+| Archetype | Shell |
+| --- | --- |
+| List/table/filterable pages | `PxListShell` |
+| Create/edit flows | `PxCreateEditShell` |
+| Analytics | `PxAnalyticsSecondaryNav` |
+| Single-record detail/drilldown | `PxDetailDrilldownShell` |
+
+**What has been demonstrated:** across six independent cold-generation benchmarks (see [`ai/cold-generation/`](./ai/cold-generation/)), a fresh, blind AI session has successfully selected and composed the correct shell/component architecture for each archetype above from this repository's own documentation alone — no Figma access, no naming hints. The before/after pair (Test #5 → Test #6, see `ai/cold-generation/README.md`) is direct evidence that hardening the repository, not the prompt, is what fixes a generation gap. This does **not** mean every individual registry component is design-owner `Approved` — see the boundary below.
+
+**v1 boundary:**
+
+- `Mapped-review-pending` components remain provisional, not `Approved` — usable only under `CLAUDE.md`'s Component Eligibility Policy, with disclosure.
+- No dual-axis chart capability is currently guaranteed.
+- The `Shell/Modal` (destructive-confirmation-over-a-mounted-shell) overlay pattern is not yet formally registered or documented.
+- Cold-generation test screens are benchmark evidence, preserved in separate, unmerged worktrees/branches — not production product pages, and not part of this repository's shipped code.
+- Figma remains migration/validation evidence; routine generation should use this repository first, per the Figma relationship section above.
