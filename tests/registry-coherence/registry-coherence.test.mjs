@@ -163,3 +163,87 @@ describe("validator: ownedExports shape and uniqueness", () => {
     assert.ok(errors.some((e) => e.includes('ownedExports name "SharedName" is claimed by more than one entry')))
   })
 })
+
+describe("PxDetailDrilldownShell: Detail/Drilldown correctly brought into scope", () => {
+  test("outofscope-detail-drilldown-page is no longer status Out of scope", () => {
+    const registry = loadRegistry(rootDir)
+    const entry = findEntry(registry, "outofscope-detail-drilldown-page")
+    assert.ok(entry, "expected the outofscope-detail-drilldown-page entry to still exist (id kept for historical traceability)")
+    assert.notEqual(entry.status, "Out of scope")
+    assert.equal(entry.category, "Shell")
+  })
+
+  test("outofscope-detail-drilldown-page points at the implemented pattern", () => {
+    const registry = loadRegistry(rootDir)
+    const entry = findEntry(registry, "outofscope-detail-drilldown-page")
+    assert.ok(entry.repoPaths.some((p) => p.includes("px-detail-drilldown-shell")))
+    assert.ok(entry.examplePaths.some((p) => p.includes("detail-drilldown-shell-example")))
+  })
+
+  test("decision-px-main-container-internal names PxDetailDrilldownShell as the fourth documented consumer", () => {
+    const registry = loadRegistry(rootDir)
+    const decision = registry.decisions.find((d) => d.id === "decision-px-main-container-internal")
+    assert.match(decision.statement, /PxDetailDrilldownShell/)
+  })
+
+  test("decision-single-record-detail-page-gap no longer describes this as an open gap", () => {
+    const registry = loadRegistry(rootDir)
+    const decision = registry.decisions.find((d) => d.id === "decision-single-record-detail-page-gap")
+    assert.match(decision.statement, /RESOLVED/)
+  })
+
+  test("ai/shell-registry.md lists PxDetailDrilldownShell", () => {
+    const md = readFile("ai/shell-registry.md")
+    assert.match(md, /PxDetailDrilldownShell/)
+  })
+
+  test("CLAUDE.md documents PxDetailDrilldownShell as a shell reuse option", () => {
+    const claudeMd = readFile("CLAUDE.md")
+    assert.match(claudeMd, /PxDetailDrilldownShell/)
+  })
+
+  test("no duplicate registry entry was created for the Shell/MainContainer-embedded copy", () => {
+    const registry = loadRegistry(rootDir)
+    const owners = registry.entries.filter((e) =>
+      (e.figmaNodes ?? []).some((n) => n.nodeId === "9661:38956")
+    )
+    assert.equal(owners.length, 0, "the 3792:8575-embedded copy must not have its own registry entry")
+  })
+
+  test("outofscope-detail-drilldown-page is design-owner Approved after visual review", () => {
+    const registry = loadRegistry(rootDir)
+    const entry = findEntry(registry, "outofscope-detail-drilldown-page")
+    assert.equal(entry.status, "Approved")
+    assert.equal(entry.visualReview, "Approved")
+    assert.equal(entry.designOwnerApproval.approved, true)
+    assert.ok(entry.designOwnerApproval.date)
+  })
+
+  test("ai/shell-registry.md reflects the PxDetailDrilldownShell approval", () => {
+    const md = readFile("ai/shell-registry.md")
+    assert.match(md, /PxDetailDrilldownShell[\s\S]*?Approved \(design owner, 2026-09-07\)[\s\S]*?\|\s*Yes\s*\|/)
+  })
+
+  test("PxMainContainer is never described as independently Approved in PxDetailDrilldownShell's own files", () => {
+    const readme = readFile("src/patterns/px-detail-drilldown-shell/README.md")
+    const component = readFile("src/patterns/px-detail-drilldown-shell/PxDetailDrilldownShell.tsx")
+    for (const source of [readme, component]) {
+      assert.doesNotMatch(
+        source,
+        /already-approved primitives[\s\S]{0,40}PxMainContainer/,
+        "must not describe PxMainContainer as independently approved"
+      )
+    }
+    // PxMainContainer's real, current status (Internal foundation) must still be registered correctly.
+    const registry = loadRegistry(rootDir)
+    const mainContainer = findEntry(registry, "shell-px-main-container")
+    assert.equal(mainContainer.status, "Internal foundation")
+    assert.equal(mainContainer.designOwnerApproval.approved, false)
+  })
+
+  test("README references the actual registry id, not an invented one", () => {
+    const readme = readFile("src/patterns/px-detail-drilldown-shell/README.md")
+    assert.doesNotMatch(readme, /shell-px-detail-drilldown/)
+    assert.match(readme, /outofscope-detail-drilldown-page/)
+  })
+})

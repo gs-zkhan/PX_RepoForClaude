@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { EngagementsListExample } from "@/pages/engagements-list-example"
 import { AnalyticsExample } from "@/pages/analytics-example"
+import { DetailDrilldownShellExample } from "@/pages/detail-drilldown-shell-example"
 import { UserExplorer } from "@/pages/user-explorer"
 import { WorkInProgress } from "@/pages/work-in-progress"
 import { ValidationGallery } from "@/ValidationGallery"
@@ -73,6 +74,17 @@ function App() {
           <DocsApp />
         </div>
       </TooltipProvider>
+    )
+  }
+
+  if (activeKey === "segments") {
+    return (
+      <DetailDrilldownShellExample
+        activeKey={activeKey}
+        onNavigate={setActiveKey}
+        mode={navMode}
+        onModeChange={setNavMode}
+      />
     )
   }
 
