@@ -216,7 +216,7 @@
     },
     {
       "id": "decision-px-main-container-internal",
-      "statement": "PxMainContainer is an internal foundation, not an independently approved shell, and remains so — this status is never promoted regardless of how many approved consumers compose it. It has no row of its own in ai/shell-registry.md. A screen may compose PxMainContainer directly only when a registered, approved shell/pattern explicitly documents that exact composition; PxMainContainer's own approval is then inherited from that specific consumer, never tracked independently. As of 2026-08-29 this includes three documented direct consumers: PxListShell, PxCreateEditShell (Accordion/Wizard tiers), and PxAnalyticsSecondaryNav (see shell-analytics-secondary-nav and src/patterns/px-analytics-secondary-nav/README.md's Composition Rules). Product/screen naming alone (e.g. a screen literally named \"Feature Adoption\") never determines which consumer, or which shell, applies — the screen's actual anatomy (tabular/list-driven vs. Analytics-nav/KPI/chart-driven) is the sole basis for that choice; see ai/shell-registry.md's PxListShell and PxAnalyticsSecondaryNav rows for the anatomy each one owns.",
+      "statement": "PxMainContainer is an internal foundation, not an independently approved shell, and remains so — this status is never promoted regardless of how many approved consumers compose it. It has no row of its own in ai/shell-registry.md. A screen may compose PxMainContainer directly only when a registered, approved shell/pattern explicitly documents that exact composition; PxMainContainer's own approval is then inherited from that specific consumer, never tracked independently. As of 2026-09-07 this includes four documented direct consumers: PxListShell, PxCreateEditShell (Accordion/Wizard tiers), PxAnalyticsSecondaryNav (see shell-analytics-secondary-nav and src/patterns/px-analytics-secondary-nav/README.md's Composition Rules), and PxDetailDrilldownShell (see outofscope-detail-drilldown-page — id kept for historical traceability — and src/patterns/px-detail-drilldown-shell/README.md's Composition rules). Product/screen naming alone (e.g. a screen literally named \"Feature Adoption\") never determines which consumer, or which shell, applies — the screen's actual anatomy (tabular/list-driven vs. Analytics-nav/KPI/chart-driven vs. single-record-detail-driven) is the sole basis for that choice; see ai/shell-registry.md's PxListShell, PxAnalyticsSecondaryNav, and PxDetailDrilldownShell rows for the anatomy each one owns.",
       "evidence": "ai/shell-registry.md note below its table; src/patterns/px-main-container/README.md \"Registry status\" section; src/patterns/px-analytics-secondary-nav/README.md \"Composition rules\" section.",
       "date": "2026-08-28"
     },
@@ -258,8 +258,8 @@
     },
     {
       "id": "decision-single-record-detail-page-gap",
-      "statement": "No sanctioned shell/pattern exists for a single-record detail/summary page (e.g. viewing one saved Segment, Account, or Engagement in a read-focused, non-tabular, non-editing layout). This is not an oversight — outofscope-detail-drilldown-page records that the design team's own Figma canvas for this exact archetype (\"Detail · Drilldown Page\", node 3187:11) is an empty, 0x0 canvas with no children, i.e. explicitly marked Out of scope rather than merely not-yet-extracted. Cold Generation Test #5 (2026-09-04) needed to build exactly this archetype and, absent a sanctioned option, used PxListShell as the closest available fit — flagged by that test as a judgment call, not a confirmed-correct answer, since PxListShell's own documented purpose (per decision-px-main-container-internal) is anatomy-restricted to list/table/filterable-dataset screens, which a single-record detail view is not. PxMainContainer's own README separately notes that Figma's generic Shell/Nav+PrimaryHeader symbol (node 3796:2273) is described in Figma as being for \"detail or settings pages\", but PxMainContainer may only be composed via its registered consumers, none of which is a confirmed match for this anatomy. THIS RECORD DOES NOT SANCTION A FIX. It documents the gap and the two options a design owner needs to choose between: (1) bring \"Detail - Drilldown Page\" into scope in Figma so a dedicated shell can be extracted with real anatomy evidence, or (2) explicitly sanction PxListShell (or a new registered PxMainContainer consumer) as the interim/permanent pattern for this archetype. No shell was created and no existing shell's documented purpose was changed by this record.",
-      "evidence": "outofscope-detail-drilldown-page entry (figmaMappingStatus Verified-MCP-this-session, status Out of scope, notes confirming the 0x0 empty-canvas finding); src/patterns/px-main-container/README.md's Figma-sources table (Shell/Nav+PrimaryHeader, node 3796:2273, \"Use for detail or settings pages\"); decision-px-main-container-internal; Cold Generation Test #5's own report (ai/cold-generation/ once merged) naming PxListShell as an unconfirmed judgment call.",
+      "statement": "RESOLVED (2026-09-07): this record originally documented a genuine architecture gap — no sanctioned shell/pattern existed for a single-record detail/summary page, since Figma's own canvas for this exact archetype (\"Detail · Drilldown Page\", node 3187:11) was an empty, 0x0, explicitly Out-of-scope canvas, and Cold Generation Test #5 (2026-09-04) had to use PxListShell as an unconfirmed judgment call in its absence. The design owner has since brought this archetype into scope in Figma (node 3187:11 now contains real design evidence — a full \"Shell / Detail Drilldown\" instance plus AI Instructions and Dos/Don'ts) and directed implementation of a new, dedicated pattern: PxDetailDrilldownShell (src/patterns/px-detail-drilldown-shell/), registered in ai/shell-registry.md and as outofscope-detail-drilldown-page (id kept unchanged for historical traceability, per decision-px-main-container-internal's fourth-consumer update). It is a thin composition of the existing PxMainContainer + PxHeader Secondary Bar props — no new visual/header component. Still Mapped-review-pending, NOT design-owner approved. This gap is no longer open.",
+      "evidence": "outofscope-detail-drilldown-page entry (now status Mapped-review-pending, category Shell, repoPaths pointing at the implemented pattern); src/patterns/px-detail-drilldown-shell/README.md; decision-px-main-container-internal (updated to name PxDetailDrilldownShell as the fourth registered consumer); ai/shell-registry.md's PxDetailDrilldownShell row.",
       "date": "2026-09-07"
     }
   ],
@@ -3792,33 +3792,62 @@
     },
     {
       "id": "outofscope-detail-drilldown-page",
-      "name": "Detail · Drilldown Page",
-      "category": "Out of scope",
+      "name": "Detail · Drilldown Page — RECONCILED: now Shell / Detail Drilldown (PxDetailDrilldownShell)",
+      "category": "Shell",
       "figmaPages": [
         {
           "nodeId": "3187:11",
-          "name": "Detail · Drilldown Page (Out of scope)",
+          "name": "Detail · Drilldown Page 🟢",
           "verified": "browser-verified-mcp-confirmed"
         }
       ],
-      "figmaNodes": [],
+      "figmaNodes": [
+        {
+          "nodeId": "9665:57781",
+          "name": "Shell / Detail Drilldown (instance)",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "9669:4541",
+          "name": "Detail Drilldown AI Instructions",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "9669:4571",
+          "name": "Detail Drilldown Dos and Don'ts",
+          "role": "instructions",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
       "figmaMappingStatus": "Verified-MCP-this-session",
-      "repoPaths": [],
+      "repoPaths": [
+        "src/patterns/px-detail-drilldown-shell/PxDetailDrilldownShell.tsx",
+        "src/patterns/px-detail-drilldown-shell/types.ts",
+        "src/patterns/px-detail-drilldown-shell/index.ts"
+      ],
       "docPath": null,
       "gallerySection": null,
-      "examplePaths": [],
-      "implementationStatus": "Not implemented",
-      "status": "Out of scope",
-      "fidelityReview": "Not applicable",
-      "visualReview": "Not applicable",
+      "examplePaths": [
+        "src/pages/detail-drilldown-shell-example.tsx"
+      ],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Complete",
+      "visualReview": "Pending",
       "designOwnerApproval": {
         "approved": false,
         "date": null
       },
-      "knownDeviations": [],
-      "dependencies": [],
+      "knownDeviations": [
+        "Figma's own AI Instructions (9669:4561) reference \"reference frames on this page for the Account Explorer example\" for typical drilldown content patterns (summary stat cards, tables, etc.). No such frames were found anywhere in the file (neither on this page, node 3187:11, nor on Shell/MainContainer, node 3792:8575) as of this implementation — a dangling reference in the Figma source itself, not a repo gap. Does not block this generic shell's implementation since those frames were always documented as illustrative content examples, never as required shell anatomy. The example fixture at src/pages/detail-drilldown-shell-example.tsx uses deliberately generic, non-entity-specific mock content instead."
+      ],
+      "dependencies": [
+        "shell-px-main-container"
+      ],
       "recommendedOrder": null,
-      "notes": "Confirmed live via get_metadata: the canvas's own Figma name is literally \"Detail · Drilldown Page (Out of scope)\" — an empty canvas (0×0, no children), consistent with a scope marker rather than a page with content to extract. The \"(Out of scope)\" suffix is the Figma team's own scope designation, recorded here as a fact about scope, not as any form of design-owner approval — per this registry's explicit rule, a scope marker (like a green page marker) is never treated as approval evidence."
+      "notes": "HISTORY (preserved, not deleted): this entry originally recorded that the design team's own Figma canvas for this archetype was an empty, 0x0, explicitly \"(Out of scope)\"-suffixed canvas — confirmed live via get_metadata at the time, and correctly not treated as any form of approval evidence per this registry's own rule that a scope marker is never approval evidence. RECONCILED (2026-09-07): re-inspected node 3187:11 live via MCP — it is no longer empty. It now contains a complete \"Shell / Detail Drilldown\" instance (9665:57781) plus full AI Instructions (9669:4541) and Dos/Don'ts (9669:4571) frames, describing a generic single-record detail/drilldown page archetype (Account, Segment, Feature, Engagement, User, or any entity). This is the canonical Figma source for the newly-implemented PxDetailDrilldownShell pattern (src/patterns/px-detail-drilldown-shell/). The id is kept unchanged (not renamed) to preserve historical traceability — the same convention already used by shell-analytics-secondary-nav, whose id was kept stable across a category change for the identical reason. A near-identical duplicate of the same Detail/Drilldown content also exists embedded in Shell/MainContainer (node 3792:8575, section \"Detail/Drilldown\", node 9661:38956) — per explicit design-owner direction this is treated as supporting/reference evidence only, and does NOT get its own registry entry; node 3187:11 is the sole canonical source. Implementation is a thin composition of the existing, already-registered PxMainContainer + PxHeader's existing Secondary Bar props (onBack/title/onEditTitle/titleChip/tabs/activeTabId/onTabChange/secondaryUtilities/secondaryActions) — no new visual/header component was created; PxHeader was confirmed field-for-field sufficient against a live screenshot of the Figma instance before any code was written. Still Mapped-review-pending — NOT design-owner approved; see decision-single-record-detail-page-gap for the architecture-decision history."
     },
     {
       "id": "outofscope-loading-skeleton-states",

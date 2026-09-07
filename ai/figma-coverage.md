@@ -61,6 +61,8 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 
 **Revision note (2026-08-31, IconButton `appearance="toolbar"` added; RTE Field recomposed onto it — narrow design-owner approval, no status change on either entry):** a new Figma section was found on the Notification page, explicitly marked `"DRAFT — Do not publish. Pending design-owner review"` (component sets `9638:50289` "Icon Button" and `9638:50307` "Popover", plus recomposed Notification/RTE examples). The design owner reviewed it and approved ONLY four specific items, not the draft as a whole: (1) a new additive `appearance="toolbar"` on the shared `IconButton` (32x32 box, radius/075, fixed 24x24 glyph, states Default/Hover/Focus/Pressed/Disabled — evidenced by `9638:50289`); (2) a `pressed` prop producing real `aria-pressed`, scoped to `appearance="toolbar"` only via a discriminated union (a compile-time error on `appearance="default"`, not a silently-accepted no-op prop); (3) `RteField`'s private, hand-rolled `ToolbarButton` removed and every toolbar control recomposed onto `IconButton appearance="toolbar"` — a near-duplicate visual implementation eliminated, zero behaviour change (verified: `test:rte-field` 8/8 unchanged, plus live re-verification of pressed-state, disabled state, selection-preserving `onMouseDown`, attachment, and alignment); (4) a generic `badge?: React.ReactNode` prop on `IconButton` (undefined = no badge) — explicitly NOT Figma's own `Show badge` boolean + `Badge` instance-swap pair, which permits an invalid runtime combination a single prop makes impossible. Explicitly NOT approved and unchanged: `NotificationBell`'s own 24x24 trigger box and badge overlay (the draft's `right-0 top-[-2px]` badge geometry is evidenced only for the 32x32 Toolbar box, with zero evidence for the 24x24 default — not transplanted); RTE Field's Font Size/Font Properties (still permanently disabled — the draft specifies only their Default/Disabled visual state, no actual menu/values/command/selection behaviour); `src/components/ui/popover.tsx`'s pre-existing DatePicker-token default-surface issue (8 unrelated consumers — a separate follow-up, not touched). `component-icon-button`'s own `status`/`category`/`designOwnerApproval` are unchanged (an "Internal foundation" entry never carries its own design-owner approval, per this registry's existing rule — approval is inherited through consumers, here `component-rte-field`, which itself remains `Approved-with-documented-exception` and gained no new exception). `component-rte-field`'s status/approval are also unchanged — this is an internal architecture improvement, not a new or resolved exception. Total entry count and counts-by-status unchanged at 99.
 
+**Revision note (2026-09-07, Detail/Drilldown brought into scope — PxDetailDrilldownShell implemented):** `outofscope-detail-drilldown-page` moves from `Out of scope` to `Mapped-review-pending` (`category` corrected from `Out of scope` to `Shell`; the `id` string is kept as-is for historical traceability, the same convention already used for `shell-analytics-secondary-nav`). Its Figma source, node `3187:11` ("Detail · Drilldown Page"), was previously recorded as an empty, 0×0, explicitly `Out of scope` canvas — re-inspected live via MCP this pass and found to now contain real, complete design evidence (a "Shell / Detail Drilldown" instance plus full AI Instructions and Dos/Don'ts frames). The design owner directed implementation of a new pattern, `PxDetailDrilldownShell` (`src/patterns/px-detail-drilldown-shell/`), as a thin composition of the already-registered `PxMainContainer` + `PxHeader`'s existing Secondary Bar props — no new visual/header component was created, confirmed field-for-field sufficient against a live screenshot of the Figma instance before any code was written. A near-identical duplicate of the same Detail/Drilldown content also exists embedded in Shell/MainContainer (node `3792:8575`, section "Detail/Drilldown") — per explicit design-owner direction this is treated as supporting/reference evidence only and does not get its own registry entry. Not design-owner approved — `fidelityReview: Complete`, `visualReview: Pending`, `designOwnerApproval.approved: false`. One open evidence gap recorded, not resolved: Figma's own AI Instructions reference "reference frames on this page for the Account Explorer example" that could not be located anywhere in the file (neither on node `3187:11` nor on `3792:8575`) — flagged in `knownDeviations`, does not block this generic shell's implementation. Total entry count unchanged at 99; counts-by-status updated (`Mapped-review-pending` 62→63, `Out of scope` 6→5); counts-by-category updated (`Shell` 5→6, `Out of scope` 6→5).
+
 ---
 
 ## Precise summary language (per explicit correction request)
@@ -93,25 +95,25 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 | --- | --- |
 | `Approved` | 14 |
 | `Approved-with-documented-exception` | 3 |
-| `Mapped-review-pending` | 62 |
+| `Mapped-review-pending` | 63 |
 | `Implemented-unmapped` | 8 |
 | `Missing` | 0 |
 | `Internal foundation` | 5 |
 | `Legacy` | 1 |
 | `Figma correction required` | 0 |
-| `Out of scope` | 6 |
+| `Out of scope` | 5 |
 
 ## Counts by category
 
 | Category | Count |
 | --- | --- |
 | `Component` | 73 |
-| `Shell` | 5 |
+| `Shell` | 6 |
 | `Pattern` | 4 |
 | `Foundation/token` | 7 |
 | `Illustration` | 2 |
 | `Reference` | 2 |
-| `Out of scope` | 6 |
+| `Out of scope` | 5 |
 
 ---
 
