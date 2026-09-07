@@ -25,6 +25,51 @@ If a Figma link or node without an explicit file key is provided, or the file ke
 
 ---
 
+# Component Eligibility Policy
+
+Every component, pattern, and shell in this repository is tracked in [`ai/figma-coverage.json`](./ai/figma-coverage.json), with a `status` field drawn from a controlled vocabulary. This policy states, once and authoritatively, how each status may be used when generating a PX screen. It was proven correct across six independent cold-generation benchmarks (see `ai/cold-generation/`) before being written here — it is not a proposal, it is how this repository already works.
+
+**Look up status directly. Never infer it.** Search `ai/figma-coverage.json` by both the component's likely `id` slug and its human-readable `name` field before concluding a status — do not assume a status from the component's source existing, from visual similarity to something else, or from a parent/consumer component's own status (approval never generally inherits from a parent unless that parent's own `notes`/`knownDeviations`/`dependencies` explicitly names and confirms the specific dependency). A product or screen name never determines eligibility — anatomy does, and status is a property of the component, not of the screen using it. Figma scope markers (a "🟢" page marker, an "(Out of scope)" suffix, or similar) are never approval evidence — approval is tracked exclusively via `designOwnerApproval` in the registry. Never promote, demote, or reinterpret a status while generating a screen — if a status seems wrong, stop and report it; do not act as if it were something else.
+
+## Allowed directly
+
+- `Approved`
+- `Approved-with-documented-exception`
+
+Use these directly, while respecting any documented exception recorded in the entry's own `knownDeviations`.
+
+## Provisionally allowed with disclosure
+
+- `Mapped-review-pending`
+
+Use these when needed, if all of the following hold:
+- a suitable `Approved` component is not available for the same role;
+- the registry entry maps the component to real Figma evidence (not merely "implemented");
+- its existing typed API is used exactly as documented — no invented prop, variant, or visual override;
+- the generated screen or its report explicitly discloses the provisional usage.
+
+Do not silently treat a `Mapped-review-pending` component as if it were `Approved`.
+
+## Internal / composition-only
+
+- `Internal foundation`
+
+Use these only through their registered/sanctioned consumers, or where the registry's own `dependencies`/`notes` explicitly document a direct composition. `PxMainContainer` is the canonical example: it is never independently `Approved`, and its own status is never promoted no matter how many approved consumers compose it — it gains legitimacy only through those registered consumers (`PxListShell`, `PxCreateEditShell{Accordion,Wizard}`, `PxAnalyticsSecondaryNav`, `PxDetailDrilldownShell` — see `decision-px-main-container-internal`).
+
+## Not directly usable for screen generation
+
+- `Implemented-unmapped`
+- `Legacy`
+- `Out of scope`
+- `Missing`
+- `Figma correction required`
+
+A fresh screen must never directly select one of these as if it were a normal, available component or pattern. If an already-approved composition internally depends on one of these (e.g. `SplitButton`'s approved review covers its own internal use of the otherwise-disallowed `component-dropdown-menu` — see `decision-dropdown-menu-scoped-composition`), that dependency is allowed only through the exact documented composition path (e.g. passing content through the approved component's own public prop) — never by importing the disallowed primitive directly on your own authority.
+
+If a screen genuinely requires a capability that exists only in one of these states, **stop and escalate** — report the gap. Do not invent a substitute, do not hand-roll a native-control replacement, and do not silently use the disallowed component anyway.
+
+---
+
 # Prism Component Composition Contract
 
 ## Purpose
