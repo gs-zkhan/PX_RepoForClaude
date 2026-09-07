@@ -14,12 +14,26 @@ Each test's generated code lives, uncommitted, in its own preserved git worktree
 | #2 | Create Segment, independent rerun after PR #13 | RadioGroup fix independently confirmed working (blind rerun, no memory of the bug). New finding: `DropdownField`'s controlled `value` prop toggling between `undefined` and a string triggered a React warning | [PR #14](https://github.com/gs-zkhan/PX_RepoForClaude/pull/14) |
 | #3 | Feature Adoption (Analytics dashboard) | First test of a materially different architecture (Analytics, not Create/Edit) — passed functionally, but exposed shell-naming ambiguity, a stale `PxMainContainer` consumer list, an undiscoverable `DashboardWidgetChartTypeSwitcher`, and two agent-side registry-lookup mistakes | [PR #15](https://github.com/gs-zkhan/PX_RepoForClaude/pull/15) |
 | #4 | Segments (List/Table/Filter/Bulk-action) | Third architecture, passed functionally. Surfaced the same `DropdownMenu` scoped-composition question independently (fixed by PR #15) and a still-open `SearchBar` width-convention question (not yet fixed) | [PR #15](https://github.com/gs-zkhan/PX_RepoForClaude/pull/15) (partial); `SearchBar` question open |
+| #5 | Segment Detail (single-record detail/drilldown, before-state) | Fourth architecture, first test of this anatomy — functionally correct, but no sanctioned shell existed for it; `PxListShell` used as an unconfirmed judgment call. Also surfaced a real `DropdownMenuItem` icon-source defect already live in production | [PR #18](https://github.com/gs-zkhan/PX_RepoForClaude/pull/18) (icon fix + gap documentation), [PR #19](https://github.com/gs-zkhan/PX_RepoForClaude/pull/19) (`PxDetailDrilldownShell` implemented) |
+| #6 | Segment Detail, independent rerun after `PxDetailDrilldownShell` (after-state) | Same archetype as #5, fresh/blind agent, no Figma — independently selected the new `PxDetailDrilldownShell` via anatomy-based registry guidance alone, with no fallback judgment call and no new gap found | None — clean pass, no repository change required |
 
 See the individual test records for full detail:
 - [`test-01-create-segment.md`](./test-01-create-segment.md)
 - [`test-02-create-segment-rerun.md`](./test-02-create-segment-rerun.md)
 - [`test-03-feature-adoption-analytics.md`](./test-03-feature-adoption-analytics.md)
 - [`test-04-segments-list.md`](./test-04-segments-list.md)
+- [`test-05-segment-detail.md`](./test-05-segment-detail.md)
+- [`test-06-segment-detail-rerun.md`](./test-06-segment-detail-rerun.md)
+
+## Before/after: Test #5 → Test #6
+
+This pair is the clearest available evidence that repository hardening measurably changed AI generation behavior, not merely that two isolated tests produced different outcomes:
+
+1. **Test #5** (base `9b434785…`) — no sanctioned single-record detail/drilldown shell existed. A fresh agent correctly identified the gap, disclosed it honestly, and made an unconfirmed judgment call (`PxListShell`) rather than inventing a new shell or silently mis-selecting one. Disposition: **PARTIAL**.
+2. **Repository hardening** — [PR #18](https://github.com/gs-zkhan/PX_RepoForClaude/pull/18) fixed the `DropdownMenuItem` icon defect Test #5 also surfaced and documented the shell gap as a decision record requiring design-owner input (deliberately not picking a shell itself). The design owner then brought Figma's Detail/Drilldown page into scope and directed [PR #19](https://github.com/gs-zkhan/PX_RepoForClaude/pull/19), which implemented `PxDetailDrilldownShell` as a thin composition of already-existing primitives and registered it in `ai/shell-registry.md`, design-owner Approved.
+3. **Test #6** (base `8f70900a…`, immediately after PR #19) — a fresh, blind agent, with no memory of Test #5 and no Figma access, regenerated the same archetype and **independently selected `PxDetailDrilldownShell`** purely from `ai/shell-registry.md`'s anatomy description — no naming hint, no coaching, no fallback judgment call required. Disposition: **PASS**.
+
+The controlled variable across this pair is the repository itself, not the prompt or the agent: both tests used the same archetype and the same fresh/blind-agent/no-Figma methodology. The only thing that changed between them is that the repository gained a registered, Approved shell for this archetype — which is what changed the outcome from an honestly-disclosed judgment call to a clean, registry-traceable selection.
 
 ## Preserved evidence
 
@@ -31,6 +45,8 @@ Each test's generated code remains uncommitted in its own dedicated git worktree
 | #2 | `PX_RepoForClaude-cold-test-segment-2` | `test/cold-generation-create-segment-2` | `56b51419d356bd2b558800e01592fe205386ab3c` |
 | #3 | `PX_RepoForClaude-cold-test-feature-adoption` | `test/cold-generation-feature-adoption-analytics` | `b0451c6b446a2394a279c25590ac3817dfb65583` |
 | #4 | `PX_RepoForClaude-cold-test-segments-list` | `test/cold-generation-segments-list` | `b0451c6b446a2394a279c25590ac3817dfb65583` |
+| #5 | `PX_RepoForClaude-cold-test-segment-detail` | `test/cold-generation-segment-detail` | `9b434785716b7291e5c04967618e356b6931b466` |
+| #6 | `PX_RepoForClaude-cold-test-segment-detail-rerun` | `test/cold-generation-segment-detail-rerun` | `8f70900a73f4a90ecc90e70286c8399a86a56915` |
 
 These worktrees are local-only working trees, not remote branches with committed content — the "base commit" is the `origin/main` SHA each worktree's branch was created from; the generated screen files exist only as uncommitted changes within that worktree. This record was written from that live evidence plus this repository's own commit/PR history; it does not itself contain the generated code.
 
