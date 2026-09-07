@@ -1,6 +1,6 @@
 # PxDetailDrilldownShell
 
-**Status:** Implemented, MCP-verified against real Figma design evidence — **not yet design-owner visually reviewed**. See `ai/shell-registry.md` and `ai/figma-coverage.json`'s `shell-px-detail-drilldown` entry for the current registry status.
+**Status:** Approved (design owner, 2026-09-07). See `ai/shell-registry.md` and `ai/figma-coverage.json`'s `outofscope-detail-drilldown-page` entry (id kept unchanged from its pre-implementation history for traceability — see that entry's own notes) for the current registry status.
 
 ## Purpose
 
@@ -111,7 +111,7 @@ Spacing: `--p-space-300` (content padding). All other visual tokens (Primary/Sec
 
 ## Component Composition Audit
 
-- **Approved components reused:** `PxMainContainer`, `PxHeader` (via `PxMainContainer`).
+- **Approved components reused:** `PxHeader` (via `PxMainContainer` — approved as part of `shell-px-list-shell`'s own repoPaths). `PxMainContainer` itself is **not** independently approved — its registry status remains `Internal foundation`; its use here is sanctioned because `PxDetailDrilldownShell` is now a registered, approved direct consumer (see `decision-px-main-container-internal`), the same relationship `PxListShell`/`PxCreateEditShell`/`PxAnalyticsSecondaryNav` already have with it.
 - **New components created:** `PxDetailDrilldownShell` (pattern) — a thin composition, not a new visual/header component.
 - **Native interactive elements introduced:** none.
 - **`className` overrides on approved components:** none — the one `className` this pattern accepts is applied to its own content `<main>`, never to `PxMainContainer`/`PxHeader`'s own visual recipe.

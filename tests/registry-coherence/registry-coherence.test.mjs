@@ -209,4 +209,41 @@ describe("PxDetailDrilldownShell: Detail/Drilldown correctly brought into scope"
     )
     assert.equal(owners.length, 0, "the 3792:8575-embedded copy must not have its own registry entry")
   })
+
+  test("outofscope-detail-drilldown-page is design-owner Approved after visual review", () => {
+    const registry = loadRegistry(rootDir)
+    const entry = findEntry(registry, "outofscope-detail-drilldown-page")
+    assert.equal(entry.status, "Approved")
+    assert.equal(entry.visualReview, "Approved")
+    assert.equal(entry.designOwnerApproval.approved, true)
+    assert.ok(entry.designOwnerApproval.date)
+  })
+
+  test("ai/shell-registry.md reflects the PxDetailDrilldownShell approval", () => {
+    const md = readFile("ai/shell-registry.md")
+    assert.match(md, /PxDetailDrilldownShell[\s\S]*?Approved \(design owner, 2026-09-07\)[\s\S]*?\|\s*Yes\s*\|/)
+  })
+
+  test("PxMainContainer is never described as independently Approved in PxDetailDrilldownShell's own files", () => {
+    const readme = readFile("src/patterns/px-detail-drilldown-shell/README.md")
+    const component = readFile("src/patterns/px-detail-drilldown-shell/PxDetailDrilldownShell.tsx")
+    for (const source of [readme, component]) {
+      assert.doesNotMatch(
+        source,
+        /already-approved primitives[\s\S]{0,40}PxMainContainer/,
+        "must not describe PxMainContainer as independently approved"
+      )
+    }
+    // PxMainContainer's real, current status (Internal foundation) must still be registered correctly.
+    const registry = loadRegistry(rootDir)
+    const mainContainer = findEntry(registry, "shell-px-main-container")
+    assert.equal(mainContainer.status, "Internal foundation")
+    assert.equal(mainContainer.designOwnerApproval.approved, false)
+  })
+
+  test("README references the actual registry id, not an invented one", () => {
+    const readme = readFile("src/patterns/px-detail-drilldown-shell/README.md")
+    assert.doesNotMatch(readme, /shell-px-detail-drilldown/)
+    assert.match(readme, /outofscope-detail-drilldown-page/)
+  })
 })

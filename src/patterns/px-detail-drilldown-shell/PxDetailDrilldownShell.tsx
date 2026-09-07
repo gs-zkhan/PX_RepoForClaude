@@ -26,13 +26,14 @@ import type { PxDetailDrilldownShellProps } from "./types"
 //      or empty; right = drilldown-owned utilities/actions or empty.
 //   ③ Main Content Region — flexible, scrollable, product-owned content.
 //
-// This is a thin composition of two already-existing, already-approved
-// primitives — no new visual/header component was created:
+// This is a thin composition of two already-existing primitives — no new
+// visual/header component was created:
 //   - <PxMainContainer> supplies the rail, the page background, and the
-//     content row. This shell is a fourth registered direct consumer,
-//     alongside PxListShell/PxCreateEditShell{Accordion,Wizard}/
-//     PxAnalyticsSecondaryNav (see ai/figma-coverage.json's
-//     decision-px-main-container-internal).
+//     content row. Its own registry status remains Internal foundation (it
+//     is never independently approved); its use here is sanctioned because
+//     this shell is a fourth registered, approved direct consumer, alongside
+//     PxListShell/PxCreateEditShell{Accordion,Wizard}/PxAnalyticsSecondaryNav
+//     (see ai/figma-coverage.json's decision-px-main-container-internal).
 //   - <PxHeader> (rendered by PxMainContainer) already exposes every field
 //     the Secondary Bar's three zones need — onBack, title, onEditTitle,
 //     titleChip (left zone), tabs/activeTabId/onTabChange (centre zone),

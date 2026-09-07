@@ -63,6 +63,8 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 
 **Revision note (2026-09-07, Detail/Drilldown brought into scope — PxDetailDrilldownShell implemented):** `outofscope-detail-drilldown-page` moves from `Out of scope` to `Mapped-review-pending` (`category` corrected from `Out of scope` to `Shell`; the `id` string is kept as-is for historical traceability, the same convention already used for `shell-analytics-secondary-nav`). Its Figma source, node `3187:11` ("Detail · Drilldown Page"), was previously recorded as an empty, 0×0, explicitly `Out of scope` canvas — re-inspected live via MCP this pass and found to now contain real, complete design evidence (a "Shell / Detail Drilldown" instance plus full AI Instructions and Dos/Don'ts frames). The design owner directed implementation of a new pattern, `PxDetailDrilldownShell` (`src/patterns/px-detail-drilldown-shell/`), as a thin composition of the already-registered `PxMainContainer` + `PxHeader`'s existing Secondary Bar props — no new visual/header component was created, confirmed field-for-field sufficient against a live screenshot of the Figma instance before any code was written. A near-identical duplicate of the same Detail/Drilldown content also exists embedded in Shell/MainContainer (node `3792:8575`, section "Detail/Drilldown") — per explicit design-owner direction this is treated as supporting/reference evidence only and does not get its own registry entry. Not design-owner approved — `fidelityReview: Complete`, `visualReview: Pending`, `designOwnerApproval.approved: false`. One open evidence gap recorded, not resolved: Figma's own AI Instructions reference "reference frames on this page for the Account Explorer example" that could not be located anywhere in the file (neither on node `3187:11` nor on `3792:8575`) — flagged in `knownDeviations`, does not block this generic shell's implementation. Total entry count unchanged at 99; counts-by-status updated (`Mapped-review-pending` 62→63, `Out of scope` 6→5); counts-by-category updated (`Shell` 5→6, `Out of scope` 6→5).
 
+**Revision note (2026-09-07, `PxDetailDrilldownShell` design-owner approval recorded):** following the implementation above, the design owner visually reviewed `PxDetailDrilldownShell`'s rendered anatomy (via `src/pages/detail-drilldown-shell-example.tsx`) and approved it for AI use. `outofscope-detail-drilldown-page` (id kept unchanged for historical traceability) moves from `Mapped-review-pending` to **`Approved`** (`fidelityReview: Complete`, `visualReview: Approved`, `designOwnerApproval: { approved: true, date: "2026-09-07" }`). This approval covers `PxDetailDrilldownShell`'s own anatomy only — it does **not** newly approve `PxMainContainer` (still `Internal foundation`, never independently approved; its use here remains sanctioned solely because `PxDetailDrilldownShell` is a registered, approved direct consumer, per `decision-px-main-container-internal`) or change the status of `PxHeader`/`component-toggle`/`component-status-label`/`component-summary-stat`/`component-table` or any other shared component this pattern's example composes. Total entry count unchanged at 99; counts-by-status updated (`Approved` 14→15, `Mapped-review-pending` 63→62); counts-by-category unchanged (`category` was already corrected to `Shell` in the prior revision).
+
 ---
 
 ## Precise summary language (per explicit correction request)
@@ -93,9 +95,9 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 
 | Status | Count |
 | --- | --- |
-| `Approved` | 14 |
+| `Approved` | 15 |
 | `Approved-with-documented-exception` | 3 |
-| `Mapped-review-pending` | 63 |
+| `Mapped-review-pending` | 62 |
 | `Implemented-unmapped` | 8 |
 | `Missing` | 0 |
 | `Internal foundation` | 5 |
