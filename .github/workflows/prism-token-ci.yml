@@ -119,6 +119,25 @@ jobs:
       - name: Figma coverage registry tests
         run: npm run test:figma-coverage
 
+      # The four steps below protect the AI-readiness hardening fixes
+      # introduced in PRs #13-#19 (RadioGroup orientation guidance,
+      # DropdownField controlled-value guidance, the registry-coherence
+      # corrections, and the DropdownMenuItem icon-source fix). They existed
+      # as documented package.json scripts before this pass but were not
+      # actually wired into CI — added here so a future change can't silently
+      # break any of them.
+      - name: Registry coherence tests
+        run: npm run test:registry-coherence
+
+      - name: RadioGroup guidance regression tests
+        run: npm run test:radio-group
+
+      - name: DropdownField controlled-value regression tests
+        run: npm run test:dropdown-field
+
+      - name: DropdownMenu icon regression tests
+        run: npm run test:dropdown-menu
+
       - name: Color utility tests
         run: npm run test:color
 
