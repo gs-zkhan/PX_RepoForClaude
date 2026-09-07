@@ -40,6 +40,16 @@ import type { TableDensity } from "@/components/ui/table"
 //   - bulk actions
 // The consuming screen supplies column + density state and callbacks; this
 // component only renders the disclosure UI and forwards user intent.
+//
+// KNOWN GAP (v1.1 shared-system PR, not fixed here): the ColumnSelector panel
+// above is a drag-to-reorder UI, and DropdownMenuContent's own Radix
+// interaction (closing on outside pointer-down) can race a drag gesture that
+// starts inside it. src/pages/user-explorer.tsx's prior bespoke Popover +
+// ColumnSelector implementation guarded this with an `isDraggingRef` passed
+// to `onInteractOutside` (see ColumnSelector's own `isDraggingRef` prop) —
+// this component doesn't yet wire that guard onto its DropdownMenuContent.
+// Flagged for a follow-up, not blocking this PR's scope (sanctioning the
+// existing DropdownMenu dependency, not changing its interaction behavior).
 // -----------------------------------------------------------------------------
 
 type TableCustomizationMenuProps = {

@@ -20,7 +20,7 @@ export const summaryStatDoc: ComponentDoc = {
       id: "stats-row",
       title: "In a StatsRow",
       body:
-        "StatsRow lays out multiple SummaryStat tiles in a horizontal strip with consistent gap. Use `placement=\"left\"` or `\"right\"` on each stat to enable a border, so the tiles read as separated cards; `placement=\"center\"` (the default) omits the border for a borderless KPI strip.",
+        "StatsRow lays out multiple SummaryStat tiles in a horizontal strip with consistent gap. Maximum 4 cards per row — Figma's own Stats Row spec caps it there for readability; StatsRow logs a dev-only console warning past 4 and never reflows or drops children on your behalf, so stack a second StatsRow instead. Use `placement=\"left\"` or `\"right\"` on each stat to enable a grouping/divider border, so the tiles read as separated cards; `placement=\"center\"` (the default) has no border and instead renders directly on the page background with `shadow/100` — border and shadow are never combined on the same card (see the Product Surface Rule in CLAUDE.md).",
       exampleId: "summary-stat/stats-row",
     },
     {
@@ -62,7 +62,7 @@ export const summaryStatDoc: ComponentDoc = {
       name: "placement",
       type: '"center" | "left" | "right"',
       defaultValue: '"center"',
-      description: "Text alignment for the Compact layout. left/right also enable a border, ignored once the Metric layout is active.",
+      description: "Text alignment for the Compact layout. left/right enable a grouping/divider border (no shadow); center renders shadow/100 with no border (ignored once the Metric layout is active — Metric is always borderless and unshadowed).",
     },
     {
       name: "selected",
@@ -119,6 +119,7 @@ export const summaryStatDoc: ComponentDoc = {
     "--s-color-surface-selected",
     "--s-color-text-default",
     "--s-color-text-subtle",
+    "--e-shadow-100",
     "--t-font-heading-large-line-height",
     "--t-font-heading-large-size",
     "--t-font-heading-large-weight",
@@ -132,11 +133,14 @@ export const summaryStatDoc: ComponentDoc = {
       "Use placement=\"left\" or \"right\" when tiles need to read as visually separated cards.",
       "Pass trend and/or description together to get the Metric layout for KPI strips.",
       "Reserve type=\"clickable\" + selected for stat tiles that act as a filter toggle.",
+      "Keep a StatsRow to 4 cards or fewer; stack a second StatsRow if you need more metrics.",
     ],
     donts: [
       "Don't pass `selected` to a non-clickable or set-now stat — only clickable supports it.",
       "Don't hardcode the Compact value font size elsewhere; the 26px/40lh pairing here is a documented, verified raw constant (matches the Prism reference and the pattern used in Charts) rather than a fabricated value — don't reuse it as a precedent for skipping tokens elsewhere.",
       "Don't add a card border to the Metric layout; Metric is always borderless regardless of `placement`.",
+      "Don't add a visible border to a center-placement (or selected) card, and don't add a shadow to a left/right-placement card — border and shadow are never combined on the same SummaryStat.",
+      "Don't place more than 4 SummaryStat cards in a single StatsRow.",
     ],
   },
 }
