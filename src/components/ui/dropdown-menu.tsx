@@ -97,7 +97,14 @@ function DropdownMenuItem({
       )}
       {...props}
     >
-      {icon && <PrismIcon name={icon} size={16} />}
+      {/* sourceSize=24: not every DropdownMenuItem icon has a dedicated 16px
+          export (e.g. email, export-document, id-card) — the 24px source
+          rendered at 16px via sourceSize is the same deliberate,
+          already-established pattern used for filter-dropdown-panel's
+          operator icons. Applied unconditionally to the whole slot so every
+          icon (not just the ones currently missing a 16px asset) resolves
+          consistently. */}
+      {icon && <PrismIcon name={icon} size={16} sourceSize={24} />}
       <span className="flex-1">{children}</span>
       {shortcut && (
         <span className="ml-auto text-xs opacity-60 tracking-widest">{shortcut}</span>
