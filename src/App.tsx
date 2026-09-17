@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { EngagementsListExample } from "@/pages/engagements-list-example"
+import { AccountExplorer } from "@/pages/account-explorer"
 import { AnalyticsExample } from "@/pages/analytics-example"
 import { DetailDrilldownShellExample } from "@/pages/detail-drilldown-shell-example"
 import { UserExplorer } from "@/pages/user-explorer"
@@ -80,6 +81,17 @@ function App() {
   if (activeKey === "segments") {
     return (
       <DetailDrilldownShellExample
+        activeKey={activeKey}
+        onNavigate={setActiveKey}
+        mode={navMode}
+        onModeChange={setNavMode}
+      />
+    )
+  }
+
+  if (activeKey === "accounts") {
+    return (
+      <AccountExplorer
         activeKey={activeKey}
         onNavigate={setActiveKey}
         mode={navMode}

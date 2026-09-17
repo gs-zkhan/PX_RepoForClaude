@@ -108,11 +108,14 @@ function AnalyticsExample({ activeKey, onNavigate, mode, onModeChange }: Analyti
           "p-[var(--p-space-300)]",
         )}
       >
+        {/* Directly on the page background — CLAUDE.md's Product Surface
+            Rule calls for shadow-100 and no border here (corrected from an
+            earlier border+shadow-together treatment). The nested "Row N"
+            filler cards below correctly keep only a border, no shadow. */}
         <div
           className={cn(
             "flex flex-col gap-[var(--p-space-200)]",
             "rounded-[var(--p-radius-150)]",
-            "border border-[var(--s-color-line-default)]",
             "bg-[var(--s-color-surface-default)]",
             "p-[var(--p-space-400)]",
             "shadow-[var(--e-shadow-100)]",
