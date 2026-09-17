@@ -238,6 +238,33 @@ Do not silently borrow a token from another component.
 
 ---
 
+## Product Surface Rule
+
+Authoritative PX-wide rule (design-owner confirmed, v1.1 shared-system audit, 2026-09-07), verified against Figma's `List Page / Content Area` (node `3302:6`, `U3D8WMBVFl9LvAZyLHhm24`) and `SummaryStat`/Stats Row (node `7102:129`):
+
+- A container sitting directly on the product/page background uses `shadow-100` and **no visible border**.
+- A container nested on another already-elevated material/surface uses a **border** and **no shadow**.
+- Never combine a visible border and a shadow on the same container.
+
+Both `src/pages/user-explorer.tsx` (previously border + shadow + the wrong background) and `src/pages/engagements-list-example.tsx` (previously no shadow at all, also the wrong background) violated this before the v1.1 audit — neither is canonical guidance for the surface treatment; both were corrected to consume `TableFrame`'s `surface` prop instead of hand-rolling their own.
+
+Grouping/divider borders and selection borders (e.g. `SummaryStat`'s Left/Right placement, or its Clickable Selected state) are a distinct case — internal dividers/state indicators within a row that already sits on the page background, not a competing "surface" — they keep their border and never gain a shadow.
+
+---
+
+## Table Composition (TableFrame)
+
+Table's own intrinsic anatomy (Figma node `20:34`) is `Toolbar → Header → Body rows → optional Pagination` — the Toolbar/title bar is present **by default**, unless explicitly removed for the use case. Use `<TableFrame>` (`src/components/ui/table-frame.tsx`) for any new table, rather than hand-rolling a title-bar `<div>` + wrapper `<section>` per screen:
+
+- Left: `title` (+ optional `count`, rendered as `"Title (N)"` per Table's own Dos rule — always the *filtered* count).
+- Right: optional `search` (an IconButton that reveals a caller-supplied `SearchBar` — never an always-open input), `filter`, `customization` (row density + column selector — compose `<TableCustomizationMenu>`, the sanctioned owner of this behavior, not a bespoke `DropdownMenu`), and `actions` (CTAs).
+- `surface="page"` (default) or `surface="nested"` encodes the Product Surface Rule above — never hand-roll the border/shadow classes directly on a table wrapper.
+- `TableFrame` owns layout/chrome only — it never owns search query state, filter predicate logic, sort state, or column/density state; those stay feature-owned or live inside whatever component fills a slot.
+
+Omit whichever RHS capabilities don't apply to a given table (e.g. a small, non-interactive drilldown activity table needs only `title`) — the Toolbar itself is the default; the exact right-side controls are contextual.
+
+---
+
 ## No Visual Overrides on Approved Components
 
 When using approved components inside patterns or screens:

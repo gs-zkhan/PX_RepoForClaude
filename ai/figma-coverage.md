@@ -9,7 +9,9 @@ node --test "tests/figma-coverage/*.test.mjs"
 
 Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 
-**Total entries: 99**
+**Total entries: 100**
+
+**Revision note (2026-09-07, v1.1 shared-system audit):** one entry added — `component-table-frame` (new `TableFrame` composition, `src/components/ui/table-frame.tsx`), formalizing Table's own intrinsic Toolbar → Table → optional Pagination anatomy (previously hand-rolled inconsistently per screen) into a reusable pattern; `Mapped-review-pending`, `visualReview: Pending`, not design-owner approved. `component-table-customization-menu`'s existing `DropdownMenu` dependency is now sanctioned (see `decision-dropdown-menu-scoped-composition`) and recorded in its own `dependencies` array. `component-summary-stat`'s notes record a design-owner correction (not a fidelity defect): Center/default placement now uses `shadow/100`, re-verified live against Figma node `7102:129`; Left/Right and Selected states are unchanged. Two new decisions recorded: `decision-list-page-surface-rule` (the PX-wide border-vs-shadow surface rule, and correcting `user-explorer.tsx`/`engagements-list-example.tsx`'s stale, mutually-inconsistent surface treatments) and `decision-statsrow-max-four` (Figma's 4-card-per-row cap, now also documented in `summary-stat.doc.ts` and enforced as a dev-only warning). Total entry count 99→100; counts-by-status below updated (`Mapped-review-pending` 62→63); counts-by-category updated (`Pattern` 4→5).
 
 **Revision note (2026-08-28, full-inventory reconciliation):** this revision replaces the prior partial page baseline (23 pages) with the complete 75-page content inventory supplied by the user, MCP-verifies every one of the 75 nodes, links every registry entry to its owning page, resolves the majority of the previously-flagged "page-level citation missing" gap, and corrects one page mislabel discovered in the process (`1273:12` was recorded as "Date Filter page" — it is actually "Date · Time Picker", hosting Date Picker and Date Filter as sibling columns). See "What changed in this pass" below.
 
@@ -97,7 +99,7 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 | --- | --- |
 | `Approved` | 15 |
 | `Approved-with-documented-exception` | 3 |
-| `Mapped-review-pending` | 62 |
+| `Mapped-review-pending` | 63 |
 | `Implemented-unmapped` | 8 |
 | `Missing` | 0 |
 | `Internal foundation` | 5 |
@@ -111,7 +113,7 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 | --- | --- |
 | `Component` | 73 |
 | `Shell` | 6 |
-| `Pattern` | 4 |
+| `Pattern` | 5 |
 | `Foundation/token` | 7 |
 | `Illustration` | 2 |
 | `Reference` | 2 |

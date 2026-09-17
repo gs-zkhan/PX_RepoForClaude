@@ -5,6 +5,7 @@ import type { PxShellNavKey, PxShellRailMode } from "@/components/px-shell-rail"
 import { PX_NAV_LABELS } from "@/components/px-shell-rail"
 import { StatusLabel } from "@/components/ui/status-label"
 import { SummaryStat, StatsRow } from "@/components/ui/summary-stat"
+import { TableFrame } from "@/components/ui/table-frame"
 import {
   Table,
   TableBody,
@@ -85,30 +86,38 @@ export function DetailDrilldownShellExample({
           />
         </div>
 
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Event</TableHead>
-              <TableHead>Date</TableHead>
-            </TableRow>
-          </TableHeader>
-          {showEmpty ? (
-            <TableEmptyState
-              colSpan={2}
-              title="No recent activity"
-              body="This record has no recent activity in the selected period."
-            />
-          ) : (
-            <TableBody>
-              {ACTIVITY_ROWS.map((row) => (
-                <TableRow key={row.event}>
-                  <TableCell>{row.event}</TableCell>
-                  <TableCell>{row.when}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          )}
-        </Table>
+        {/* Table anatomy is Toolbar → Table → optional Pagination (Figma
+            node 20:34) — <TableFrame> supplies the toolbar/title bar and the
+            surface treatment; this table sits directly on the drilldown's
+            page background, so surface="page" (shadow-100, no border). No
+            search/filter/customization/actions needed for a 3-row activity
+            list — those slots are omitted per "applicability still matters". */}
+        <TableFrame title="Recent Activity" count={showEmpty ? 0 : ACTIVITY_ROWS.length}>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Event</TableHead>
+                <TableHead>Date</TableHead>
+              </TableRow>
+            </TableHeader>
+            {showEmpty ? (
+              <TableEmptyState
+                colSpan={2}
+                title="No recent activity"
+                body="This record has no recent activity in the selected period."
+              />
+            ) : (
+              <TableBody>
+                {ACTIVITY_ROWS.map((row) => (
+                  <TableRow key={row.event}>
+                    <TableCell>{row.event}</TableCell>
+                    <TableCell>{row.when}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            )}
+          </Table>
+        </TableFrame>
       </div>
     </PxDetailDrilldownShell>
   )

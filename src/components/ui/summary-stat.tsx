@@ -13,6 +13,20 @@ import { cn } from "@/lib/utils"
 //   label + larger value + trend row + description, height auto, no card
 //   border. Used for KPI strips on list pages.
 //
+// Surface rule (PX-wide, never border + shadow together — see
+// CLAUDE.md's Product Surface Rule): Center/default placement has
+// no visible border, so it's the only case that sits directly on the page
+// background and gets `shadow/100`. Left/Right placement keeps its existing
+// grouping/divider border and never gets a shadow. Selected (Clickable only)
+// keeps its existing selection border and never gets a shadow either — the
+// v1.1 design-owner audit re-verified this against Figma node `7102:129`
+// (2026-09-07): every card in the published "Stats Row" component now
+// carries a drop-shadow matching `shadow/100` (scaled render values on that
+// instance — 2px/0.5px vs the canonical 4px/1px blur — are a Figma
+// instance-scale artifact, not a distinct token; the file's own resolved
+// style annotation names it `shadow/100` directly), with no border and no
+// Left/Right/Selected variant shown carrying both border and shadow.
+//
 // Type controls interactivity: non-clickable (default) is a div; clickable
 // and set-now render as buttons. Only clickable supports a `selected` state
 // (selection ring + surface-selected fill). Set-now is meant for the
@@ -95,6 +109,9 @@ function SummaryStat({
     isMetric ? "h-auto items-start text-left px-[var(--p-space-300)] py-[var(--p-space-200)] gap-[var(--p-space-050)]"
              : "h-[88px] p-[var(--p-space-200)] gap-[var(--p-space-050)]",
     !isMetric && PLACEMENT_CLASS[placement],
+    // Never combine with a visible border (PLACEMENT_CLASS left/right, or
+    // the selected override below) — see the Surface rule note above.
+    placement === "center" && !selected && "shadow-[var(--e-shadow-100)]",
     type === "non-clickable" && !isMetric && "hover:bg-[var(--s-color-surface-muted)]",
     isInteractive && "cursor-pointer",
     isInteractive && !selected && "hover:bg-[var(--s-color-surface-muted)]",
@@ -170,6 +187,13 @@ type StatsRowProps = {
 }
 
 function StatsRow({ children, className }: StatsRowProps) {
+  const count = React.Children.count(children)
+  if (count > 4 && import.meta.env.DEV) {
+    console.warn(
+      `StatsRow: ${count} cards passed — Figma's own spec caps a single row at 4 cards for readability; stack a second row instead.`
+    )
+  }
+
   return <div className={cn("flex gap-[var(--p-space-300)]", className)}>{children}</div>
 }
 

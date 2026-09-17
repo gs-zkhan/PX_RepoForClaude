@@ -3,9 +3,10 @@
  *
  * Reproduces the Figma frame `Shell/ListPage` (node 7306:20074) from the
  * Prism V1 - ShadCN file: PX rail on the left, PX Header with module name +
- * PEC + utilities on top, and a card (no border/shadow — see List Page /
- * Content Area, node 3302:6) containing a titled toolbar, data table, and
- * pagination inside the shell content slot.
+ * PEC + utilities on top, and <TableFrame> (List Page / Content Area, node
+ * 3302:6 — shadow-100, no border, since it sits directly on the page
+ * background) containing a titled toolbar, data table, and pagination
+ * inside the shell content slot.
  *
  * Everything feature-specific (columns, data, actions, PEC options) lives in
  * this file. The shell is responsible for chrome only.
@@ -13,7 +14,6 @@
 
 import * as React from "react"
 
-import { cn } from "@/lib/utils"
 import { PxListShell, PxFilterSlider, type PxFilterSliderTab } from "@/patterns/px-list-shell"
 import { PECDropdown, type PECOption } from "@/components/px-pec-dropdown"
 import { PX_NAV_LABELS, type PxShellNavKey, type PxShellRailMode } from "@/components/px-shell-rail"
@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { IconButton } from "@/components/ui/icon-button"
 import { Pagination } from "@/components/ui/pagination"
+import { SearchBar } from "@/components/ui/search-bar"
 import { StatusLabel } from "@/components/ui/status-label"
 import {
   Table,
@@ -39,6 +40,7 @@ import {
   TableRow,
   type TableDensity,
 } from "@/components/ui/table"
+import { TableFrame } from "@/components/ui/table-frame"
 import { TableCustomizationMenu } from "@/components/ui/table-customization-menu"
 import type { ColumnSelectorColumn } from "@/components/ui/column-selector"
 
@@ -146,6 +148,11 @@ function EngagementsTable({
   const [filterOpen, setFilterOpen] = React.useState(false)
   const [filterTab, setFilterTab] = React.useState<PxFilterSliderTab>("filter")
 
+  // Search reveal — Figma's own Table/Toolbar anatomy (node 1896:6) starts
+  // search as an icon that reveals the SearchBar, never an always-open input.
+  const [searchOpen, setSearchOpen] = React.useState(false)
+  const [query, setQuery] = React.useState("")
+
   // Table customization — Arrange Columns + Row Density, per Figma node
   // 3187:9 ("Row Density - Menu" frame). Column selection/order state is
   // committed here (feature-owned); the demo table below still renders its
@@ -156,60 +163,39 @@ function EngagementsTable({
   const [columnOrder, setColumnOrder] = React.useState(ENGAGEMENT_COLUMN_IDS)
 
   return (
-    <section
-      className={cn(
-        "flex h-full flex-col overflow-hidden",
-        "rounded-[var(--p-radius-150)]",
-        "bg-[var(--s-color-surface-default)]",
-      )}
+    <TableFrame
+      title="All Engagements"
+      surface="page"
+      search={{
+        open: searchOpen,
+        onToggle: () => setSearchOpen((v) => !v),
+        render: (
+          <SearchBar
+            size="small"
+            placeholder="Search engagements"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onClear={() => setQuery("")}
+          />
+        ),
+      }}
+      filter={{ active: filterOpen, onToggle: () => setFilterOpen((v) => !v) }}
+      customization={
+        <TableCustomizationMenu
+          columns={ENGAGEMENT_COLUMNS}
+          selectedColumns={selectedColumns}
+          onSelectedColumnsChange={setSelectedColumns}
+          columnOrder={columnOrder}
+          onColumnOrderChange={setColumnOrder}
+          onResetColumns={() => {
+            setSelectedColumns(ENGAGEMENT_COLUMN_IDS)
+            setColumnOrder(ENGAGEMENT_COLUMN_IDS)
+          }}
+          density={density}
+          onDensityChange={setDensity}
+        />
+      }
     >
-      {/*
-        Title bar — matches Figma node 3302:6 (List Page / Content Area,
-        View=Table, State=With Data): plain title on the LHS, uniform 16px
-        (space/200) padding, and an icon-only RHS action group (search,
-        filter, more) with a 16px gap. Create is hidden in this exact
-        reference state.
-      */}
-      <div className="flex shrink-0 items-center gap-[var(--p-space-200)] p-[var(--p-space-200)]">
-        <span
-          className={cn(
-            "text-[length:var(--p-font-size-medium)]",
-            "font-[var(--p-font-weight-regular)]",
-            "leading-[var(--p-font-line-height-medium)]",
-            "text-[var(--s-color-text-default)]",
-          )}
-        >
-          All Engagements
-        </span>
-
-        <div className="flex-1" />
-
-        <div className="flex items-center gap-[var(--p-space-200)]">
-          <IconButton icon="search" label="Search" />
-
-          <IconButton
-            icon="filter"
-            label="Filter"
-            aria-pressed={filterOpen}
-            onClick={() => setFilterOpen((v) => !v)}
-          />
-
-          <TableCustomizationMenu
-            columns={ENGAGEMENT_COLUMNS}
-            selectedColumns={selectedColumns}
-            onSelectedColumnsChange={setSelectedColumns}
-            columnOrder={columnOrder}
-            onColumnOrderChange={setColumnOrder}
-            onResetColumns={() => {
-              setSelectedColumns(ENGAGEMENT_COLUMN_IDS)
-              setColumnOrder(ENGAGEMENT_COLUMN_IDS)
-            }}
-            density={density}
-            onDensityChange={setDensity}
-          />
-        </div>
-      </div>
-
       {/* Table + Filter Slider row — slider narrows only this row, never the toolbar above */}
       <div className="flex min-h-0 flex-1">
         <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
@@ -278,7 +264,7 @@ function EngagementsTable({
           />
         )}
       </div>
-    </section>
+    </TableFrame>
   )
 }
 

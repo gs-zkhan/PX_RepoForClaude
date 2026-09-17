@@ -2,7 +2,9 @@
  * Audience Explorer — user list screen built on <PxListShell>.
  *
  * Anatomy: PX rail + two-bar header (shell's responsibility) wrapping a
- * bordered card that holds a title bar, a conditional Filter Bar, the user
+ * <TableFrame> (Table's own Toolbar → Table → Pagination anatomy, node
+ * 20:34 — shadow-100, no border, since it sits directly on the page
+ * background) that holds the title bar, a conditional Filter Bar, the user
  * table, and pagination.
  *
  * Filtering is real, not decorative. Four multi-select criteria (Status,
@@ -23,19 +25,13 @@ import { PX_NAV_LABELS, type PxShellNavKey, type PxShellRailMode } from "@/compo
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
-import {
-  ColumnSelector,
-  type ColumnSelectorView,
-} from "@/components/ui/column-selector"
+import type { ColumnSelectorColumn } from "@/components/ui/column-selector"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { FilterBar, type FilterBarChip } from "@/components/ui/filter-bar"
@@ -62,6 +58,8 @@ import {
   type TableDensity,
   type TableSortDirection,
 } from "@/components/ui/table"
+import { TableCustomizationMenu } from "@/components/ui/table-customization-menu"
+import { TableFrame } from "@/components/ui/table-frame"
 
 // ---------------------------------------------------------------------------
 // Data model
@@ -450,17 +448,11 @@ const COLUMNS: ColumnDef[] = [
 
 const DEFAULT_COLUMN_IDS: string[] = COLUMNS.map((c) => c.key)
 
-const COL_SELECTOR_COLUMNS = COLUMNS.map((c) => ({
+const COL_SELECTOR_COLUMNS: ColumnSelectorColumn[] = COLUMNS.map((c) => ({
   id: c.key,
   label: c.label,
   ...(c.locked ? { disabled: true } : {}),
 }))
-
-const DENSITY_OPTIONS: { value: TableDensity; label: string }[] = [
-  { value: "compact",     label: "Compact"     },
-  { value: "default",     label: "Default"     },
-  { value: "comfortable", label: "Comfortable" },
-]
 
 const PAGE_SIZE_OPTIONS = [10, 25, 50]
 
@@ -503,6 +495,7 @@ type UserExplorerProps = {
 function UserExplorer({ activeKey, onNavigate, mode, onModeChange }: UserExplorerProps) {
   const [users, setUsers] = React.useState(USERS)
   const [query, setQuery] = React.useState("")
+  const [searchOpen, setSearchOpen] = React.useState(false)
   const [filterBarOpen, setFilterBarOpen] = React.useState(false)
   const [filters, setFilters] = React.useState<ActiveFilter[]>([])
   const [openField, setOpenField] = React.useState<FilterFieldKey | null>(null)
@@ -522,9 +515,6 @@ function UserExplorer({ activeKey, onNavigate, mode, onModeChange }: UserExplore
 
   const [visibleColumnIds, setVisibleColumnIds] = React.useState<string[]>(DEFAULT_COLUMN_IDS)
   const [columnOrder, setColumnOrder] = React.useState<string[]>(DEFAULT_COLUMN_IDS)
-  const [colSelectorOpen, setColSelectorOpen] = React.useState(false)
-  const [colSelectorView, setColSelectorView] = React.useState<ColumnSelectorView>("selection")
-  const colSelectorIsDragging = React.useRef(false)
   const [density, setDensity] = React.useState<TableDensity>("default")
 
   // Column pinning — first slice: at most one pinned column per side, no
@@ -738,116 +728,52 @@ function UserExplorer({ activeKey, onNavigate, mode, onModeChange }: UserExplore
         ),
       }}
     >
-      <section
-        className={cn(
-          "flex h-full flex-col overflow-hidden",
-          "rounded-[var(--p-radius-150)]",
-          "border border-[var(--s-color-line-default)]",
-          "bg-[var(--s-color-surface-default)]",
-          "shadow-[var(--e-shadow-100)]",
-        )}
-      >
-        {/* Title bar ------------------------------------------------------ */}
-        <div className="flex shrink-0 items-center gap-4 px-6 py-4">
-          <div className="flex flex-1 items-center gap-[var(--p-space-200)]">
-            <span className="text-[length:var(--p-font-size-h6)] font-[var(--p-font-weight-medium)] leading-[var(--p-font-line-height-h6)] text-[var(--s-color-text-default)]">
-              All Users ({sortedUsers.length.toLocaleString()})
-            </span>
-            {selectedCount > 0 && (
-              <span className="text-[length:var(--p-font-size-small)] leading-[var(--p-font-line-height-small)] text-[var(--s-color-text-subtlest)]">
-                {selectedCount} selected
-              </span>
-            )}
-          </div>
-
-          <div className="flex items-center gap-[var(--p-space-300)]">
-            <div className="w-[260px]">
-              <SearchBar
-                size="small"
-                placeholder="Search users"
-                value={query}
-                onChange={(e) => {
-                  setQuery(e.target.value)
-                  setPage(1)
-                }}
-                onClear={() => {
-                  setQuery("")
-                  setPage(1)
-                }}
-              />
-            </div>
-
-            <IconButton
-              icon="filter"
-              label={filterBarOpen ? "Hide filters" : "Show filters"}
-              aria-pressed={filterBarOpen}
-              onClick={() => setFilterBarOpen((v) => !v)}
+      <TableFrame
+        title="All Users"
+        count={sortedUsers.length}
+        subtitle={selectedCount > 0 ? `${selectedCount} selected` : undefined}
+        surface="page"
+        search={{
+          open: searchOpen,
+          onToggle: () => setSearchOpen((v) => !v),
+          render: (
+            <SearchBar
+              size="small"
+              placeholder="Search users"
+              value={query}
+              onChange={(e) => {
+                setQuery(e.target.value)
+                setPage(1)
+              }}
+              onClear={() => {
+                setQuery("")
+                setPage(1)
+              }}
             />
-
-            <Popover open={colSelectorOpen} onOpenChange={setColSelectorOpen}>
-              <PopoverAnchor asChild>
-                <IconButton
-                  icon="add-column"
-                  label="Configure columns"
-                  aria-pressed={colSelectorOpen}
-                  onClick={() => setColSelectorOpen((v) => !v)}
-                />
-              </PopoverAnchor>
-              <PopoverContent
-                align="end"
-                sideOffset={4}
-                className="p-0 w-[312px]"
-                onInteractOutside={(e) => {
-                  if (colSelectorIsDragging.current) e.preventDefault()
-                }}
-              >
-                <ColumnSelector
-                  columns={COL_SELECTOR_COLUMNS}
-                  selected={visibleColumnIds}
-                  order={columnOrder}
-                  view={colSelectorView}
-                  onViewChange={setColSelectorView}
-                  onSelectedChange={setVisibleColumnIds}
-                  onReorder={setColumnOrder}
-                  onReset={() => {/* ColumnSelector resets its own draft; committed on Save */}}
-                  onCancel={() => setColSelectorOpen(false)}
-                  onSave={() => setColSelectorOpen(false)}
-                  isDraggingRef={colSelectorIsDragging}
-                />
-              </PopoverContent>
-            </Popover>
-
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <IconButton icon="more-vertical" label="More options" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem icon="export-document">Export CSV</DropdownMenuItem>
-                <DropdownMenuItem icon="refresh">Refresh</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuSub>
-                  <DropdownMenuSubTrigger>Row density</DropdownMenuSubTrigger>
-                  <DropdownMenuSubContent>
-                    {DENSITY_OPTIONS.map((opt) => (
-                      <DropdownMenuItem
-                        key={opt.value}
-                        icon={density === opt.value ? "check" : undefined}
-                        onSelect={() => setDensity(opt.value)}
-                      >
-                        {opt.label}
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuSubContent>
-                </DropdownMenuSub>
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            <Button variant="primary" size="large">
-              Add User
-            </Button>
-          </div>
-        </div>
-
+          ),
+        }}
+        filter={{ active: filterBarOpen, onToggle: () => setFilterBarOpen((v) => !v) }}
+        customization={
+          <TableCustomizationMenu
+            columns={COL_SELECTOR_COLUMNS}
+            selectedColumns={visibleColumnIds}
+            onSelectedColumnsChange={setVisibleColumnIds}
+            columnOrder={columnOrder}
+            onColumnOrderChange={setColumnOrder}
+            onResetColumns={() => {
+              setVisibleColumnIds(DEFAULT_COLUMN_IDS)
+              setColumnOrder(DEFAULT_COLUMN_IDS)
+            }}
+            density={density}
+            onDensityChange={setDensity}
+          />
+        }
+        actions={
+          <Button variant="primary" size="large">
+            Add User
+          </Button>
+        }
+      >
         {/* Filter Bar + its dropdown panel -------------------------------- */}
         {filterBarOpen && (
           <Popover
@@ -1070,7 +996,7 @@ function UserExplorer({ activeKey, onNavigate, mode, onModeChange }: UserExplore
             }}
           />
         </div>
-      </section>
+      </TableFrame>
     </PxListShell>
   )
 }

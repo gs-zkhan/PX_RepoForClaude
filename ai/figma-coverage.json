@@ -187,6 +187,16 @@
         "component-filter-dropdown-panel"
       ],
       "reason": "Figma documents these three components together as one interdependent system on a single page (per the page AI Instructions: never use Filter Chip outside a Filter Bar) — three repo components legitimately share the one parent page, mirroring Figma's own grouping decision."
+    },
+    {
+      "nodeId": "20:34",
+      "name": "Table page",
+      "primaryOwner": "component-table",
+      "sharedBy": [
+        "component-table",
+        "component-table-frame"
+      ],
+      "reason": "Table is the primary owner (this is its defining page, already implemented in the repo). component-table-frame legitimately cites the same page because it formalizes Table's own intrinsic Toolbar -> Table -> optional Pagination anatomy (Section 4 of this same page) into a reusable composition, rather than pointing at an unrelated component by accident."
     }
   ],
   "decisions": [
@@ -222,9 +232,9 @@
     },
     {
       "id": "decision-dropdown-menu-scoped-composition",
-      "statement": "component-dropdown-menu remains status Implemented-unmapped and is not independently approved for arbitrary direct screen composition — approval does not generally inherit from a parent/consumer component. However, an approved composed surface may internally depend on DropdownMenu when that exact composition was part of its own recorded design-owner review. Three approved entries do so today, confirmed via direct source import: component-button-split-variant (SplitButton's dropdown-trigger zone), shell-analytics-secondary-nav (the collapsed-rail hover flyout), and component-dashboard-widget-card (the header overflow menu) — each now lists component-dropdown-menu in its own dependencies array. When an approved public API explicitly requires caller-supplied DropdownMenuItem content — currently SplitButton's menuContent prop — using DropdownMenuItem through that documented slot is covered by the approved SplitButton composition. This scoped allowance does not approve unrelated standalone DropdownMenu usage anywhere else — a screen may not import DropdownMenu/DropdownMenuTrigger/DropdownMenuContent directly on its own authority.",
-      "evidence": "src/components/ui/split-button.tsx (imports DropdownMenu/DropdownMenuTrigger/DropdownMenuContent directly, wraps caller-supplied menuContent in its own DropdownMenuContent); src/patterns/px-analytics-secondary-nav/PxAnalyticsSecondaryNav.tsx (imports DropdownMenu family for the collapsed-rail flyout, documented in its own README's \"Collapsed-menu hover flyout\" section); src/components/ui/dashboard-widget-card.tsx (imports DropdownMenu family for the overflow menu).",
-      "date": "2026-09-04"
+      "statement": "component-dropdown-menu remains status Implemented-unmapped and is not independently approved for arbitrary direct screen composition — approval does not generally inherit from a parent/consumer component. However, an approved composed surface may internally depend on DropdownMenu when that exact composition was part of its own recorded design-owner review. Four approved entries do so today, confirmed via direct source import: component-button-split-variant (SplitButton's dropdown-trigger zone), shell-analytics-secondary-nav (the collapsed-rail hover flyout), component-dashboard-widget-card (the header overflow menu), and component-table-customization-menu (the Table Toolbar's combined Arrange Columns / Row Density \"More\" trigger, sanctioned 2026-09-07 as part of the v1.1 shared-system audit) — each now lists component-dropdown-menu in its own dependencies array. When an approved public API explicitly requires caller-supplied DropdownMenuItem content — currently SplitButton's menuContent prop — using DropdownMenuItem through that documented slot is covered by the approved SplitButton composition. This scoped allowance does not approve unrelated standalone DropdownMenu usage anywhere else — a screen (or the new component-table-frame composition) may not import DropdownMenu/DropdownMenuTrigger/DropdownMenuContent directly on its own authority; component-table-frame consumes component-table-customization-menu through its own public API instead.",
+      "evidence": "src/components/ui/split-button.tsx (imports DropdownMenu/DropdownMenuTrigger/DropdownMenuContent directly, wraps caller-supplied menuContent in its own DropdownMenuContent); src/patterns/px-analytics-secondary-nav/PxAnalyticsSecondaryNav.tsx (imports DropdownMenu family for the collapsed-rail flyout, documented in its own README's \"Collapsed-menu hover flyout\" section); src/components/ui/dashboard-widget-card.tsx (imports DropdownMenu family for the overflow menu). src/components/ui/table-customization-menu.tsx (imports DropdownMenu family for its combined Arrange Columns / Row Density \"More\" trigger; consumed by component-table-frame's `customization` slot rather than component-table-frame importing DropdownMenu itself).",
+      "date": "2026-09-07"
     },
     {
       "id": "decision-textarea-exception",
@@ -260,6 +270,18 @@
       "id": "decision-single-record-detail-page-gap",
       "statement": "RESOLVED (2026-09-07): this record originally documented a genuine architecture gap — no sanctioned shell/pattern existed for a single-record detail/summary page, since Figma's own canvas for this exact archetype (\"Detail · Drilldown Page\", node 3187:11) was an empty, 0x0, explicitly Out-of-scope canvas, and Cold Generation Test #5 (2026-09-04) had to use PxListShell as an unconfirmed judgment call in its absence. The design owner has since brought this archetype into scope in Figma (node 3187:11 now contains real design evidence — a full \"Shell / Detail Drilldown\" instance plus AI Instructions and Dos/Don'ts) and directed implementation of a new, dedicated pattern: PxDetailDrilldownShell (src/patterns/px-detail-drilldown-shell/), registered in ai/shell-registry.md and as outofscope-detail-drilldown-page (id kept unchanged for historical traceability, per decision-px-main-container-internal's fourth-consumer update). It is a thin composition of the existing PxMainContainer + PxHeader Secondary Bar props — no new visual/header component. Still Mapped-review-pending, NOT design-owner approved. This gap is no longer open.",
       "evidence": "outofscope-detail-drilldown-page entry (now status Mapped-review-pending, category Shell, repoPaths pointing at the implemented pattern); src/patterns/px-detail-drilldown-shell/README.md; decision-px-main-container-internal (updated to name PxDetailDrilldownShell as the fourth registered consumer); ai/shell-registry.md's PxDetailDrilldownShell row.",
+      "date": "2026-09-07"
+    },
+    {
+      "id": "decision-list-page-surface-rule",
+      "statement": "PX-wide Product Surface Rule (design-owner authoritative, 2026-09-07 v1.1 audit): a container sitting directly on the product/page background uses a shadow (shadow/100) and no visible border; a container nested on another already-elevated material/surface uses a border and no shadow. Border and shadow are never combined on the same container. Verified against List Page / Content Area (node 3302:6): the real generated CSS is bg-color/surface/page + shadow-100 + radius-150, with no border class anywhere. src/pages/user-explorer.tsx previously combined border + shadow + the wrong (surface/default, white) background — that combination is stale/incorrect and must not be treated as canonical guidance going forward, even though it predates this audit and was itself only ever an unverified, hand-rolled copy. src/pages/engagements-list-example.tsx previously dropped the shadow entirely while also using the wrong background — also corrected. Both now consume the new component-table-frame's `surface=\"page\"` treatment instead of hand-rolling their own.",
+      "evidence": "get_design_context on Figma node 3302:6 (U3D8WMBVFl9LvAZyLHhm24): generated background token color/surface/page, generated box-shadow (two-layer: offset 0/2 radius 4 alpha 0.06, offset 0/0 radius 1 alpha 0.24) — the exact same two-layer value already defined as --e-shadow-100 in src/styles/prism-generated.css, no border property present. src/components/ui/table-frame.tsx (new); src/pages/user-explorer.tsx and src/pages/engagements-list-example.tsx (corrected to consume it).",
+      "date": "2026-09-07"
+    },
+    {
+      "id": "decision-statsrow-max-four",
+      "statement": "StatsRow must never render more than 4 SummaryStat cards in a single row — re-confirmed live against Figma's Stats Row AI Instructions (node 7078:3: \"Never place more than 4 cards in a single row\") and Dos/Don'ts (node 7080:2). This was previously Figma-only guidance with no repo-readable equivalent (src/docs/docs/summary-stat.doc.ts did not mention it). Now documented in that doc file and enforced as a dev-only console warning in src/components/ui/summary-stat.tsx's StatsRow — matching this repo's existing convention (src/components/ui/bar-chart.tsx's max-3-series warning, src/components/ui/line-chart.tsx's max-6-series warning). StatsRow deliberately does not auto-reflow or drop children past 4 — the caller must stack a second StatsRow.",
+      "evidence": "get_metadata/get_design_context on Figma nodes 7078:3 and 7080:2 (U3D8WMBVFl9LvAZyLHhm24); src/docs/docs/summary-stat.doc.ts; src/components/ui/summary-stat.tsx (StatsRow); src/components/ui/bar-chart.tsx and line-chart.tsx (existing warning convention referenced).",
       "date": "2026-09-07"
     }
   ],
@@ -2245,7 +2267,7 @@
         "foundation-token-pipeline"
       ],
       "recommendedOrder": null,
-      "notes": "Corrected in this pass: this file's own StatsRow export (summary-stat.tsx:172,176) implements the \"Shell/Summary Stats Row\" layout pattern (7078:2, confirmed live) in addition to the individual SummaryStat card (Summary Stats page, 1273:17, confirmed live)."
+      "notes": "Corrected in this pass: this file's own StatsRow export (summary-stat.tsx:172,176) implements the \"Shell/Summary Stats Row\" layout pattern (7078:2, confirmed live) in addition to the individual SummaryStat card (Summary Stats page, 1273:17, confirmed live). DESIGN-OWNER CORRECTION (2026-09-07, v1.1 audit): the design owner explicitly changed the approved design mid-audit — Center/default placement now uses shadow/100 (re-verified live against Figma node 7102:129's published \"Stats Row\" component, all Cards=2/3/4/5 variants), matching the PX-wide Product Surface Rule (never border + shadow together). This is a forward design change, not a historical fidelity defect — the prior no-shadow state was accurate at the time it was recorded. Left/Right placement (divider border, no shadow) and Clickable Selected (selection border, no shadow) were independently re-verified unchanged. Repo implementation (src/components/ui/summary-stat.tsx) updated to match."
     },
     {
       "id": "component-table-customization-menu",
@@ -2285,10 +2307,11 @@
       ],
       "dependencies": [
         "foundation-token-pipeline",
-        "component-column-selector"
+        "component-column-selector",
+        "component-dropdown-menu"
       ],
       "recommendedOrder": null,
-      "notes": "Documentation-registry gap. Composes ColumnSelector as one of its two menu panes (not a duplicate of it). Corrected in this pass: the page-level reference (3187:9) was previously stored in figmaNodes with role \"page\" — moved to figmaPages for schema consistency, and independently re-confirmed live via get_metadata this pass."
+      "notes": "Documentation-registry gap. Composes ColumnSelector as one of its two menu panes (not a duplicate of it). Corrected in this pass: the page-level reference (3187:9) was previously stored in figmaNodes with role \"page\" — moved to figmaPages for schema consistency, and independently re-confirmed live via get_metadata this pass. CORRECTED (2026-09-07, v1.1 shared-system audit): this component's own internal DropdownMenu import was live but undocumented as a sanctioned composition and missing from its own dependencies array — both corrected. Now consumed by the new component-table-frame's `customization` slot as the intended default owner of row density + column selector in the Table Toolbar."
     },
     {
       "id": "component-table",
@@ -4671,6 +4694,62 @@
       ],
       "recommendedOrder": null,
       "notes": "Node 3187:7 (\"Shell/Left Navigation\") supplied by the user and confirmed live — src/components/px-shell-rail.tsx exports PxShellRail (Collapsed/Expanded modes, admin sections). Always-dark nav rail (color/neutral/800, does not flip in dark mode). This is the nav-rail primitive composed by PxMainContainer, not an independently approved top-level shell — see decision-px-main-container-internal for the analogous relationship."
+    },
+    {
+      "id": "component-table-frame",
+      "name": "TableFrame",
+      "category": "Pattern",
+      "figmaPages": [
+        {
+          "nodeId": "20:34",
+          "name": "Table",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "1896:6",
+          "name": "Table/Toolbar",
+          "role": "component",
+          "verified": "browser-verified-mcp-confirmed"
+        },
+        {
+          "nodeId": "3302:6",
+          "name": "List Page / Content Area (surface treatment reference)",
+          "role": "reference",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/table-frame.tsx"
+      ],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [
+        "src/pages/user-explorer.tsx",
+        "src/pages/engagements-list-example.tsx",
+        "src/pages/detail-drilldown-shell-example.tsx"
+      ],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Complete",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [
+        "No .doc.ts file exists yet — not registered/navigable in Design System Docs or the Validation Gallery.",
+        "Table's own Toolbar anatomy (node 1896:6) shows two separate RHS icons (btn-columns, btn-more); this repo's existing component-table-customization-menu consolidates both column-selection and row-density under a single More trigger — TableFrame's `customization` slot reuses that existing consolidation rather than reproducing two separate icons, since component-table-customization-menu is itself the already-registered, Figma-mapped (node 3187:9) source of truth for that behavior.",
+        "`surface=\"nested\"` (border, no shadow) has no direct Figma example evidence yet — encoded from the general Product Surface Rule (never border + shadow together) by symmetry with the verified `surface=\"page\"` case (node 3302:6), pending a real nested-table Figma example."
+      ],
+      "dependencies": [
+        "foundation-token-pipeline",
+        "component-icon-button"
+      ],
+      "recommendedOrder": null,
+      "notes": "New in the v1.1 shared-system audit (2026-09-07). Formalizes Table's own intrinsic Toolbar → Table → optional Pagination anatomy (previously hand-rolled inconsistently per-screen — see decision-list-page-surface-rule) into one reusable composition owning title/count layout, the RHS icon-group chrome, and the border-vs-shadow surface treatment. Deliberately does not own search query state, filter predicate logic, sort state, or column/density state — those stay feature-owned or live inside whatever component fills a slot. Does not import DropdownMenu itself; the `customization` slot accepts component-table-customization-menu, which is the sanctioned DropdownMenu consumer (see decision-dropdown-menu-scoped-composition)."
     }
   ]
 }
