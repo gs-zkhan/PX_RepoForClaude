@@ -7,6 +7,10 @@ import { PX_NAV_LABELS, type PxShellNavKey, type PxShellRailMode } from "@/compo
 // real page built yet. Primary-only header (moduleName sourced from the
 // shared PX_NAV_LABELS map so it can never drift from the rail label), empty
 // content card.
+//
+// The content card sits directly on the shell's page background, so per
+// CLAUDE.md's Product Surface Rule it gets shadow-100 and no visible border
+// (corrected — this previously combined both).
 // -----------------------------------------------------------------------------
 
 type WorkInProgressProps = {
@@ -26,7 +30,6 @@ function WorkInProgress({ activeKey, onNavigate, mode, onModeChange }: WorkInPro
         className={cn(
           "flex h-full min-h-[480px] flex-col items-center justify-center",
           "rounded-[var(--p-radius-150)]",
-          "border border-[var(--s-color-line-default)]",
           "bg-[var(--s-color-surface-default)]",
           "shadow-[var(--e-shadow-100)]",
         )}
