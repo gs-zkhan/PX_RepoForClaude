@@ -2255,19 +2255,19 @@
       "gallerySection": "Summary Stat",
       "examplePaths": [],
       "implementationStatus": "Implemented",
-      "status": "Mapped-review-pending",
-      "fidelityReview": "Pending",
-      "visualReview": "Pending",
+      "status": "Approved",
+      "fidelityReview": "Complete",
+      "visualReview": "Approved",
       "designOwnerApproval": {
-        "approved": false,
-        "date": null
+        "approved": true,
+        "date": "2026-09-17"
       },
       "knownDeviations": [],
       "dependencies": [
         "foundation-token-pipeline"
       ],
       "recommendedOrder": null,
-      "notes": "Corrected in this pass: this file's own StatsRow export (summary-stat.tsx:172,176) implements the \"Shell/Summary Stats Row\" layout pattern (7078:2, confirmed live) in addition to the individual SummaryStat card (Summary Stats page, 1273:17, confirmed live). DESIGN-OWNER CORRECTION (2026-09-07, v1.1 audit): the design owner explicitly changed the approved design mid-audit — Center/default placement now uses shadow/100 (re-verified live against Figma node 7102:129's published \"Stats Row\" component, all Cards=2/3/4/5 variants), matching the PX-wide Product Surface Rule (never border + shadow together). This is a forward design change, not a historical fidelity defect — the prior no-shadow state was accurate at the time it was recorded. Left/Right placement (divider border, no shadow) and Clickable Selected (selection border, no shadow) were independently re-verified unchanged. Repo implementation (src/components/ui/summary-stat.tsx) updated to match."
+      "notes": "Corrected in this pass: this file's own StatsRow export (summary-stat.tsx:172,176) implements the \"Shell/Summary Stats Row\" layout pattern (7078:2, confirmed live) in addition to the individual SummaryStat card (Summary Stats page, 1273:17, confirmed live). DESIGN-OWNER CORRECTION (2026-09-07, v1.1 audit): the design owner explicitly changed the approved design mid-audit — Center/default placement now uses shadow/100 (re-verified live against Figma node 7102:129's published \"Stats Row\" component, all Cards=2/3/4/5 variants), matching the PX-wide Product Surface Rule (never border + shadow together). This is a forward design change, not a historical fidelity defect — the prior no-shadow state was accurate at the time it was recorded. Left/Right placement (divider border, no shadow) and Clickable Selected (selection border, no shadow) were independently re-verified unchanged. Repo implementation (src/components/ui/summary-stat.tsx) updated to match. APPROVED (2026-09-17, v1.1 audit closeout): Design-owner visual review completed 2026-09-17, covering the v1.1 shadow/border correction specifically (Center/default -> shadow/100 no border; Left/Right and Selected unchanged, border no shadow; never both together) — re-verified live against Figma node 7102:129 before this approval."
     },
     {
       "id": "component-table-customization-menu",
@@ -2295,12 +2295,12 @@
       "gallerySection": null,
       "examplePaths": [],
       "implementationStatus": "Implemented",
-      "status": "Mapped-review-pending",
-      "fidelityReview": "Pending",
-      "visualReview": "Pending",
+      "status": "Approved",
+      "fidelityReview": "Complete",
+      "visualReview": "Approved",
       "designOwnerApproval": {
-        "approved": false,
-        "date": null
+        "approved": true,
+        "date": "2026-09-17"
       },
       "knownDeviations": [
         "No .doc.ts file exists — not registered/navigable in the Design System Docs site, and not demonstrated as its own Validation Gallery section."
@@ -2311,7 +2311,7 @@
         "component-dropdown-menu"
       ],
       "recommendedOrder": null,
-      "notes": "Documentation-registry gap. Composes ColumnSelector as one of its two menu panes (not a duplicate of it). Corrected in this pass: the page-level reference (3187:9) was previously stored in figmaNodes with role \"page\" — moved to figmaPages for schema consistency, and independently re-confirmed live via get_metadata this pass. CORRECTED (2026-09-07, v1.1 shared-system audit): this component's own internal DropdownMenu import was live but undocumented as a sanctioned composition and missing from its own dependencies array — both corrected. Now consumed by the new component-table-frame's `customization` slot as the intended default owner of row density + column selector in the Table Toolbar."
+      "notes": "Documentation-registry gap. Composes ColumnSelector as one of its two menu panes (not a duplicate of it). Corrected in this pass: the page-level reference (3187:9) was previously stored in figmaNodes with role \"page\" — moved to figmaPages for schema consistency, and independently re-confirmed live via get_metadata this pass. CORRECTED (2026-09-07, v1.1 shared-system audit): this component's own internal DropdownMenu import was live but undocumented as a sanctioned composition and missing from its own dependencies array — both corrected. Now consumed by the new component-table-frame's `customization` slot as the intended default owner of row density + column selector in the Table Toolbar. APPROVED (2026-09-17, v1.1 audit closeout): Design-owner visual review completed 2026-09-17, covering the consolidated single \"More\" trigger (Arrange Columns + Row Density) as the intended default owner of that capability in a Table Toolbar."
     },
     {
       "id": "component-table",
@@ -4724,23 +4724,26 @@
       "repoPaths": [
         "src/components/ui/table-frame.tsx"
       ],
-      "docPath": null,
-      "gallerySection": null,
+      "docPath": "src/docs/docs/table-frame.doc.ts",
+      "gallerySection": "Table Frame",
       "examplePaths": [
         "src/pages/user-explorer.tsx",
         "src/pages/engagements-list-example.tsx",
-        "src/pages/detail-drilldown-shell-example.tsx"
+        "src/pages/detail-drilldown-shell-example.tsx",
+        "src/pages/account-explorer.tsx",
+        "src/docs/examples/table-frame/default.tsx",
+        "src/docs/examples/table-frame/with-controls.tsx"
       ],
       "implementationStatus": "Implemented",
-      "status": "Mapped-review-pending",
+      "status": "Approved",
       "fidelityReview": "Complete",
-      "visualReview": "Pending",
+      "visualReview": "Approved",
       "designOwnerApproval": {
-        "approved": false,
-        "date": null
+        "approved": true,
+        "date": "2026-09-17"
       },
       "knownDeviations": [
-        "No .doc.ts file exists yet — not registered/navigable in Design System Docs or the Validation Gallery.",
+        "RESOLVED (2026-09-17): doc page added (src/docs/docs/table-frame.doc.ts, \"Data Display\" nav group) with two examples, plus a \"Table Frame\" Validation Gallery section.",
         "Table's own Toolbar anatomy (node 1896:6) shows two separate RHS icons (btn-columns, btn-more); this repo's existing component-table-customization-menu consolidates both column-selection and row-density under a single More trigger — TableFrame's `customization` slot reuses that existing consolidation rather than reproducing two separate icons, since component-table-customization-menu is itself the already-registered, Figma-mapped (node 3187:9) source of truth for that behavior.",
         "`surface=\"nested\"` (border, no shadow) has no direct Figma example evidence yet — encoded from the general Product Surface Rule (never border + shadow together) by symmetry with the verified `surface=\"page\"` case (node 3302:6), pending a real nested-table Figma example."
       ],
@@ -4749,7 +4752,7 @@
         "component-icon-button"
       ],
       "recommendedOrder": null,
-      "notes": "New in the v1.1 shared-system audit (2026-09-07). Formalizes Table's own intrinsic Toolbar → Table → optional Pagination anatomy (previously hand-rolled inconsistently per-screen — see decision-list-page-surface-rule) into one reusable composition owning title/count layout, the RHS icon-group chrome, and the border-vs-shadow surface treatment. Deliberately does not own search query state, filter predicate logic, sort state, or column/density state — those stay feature-owned or live inside whatever component fills a slot. Does not import DropdownMenu itself; the `customization` slot accepts component-table-customization-menu, which is the sanctioned DropdownMenu consumer (see decision-dropdown-menu-scoped-composition)."
+      "notes": "New in the v1.1 shared-system audit (2026-09-07). Formalizes Table's own intrinsic Toolbar → Table → optional Pagination anatomy (previously hand-rolled inconsistently per-screen — see decision-list-page-surface-rule) into one reusable composition owning title/count layout, the RHS icon-group chrome, and the border-vs-shadow surface treatment. Deliberately does not own search query state, filter predicate logic, sort state, or column/density state — those stay feature-owned or live inside whatever component fills a slot. Does not import DropdownMenu itself; the `customization` slot accepts component-table-customization-menu, which is the sanctioned DropdownMenu consumer (see decision-dropdown-menu-scoped-composition). APPROVED (2026-09-17, v1.1 audit closeout): Design-owner visual review completed 2026-09-17 (TableFrame's Toolbar anatomy, surface treatment, and control-slot composition, as demonstrated in the Validation Gallery's \"Table Frame\" section and in production use across user-explorer.tsx, engagements-list-example.tsx, detail-drilldown-shell-example.tsx, and account-explorer.tsx)."
     }
   ]
 }

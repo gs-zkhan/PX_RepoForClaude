@@ -17,6 +17,7 @@
     "tokens:no-self-approval": "node scripts/validate-no-self-approval.mjs",
     "test:token-guardrails": "node --test \"tests/token-guardrails/*.test.mjs\"",
     "figma-coverage:validate": "node scripts/validate-figma-coverage.mjs",
+    "validate:surface-rule": "node scripts/validate-surface-rule.mjs",
     "test:figma-coverage": "node --test \"tests/figma-coverage/*.test.mjs\"",
     "test:color": "node --experimental-strip-types --test \"tests/color/*.test.mjs\"",
     "test:notification": "node --experimental-strip-types --test \"tests/notification/*.test.mjs\"",

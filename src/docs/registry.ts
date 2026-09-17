@@ -57,6 +57,7 @@ import { statusLabelDoc } from "@/docs/docs/status-label.doc"
 import { statusSelectDoc } from "@/docs/docs/status-select.doc"
 import { summaryStatDoc } from "@/docs/docs/summary-stat.doc"
 import { tableDoc } from "@/docs/docs/table.doc"
+import { tableFrameDoc } from "@/docs/docs/table-frame.doc"
 import { tabsDoc } from "@/docs/docs/tabs.doc"
 import { textareaDoc } from "@/docs/docs/textarea.doc"
 import { textFieldDoc } from "@/docs/docs/text-field.doc"
@@ -171,6 +172,7 @@ const allDocs: ComponentDoc[] = [
   statusSelectDoc,
   summaryStatDoc,
   tableDoc,
+  tableFrameDoc,
   tabsDoc,
   textareaDoc,
   textFieldDoc,
@@ -277,6 +279,7 @@ export const navGroups: DocNavGroup[] = [
     title: "Data Display",
     items: [
       tableDoc,
+      tableFrameDoc,
       configRowDoc,
       treeDoc,
       avatarDoc,

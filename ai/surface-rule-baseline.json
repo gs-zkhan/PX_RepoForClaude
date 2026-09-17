@@ -1,0 +1,10 @@
+{
+  "$description": "Baseline of known, accepted border+shadow-100 co-occurrences, as of the v1.1 shared-system audit (2026-09-17). Checked by scripts/validate-surface-rule.mjs. A fingerprint here is either a legitimate control-handle-style use (not a Product Surface Rule 'page container' case) or a known, separately-tracked piece of debt with its own decision record. A fingerprint appearing in a future run that is NOT in this list is a new instance and WILL fail the check. Removing a fingerprint from this list (because the underlying code was fixed or deleted) is always safe.",
+  "fingerprints": [
+    "src/components/ui/color-picker-advanced.tsx:503 — saturation/value picker thumb: a small circular drag handle (border-2 border-white + shadow for depth), not a page-level container. Same convention as every other slider/handle in this repo.",
+    "src/components/ui/color-picker-advanced.tsx:538 — hue slider thumb, same handle convention as above.",
+    "src/components/ui/color-picker-advanced.tsx:560 — opacity slider thumb, same handle convention as above.",
+    "src/components/ui/slider.tsx:68 — Slider's own thumb, the canonical handle convention every other border+shadow-100 instance above matches.",
+    "src/pages/audience-explorer.tsx:514 — known, pre-existing orphaned/legacy file (never imported or routed — see ai/figma-coverage.json's decision-legacy-page entry), same border+shadow bug as the six files fixed in this audit, intentionally left unfixed pending a delete-vs-reconcile decision rather than polishing dead code."
+  ]
+}

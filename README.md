@@ -60,6 +60,9 @@ npm run lint
 # Figma coverage registry validation
 npm run figma-coverage:validate
 
+# Product Surface Rule guard (border+shadow-100 combined on the same element)
+npm run validate:surface-rule
+
 # Registry coherence / recent hardening regression suites
 npm run test:figma-coverage
 npm run test:registry-coherence
@@ -96,3 +99,23 @@ See [`.github/workflows/prism-token-ci.yml`](./.github/workflows/prism-token-ci.
 - The `Shell/Modal` (destructive-confirmation-over-a-mounted-shell) overlay pattern is not yet formally registered or documented.
 - Cold-generation test screens are benchmark evidence, preserved in separate, unmerged worktrees/branches — not production product pages, and not part of this repository's shipped code.
 - Figma remains migration/validation evidence; routine generation should use this repository first, per the Figma relationship section above.
+- `SearchBar`'s `className`-forwarding/width convention (surfaced in cold-generation Test #4) remains an open documentation ambiguity, not yet resolved.
+
+## PX AI-Ready Design System v1.1
+
+Triggered by a real designer test of a cloned repo (an actual generated Account Explorer screen, not a cold-generation benchmark), which surfaced visible, repeatable design-system violations that manual generation and prior benchmarks hadn't caught: containers combining a visible border with a shadow, tables with no title bar, and `StatsRow` instances exceeding Figma's documented 4-card cap.
+
+**What changed:**
+
+- **Product Surface Rule** (`CLAUDE.md`): a container directly on the product/page background uses `shadow-100` and no visible border; a container nested on another surface uses a border and no shadow — never both. Re-verified live against Figma (`List Page / Content Area`, node `3302:6`).
+- **`TableFrame`** (`src/components/ui/table-frame.tsx`, now `Approved`): formalizes Table's own `Toolbar → Table → optional Pagination` anatomy (node `20:34`) so screens stop hand-rolling inconsistent title bars and wrapper surfaces. Documented at `src/docs/docs/table-frame.doc.ts` and in the Validation Gallery's "Table Frame" section.
+- **`SummaryStat`** (now `Approved`): Center/default placement renders `shadow-100` with no border, per an explicit design-owner correction re-verified against Figma node `7102:129`. Left/Right placement and Clickable Selected are unchanged (border, no shadow).
+- **`StatsRow`**: documents and dev-warns past 4 cards, mirroring the existing `BarChart`/`LineChart` max-series-warning convention.
+- **`TableCustomizationMenu`**'s existing `DropdownMenu` dependency (now `Approved`) is a formally sanctioned scoped composition — the intended default owner of row density + column selection in a Table Toolbar. `TableFrame` itself never imports `DropdownMenu`.
+- Six border+shadow-together (or missing-title-bar) instances corrected across `user-explorer.tsx`, `engagements-list-example.tsx`, `detail-drilldown-shell-example.tsx`, `account-explorer.tsx`, `analytics-example.tsx`, `create-edit-shell-example.tsx`, and the shared `WorkInProgress` placeholder (which every not-yet-built nav item renders).
+
+**v1.1 boundary — read before assuming this generalizes:**
+
+- **No fresh, blind cold-generation retest has been run for this round of learnings yet.** Every fix above was applied by hand, in response to a human manually finding a specific bug — the repository's own benchmark methodology (`ai/cold-generation/`) treats a blind rerun by an agent with no memory of this work as the only real evidence a fix generalizes, not a hand-fix count. That retest is planned but not yet done.
+- `src/pages/audience-explorer.tsx` is known, pre-existing orphaned/legacy code (never imported or routed) with the same border+shadow bug, intentionally left unfixed pending a delete-vs-reconcile decision — see `ai/figma-coverage.json`'s `decision-legacy-page` entry.
+- The border+shadow sweep behind this hardening searched specifically for the `shadow-100` token; it would not by itself catch a container that's missing a shadow it should have with no border present either. Treat this as a strong pass, not a certified-exhaustive one.

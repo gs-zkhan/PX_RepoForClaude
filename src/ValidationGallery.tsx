@@ -113,7 +113,10 @@ import {
   TableActionHead,
   TableActionCell,
   TableEmptyState,
+  type TableDensity,
 } from "@/components/ui/table"
+import { TableFrame } from "@/components/ui/table-frame"
+import { TableCustomizationMenu } from "@/components/ui/table-customization-menu"
 import { PrismIcon } from "@/components/ui/prism-icon"
 import { PxShellRail } from "@/components/px-shell-rail"
 import type { PxShellRailMode } from "@/components/px-shell-rail"
@@ -248,6 +251,12 @@ function ValidationGallery() {
   )
   const [analyticsCollapsed, setAnalyticsCollapsed] = React.useState(false)
   const [pec, setPec] = React.useState({ product: "px", environment: "production", channels: ["web-app"] })
+  const [tableFrameSearchOpen, setTableFrameSearchOpen] = React.useState(false)
+  const [tableFrameQuery, setTableFrameQuery] = React.useState("")
+  const [tableFrameFilterOpen, setTableFrameFilterOpen] = React.useState(false)
+  const [tableFrameDensity, setTableFrameDensity] = React.useState<TableDensity>("default")
+  const [tableFrameColumns, setTableFrameColumns] = React.useState(["name", "status"])
+  const [tableFrameColumnOrder, setTableFrameColumnOrder] = React.useState(["name", "status"])
   const [filterTab, setFilterTab] = React.useState<"filter" | "global-context">("filter")
   const [filterBarOpenChip, setFilterBarOpenChip] = React.useState<string | undefined>(undefined)
   const [fdpOpen, setFdpOpen] = React.useState<
@@ -1243,6 +1252,104 @@ function ValidationGallery() {
                   body="Try adjusting your filters or search query."
                 />
               </Table>
+            </div>
+          </Row>
+        </Section>
+
+        {/* ------------------------------------------------------------------ */}
+        {/* Table Frame                                                        */}
+        {/* ------------------------------------------------------------------ */}
+        <Section title="Table Frame">
+          <Row label="title + count only">
+            <div className="w-full">
+              <TableFrame title="Recent Activity" count={3}>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Event</TableHead>
+                      <TableHead>Date</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>Membership changed</TableCell>
+                      <TableCell>Sep 5, 2026</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Criteria updated</TableCell>
+                      <TableCell>Sep 3, 2026</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Record created</TableCell>
+                      <TableCell>Aug 20, 2026</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableFrame>
+            </div>
+          </Row>
+          <Row label="search + filter + customization + actions">
+            <div className="w-full">
+              <TableFrame
+                title="Accounts"
+                count={2}
+                search={{
+                  open: tableFrameSearchOpen,
+                  onToggle: () => setTableFrameSearchOpen((v) => !v),
+                  render: (
+                    <SearchBar
+                      size="small"
+                      placeholder="Search accounts"
+                      value={tableFrameQuery}
+                      onChange={(e) => setTableFrameQuery(e.target.value)}
+                      onClear={() => setTableFrameQuery("")}
+                    />
+                  ),
+                }}
+                filter={{ active: tableFrameFilterOpen, onToggle: () => setTableFrameFilterOpen((v) => !v) }}
+                customization={
+                  <TableCustomizationMenu
+                    columns={[
+                      { id: "name", label: "Name" },
+                      { id: "status", label: "Status" },
+                    ]}
+                    selectedColumns={tableFrameColumns}
+                    onSelectedColumnsChange={setTableFrameColumns}
+                    columnOrder={tableFrameColumnOrder}
+                    onColumnOrderChange={setTableFrameColumnOrder}
+                    density={tableFrameDensity}
+                    onDensityChange={setTableFrameDensity}
+                  />
+                }
+                actions={
+                  <Button variant="primary" size="large">
+                    Add Account
+                  </Button>
+                }
+              >
+                <Table density={tableFrameDensity}>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Name</TableHead>
+                      <TableHead>Status</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>Northwind Labs</TableCell>
+                      <TableCell>
+                        <StatusLabel variant="active">Healthy</StatusLabel>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Helio Freight</TableCell>
+                      <TableCell>
+                        <StatusLabel variant="waiting">At Risk</StatusLabel>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableFrame>
             </div>
           </Row>
         </Section>

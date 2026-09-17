@@ -116,6 +116,14 @@ jobs:
       - name: Validate Figma coverage registry
         run: npm run figma-coverage:validate
 
+      # Guards CLAUDE.md's Product Surface Rule (never combine a visible
+      # border with shadow-100 on the same element) — added after the v1.1
+      # audit found six instances of exactly this bug, each only caught by
+      # a human manually clicking through the app. See
+      # scripts/validate-surface-rule.mjs and ai/surface-rule-baseline.json.
+      - name: Product Surface Rule guard
+        run: npm run validate:surface-rule
+
       - name: Figma coverage registry tests
         run: npm run test:figma-coverage
 

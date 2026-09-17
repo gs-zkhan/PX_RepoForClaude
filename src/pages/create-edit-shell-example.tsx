@@ -192,7 +192,10 @@ function CreateEditShellExample({ activeKey, onNavigate, mode, onModeChange }: C
         ],
       }}
     >
-      <section className="flex h-full flex-col items-center justify-center rounded-[var(--p-radius-150)] border border-[var(--s-color-line-default)] bg-[var(--s-color-surface-default)]">
+      {/* Directly on the page background — CLAUDE.md's Product Surface Rule
+          calls for shadow-100 and no border here (corrected from a
+          border-only treatment). */}
+      <section className="flex h-full flex-col items-center justify-center rounded-[var(--p-radius-150)] bg-[var(--s-color-surface-default)] shadow-[var(--e-shadow-100)]">
         <EmptyState
           title="No engagements yet"
           description="Use the actions above to try each PxCreateEditShell tier."

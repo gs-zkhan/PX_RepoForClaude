@@ -11,6 +11,8 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 
 **Total entries: 100**
 
+**Revision note (2026-09-17, v1.1 audit closeout — design-owner approvals):** three entries move from `Mapped-review-pending` to `Approved` (`fidelityReview: Complete`, `visualReview: Approved`, `designOwnerApproval: { approved: true, date: "2026-09-17" }`): `component-table-frame` (Toolbar anatomy, surface treatment, control-slot composition — now demonstrated in a Design System Docs page and a Validation Gallery "Table Frame" section), `component-summary-stat` (the v1.1 Center/default shadow/border correction specifically), and `component-table-customization-menu` (the consolidated single "More" trigger as the default owner of row density + column selection in a Table Toolbar). Total entry count unchanged at 100; counts-by-status updated (`Approved` 15→18, `Mapped-review-pending` 63→60).
+
 **Revision note (2026-09-07, v1.1 shared-system audit):** one entry added — `component-table-frame` (new `TableFrame` composition, `src/components/ui/table-frame.tsx`), formalizing Table's own intrinsic Toolbar → Table → optional Pagination anatomy (previously hand-rolled inconsistently per screen) into a reusable pattern; `Mapped-review-pending`, `visualReview: Pending`, not design-owner approved. `component-table-customization-menu`'s existing `DropdownMenu` dependency is now sanctioned (see `decision-dropdown-menu-scoped-composition`) and recorded in its own `dependencies` array. `component-summary-stat`'s notes record a design-owner correction (not a fidelity defect): Center/default placement now uses `shadow/100`, re-verified live against Figma node `7102:129`; Left/Right and Selected states are unchanged. Two new decisions recorded: `decision-list-page-surface-rule` (the PX-wide border-vs-shadow surface rule, and correcting `user-explorer.tsx`/`engagements-list-example.tsx`'s stale, mutually-inconsistent surface treatments) and `decision-statsrow-max-four` (Figma's 4-card-per-row cap, now also documented in `summary-stat.doc.ts` and enforced as a dev-only warning). Total entry count 99→100; counts-by-status below updated (`Mapped-review-pending` 62→63); counts-by-category updated (`Pattern` 4→5).
 
 **Revision note (2026-08-28, full-inventory reconciliation):** this revision replaces the prior partial page baseline (23 pages) with the complete 75-page content inventory supplied by the user, MCP-verifies every one of the 75 nodes, links every registry entry to its owning page, resolves the majority of the previously-flagged "page-level citation missing" gap, and corrects one page mislabel discovered in the process (`1273:12` was recorded as "Date Filter page" — it is actually "Date · Time Picker", hosting Date Picker and Date Filter as sibling columns). See "What changed in this pass" below.
@@ -97,9 +99,9 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 
 | Status | Count |
 | --- | --- |
-| `Approved` | 15 |
+| `Approved` | 18 |
 | `Approved-with-documented-exception` | 3 |
-| `Mapped-review-pending` | 63 |
+| `Mapped-review-pending` | 60 |
 | `Implemented-unmapped` | 8 |
 | `Missing` | 0 |
 | `Internal foundation` | 5 |
