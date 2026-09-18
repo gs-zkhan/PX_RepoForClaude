@@ -16,6 +16,7 @@ Each test's generated code lives, uncommitted, in its own preserved git worktree
 | #4 | Segments (List/Table/Filter/Bulk-action) | Third architecture, passed functionally. Surfaced the same `DropdownMenu` scoped-composition question independently (fixed by PR #15) and a still-open `SearchBar` width-convention question (not yet fixed) | [PR #15](https://github.com/gs-zkhan/PX_RepoForClaude/pull/15) (partial); `SearchBar` question open |
 | #5 | Segment Detail (single-record detail/drilldown, before-state) | Fourth architecture, first test of this anatomy — functionally correct, but no sanctioned shell existed for it; `PxListShell` used as an unconfirmed judgment call. Also surfaced a real `DropdownMenuItem` icon-source defect already live in production | [PR #18](https://github.com/gs-zkhan/PX_RepoForClaude/pull/18) (icon fix + gap documentation), [PR #19](https://github.com/gs-zkhan/PX_RepoForClaude/pull/19) (`PxDetailDrilldownShell` implemented) |
 | #6 | Segment Detail, independent rerun after `PxDetailDrilldownShell` (after-state) | Same archetype as #5, fresh/blind agent, no Figma — independently selected the new `PxDetailDrilldownShell` via anatomy-based registry guidance alone, with no fallback judgment call and no new gap found | None — clean pass, no repository change required |
+| #7 | Account Explorer (List + Detail/Drilldown), v1.1 registry state — first test with the real production screen physically hidden from the worktree | Fifth architecture (list-plus-drilldown, entity = Account) — independently selected `PxListShell`/`PxDetailDrilldownShell`, `TableFrame`, `StatsRow`/`SummaryStat` (max-4 rule followed), the Product Surface Rule, and `TableCustomizationMenu` (correctly reasoning through `decision-dropdown-menu-scoped-composition`). Found a real registry double standard: direct screen-level `Popover` usage for the canonical `FilterBar`+`FilterDropdownPanel` pattern was technically `Implemented-unmapped`/disallowed, despite matching `user-explorer.tsx` exactly and despite Popover already being an undocumented dependency of four approved components | [PR #25](https://github.com/gs-zkhan/PX_RepoForClaude/pull/25) — initially **PARTIAL**, now **PASS** retroactively, with no change to the generated screen (see [Retroactive fix: Test #7](#retroactive-fix-test-7-popover-eligibility) below) |
 
 See the individual test records for full detail:
 - [`test-01-create-segment.md`](./test-01-create-segment.md)
@@ -24,6 +25,7 @@ See the individual test records for full detail:
 - [`test-04-segments-list.md`](./test-04-segments-list.md)
 - [`test-05-segment-detail.md`](./test-05-segment-detail.md)
 - [`test-06-segment-detail-rerun.md`](./test-06-segment-detail-rerun.md)
+- [`test-07-account-explorer-v1.1.md`](./test-07-account-explorer-v1.1.md)
 
 ## Before/after: Test #5 → Test #6
 
@@ -34,6 +36,16 @@ This pair is the clearest available evidence that repository hardening measurabl
 3. **Test #6** (base `8f70900a…`, immediately after PR #19) — a fresh, blind agent, with no memory of Test #5 and no Figma access, regenerated the same archetype and **independently selected `PxDetailDrilldownShell`** purely from `ai/shell-registry.md`'s anatomy description — no naming hint, no coaching, no fallback judgment call required. Disposition: **PASS**.
 
 The controlled variable across this pair is the repository itself, not the prompt or the agent: both tests used the same archetype and the same fresh/blind-agent/no-Figma methodology. The only thing that changed between them is that the repository gained a registered, Approved shell for this archetype — which is what changed the outcome from an honestly-disclosed judgment call to a clean, registry-traceable selection.
+
+## Retroactive fix: Test #7 (Popover eligibility)
+
+Test #7 (see [`test-07-account-explorer-v1.1.md`](./test-07-account-explorer-v1.1.md)) is the first record in this directory where a repository fix upgrades a test's own disposition **in place**, rather than requiring a fresh rerun like the Test #5 → Test #6 pair above. The distinction matters for how much this record can be trusted to claim:
+
+1. **Test #7, as generated.** A fresh, blind agent — with the real `src/pages/account-explorer.tsx` physically hidden from its worktree — independently selected `PxListShell`/`PxDetailDrilldownShell`, `TableFrame`, `StatsRow`/`SummaryStat` (correctly capped at 4 per row), the Product Surface Rule, and `TableCustomizationMenu` (correctly reasoning through the existing `decision-dropdown-menu-scoped-composition`). It also reproduced `user-explorer.tsx`'s own canonical `Popover`+`PopoverAnchor`+`PopoverContent` composition for anchoring `FilterBar`+`FilterDropdownPanel` — a pattern that, on direct registry lookup, turned out to be technically disallowed: `component-popover` sat in the identical `Implemented-unmapped`/`Unmapped`/`Pending` posture as `component-dropdown-menu`, but with no scoped-composition decision covering it, unlike DropdownMenu. Disposition at the time: **PARTIAL**.
+2. **Repository hardening.** A follow-up repo-wide Popover eligibility audit found the same primitive already relied on internally, undocumented, by four approved/approved-with-exception components (`component-color-picker`, `component-notification`, `component-rte-field`, `component-dashboard-widget-card`), and unflagged at screen level in the canonical reference page itself. [PR #25](https://github.com/gs-zkhan/PX_RepoForClaude/pull/25) added `decision-popover-scoped-composition`, mirroring the DropdownMenu decision's structure, without changing `component-popover`'s own status or any component/source code.
+3. **Test #7's disposition, reconsidered.** PR #25's second clause narrowly sanctions exactly the `FilterBar`+`FilterDropdownPanel` anchoring composition Test #7's generated screen already used. Nothing about the generated file needed to change — only the registry's own bookkeeping did. Disposition is recorded as **PASS**, retroactively, as of PR #25.
+
+**Why this is not the same claim as a Test #5/#6-style rerun:** #5 → #6 independently reconfirmed, with a *second* fresh agent run against the hardened repository, that the fix generalizes to a brand-new generation. Test #7's upgrade to PASS confirms only that the *one specific composition it already produced* is now correctly covered by policy — it does not by itself demonstrate that a fresh agent, run again today, would make every one of the same correct choices Test #7 made. A Test #8-style independent rerun would be required to make that broader claim, and has not been performed.
 
 ## Preserved evidence
 
@@ -47,8 +59,11 @@ Each test's generated code remains uncommitted in its own dedicated git worktree
 | #4 | `PX_RepoForClaude-cold-test-segments-list` | `test/cold-generation-segments-list` | `b0451c6b446a2394a279c25590ac3817dfb65583` |
 | #5 | `PX_RepoForClaude-cold-test-segment-detail` | `test/cold-generation-segment-detail` | `9b434785716b7291e5c04967618e356b6931b466` |
 | #6 | `PX_RepoForClaude-cold-test-segment-detail-rerun` | `test/cold-generation-segment-detail-rerun` | `8f70900a73f4a90ecc90e70286c8399a86a56915` |
+| #7 | `PX-cold-test-account-explorer` | `test/cold-gen-account-explorer` | `87fd3ebfc0a96cf51f2362b34c109ef7c6260d4b` |
 
 These worktrees are local-only working trees, not remote branches with committed content — the "base commit" is the `origin/main` SHA each worktree's branch was created from; the generated screen files exist only as uncommitted changes within that worktree. This record was written from that live evidence plus this repository's own commit/PR history; it does not itself contain the generated code.
+
+Test #7 additionally required physically hiding an existing product file (`src/pages/account-explorer.tsx`) from its worktree — moved, uncommitted, to a quarantine path entirely outside the worktree tree — since prior tests' "no access to an existing finished screen" condition was enforced by instruction alone, not by making the file physically unavailable. See [`test-07-account-explorer-v1.1.md`](./test-07-account-explorer-v1.1.md) §4 for the full isolation method.
 
 ## Benchmark methodology
 
