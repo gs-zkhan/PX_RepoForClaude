@@ -65,6 +65,16 @@
       "reason": "PxMainContainer is the primary owner (this is its defining page). PxListShell composes PxMainContainer as its rail+header+content-row foundation, so it legitimately cites the same source page for that composition relationship — this is intentional architectural reuse, not two unrelated features accidentally pointing at the same node."
     },
     {
+      "nodeId": "20:36",
+      "name": "Shell/Filter Panel page",
+      "primaryOwner": "shell-px-list-shell",
+      "sharedBy": [
+        "shell-px-list-shell",
+        "component-filter-criterion-menu"
+      ],
+      "reason": "shell-px-list-shell is the primary owner (already cited this page for PxFilterSlider/Filter Bar/Filter Dropdown Panel evidence). component-filter-criterion-menu (added 2026-09-18) legitimately cites the same page's own \"Add Filter\"/\"Filter as a Popup\" anatomy (nodes 7126:10082, 7127:8632) — the trigger+menu affordance it wraps, not an unrelated component by accident."
+    },
+    {
       "nodeId": "3187:10",
       "name": "Shell/Create · Edit Form page",
       "primaryOwner": "shell-px-create-edit-modal",
@@ -194,9 +204,10 @@
       "primaryOwner": "component-table",
       "sharedBy": [
         "component-table",
-        "component-table-frame"
+        "component-table-frame",
+        "component-table-row-actions-menu"
       ],
-      "reason": "Table is the primary owner (this is its defining page, already implemented in the repo). component-table-frame legitimately cites the same page because it formalizes Table's own intrinsic Toolbar -> Table -> optional Pagination anatomy (Section 4 of this same page) into a reusable composition, rather than pointing at an unrelated component by accident."
+      "reason": "Table is the primary owner (this is its defining page, already implemented in the repo). component-table-frame legitimately cites the same page because it formalizes Table's own intrinsic Toolbar -> Table -> optional Pagination anatomy (Section 4 of this same page) into a reusable composition, rather than pointing at an unrelated component by accident. component-table-row-actions-menu (added 2026-09-18) legitimately cites the same page's row-level \"More\" cell anatomy (node 1886:71, Section 2 Body Cell) — the trigger this component wraps, not an unrelated component by accident."
     }
   ],
   "decisions": [
@@ -232,14 +243,20 @@
     },
     {
       "id": "decision-dropdown-menu-scoped-composition",
-      "statement": "component-dropdown-menu remains status Implemented-unmapped and is not independently approved for arbitrary direct screen composition — approval does not generally inherit from a parent/consumer component. However, an approved composed surface may internally depend on DropdownMenu when that exact composition was part of its own recorded design-owner review. Four approved entries do so today, confirmed via direct source import: component-button-split-variant (SplitButton's dropdown-trigger zone), shell-analytics-secondary-nav (the collapsed-rail hover flyout), component-dashboard-widget-card (the header overflow menu), and component-table-customization-menu (the Table Toolbar's combined Arrange Columns / Row Density \"More\" trigger, sanctioned 2026-09-07 as part of the v1.1 shared-system audit) — each now lists component-dropdown-menu in its own dependencies array. When an approved public API explicitly requires caller-supplied DropdownMenuItem content — currently SplitButton's menuContent prop — using DropdownMenuItem through that documented slot is covered by the approved SplitButton composition. This scoped allowance does not approve unrelated standalone DropdownMenu usage anywhere else — a screen (or the new component-table-frame composition) may not import DropdownMenu/DropdownMenuTrigger/DropdownMenuContent directly on its own authority; component-table-frame consumes component-table-customization-menu through its own public API instead.",
-      "evidence": "src/components/ui/split-button.tsx (imports DropdownMenu/DropdownMenuTrigger/DropdownMenuContent directly, wraps caller-supplied menuContent in its own DropdownMenuContent); src/patterns/px-analytics-secondary-nav/PxAnalyticsSecondaryNav.tsx (imports DropdownMenu family for the collapsed-rail flyout, documented in its own README's \"Collapsed-menu hover flyout\" section); src/components/ui/dashboard-widget-card.tsx (imports DropdownMenu family for the overflow menu). src/components/ui/table-customization-menu.tsx (imports DropdownMenu family for its combined Arrange Columns / Row Density \"More\" trigger; consumed by component-table-frame's `customization` slot rather than component-table-frame importing DropdownMenu itself).",
-      "date": "2026-09-07"
+      "statement": "component-dropdown-menu remains status Implemented-unmapped and is not independently approved for arbitrary direct screen composition — approval does not generally inherit from a parent/consumer component. However, an approved composed surface may internally depend on DropdownMenu when that exact composition was part of its own recorded design-owner review. Four approved entries did so as of 2026-09-07, confirmed via direct source import: component-button-split-variant (SplitButton's dropdown-trigger zone), shell-analytics-secondary-nav (the collapsed-rail hover flyout), component-dashboard-widget-card (the header overflow menu), and component-table-customization-menu (the Table Toolbar's combined Arrange Columns / Row Density \"More\" trigger, sanctioned 2026-09-07 as part of the v1.1 shared-system audit) — each lists component-dropdown-menu in its own dependencies array. When an approved public API explicitly requires caller-supplied DropdownMenuItem content — currently SplitButton's menuContent prop — using DropdownMenuItem through that documented slot is covered by the approved SplitButton composition. AMENDED (2026-09-18, v1.1 hardening pass, dependency-consistency audit following Blind Cold Test #7/#8): three more entries were found relying on DropdownMenu internally, undeclared, and are added to this same scoped allowance: component-status-select (StatusSelect's own trigger+menu composition — StatusLabel+chevron trigger, DropdownMenuContent of StatusLabel-rendered options; already live in src/components/ui/status-select.tsx, previously undeclared), component-table-row-actions-menu (new, narrow wrapper extracted from the identical, pre-existing per-row \"more actions\" kebab menu markup that was previously hand-rolled directly at screen level in both src/pages/user-explorer.tsx and src/pages/engagements-list-example.tsx — see that entry's own Figma evidence, node 1886:71 on the Table page), and component-filter-criterion-menu (new, narrow wrapper extracted from the identical, pre-existing \"Add criterion\" Button+menu markup previously hand-rolled directly at screen level in src/pages/user-explorer.tsx — see that entry's own Figma evidence, the Filter Panel page's \"Add Filter\"/\"Filter as a Popup\" anatomy). Each of these three now lists component-dropdown-menu in its own dependencies array. This scoped allowance does not approve unrelated standalone DropdownMenu usage anywhere else — a screen (or the component-table-frame composition) may not import DropdownMenu/DropdownMenuTrigger/DropdownMenuContent directly on its own authority; component-table-frame consumes component-table-customization-menu through its own public API instead, and (as of this amendment) src/pages/user-explorer.tsx/src/pages/engagements-list-example.tsx consume component-table-row-actions-menu/component-filter-criterion-menu/component-status-select through their own public APIs instead of importing DropdownMenu directly. A screen MAY still pass DropdownMenuItem/DropdownMenuSeparator/DropdownMenuLabel elements through one of these sanctioned components' own children slot — mirroring the already-established SplitButton menuContent-slot pattern — since that is caller-supplied leaf content, not construction of the DropdownMenu/DropdownMenuTrigger/DropdownMenuContent overlay machinery itself.",
+      "evidence": "src/components/ui/split-button.tsx (imports DropdownMenu/DropdownMenuTrigger/DropdownMenuContent directly, wraps caller-supplied menuContent in its own DropdownMenuContent); src/patterns/px-analytics-secondary-nav/PxAnalyticsSecondaryNav.tsx (imports DropdownMenu family for the collapsed-rail flyout, documented in its own README's \"Collapsed-menu hover flyout\" section); src/components/ui/dashboard-widget-card.tsx (imports DropdownMenu family for the overflow menu). src/components/ui/table-customization-menu.tsx (imports DropdownMenu family for its combined Arrange Columns / Row Density \"More\" trigger; consumed by component-table-frame's `customization` slot rather than component-table-frame importing DropdownMenu itself). AMENDED (2026-09-18): src/components/ui/status-select.tsx (imports DropdownMenu/DropdownMenuTrigger/DropdownMenuContent directly for its own trigger+menu); src/components/ui/table-row-actions-menu.tsx and src/components/ui/filter-criterion-menu.tsx (both new, each importing DropdownMenu/DropdownMenuTrigger/DropdownMenuContent directly, each replacing an identical, previously-unsanctioned direct usage in src/pages/user-explorer.tsx and/or src/pages/engagements-list-example.tsx — see git history for the exact refactor).",
+      "date": "2026-09-18"
     },
     {
       "id": "decision-popover-scoped-composition",
       "statement": "component-popover remains status Implemented-unmapped (figmaMappingStatus Unmapped, zero figmaNodes, fidelityReview/visualReview Pending, designOwnerApproval false) and is not independently approved for arbitrary direct screen composition — this is a scoped-composition exception analogous to decision-dropdown-menu-scoped-composition, not a promotion of Popover itself. It has exactly the same eligibility posture as component-dropdown-menu (both Implemented-unmapped, both figmaMappingStatus Unmapped, both Pending/Pending, both never independently design-owner approved), discovered via a repo-wide Popover eligibility audit (Blind Cold Test #7 follow-up) after a fresh screen composed Popover/PopoverAnchor/PopoverContent directly, mirroring an existing unguarded canonical-page pattern. Two clauses: (1) Approved internal-consumer clause — four approved/approved-with-exception entries may internally depend on Popover when that exact composition was part of their own recorded design-owner review: component-color-picker (the anchored swatch-grid/HSV trigger, approved 2026-08-31 — the design owner personally corrected a Popover-driven double-surface/corner-clipping bug in PopoverContent as part of that approval), component-notification (NotificationBell's anchored panel, approved 2026-08-31 — the design owner personally added a real align prop wired to Radix Popover's own align as part of that approval), component-rte-field (the alignment icon-picker, approved-with-documented-exception 2026-08-31 — built by explicitly reusing \"the exact composition already established by DashboardWidgetChartTypeSwitcher\"), and component-dashboard-widget-card via its DashboardWidgetChartTypeSwitcher owned export (the chart-type trigger+popover, approved-with-documented-exception 2026-08-30 — this entry's own knownDeviations already states the switcher \"is built on Popover instead\" of DropdownMenu, but until now Popover was never added to its dependencies array alongside DropdownMenu, which was). Each of these four entries now lists component-popover in its own dependencies array. (2) Canonical screen-level filter composition clause — direct screen-level use of Popover + PopoverAnchor + PopoverContent is separately and narrowly sanctioned specifically to anchor FilterBar + FilterDropdownPanel, using the same composition already demonstrated, unflagged, in page-user-explorer-canonical / src/pages/user-explorer.tsx — the file decision-canonical-page and CLAUDE.md's own \"Canonical application references\" section designate as the reference architecture a new screen should study and reuse. FilterDropdownPanel's own header comment already documents this exact contract (\"content-only... meant to be rendered inside a <PopoverContent> which supplies the shell... same composition pattern as PECDropdown\"), so this clause codifies an existing, intended composition rather than inventing a new one. This allowance is narrowly scoped to that documented filter-panel composition only — it must not be interpreted as general approval for arbitrary direct Popover usage in screens, exactly as decision-dropdown-menu-scoped-composition's own scoped allowance does not generalize to unrelated DropdownMenu usage.",
       "evidence": "src/components/ui/color-picker.tsx (imports Popover/PopoverTrigger/PopoverContent directly for the anchored trigger); src/components/ui/notification.tsx (NotificationBell imports Popover family for the anchored panel); src/components/ui/rte-field.tsx (imports Popover family for the alignment icon-picker, header comment cites DashboardWidgetChartTypeSwitcher as the reused precedent); src/components/ui/dashboard-widget-chart-type-switcher.tsx (imports Popover family for the chart-type trigger+popover; component-dashboard-widget-card's own knownDeviations already states this explicitly). src/pages/user-explorer.tsx (imports Popover/PopoverAnchor/PopoverContent directly to anchor FilterBar to FilterDropdownPanel); src/components/ui/filter-dropdown-panel.tsx header comment (\"Content-only — no outer shell... Meant to be rendered inside a <PopoverContent> which supplies the shell. Same composition pattern as PECDropdown\"). component-popover's own entry (figmaMappingStatus Unmapped, zero figmaNodes, notes empty) confirmed unchanged by this decision — no new Figma mapping or fidelity/visual review was performed for Popover itself.",
+      "date": "2026-09-18"
+    },
+    {
+      "id": "decision-input-scoped-composition",
+      "statement": "component-input remains status Implemented-unmapped (figmaMappingStatus Unmapped, zero figmaNodes, notes: \"Internal composition primitive consumed by TextField/Textarea/SearchBar\", fidelityReview/visualReview Pending, designOwnerApproval false) and is not independently approved for arbitrary direct screen or shell composition — this is a scoped-composition exception analogous to decision-dropdown-menu-scoped-composition and decision-popover-scoped-composition, not a promotion of Input itself. Discovered via the same dependency-consistency audit that found the Popover gap (Cold Test #7/#8 follow-up, v1.1 hardening pass): PxHeader.tsx (src/patterns/px-list-shell/PxHeader.tsx, tracked under shell-px-list-shell's own repoPaths) imports Input directly for exactly one, single, already-documented behaviour — the inline title-edit feature: when onEditTitle is supplied and the caller clicks the edit pencil, the static title <span> is swapped for <Input inline autoFocus size=\"small\" ...> with onBlur/onKeyDown (Enter commits, Escape cancels) — never any other Input usage anywhere in PxHeader.tsx. This exact capability is inherited, unchanged, by every shell that wires onEditTitle through to PxHeader: shell-px-list-shell (direct — PxHeader.tsx is its own repoPath), shell-px-create-edit-accordion, shell-px-create-edit-wizard, and outofscope-detail-drilldown-page (PxDetailDrilldownShell) — all forward onEditTitle straight through to PxMainContainer's header prop, which PxHeader itself renders; none of these three re-implement or duplicate the Input usage, so component-input is recorded only against shell-px-list-shell (the actual import site), not duplicated into the other three's dependencies arrays, consistent with how this registry already treats DropdownMenu/Popover dependencies (recorded at the file that contains the literal import, not propagated through composition layers). ai/shell-registry.md's own approval-history entry for PxDetailDrilldownShell (2026-09-07) already describes onEditTitle as one of \"PxHeader's existing, already-approved Secondary Bar props\" — this decision formalizes that existing, already-asserted approval in the registry rather than inventing a new one. This allowance is narrowly scoped to PxHeader's one documented <Input inline> usage only — it must not be interpreted as general approval for arbitrary direct Input use elsewhere (TextField/Textarea/SearchBar's own existing internal use of Input is unaffected and unchanged by this decision, and was never in question).",
+      "evidence": "src/patterns/px-list-shell/PxHeader.tsx (single `import { Input } from \"@/components/ui/input\"`, single usage site guarded by `isEditingTitle`); ai/shell-registry.md's 2026-09-07 PxDetailDrilldownShell approval-history entry (\"PxHeader's existing, already-approved Secondary Bar props (onBack/title/onEditTitle/titleChip/...)\"); onEditTitle wiring confirmed by direct grep in src/patterns/px-create-edit-shell/PxCreateEditShellAccordion.tsx, src/patterns/px-create-edit-shell/PxCreateEditShellWizard.tsx, and src/patterns/px-detail-drilldown-shell/PxDetailDrilldownShell.tsx (all forward onEditTitle unchanged); src/pages/create-edit-shell-example.tsx already exercises this exact feature live (onEditTitle={setEngagementName} on the Accordion tier, onEditTitle={setWizardTitle} on the Wizard tier). component-input's own entry (figmaMappingStatus Unmapped, zero figmaNodes) confirmed unchanged by this decision — no new Figma mapping or fidelity/visual review was performed for Input itself.",
       "date": "2026-09-18"
     },
     {
@@ -2228,10 +2245,13 @@
         "approved": false,
         "date": null
       },
-      "knownDeviations": [],
+      "knownDeviations": [
+        "ADDED (2026-09-18, dependency-consistency audit): this component's own trigger+menu composes DropdownMenu/DropdownMenuTrigger/DropdownMenuContent/DropdownMenuItem directly (src/components/ui/status-select.tsx) — a real, undeclared dependency until now, the same class of gap decision-dropdown-menu-scoped-composition already covers for TableCustomizationMenu/SplitButton/etc. Now named as a fifth sanctioned internal consumer in that decision (2026-09-18 amendment) and recorded below. component-dropdown-menu's own status is unchanged."
+      ],
       "dependencies": [
         "foundation-token-pipeline",
-        "component-status-label"
+        "component-status-label",
+        "component-dropdown-menu"
       ],
       "recommendedOrder": null,
       "notes": ""
@@ -2318,6 +2338,104 @@
       ],
       "recommendedOrder": null,
       "notes": "Documentation-registry gap. Composes ColumnSelector as one of its two menu panes (not a duplicate of it). Corrected in this pass: the page-level reference (3187:9) was previously stored in figmaNodes with role \"page\" — moved to figmaPages for schema consistency, and independently re-confirmed live via get_metadata this pass. CORRECTED (2026-09-07, v1.1 shared-system audit): this component's own internal DropdownMenu import was live but undocumented as a sanctioned composition and missing from its own dependencies array — both corrected. Now consumed by the new component-table-frame's `customization` slot as the intended default owner of row density + column selector in the Table Toolbar."
+    },
+    {
+      "id": "component-table-row-actions-menu",
+      "name": "Table Row Actions Menu",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:34",
+          "name": "Table",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "1886:71",
+          "name": "_Table/Body Cell — Type=More, State=Default",
+          "role": "component",
+          "verified": "mcp-verified"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/table-row-actions-menu.tsx"
+      ],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [
+        "Figma's Table page (20:34) documents the row-level \"More\" cell trigger itself (node 1886:71, Type=More × State=Default/Hover/Selected, 48x48) and its Behaviour row states \"Hover reveals the More icon\" — but does not show the specific menu contents once opened; the Table AI Instructions' own Pairs-With text says only that \"editing happens in a Third Pane or Modal opened from the row action,\" without enumerating a fixed item set. The trigger anatomy (IconButton, icon=\"more-vertical\") and the DropdownMenu-based reveal mechanism are real, already-live, unchanged Figma-adjacent evidence; the specific item labels/icons per screen are feature-owned content, not part of this component's own contract.",
+        "Composes the standalone-disallowed component-dropdown-menu (status Implemented-unmapped) internally for its trigger+content. This is a scoped, approved composition — see decision-dropdown-menu-scoped-composition (2026-09-18 amendment) — not an independent approval of DropdownMenu for arbitrary direct use elsewhere."
+      ],
+      "dependencies": [
+        "foundation-token-pipeline",
+        "component-icon-button",
+        "component-dropdown-menu"
+      ],
+      "recommendedOrder": null,
+      "notes": "ADDED 2026-09-18 (v1.1 hardening pass, dependency-consistency audit following Blind Cold Test #7/#8). Extracted — pixel- and behaviour-identical, zero new visual anatomy — from an already-live, identical per-row \"more actions\" kebab menu that was previously hand-rolled directly (raw DropdownMenu/DropdownMenuTrigger/DropdownMenuContent) at screen level in both src/pages/user-explorer.tsx and src/pages/engagements-list-example.tsx. Public API: `label` (required accessible name for the trigger), `align` (default \"end\"), `children` (caller-supplied DropdownMenuItem/DropdownMenuSeparator content — the same caller-supplies-leaf-content pattern already established by SplitButton's `menuContent` prop). Both screens now import this component instead of DropdownMenu/DropdownMenuTrigger/DropdownMenuContent directly; DropdownMenuItem/DropdownMenuSeparator remain legitimately imported by each screen only to construct this component's `children`, mirroring the SplitButton menuContent-slot precedent. Not yet design-owner approved — Mapped-review-pending, visualReview Pending."
+    },
+    {
+      "id": "component-filter-criterion-menu",
+      "name": "Filter Criterion Menu",
+      "category": "Component",
+      "figmaPages": [
+        {
+          "nodeId": "20:36",
+          "name": "Shell/Filter Panel",
+          "verified": "browser-verified-mcp-confirmed"
+        }
+      ],
+      "figmaNodes": [
+        {
+          "nodeId": "7126:10082",
+          "name": "Three filter surface types — Bar, Slider, Popup — pick based on complexity (\"Filter as a Popup: a floating panel that opens from 'Add Filter' or 'Modify filter'... for complex filter configurations with many attributes or nested conditions\")",
+          "role": "instructions",
+          "verified": "mcp-verified"
+        },
+        {
+          "nodeId": "7127:8632",
+          "name": "Filter Panel Dos and Don'ts — \"This tertiary button is the primary affordance for adding new filters... Keep it visible and enabled any time at least one chip is present, positioned after the separator on the right of the chip row\"",
+          "role": "instructions",
+          "verified": "mcp-verified"
+        }
+      ],
+      "figmaMappingStatus": "Verified-MCP-this-session",
+      "repoPaths": [
+        "src/components/ui/filter-criterion-menu.tsx"
+      ],
+      "docPath": null,
+      "gallerySection": null,
+      "examplePaths": [],
+      "implementationStatus": "Implemented",
+      "status": "Mapped-review-pending",
+      "fidelityReview": "Pending",
+      "visualReview": "Pending",
+      "designOwnerApproval": {
+        "approved": false,
+        "date": null
+      },
+      "knownDeviations": [
+        "Figma's Filter Panel page (20:36) documents \"Add Filter\" as a named, distinct entry point (alongside \"Modify filter\") into filter configuration, and its own Dos/Don'ts frame documents the tertiary-button trigger convention this component's trigger already matches — but, as with component-table-row-actions-menu, does not enumerate a fixed menu-item set; which filter fields are offered is feature/screen-owned content (this screen's own not-yet-added filter fields), not part of this component's own contract.",
+        "Composes the standalone-disallowed component-dropdown-menu (status Implemented-unmapped) internally for its trigger+content. This is a scoped, approved composition — see decision-dropdown-menu-scoped-composition (2026-09-18 amendment) — not an independent approval of DropdownMenu for arbitrary direct use elsewhere."
+      ],
+      "dependencies": [
+        "foundation-token-pipeline",
+        "component-button",
+        "component-dropdown-menu"
+      ],
+      "recommendedOrder": null,
+      "notes": "ADDED 2026-09-18 (v1.1 hardening pass, dependency-consistency audit following Blind Cold Test #7/#8). Extracted — pixel- and behaviour-identical, zero new visual anatomy — from an already-live, identical \"Add criterion\" Button+menu that was previously hand-rolled directly (raw DropdownMenu/DropdownMenuTrigger/DropdownMenuContent) at screen level in src/pages/user-explorer.tsx (used exactly once, in one file). Public API: `triggerLabel` (the Button's own label, e.g. \"Add criterion\"), `menuLabel` (optional heading above the option list, e.g. \"Filter by\"), `options` ({ key, label }[]), `onSelect`, `align` (default \"start\"). src/pages/user-explorer.tsx now imports this component instead of DropdownMenu/DropdownMenuTrigger/DropdownMenuContent/DropdownMenuLabel directly; DropdownMenuItem/DropdownMenuLabel remain legitimately imported only to the extent this component itself constructs them internally (the screen no longer imports them for this use-site at all, since options are passed as plain data, not JSX). Not yet design-owner approved — Mapped-review-pending, visualReview Pending."
     },
     {
       "id": "component-table",
@@ -3420,10 +3538,13 @@
         "approved": true,
         "date": "2026-08-27"
       },
-      "knownDeviations": [],
+      "knownDeviations": [
+        "ADDED (2026-09-18, dependency-consistency audit following Cold Test #7/#8): PxHeader.tsx (already one of this entry's own repoPaths) imports Input directly (component-input, status Implemented-unmapped) for its inline title-edit feature (isEditingTitle ? <Input inline> : static title span, triggered by onEditTitle). This was a real, undocumented eligibility gap — the same class of issue Popover had before decision-popover-scoped-composition — until now recorded nowhere. See decision-input-scoped-composition for the narrow scoped-composition rationale. component-input is added to this entry's dependencies below; component-input's own status is unchanged (still Implemented-unmapped, not promoted)."
+      ],
       "dependencies": [
         "shell-px-main-container",
-        "foundation-token-pipeline"
+        "foundation-token-pipeline",
+        "component-input"
       ],
       "recommendedOrder": null,
       "notes": "All three source pages are now genuinely mcp-verified: 3792:8575 and 7306:20074 were verified live in an earlier phase of this session; 1273:19 (\"Shell/Page Header & Title\") and 20:36 (\"Shell/Filter Panel\") were previously only From-repo-evidence (carried from ai/shell-registry.md's links, never independently checked) and have now been verified live via get_metadata during this correction pass — this entry no longer mixes verification tiers. src/patterns/px-list-shell/README.md still reads \"pending visual review\" and has not been updated to reflect this 2026-08-27 approval recorded in ai/shell-registry.md — flagged as repository-only debt, not a real approval gap. Corrected in this pass: \"Shell/List Page\" (3187:8, confirmed live) is the standalone page defining the reusable \"List Page / Content Area\" pattern (View=Table/Card × State=WithData/Empty) that PxListShell's children slot renders — distinct from \"Shell/ListPage\" (7306:20074, already cited), which is the fully-assembled MainContainer + content example. Both are legitimate, different evidence for this shell."

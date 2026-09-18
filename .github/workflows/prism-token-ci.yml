@@ -119,6 +119,20 @@ jobs:
       - name: Figma coverage registry tests
         run: npm run test:figma-coverage
 
+      # Catches undeclared dependencies on restricted-status components
+      # (Implemented-unmapped/Legacy/Out of scope/Missing/Figma correction
+      # required) inside Approved-tier entries, plus direct screen-level
+      # DropdownMenu overlay construction in the canonical/reference example
+      # pages — the automated version of the manual audits that found the
+      # Popover (PR #25) and PxHeader->Input inconsistencies (v1.1 hardening
+      # pass). See scripts/validate-dependency-consistency.mjs's own header
+      # comment for the full design and what it deliberately ignores.
+      - name: Validate dependency consistency (undeclared restricted-status dependencies)
+        run: npm run dependency-consistency:validate
+
+      - name: Dependency consistency tests
+        run: npm run test:dependency-consistency
+
       # The four steps below protect the AI-readiness hardening fixes
       # introduced in PRs #13-#19 (RadioGroup orientation guidance,
       # DropdownField controlled-value guidance, the registry-coherence

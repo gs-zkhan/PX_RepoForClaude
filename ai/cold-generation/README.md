@@ -17,6 +17,9 @@ Each test's generated code lives, uncommitted, in its own preserved git worktree
 | #5 | Segment Detail (single-record detail/drilldown, before-state) | Fourth architecture, first test of this anatomy — functionally correct, but no sanctioned shell existed for it; `PxListShell` used as an unconfirmed judgment call. Also surfaced a real `DropdownMenuItem` icon-source defect already live in production | [PR #18](https://github.com/gs-zkhan/PX_RepoForClaude/pull/18) (icon fix + gap documentation), [PR #19](https://github.com/gs-zkhan/PX_RepoForClaude/pull/19) (`PxDetailDrilldownShell` implemented) |
 | #6 | Segment Detail, independent rerun after `PxDetailDrilldownShell` (after-state) | Same archetype as #5, fresh/blind agent, no Figma — independently selected the new `PxDetailDrilldownShell` via anatomy-based registry guidance alone, with no fallback judgment call and no new gap found | None — clean pass, no repository change required |
 | #7 | Account Explorer (List + Detail/Drilldown), v1.1 registry state — first test with the real production screen physically hidden from the worktree | Fifth architecture (list-plus-drilldown, entity = Account) — independently selected `PxListShell`/`PxDetailDrilldownShell`, `TableFrame`, `StatsRow`/`SummaryStat` (max-4 rule followed), the Product Surface Rule, and `TableCustomizationMenu` (correctly reasoning through `decision-dropdown-menu-scoped-composition`). Found a real registry double standard: direct screen-level `Popover` usage for the canonical `FilterBar`+`FilterDropdownPanel` pattern was technically `Implemented-unmapped`/disallowed, despite matching `user-explorer.tsx` exactly and despite Popover already being an undocumented dependency of four approved components | [PR #25](https://github.com/gs-zkhan/PX_RepoForClaude/pull/25) — initially **PARTIAL**, now **PASS** retroactively, with no change to the generated screen (see [Retroactive fix: Test #7](#retroactive-fix-test-7-popover-eligibility) below) |
+| #8 | Create/Edit Account (Accordion tier) | Sixth architecture test (Create/Edit tiering, entity = Account, 9 fields) — independently derived the Modal/Accordion/Wizard tier purely from field count/branching structure, never the page's name. One self-corrected `DropdownField` controlled-value mistake (already-documented pitfall, generation error not a repo gap). A follow-up audit (this same v1.1 hardening pass) found this test's own title-edit interaction had silently exercised the then-undeclared `PxHeader`→`component-input` dependency, without the generating agent itself flagging it | None from Test #8 directly — the `PxHeader`→`component-input` gap it exercised was closed by this v1.1 hardening pass's own PR, not triggered by Test #8's own report |
+
+**Final disposition per test, exactly as recorded (never summarized as "8/8 clean"):** #1 historical/negative fixture (the defect PR #13 fixed); #2 PASS; #3 PASS; #4 PASS; #5 **PARTIAL** (no sanctioned Detail/Drilldown shell existed yet); #6 PASS; #7 initially **PARTIAL**, retroactively PASS after PR #25 with no generated-screen change (see below); #8 PASS.
 
 See the individual test records for full detail:
 - [`test-01-create-segment.md`](./test-01-create-segment.md)
@@ -26,6 +29,7 @@ See the individual test records for full detail:
 - [`test-05-segment-detail.md`](./test-05-segment-detail.md)
 - [`test-06-segment-detail-rerun.md`](./test-06-segment-detail-rerun.md)
 - [`test-07-account-explorer-v1.1.md`](./test-07-account-explorer-v1.1.md)
+- [`test-08-create-edit-account.md`](./test-08-create-edit-account.md)
 
 ## Before/after: Test #5 → Test #6
 
@@ -60,6 +64,7 @@ Each test's generated code remains uncommitted in its own dedicated git worktree
 | #5 | `PX_RepoForClaude-cold-test-segment-detail` | `test/cold-generation-segment-detail` | `9b434785716b7291e5c04967618e356b6931b466` |
 | #6 | `PX_RepoForClaude-cold-test-segment-detail-rerun` | `test/cold-generation-segment-detail-rerun` | `8f70900a73f4a90ecc90e70286c8399a86a56915` |
 | #7 | `PX-cold-test-account-explorer` | `test/cold-gen-account-explorer` | `87fd3ebfc0a96cf51f2362b34c109ef7c6260d4b` |
+| #8 | `PX-cold-test-create-edit-account` | `test/cold-gen-create-edit-account` | `f81b884e00f50e4f2f3979a67ce576b7bbdc2710` |
 
 These worktrees are local-only working trees, not remote branches with committed content — the "base commit" is the `origin/main` SHA each worktree's branch was created from; the generated screen files exist only as uncommitted changes within that worktree. This record was written from that live evidence plus this repository's own commit/PR history; it does not itself contain the generated code.
 

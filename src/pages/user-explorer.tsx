@@ -27,20 +27,18 @@ import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import type { ColumnSelectorColumn } from "@/components/ui/column-selector"
 import {
-  DropdownMenu,
-  DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { FilterBar, type FilterBarChip } from "@/components/ui/filter-bar"
+import { FilterCriterionMenu } from "@/components/ui/filter-criterion-menu"
 import { FilterDropdownPanel, type PicklistOption } from "@/components/ui/filter-dropdown-panel"
 import { IconButton } from "@/components/ui/icon-button"
 import { Pagination } from "@/components/ui/pagination"
 import { Popover, PopoverAnchor, PopoverContent } from "@/components/ui/popover"
 import { SearchBar } from "@/components/ui/search-bar"
 import { StatusLabel, type StatusLabelVariant } from "@/components/ui/status-label"
+import { StatusSelect } from "@/components/ui/status-select"
 import {
   Table,
   TableActionCell,
@@ -60,6 +58,7 @@ import {
 } from "@/components/ui/table"
 import { TableCustomizationMenu } from "@/components/ui/table-customization-menu"
 import { TableFrame } from "@/components/ui/table-frame"
+import { TableRowActionsMenu } from "@/components/ui/table-row-actions-menu"
 
 // ---------------------------------------------------------------------------
 // Data model
@@ -826,21 +825,12 @@ function UserExplorer({ activeKey, onNavigate, mode, onModeChange }: UserExplore
             that, FilterBar's own empty state carries the "Add filter" CTA. */}
         {filterBarOpen && filters.length > 0 && unusedFields.length > 0 && (
           <div className="flex shrink-0 items-center border-t border-[var(--s-color-line-default)] px-6 py-2">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="tertiary" size="small">
-                  Add criterion
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start">
-                <DropdownMenuLabel>Filter by</DropdownMenuLabel>
-                {unusedFields.map((key) => (
-                  <DropdownMenuItem key={key} onSelect={() => addFilter(key)}>
-                    {FILTER_FIELDS[key].label}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <FilterCriterionMenu
+              triggerLabel="Add criterion"
+              menuLabel="Filter by"
+              options={unusedFields.map((key) => ({ key, label: FILTER_FIELDS[key].label }))}
+              onSelect={(key) => addFilter(key as FilterFieldKey)}
+            />
           </div>
         )}
 
@@ -913,25 +903,15 @@ function UserExplorer({ activeKey, onNavigate, mode, onModeChange }: UserExplore
                     {activeColumns.map((col) => (
                       <TableCell key={col.key} align={col.align} pinned={pinnedSideFor(col.key)}>
                         {col.key === "status" ? (
-                          <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                              <StatusLabel variant={STATUS_VARIANTS[user.status]} editable>
-                                {STATUS_LABELS[user.status]}
-                              </StatusLabel>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="start">
-                              {STATUS_OPTIONS.map((opt) => (
-                                <DropdownMenuItem
-                                  key={opt.status}
-                                  onSelect={() => updateUserStatus(user.id, opt.status)}
-                                >
-                                  <StatusLabel variant={STATUS_VARIANTS[opt.status]}>
-                                    {opt.label}
-                                  </StatusLabel>
-                                </DropdownMenuItem>
-                              ))}
-                            </DropdownMenuContent>
-                          </DropdownMenu>
+                          <StatusSelect
+                            value={user.status}
+                            options={STATUS_OPTIONS.map((opt) => ({
+                              value: opt.status,
+                              variant: STATUS_VARIANTS[opt.status],
+                              label: opt.label,
+                            }))}
+                            onValueChange={(value) => updateUserStatus(user.id, value as UserStatus)}
+                          />
                         ) : (
                           col.render(user)
                         )}
@@ -939,23 +919,15 @@ function UserExplorer({ activeKey, onNavigate, mode, onModeChange }: UserExplore
                     ))}
 
                     <TableActionCell>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <IconButton
-                            icon="more-vertical"
-                            label={`Actions for ${user.firstName} ${user.lastName}`}
-                          />
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuItem icon="id-card">View profile</DropdownMenuItem>
-                          <DropdownMenuItem icon="email">Send email</DropdownMenuItem>
-                          <DropdownMenuItem icon="copy">Copy user ID</DropdownMenuItem>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem icon="delete" destructive>
-                            Remove user
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
+                      <TableRowActionsMenu label={`Actions for ${user.firstName} ${user.lastName}`}>
+                        <DropdownMenuItem icon="id-card">View profile</DropdownMenuItem>
+                        <DropdownMenuItem icon="email">Send email</DropdownMenuItem>
+                        <DropdownMenuItem icon="copy">Copy user ID</DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem icon="delete" destructive>
+                          Remove user
+                        </DropdownMenuItem>
+                      </TableRowActionsMenu>
                     </TableActionCell>
                   </TableRow>
                 )
