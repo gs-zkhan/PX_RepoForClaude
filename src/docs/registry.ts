@@ -15,6 +15,7 @@ import { colorPickerDoc } from "@/docs/docs/color-picker.doc"
 import { columnSelectorDoc } from "@/docs/docs/column-selector.doc"
 import { configRowDoc } from "@/docs/docs/config-row.doc"
 import { dashboardWidgetCardDoc } from "@/docs/docs/dashboard-widget-card.doc"
+import { designerOnboardingDoc } from "@/docs/docs/designer-onboarding.doc"
 import { dateFieldDoc } from "@/docs/docs/date-field.doc"
 import { dateFilterDoc } from "@/docs/docs/date-filter.doc"
 import { datePickerDoc } from "@/docs/docs/date-picker.doc"
@@ -65,6 +66,7 @@ import { toastDoc } from "@/docs/docs/toast.doc"
 import { toggleDoc } from "@/docs/docs/toggle.doc"
 import { tooltipDoc } from "@/docs/docs/tooltip.doc"
 import { treeDoc } from "@/docs/docs/tree.doc"
+import { v11ReleaseCheckpointDoc } from "@/docs/docs/v11-release-checkpoint.doc"
 import { viewSelectorDoc } from "@/docs/docs/view-selector.doc"
 import { viewSwitcherDoc } from "@/docs/docs/view-switcher.doc"
 import { viewsDoc } from "@/docs/docs/views.doc"
@@ -115,6 +117,8 @@ export function getExampleSource(exampleId: string): string | null {
 }
 
 const allDocs: ComponentDoc[] = [
+  designerOnboardingDoc,
+  v11ReleaseCheckpointDoc,
   accordionDoc,
   avatarDoc,
   bannerDoc,
@@ -207,8 +211,21 @@ function navItem(doc: ComponentDoc) {
  * patterns (PxListShell, PxCreateEditShell, PxMainContainer) remain
  * README-only. Components without a doc yet are intentionally absent rather
  * than linked to an empty page.
+ *
+ * "Getting Started" (first group below) is a SECOND deliberate, explicitly-
+ * requested exception, same treatment as PxAnalyticsSecondaryNav: two
+ * onboarding/release documents (DESIGNER_ONBOARDING.md at the repo root,
+ * ai/v1.1-release-checkpoint.md), not components, mirrored here purely for
+ * in-app discovery so a new designer opening the Design System Docs finds
+ * them first. The repo-root/ai/ markdown files remain the actual source of
+ * truth; these two doc pages are a copy for readability, not a fork of the
+ * content.
  */
 export const navGroups: DocNavGroup[] = [
+  {
+    title: "Getting Started",
+    items: [designerOnboardingDoc, v11ReleaseCheckpointDoc].map(navItem),
+  },
   {
     title: "Actions & Controls",
     items: [buttonDoc, iconButtonDoc, toggleDoc, sliderDoc, dragHandleDoc].map(navItem),
