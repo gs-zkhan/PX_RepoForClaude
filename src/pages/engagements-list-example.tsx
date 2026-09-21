@@ -19,13 +19,9 @@ import { PECDropdown, type PECOption } from "@/components/px-pec-dropdown"
 import { PX_NAV_LABELS, type PxShellNavKey, type PxShellRailMode } from "@/components/px-shell-rail"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import {
-  DropdownMenu,
-  DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { IconButton } from "@/components/ui/icon-button"
 import { Pagination } from "@/components/ui/pagination"
 import { SearchBar } from "@/components/ui/search-bar"
 import { StatusLabel } from "@/components/ui/status-label"
@@ -42,6 +38,7 @@ import {
 } from "@/components/ui/table"
 import { TableFrame } from "@/components/ui/table-frame"
 import { TableCustomizationMenu } from "@/components/ui/table-customization-menu"
+import { TableRowActionsMenu } from "@/components/ui/table-row-actions-menu"
 import type { ColumnSelectorColumn } from "@/components/ui/column-selector"
 
 // ---------------------------------------------------------------------------
@@ -223,22 +220,14 @@ function EngagementsTable({
                       <StatusLabel variant="open">{row.status}</StatusLabel>
                     </TableCell>
                     <TableActionCell>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <IconButton
-                            icon="more-vertical"
-                            label={`Actions for ${row.userName}`}
-                          />
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuItem icon="edit">Edit</DropdownMenuItem>
-                          <DropdownMenuItem icon="copy">Duplicate</DropdownMenuItem>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem icon="delete" destructive>
-                            Delete
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
+                      <TableRowActionsMenu label={`Actions for ${row.userName}`}>
+                        <DropdownMenuItem icon="edit">Edit</DropdownMenuItem>
+                        <DropdownMenuItem icon="copy">Duplicate</DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem icon="delete" destructive>
+                          Delete
+                        </DropdownMenuItem>
+                      </TableRowActionsMenu>
                     </TableActionCell>
                   </TableRow>
                 ))}

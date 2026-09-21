@@ -9,7 +9,9 @@ node --test "tests/figma-coverage/*.test.mjs"
 
 Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 
-**Total entries: 100**
+**Total entries: 102**
+
+**Revision note (2026-09-18, v1.1 hardening pass — dependency-consistency audit following Blind Cold Test #7/#8):** two entries added — `component-table-row-actions-menu` and `component-filter-criterion-menu` (both `src/components/ui/`), narrow wrappers extracted, pixel- and behaviour-identical, from markup that was previously hand-rolled directly (raw `DropdownMenu`) at screen level in `user-explorer.tsx`/`engagements-list-example.tsx`; both `Mapped-review-pending`, `figmaMappingStatus: Verified-MCP-this-session` (real evidence gathered this pass: the Table page's row-level "More" cell, node `1886:71`; the Filter Panel page's "Add Filter"/"Filter as a Popup" anatomy, nodes `7126:10082`/`7127:8632`), not design-owner approved. Two new decisions recorded: `decision-input-scoped-composition` (a narrow scoped exception for `PxHeader`'s pre-existing, already-asserted-approved inline-title-edit use of `component-input`, still `Implemented-unmapped`) and an amendment to `decision-dropdown-menu-scoped-composition` (naming `component-status-select` plus the two new entries above as three more sanctioned internal `DropdownMenu` consumers, closing an identical undeclared-dependency gap `component-status-select` already had). `shell-px-list-shell` and `component-status-select`'s own `dependencies` arrays updated accordingly. `component-input`'s and `component-dropdown-menu`'s own statuses are unchanged — neither is promoted. Total entry count 100→102; counts-by-status below updated (`Mapped-review-pending` 63→65); counts-by-category updated (`Component` 73→75).
 
 **Revision note (2026-09-07, v1.1 shared-system audit):** one entry added — `component-table-frame` (new `TableFrame` composition, `src/components/ui/table-frame.tsx`), formalizing Table's own intrinsic Toolbar → Table → optional Pagination anatomy (previously hand-rolled inconsistently per screen) into a reusable pattern; `Mapped-review-pending`, `visualReview: Pending`, not design-owner approved. `component-table-customization-menu`'s existing `DropdownMenu` dependency is now sanctioned (see `decision-dropdown-menu-scoped-composition`) and recorded in its own `dependencies` array. `component-summary-stat`'s notes record a design-owner correction (not a fidelity defect): Center/default placement now uses `shadow/100`, re-verified live against Figma node `7102:129`; Left/Right and Selected states are unchanged. Two new decisions recorded: `decision-list-page-surface-rule` (the PX-wide border-vs-shadow surface rule, and correcting `user-explorer.tsx`/`engagements-list-example.tsx`'s stale, mutually-inconsistent surface treatments) and `decision-statsrow-max-four` (Figma's 4-card-per-row cap, now also documented in `summary-stat.doc.ts` and enforced as a dev-only warning). Total entry count 99→100; counts-by-status below updated (`Mapped-review-pending` 62→63); counts-by-category updated (`Pattern` 4→5).
 
@@ -99,7 +101,7 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 | --- | --- |
 | `Approved` | 15 |
 | `Approved-with-documented-exception` | 3 |
-| `Mapped-review-pending` | 63 |
+| `Mapped-review-pending` | 65 |
 | `Implemented-unmapped` | 8 |
 | `Missing` | 0 |
 | `Internal foundation` | 5 |
@@ -111,7 +113,7 @@ Figma source: **file key `U3D8WMBVFl9LvAZyLHhm24`, "Prism V1 - ShadCN"**.
 
 | Category | Count |
 | --- | --- |
-| `Component` | 73 |
+| `Component` | 75 |
 | `Shell` | 6 |
 | `Pattern` | 5 |
 | `Foundation/token` | 7 |
